@@ -94,6 +94,16 @@ In this paper is considered the problem of exploring an unknown environment
 \end_layout
 
 \begin_layout Standard
+The use of multiple coordinated robots is motivated by the increased efficiency
+ in accomplishing this task, rather than a single robot.
+ Same holds for the localization of the robots in the environment because
+ they can exhange information about their positions as they sense each other.
+ Using multiple robots also allows them to be cheaper with respect to one
+ which should perform the exploration by itself.
+ 
+\end_layout
+
+\begin_layout Standard
 Mainly two previous approaches concerning multiple robots exploration are
  presented.
  First one consists in separating the environment into stripes and then
