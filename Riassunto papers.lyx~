@@ -94,16 +94,6 @@ In this paper is considered the problem of exploring an unknown environment
 \end_layout
 
 \begin_layout Standard
-The use of multiple coordinated robots is motivated by the increased efficiency
- in accomplishing this task, rather than a single robot.
- Same holds for the localization of the robots in the environment because
- they can exhange information about their positions as they sense each other.
- Using multiple robots also allows them to be cheaper with respect to one
- which should perform the exploration by itself.
- 
-\end_layout
-
-\begin_layout Standard
 Mainly two previous approaches concerning multiple robots exploration are
  presented.
  First one consists in separating the environment into stripes and then
@@ -167,6 +157,71 @@ The provided experimental results only deal with an office-like environment
  Moreover, two coordinated robots have performances similar to three uncoordinat
 ed robots and the improvement introduced by the coordination is almost the
  same both with two and three robots.
+\end_layout
+
+\begin_layout Section
+\begin_inset Quotes eld
+\end_inset
+
+Coordinated Multi-Robot Exploration
+\begin_inset Quotes erd
+\end_inset
+
+ - Burgard
+\end_layout
+
+\begin_layout Standard
+As in the previous paper, the focus of this one is on the coordination of
+ a team of multiple robots by the definition of target points for the exploratio
+n, but it also takes into account limited communication among them.
+\end_layout
+
+\begin_layout Standard
+The algorithm used for the assignment of the target points is almost the
+ same as above.
+ Few differences are introduced in the reduction of the utility of a frontier
+ cell after a robot is assigned to an adjacent one and in determining the
+ pair robot-frontier cell.
+ In fact, in the previous case, cost and utility had the same weight, now
+ the relative importance of utility versus cost is modified through a positive
+ factor 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Moreover, experiments performed, showed that if 
+\begin_inset Formula $\beta\in[0.01,50]$
+\end_inset
+
+ the exploration time is almost constant.
+ While if 
+\begin_inset Formula $\beta>50$
+\end_inset
+
+ the impact of the coordination decreases, thus the exploration time increases.
+ While if it is near 0, robots ignore distance to be traveled, increasing
+ again the exploration time.
+ 
+\end_layout
+
+\begin_layout Standard
+Limited communication range affects highly the algorithm explained before,
+ but it is easily modified to deal with this problem by applying it to every
+ sub-team of robots which are able to communicate with each other.
+ Another issue derived from the limited communication consists in when new
+ assignments have to be computed.
+ In fact, in the case of perfect communication, they can be calculated whenever
+ a robot reaches its target.
+ In the other case, this approach can't be pursued.
+ Therefore, what is done is to store in each robot the latest target locations
+ assigned to other robots; in this way, robots avoid going to places already
+ explored by other robots.
+\end_layout
+
+\begin_layout Standard
+It is meaningful to point out that to achieve coordination, the team must
+ be able to communicate the maps of the individual robots during exploration.
+ 
 \end_layout
 
 \end_body
