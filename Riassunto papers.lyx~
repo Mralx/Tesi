@@ -221,7 +221,28 @@ Limited communication range affects highly the algorithm explained before,
 \begin_layout Standard
 It is meaningful to point out that to achieve coordination, the team must
  be able to communicate the maps of the individual robots during exploration.
- 
+ Main idea is to split the team of robots into clusters, and messages sent
+ by a robot are forwarded to all team-mates in the corresponding cluster.
+ If every cluster maintaines a map built from all observations made by robots
+ of that team, if connection problems are encountered, it may happen that
+ the map is updated twice, which is not admissible.
+ An efficient way to overcome this problem is to have each robot storing
+ a log of sensors measurements perceived by this robot and only trasmits
+ those measurements that have not been transmitted to the corresponding
+ robot so far.
+ Additionally, a data structure containing the time stamp of the last transmissi
+on to each robot is stored.
+ In this way, as a measurement has been sent to all other robots can be
+ discarded.
+\end_layout
+
+\begin_layout Standard
+The experiments are performed on three different maps: an unstructured one,
+ an office-like and a corridor environment.
+ In all the three cases, the coordinated algorithm outscales the uncoordinated
+ one.
+ This is due to the better distribution of the robots in the environment,
+ allowing to speed up the exploration.
 \end_layout
 
 \end_body

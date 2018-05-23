@@ -245,5 +245,102 @@ The experiments are performed on three different maps: an unstructured one,
  allowing to speed up the exploration.
 \end_layout
 
+\begin_layout Section
+Coordination for Multi-Robot Exploration and Mapping - Simmons
+\end_layout
+
+\begin_layout Standard
+This paper main topics are the definition of a mechanism for coordinated
+ mapping and another for coordinated exploration.
+ 
+\end_layout
+
+\begin_layout Standard
+The coordinated mapping approach works with (reasonably) static world and
+ assumes that in the beginning, robots know their relative position.
+ It decomposes the mapping problem in a modular way, being composed of a
+ local map stored on each robot and a global map kept by a central mapper.
+ As a robot receives its own odometry and sensor measurements, it computes
+ a maximum likelihood extimation of its position, a maximum likelihood extimatio
+n for the map and a posterior density of its 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ location.
+ This update takes into account both noise in motion and in perception,
+ moreover it converges fast.
+ For what concerns the central mapper, its main role is to integrate information
+s coming from the robots in real-time.
+ This information are sent after having collected a certain number of them
+ and the central mapper combines them by minimizing the error between the
+ scans of the different robots.
+ 
+\end_layout
+
+\begin_layout Standard
+The coordinated exploration approach makes each robot construct a 
+\begin_inset Quotes eld
+\end_inset
+
+bid
+\begin_inset Quotes erd
+\end_inset
+
+, on the basis of the expected utility for it to travel to a frontier cell
+ and the expected information gain there.
+ Cost is computed as the optimal path from the robot's current position.
+ The information gain is estimated by assuming that the robot has a nominal
+ sensor range and then counting the unexplored cells which fall within the
+ radius of the frontier cell.
+ Also the maximum and minimum extent of the information gain region are
+ stored because they are used to forme a rectangle that approximates this
+ region.
+ It is useful to find potential overlaps in coverage.
+ This approach makes robot move enough far to optimize exploration but if
+ there is an obstacle separating them like a wall, they move near it but
+ in the different rooms.
+ The algorithm used to assign tasks to robots is a greedy one, assigning
+ the first task to the bid with highest net utility.
+ After that, other bids are discounted by estimating the percentage of overlap
+ with the already assigned task and then it assigns new task with same criteria
+ as before.
+ This process goes on up to the end of the tasks or the available robots.
+ Moreover, it is introduced the concept of hysteresis, which is useful to
+ handle the high variation that might be measured in the information gain
+ metric.
+ 
+\end_layout
+
+\begin_layout Standard
+The experiments are performed on real robots in an hospital building composed
+ of corridors and offices.
+ Main behaviours to point out are that three robots start in a narrow corridor,
+ then one will stand still and the other two will go to the frontiers and
+ that if one robot goes near a task assigned to another one, then the task
+ is dynamically swapped to the nearer robot.
+\end_layout
+
+\begin_layout Standard
+Other reported experiments run in simulator have been performed in five
+ different environments, a single-corridor office, a two parallel corridors
+ office, an obstacle-free environment and two random unstructured environments.
+ In all the cases, increasing the number of robots improves results but
+ the amount of improvement depends on the characteristics of the environment.
+ In fact, in the first two environments, moving from two to three robots
+ doesn't have the same impact as switching from one robot to two because
+ the third robot is almost useless.
+ In the obstacle-free environment, a single robot exploration has an high
+ rate of failure, which is highly mitigated by switching to two robots and
+ it's even better with three.
+ Also the accuracy of the map increases with the number of robots.
+ For what concerns the unstructured environments, the presence of obstacles
+ helps in spreading the robots around, so this makes the improvement of
+ using three robots rather than two way higher than moving from one to two.
+\end_layout
+
 \end_body
 \end_document
