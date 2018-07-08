@@ -148,28 +148,7 @@ This four elements characterize the instance of exploration problem we are
  of the team.
  In particular, a cell is clear if there are no obstacles in it, otherwise
  it is occupied.
- As stated above, the aim of this work is to find out if it exists a correlation
- between a set of features of the environment and a possible improvement
- in the exploration performance.
- The features taken into account are: 
-\end_layout
-
-\begin_layout Enumerate
-Dimension: small environments will take less to be explored with respect
- to large ones 
-\end_layout
-
-\begin_layout Enumerate
-Openedness: the property of an environment to be composed of large spaces
- rather than cluttered ones
-\end_layout
-
-\begin_layout Enumerate
-Parallelizability: 
-\end_layout
-
-\begin_layout Standard
-
+ 
 \end_layout
 
 \begin_layout Section
