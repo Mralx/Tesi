@@ -135,8 +135,12 @@ This four elements characterize the instance of exploration problem we are
 \end_inset
 
 .
- The center of each cell is characterized by its coordinates in the environment,
- provided as a vector 
+ The center of each cell 
+\begin_inset Formula $c$
+\end_inset
+
+ is characterized by its coordinates in the environment, provided as a vector
+ 
 \begin_inset Formula $(x_{c},y_{c})$
 \end_inset
 
@@ -144,9 +148,9 @@ This four elements characterize the instance of exploration problem we are
  Each cell contains a variable, whose value tells if that cell is clear,
  occupied by an obstacle or still unexplored.
  Clearly, the first two values refer only to already explored cells, while
- the third refer to those cells which are still not mapped by any robot
+ the third refers to those cells which are still not mapped by any robot
  of the team.
- In particular, a cell is clear if there are no obstacles in it, otherwise
+ In particular, a cell is clear if there are no obstacles in it, otherwise,
  it is occupied.
  As stated above, the aim of this work is to find out if it exists a correlation
  between a set of features of the environment and a possible improvement
@@ -160,44 +164,138 @@ Dimension: small environments will take less to be explored with respect
 \end_layout
 
 \begin_layout Enumerate
-Openedness: the property of an environment to be composed of large spaces
+Openness: the property of an environment to be composed of large spaces
  rather than cluttered ones
 \end_layout
 
 \begin_layout Enumerate
-Parallelizability: 
+Parallelizability: a measure of how much the robots are enforced to spread
+ during the exploration or if they will stick together
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Section
-Team configuration
-\end_layout
-
-\begin_layout Standard
-For each robot 
-\begin_inset Formula $a\in A$
+Being the environment unknown, we cannot use it directly to extract these
+ features.
+ Thus, we need to use the map produced by the robots for teh computation
+ and this feature extraction step should be done as the exploration goes
+ on; in this way, we can update the coordination strategy online.
+ For this reason, we define as 
+\begin_inset Formula $M_{t}$
 \end_inset
 
- what needs to be described 
-\end_layout
+ the map known at time 
+\begin_inset Formula $t\in[t_{0},t_{f}]$
+\end_inset
 
-\begin_layout Section
-Mapping
-\end_layout
+ where 
+\begin_inset Formula $t_{0}$
+\end_inset
 
-\begin_layout Section
-Coordination
-\end_layout
+ is the time at which the exploration starts and 
+\begin_inset Formula $t_{f}$
+\end_inset
 
-\begin_layout Section
-Environment
+ is the time at which the exploration ends, i.e.
+ the time at which the termination criteria 
+\begin_inset Formula $T$
+\end_inset
+
+ is verified.
+ We also define the auxiliary function 
+\begin_inset Formula $S:M\rightarrow\mathbb{R}$
+\end_inset
+
+ which takes as input a cell of the map and provides its area.
 \end_layout
 
 \begin_layout Standard
-The environments analyzed in this thesis are indoor ones.
+Dimension and openness computation can be easily defined being rather intuitive
+ features of an environment.
+ On the other hand, parallelizability needs further considerations.
+ 
+\end_layout
+
+\begin_layout Standard
+Dimension can be computed as the amount of free area in the map, thus it
+ is the sum of the area of all the clear cells: 
+\begin_inset Formula $D(M)=\sum_{i}S(f_{i})$
+\end_inset
+
+ with 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ being a clear cell.
+ 
+\end_layout
+
+\begin_layout Standard
+Openness is related to the obstacle density, so to the probability of a
+ randomly picked cell to be occupied by an obstacle: 
+\begin_inset Formula $O(M)=\frac{\Sigma_{i}S(o_{i})}{\Sigma_{j}S(c_{j})}$
+\end_inset
+
+ where 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ is an occupied cell and 
+\begin_inset Formula $c_{j}$
+\end_inset
+
+ is a generic cell.
+ 
+\end_layout
+
+\begin_layout Standard
+Before moving to parallelizability, we need to introduce the notion of embedded
+ graph.
+ A graph 
+\begin_inset Formula $G$
+\end_inset
+
+ embedded to a surface 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is a representation of 
+\begin_inset Formula $G$
+\end_inset
+
+ on 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ such that points of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+and simple arcs in it are associated with vertices and edges of 
+\begin_inset Formula $G$
+\end_inset
+
+ respectively.
+ In the case we are analyzing, this concept can be exploited by creating
+ a graph 
+\begin_inset Formula $\varUpsilon$
+\end_inset
+
+ embedded on the map 
+\begin_inset Formula $M$
+\end_inset
+
+ and then through the concept of centrality of a node, we can find out what
+ are the most connected nodes of 
+\begin_inset Formula $\varUpsilon$
+\end_inset
+
+.
+ If a node has a lot of connections, it means that it is a splitting point
+ for the team and this information about the node is very important for
+ the coordination management.
+ On this setting, we can define the parallelizability according to the number
+ of central node in the graph and on the average number of connections of
+ each node.
  
 \end_layout
 
