@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" line="281" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1af4ec83-2cb6-438c-a042-35fb095a1534" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastEnvironment.png" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastEnvironment.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastteamconfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastteamconfig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/Tesi/env_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/environments/Tesi/env_5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/Tesi/env_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/environments/Tesi/env_6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/errConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/errConsole.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/metricConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/metricConsole.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/personalConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/personalConsole.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/Agent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/Agent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/AgentStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/AgentStats.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/BasicAgent$ExploreState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/BasicAgent$ExploreState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/BasicAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/BasicAgent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/ComStation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/ComStation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/RealAgent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/RealAgent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/RealAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/RealAgent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/TeammateAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/TeammateAgent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/UtilityCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/UtilityCalculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/sets/ActiveSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/sets/ActiveSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/sets/FollowerSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/sets/FollowerSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/sets/IdleSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/sets/IdleSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/agents/sets/LeaderSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/agents/sets/LeaderSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/CommLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/CommLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/DataMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/DataMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/DirectLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/DirectLine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/IDataMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/IDataMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/PropModel1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/PropModel1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/RendezvousDataMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/RendezvousDataMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/communication/StaticCircle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/communication/StaticCircle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/Constants$MapColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/Constants$MapColor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/EnvLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/EnvLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/RobotConfig$roletype.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/RobotConfig$roletype.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/RobotConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/RobotConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/RobotTeamConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/RobotTeamConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$commtype.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$commtype.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$exptype.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$exptype.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$frontiertype.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig$frontiertype.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/SimulatorConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer$direction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer$direction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/ContourTracer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/Environment$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/Environment$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/Environment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/Frontier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/Frontier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/MapTools.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/MapTools.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/OccupancyGrid$OccGridBit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/OccupancyGrid$OccGridBit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/OccupancyGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/OccupancyGrid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/Skeleton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/Skeleton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/TopologicalMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/TopologicalMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/environment/Walls.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/environment/Walls.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/AgentStepRunnable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/AgentStepRunnable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/FrontierExploration$Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/FrontierExploration$Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/FrontierExploration.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/FrontierExploration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower$Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower$Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/LeaderFollower.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/NearRVPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/NearRVPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/RandomWalk.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/RandomWalk.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/RoleBasedExploration$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/RoleBasedExploration$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/RoleBasedExploration.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/RoleBasedExploration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/RunFromLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/RunFromLog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/UtilityExploration$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/UtilityExploration$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/UtilityExploration.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/UtilityExploration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/IRendezvousDisplayData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/IRendezvousDisplayData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/IRendezvousStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/IRendezvousStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategyDisplayData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategyDisplayData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategySettings$strategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategySettings$strategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/MultiPointRendezvousStrategySettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/Rendezvous.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/Rendezvous.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/RendezvousAgentData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/RendezvousAgentData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/RendezvousStrategyFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/RendezvousStrategyFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategyDisplayData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategyDisplayData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/rendezvous/SinglePointRendezvousStrategySettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/BuddyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/BuddyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/DivideController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/DivideController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController$AgentFrontierPair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController$AgentFrontierPair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ReserveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ReserveController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/SideController$Vector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/SideController$Vector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/SideController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/SideController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/BuddySystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/BuddySystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/DivideAndConquer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/DivideAndConquer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveBuddySystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveBuddySystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveReserve.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveReserve.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/PureExploration.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/PureExploration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/Reserve.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/Reserve.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/SideFollower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/SideFollower.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/CommunicationDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/LogDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$20.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$runMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI$runMode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/MainGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$EditableNumberRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$EditableNumberRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$NameRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$NameRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$RankRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$RankRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$UneditableNumberRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog$UneditableNumberRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotConfigTableModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/RobotPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/communication/DataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/DataMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environment/ContourTracer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/environment/ContourTracer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environment/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/environment/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environment/Frontier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/environment/Frontier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environment/OccupancyGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/environment/OccupancyGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/AgentStepRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/AgentStepRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/SimulationFramework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/SimulationFramework.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/rendezvous/Rendezvous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/rendezvous/Rendezvous.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/rendezvous/RendezvousAgentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/rendezvous/RendezvousAgentData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisControllers/BuddyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisControllers/BuddyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/PureExploration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/PureExploration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainGUI.java" afterDir="false" />
+    </list>
+    <ignored path="MRESim.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="hideWarnings" value="true" />
+    <option name="HIDE_WARNINGS" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MRESim" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1530">
+              <caret line="345" selection-start-line="345" selection-end-line="345" />
+              <folding>
+                <element signature="n#!!doc;n#starterSelected#0;n#ExplorationController#0" expanded="true" />
+                <element signature="method#closeToObstacle#0;class#ExplorationController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/exploration/SimulationFramework.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5066">
+              <caret line="704" column="108" selection-start-line="704" selection-start-column="108" selection-end-line="704" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/exploration/GraphEdit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="101">
+              <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+              <folding>
+                <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
+                <element signature="method#editFile#0;class#GraphEdit#0" />
+                <element signature="method#editPng#0;class#GraphEdit#0" />
+                <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/image/BufferedImage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="109">
+              <caret line="1015" selection-start-line="1015" selection-end-line="1015" />
+              <folding>
+                <element signature="e#41021#41022#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/sun/awt/image/ByteInterleavedRaster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="540" selection-start-line="540" selection-end-line="540" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/exploration/GraphStats.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="799">
+              <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>explored</find>
+      <find>re</find>
+      <find>replan</find>
+      <find>metricconsol</find>
+      <find>metric</find>
+      <find>logfront</find>
+      <find>fronti</find>
+      <find>frontier</find>
+      <find>basestat</find>
+      <find>frontiers</find>
+      <find>grap</find>
+      <find>frontiersgraphg</find>
+      <find>metriccons</find>
+      <find>environmentfea</find>
+      <find>frontiergraph</find>
+      <find>frontiersgraph</find>
+      <find>callfr</find>
+      <find>reservecontroller</find>
+      <find>ReserveController</find>
+      <find>tostrin</find>
+      <find>clean</find>
+      <find>clea</find>
+      <find>contou</find>
+      <find>Clean</find>
+      <find>tmpP</find>
+      <find>tmp</find>
+      <find>agentFrontiers</find>
+      <find>get</find>
+      <find>distance</find>
+      <find>setsta</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/gui/RobotPanel.java" />
+        <option value="$PROJECT_DIR$/src/environment/Skeleton.java" />
+        <option value="$PROJECT_DIR$/src/environment/FrontierController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/Reserve.java" />
+        <option value="$PROJECT_DIR$/src/agents/AgentPool.java" />
+        <option value="$PROJECT_DIR$/src/agents/AgentActive.java" />
+        <option value="$PROJECT_DIR$/src/exploration/LeaderFollower.java" />
+        <option value="$PROJECT_DIR$/src/agents/LeaderSet.java" />
+        <option value="$PROJECT_DIR$/src/agents/IdleSet.java" />
+        <option value="$PROJECT_DIR$/src/agents/ActiveSet.java" />
+        <option value="$PROJECT_DIR$/src/agents/FollowerSet.java" />
+        <option value="$PROJECT_DIR$/src/exploration/ExplorationController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesis/PureExploration.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/DivideController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/ReserveController.java" />
+        <option value="$PROJECT_DIR$/src/agents/RealAgent.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/SideController.java" />
+        <option value="$PROJECT_DIR$/src/agents/AgentStats.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/BuddyController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/UtilityController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/PureExploration.java" />
+        <option value="$PROJECT_DIR$/src/gui/ExplorationDialog.java" />
+        <option value="$PROJECT_DIR$/src/config/SimulatorConfig.java" />
+        <option value="$PROJECT_DIR$/src/exploration/rendezvous/RendezvousAgentData.java" />
+        <option value="$PROJECT_DIR$/src/exploration/rendezvous/Rendezvous.java" />
+        <option value="$PROJECT_DIR$/src/agents/TeammateAgent.java" />
+        <option value="$PROJECT_DIR$/src/communication/DataMessage.java" />
+        <option value="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" />
+        <option value="$PROJECT_DIR$/src/environment/ContourTracer.java" />
+        <option value="$PROJECT_DIR$/src/exploration/AgentStepRunnable.java" />
+        <option value="$PROJECT_DIR$/src/environment/Frontier.java" />
+        <option value="$PROJECT_DIR$/src/environment/Environment.java" />
+        <option value="$PROJECT_DIR$/src/environment/OccupancyGrid.java" />
+        <option value="$PROJECT_DIR$/logs/frontiersGraph.txt" />
+        <option value="$PROJECT_DIR$/config/grassTeam/2.txt" />
+        <option value="$PROJECT_DIR$/src/path/Path.java" />
+        <option value="$PROJECT_DIR$/config/lastSimulatorConfig.txt" />
+        <option value="$PROJECT_DIR$/config/roomsTeam/4.txt" />
+        <option value="$PROJECT_DIR$/src/config/Constants.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainGUI.java" />
+        <option value="$PROJECT_DIR$/config/lastteamconfig.txt" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" />
+        <option value="$PROJECT_DIR$/src/exploration/SimulationFramework.java" />
+        <option value="$PROJECT_DIR$/src/exploration/GraphStats.java" />
+        <option value="$PROJECT_DIR$/src/exploration/GraphEdit.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="281" />
+    <option name="y" value="-16" />
+    <option name="width" value="697" />
+    <option name="height" value="745" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MRESim" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MRESim" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MRESim" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="exploration" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="consta&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/config/Constants.java&#10;lastsi&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/config/lastSimulatorConfig.txt&#10;last&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/config/lastteamconfig.txt&#10;main&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/gui/MainGUI.java&#10;reserv&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/exploration/thesisControllers/ReserveController.java&#10;cons&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/config/Constants.java&#10;lasttea&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/config/lastteamconfig.txt&#10;basestation&#9;PSI&#9;JAVA://config.RobotConfig.roletype#BaseStation&#10;metric&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/metricConsole.txt&#10;lasts&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/config/lastSimulatorConfig.txt&#10;reserve&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/exploration/thesisStrategies/Reserve.java&#10;exploratio&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/exploration/thesisControllers/ExplorationController.java&#10;savetopng&#9;PSI&#9;JAVA://environment.OccupancyGrid#saveToPNG&#10;savetoP&#9;PSI&#9;JAVA://environment.OccupancyGrid#saveToPNG&#10;exploration&#9;PSI&#9;JAVA://exploration.thesisControllers.ExplorationController&#10;proact&#9;PSI&#9;JAVA://exploration.thesisStrategies.ProactiveReserve&#10;constants&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/config/Constants.java&#10;realagen&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/agents/RealAgent.java&#10;env&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/environment/Environment.java&#10;maing&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/gui/MainGUI.java&#10;Consta&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/config/Constants.java&#10;simula&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/exploration/SimulationFramework.java&#10;Constants&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/src/config/Constants.java&#10;C:\Users\Victor\Documents&#9;null&#9;null&#10;C:\Users&#9;null&#9;null&#10;updateGUI&#9;PSI&#9;JAVA://exploration.SimulationFramework#updateGUI&#10;Trying to load&#9;null&#9;null&#10;old_&#9;FILE&#9;file://C:/Users/Alex/Desktop/Tesi/Documenti/Marco Catteneo/MRESim/config/old_lastWallConfig.txt&#10;metricC&#9;FILE&#9;file://C:/Users/marco/Documents/Tesi/MRESim/logs/metricConsole.txt" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547683169314" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="exploration" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.GraphEdit">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GraphEdit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="exploration.GraphEdit" />
+      <module name="MRESim" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="exploration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainGUI" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gui.MainGUI" />
+      <module name="MRESim" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.MainGUI" />
+      <item itemvalue="Application.GraphEdit" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GraphEdit" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1af4ec83-2cb6-438c-a042-35fb095a1534" name="Default" comment="" />
+      <created>1491387010413</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1491387010413</updated>
+      <workItem from="1491387016930" duration="6086000" />
+      <workItem from="1491408324659" duration="1132000" />
+      <workItem from="1491485038973" duration="87000" />
+      <workItem from="1495037445025" duration="805000" />
+      <workItem from="1495039706417" duration="5616000" />
+      <workItem from="1495126375924" duration="3354000" />
+      <workItem from="1495213511633" duration="3143000" />
+      <workItem from="1495268101013" duration="1879000" />
+      <workItem from="1495300215545" duration="1706000" />
+      <workItem from="1495469772117" duration="1840000" />
+      <workItem from="1495484254138" duration="1786000" />
+      <workItem from="1495560392876" duration="186000" />
+      <workItem from="1496738452389" duration="861000" />
+      <workItem from="1496827585372" duration="1048000" />
+      <workItem from="1501198057770" duration="3189000" />
+      <workItem from="1501272155144" duration="7166000" />
+      <workItem from="1501538452115" duration="594000" />
+      <workItem from="1503325497553" duration="475000" />
+      <workItem from="1503843690192" duration="2587000" />
+      <workItem from="1503926809289" duration="68000" />
+      <workItem from="1519482712741" duration="8586000" />
+      <workItem from="1520181706472" duration="24827000" />
+      <workItem from="1520548540017" duration="13680000" />
+      <workItem from="1520728725747" duration="5683000" />
+      <workItem from="1520770468623" duration="18499000" />
+      <workItem from="1521120388206" duration="22007000" />
+      <workItem from="1521911444270" duration="1710000" />
+      <workItem from="1522334535671" duration="33775000" />
+      <workItem from="1526546853379" duration="130000" />
+      <workItem from="1526660015286" duration="892000" />
+      <workItem from="1529475509338" duration="213000" />
+      <workItem from="1531304936024" duration="743000" />
+      <workItem from="1532187084340" duration="433000" />
+      <workItem from="1532187688966" duration="273000" />
+      <workItem from="1532188027042" duration="4411000" />
+      <workItem from="1536853832609" duration="5124000" />
+      <workItem from="1537782013715" duration="3159000" />
+      <workItem from="1537862656912" duration="4806000" />
+      <workItem from="1537971538834" duration="3170000" />
+      <workItem from="1538037443683" duration="1838000" />
+      <workItem from="1538040450253" duration="3330000" />
+      <workItem from="1538061261107" duration="7109000" />
+      <workItem from="1538123759760" duration="7059000" />
+      <workItem from="1538489412937" duration="2381000" />
+      <workItem from="1538576020511" duration="2489000" />
+      <workItem from="1538728967042" duration="6007000" />
+      <workItem from="1538736404813" duration="85000" />
+      <workItem from="1538991799405" duration="321000" />
+      <workItem from="1538993700203" duration="3686000" />
+      <workItem from="1539004185120" duration="1437000" />
+      <workItem from="1539006649364" duration="13125000" />
+      <workItem from="1539338565679" duration="6212000" />
+      <workItem from="1539613926426" duration="364000" />
+      <workItem from="1539618954946" duration="5929000" />
+      <workItem from="1539771662460" duration="15485000" />
+      <workItem from="1539877849291" duration="6924000" />
+      <workItem from="1539963500635" duration="4947000" />
+      <workItem from="1540227148687" duration="2252000" />
+      <workItem from="1540229433315" duration="6170000" />
+      <workItem from="1540239560170" duration="918000" />
+      <workItem from="1540369938408" duration="6355000" />
+      <workItem from="1540399338920" duration="12818000" />
+      <workItem from="1540483218431" duration="5280000" />
+      <workItem from="1540634229757" duration="2455000" />
+      <workItem from="1540717276128" duration="8680000" />
+      <workItem from="1540814236459" duration="1095000" />
+      <workItem from="1540831473426" duration="6228000" />
+      <workItem from="1540894385499" duration="594000" />
+      <workItem from="1540898376873" duration="2674000" />
+      <workItem from="1540907329523" duration="7340000" />
+      <workItem from="1540916723007" duration="4128000" />
+      <workItem from="1541411188919" duration="593000" />
+      <workItem from="1541416120026" duration="599000" />
+      <workItem from="1541587208328" duration="4898000" />
+      <workItem from="1541608877300" duration="6836000" />
+      <workItem from="1541695962631" duration="5972000" />
+      <workItem from="1541702322816" duration="1271000" />
+      <workItem from="1542020227905" duration="9416000" />
+      <workItem from="1542100924974" duration="2789000" />
+      <workItem from="1542106598925" duration="916000" />
+      <workItem from="1542118836822" duration="5515000" />
+      <workItem from="1542192870063" duration="787000" />
+      <workItem from="1542214495652" duration="951000" />
+      <workItem from="1542276354864" duration="2662000" />
+      <workItem from="1542360775370" duration="4048000" />
+      <workItem from="1542383483055" duration="2062000" />
+      <workItem from="1542627096193" duration="120000" />
+      <workItem from="1542627411625" duration="1174000" />
+      <workItem from="1542637663300" duration="2277000" />
+      <workItem from="1542731031471" duration="1191000" />
+      <workItem from="1542738913358" duration="26000" />
+      <workItem from="1542738971171" duration="678000" />
+      <workItem from="1542795848308" duration="3233000" />
+      <workItem from="1543231957690" duration="615000" />
+      <workItem from="1543916004841" duration="432000" />
+      <workItem from="1544180142274" duration="2968000" />
+      <workItem from="1544482385572" duration="8373000" />
+      <workItem from="1544638845694" duration="2379000" />
+      <workItem from="1544698616402" duration="3755000" />
+      <workItem from="1544709799626" duration="1950000" />
+      <workItem from="1544985234387" duration="764000" />
+      <workItem from="1544987241249" duration="1422000" />
+      <workItem from="1544991897720" duration="1147000" />
+      <workItem from="1544993114235" duration="1141000" />
+      <workItem from="1545005150830" duration="4594000" />
+      <workItem from="1545044288906" duration="3719000" />
+      <workItem from="1545128007227" duration="3662000" />
+      <workItem from="1545234507523" duration="805000" />
+      <workItem from="1545235835614" duration="10089000" />
+      <workItem from="1545257075725" duration="1197000" />
+      <workItem from="1547059649476" duration="796000" />
+      <workItem from="1547500626240" duration="619000" />
+      <workItem from="1547503501603" duration="6141000" />
+      <workItem from="1547589860554" duration="3968000" />
+      <workItem from="1547673234986" duration="8629000" />
+      <workItem from="1547938270570" duration="3922000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="482545000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3267776" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Palette&#9;" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32258064" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.43317232" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39774558" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32792208" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32850242" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.66612905" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32258064" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Designer" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/exploration/thesisStrategies/PureExploration.java</url>
+          <line>84</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/config/officeTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/personalConsole.txt" />
+    <entry file="file://$PROJECT_DIR$/config/grassTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/CharSequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/metricConsole.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/communication/RendezvousDataMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/communication/CommLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/rendezvous/MultiPointRendezvousStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="641" column="54" selection-start-line="641" selection-start-column="46" selection-end-line="641" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/RunFromLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1082">
+          <caret line="186" column="36" selection-start-line="186" selection-start-column="36" selection-end-line="186" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/SimulatorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/communication/DataMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="147" column="46" selection-start-line="147" selection-start-column="46" selection-end-line="147" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/ComStation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="50" column="20" lean-forward="true" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/BuddyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/FrontierExploration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="605" column="23" selection-start-line="605" selection-start-column="23" selection-end-line="605" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/RobotConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/io/BufferedReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="390" column="18" selection-start-line="390" selection-start-column="18" selection-end-line="390" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="230" column="25" selection-start-line="230" selection-start-column="18" selection-end-line="230" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/Frontier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lastSimulatorConfig.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/mazeTeam/4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/roomsTeam/4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/StringLatin1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/ReserveController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc;n#rc#0;n#ReserveController#0" expanded="true" />
+            <element signature="n#!!doc;n#addCallFrontiers#0;n#ReserveController#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/sets/ActiveSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="e#672#673#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/TeammateAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="152" column="27" selection-start-line="152" selection-start-column="27" selection-end-line="152" selection-end-column="27" />
+          <folding>
+            <element signature="e#5248#5249#0" expanded="true" />
+            <element signature="e#5278#5279#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/UtilityExploration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="188" column="60" selection-start-line="188" selection-start-column="60" selection-end-line="188" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/AgentStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-159">
+          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lastteamconfig.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/AgentStepRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
+          <folding>
+            <element signature="e#3328#3581#1" />
+            <element signature="e#5705#5804#0" expanded="true" />
+            <element signature="e#6575#6655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="112" column="30" selection-start-line="112" selection-start-column="30" selection-end-line="112" selection-end-column="30" />
+          <folding>
+            <element signature="e#1955#2019#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="400" column="24" selection-start-line="400" selection-start-column="24" selection-end-line="400" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/geom/Point2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="376" column="18" selection-start-line="376" selection-start-column="18" selection-end-line="376" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/RealAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-387">
+          <caret line="746" column="8" lean-forward="true" selection-start-line="746" selection-start-column="8" selection-end-line="746" selection-end-column="8" />
+          <folding>
+            <element signature="e#2503#2588#0" expanded="true" />
+            <element signature="e#7437#7497#0" expanded="true" />
+            <element signature="e#9248#9249#0" expanded="true" />
+            <element signature="e#9276#9277#0" expanded="true" />
+            <element signature="e#11332#11333#0" expanded="true" />
+            <element signature="e#11367#11368#0" expanded="true" />
+            <element signature="e#17063#17140#0" expanded="true" />
+            <element signature="e#27688#27689#0" expanded="true" />
+            <element signature="e#27754#27755#0" expanded="true" />
+            <element signature="e#30511#30568#0" expanded="true" />
+            <element signature="e#52288#52348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/BasicAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="206" column="17" selection-start-line="206" selection-start-column="17" selection-end-line="206" selection-end-column="17" />
+          <folding>
+            <element signature="e#4512#4513#0" expanded="true" />
+            <element signature="e#4545#4546#0" expanded="true" />
+            <element signature="e#5832#5833#0" expanded="true" />
+            <element signature="e#5870#5871#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/path/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1581">
+          <caret line="55" column="13" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+          <folding>
+            <element signature="e#51070#51071#0" expanded="true" />
+            <element signature="e#51111#51112#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14331">
+          <caret line="896" selection-start-line="896" selection-end-line="896" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="126" column="60" selection-start-line="126" selection-start-column="60" selection-end-line="126" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="149" column="60" selection-start-line="149" selection-start-column="60" selection-end-line="149" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+          <folding>
+            <element signature="e#3276#3332#0" expanded="true" />
+            <element signature="n#!!doc;n#activationFunction#0;n#BuddySystem#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="102" column="60" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="60" />
+          <folding>
+            <element signature="e#444#501#0" expanded="true" />
+            <element signature="e#762#836#0" expanded="true" />
+            <element signature="e#976#1060#0" expanded="true" />
+            <element signature="e#1652#1732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/OccupancyGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="1872" selection-start-line="1872" selection-end-line="1872" />
+          <folding>
+            <element signature="e#64137#64138#0" expanded="true" />
+            <element signature="e#64189#64190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="345" selection-start-line="345" selection-end-line="345" />
+          <folding>
+            <element signature="n#!!doc;n#starterSelected#0;n#ExplorationController#0" expanded="true" />
+            <element signature="method#closeToObstacle#0;class#ExplorationController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/SimulationFramework.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5066">
+          <caret line="704" column="108" selection-start-line="704" selection-start-column="108" selection-end-line="704" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/GraphStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/image/BufferedImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="1015" selection-start-line="1015" selection-end-line="1015" />
+          <folding>
+            <element signature="e#41021#41022#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/sun/awt/image/ByteInterleavedRaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="540" selection-start-line="540" selection-end-line="540" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/GraphEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+          <folding>
+            <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
+            <element signature="method#editFile#0;class#GraphEdit#0" />
+            <element signature="method#editPng#0;class#GraphEdit#0" />
+            <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

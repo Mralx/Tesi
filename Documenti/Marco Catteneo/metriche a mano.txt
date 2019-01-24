@@ -1,0 +1,31 @@
+time elapsed - frontiere
+6 (425,293) , (468,231) , (545,297) , (485,361)
+7 (545,297) , (466,230) , (465,274) , (402,313) , (485,363)
+8 (559,237) , (466,230) , (466,277) , (555,356) , (399,316) , (548,294) , (486,365) , (560,253)
+9 (467,230) , (559,237) , (468,276) , (559,368) , (391,310) , (552,299) , (411,327) , (560,253) , (486,364)
+
+edge connectivity
+1) grafo completo = ogni nodo è connesso anche alle frontiere scoperte successivamente, 
+quindi l'analisi dovrebbe tenere conto anche dei nodi precedenti a quelli elencati sopra, ma qui considero solo questo sottografo 
+	7: 3 frontiere viste da 6 restano (quasi) invariate, 1 scompare e ne vengono generate 2 => ec=2, due archi alla stessa frontiera 
+	8: 5 frontiere precedenti invariate, ne genera 3 => ec=2, come sopra
+	9: ec=2, come sopra
+	
+	In generale, ec_t=min(t,ec_(t-1))=ec_(t-1)=ec_0 infatti, ogni frontiera scoperta all'istante t sarà connessa anche ai nodi precedenti all'istante t, 
+	il che significa che per disconnetterla dal grafo si dovranno rimuovere t archi. 
+	Per tale ragione: 
+		se viene scoperta una frontiera, essa sarà collegata a t nodi, quindi ec_t=ec_(t-1);
+		se le frontiere restano le stesse di quelle del passo precedente, ec_t = ec_k con k < t;
+		se almeno una frontiera viene esplorata, essa avrà al più t-1 connessioni, quindi ec_t = min(t-1, ec_(t-1)) 
+
+2) grafo ridotto = ogni nodo è connesso solo alle frontiere che vede
+	7: ec=1, le 2 frontiere appena scoperte sono connesse solo al nodo 7 e non al 6
+	8: ec=1, come sopra per le 3 nuove frontiere
+	9: ec=1, come sopra
+
+	In generale, 3 casi riconducibili a 2:
+	1) vengono scoperte nuove frontiere -> ec=1 poichè sono connesse solamente al nodo al tempo t
+	2) frontiere invariate -> ec=1+k poiché connesse a tutti i nodi da quello a tempo t fino a quello a tempo t-k, il quale è il primo a scoprire quella frontiera
+	3) vengono esplorate delle frontiere -> ec=t-k-1 poichè sono connesse solamente al nodo a t-1 (e i suoi predecessori fino al primo nodo nel quale si scopre
+	tale frontiera) e non a quello t, quindi è come il caso 1 
+

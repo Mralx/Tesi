@@ -1,0 +1,28 @@
+NOME Alex
+COGNOME	Perugini
+INDIRIZZO Via Domenico Trentacoste 32
+TELEFONO (casa, alloggio a Milano, cellulare, cercapersone, ...) 3349009072
+SKYPE 10455329@polimi.it
+EMAIL alex.perugini@mail.polimi.it	
+HOME PAGE
+CORSO DI LAUREA (e orientamento) Computer Science and Engineering, orientamento in Robotica
+MATRICOLA 876359	
+TIPO DI LAVORO (progetto/elaborato/tesina/tesi) tesi
+DATA INIZIO DEL LAVORO 04/05/18
+TITOLO DEL LAVORO (orientativo) Analysis of Coordination for Multi-Robot Exploration
+DESCRIZIONE DEL LAVORO (10-15 righe) 
+La tesi verterà principalmente sull'approfondimento del lavoro fatto da Marco Cattaneo nella tesi 
+"An Analysis of Coordination Mechanisms for Multi-Robot Exploration of Indoor Environments".
+Inizialmente si analizzerà la possibilità di riuscire a classificare le proprietà dell'ambiente 
+che si sta esplorando. La classificazione dell’ambiente consiste nel cercare di capire se l’ambiente, 
+in cui il robot si trova, rientri in una delle categorie definite dalla tesi di Cattaneo. Tale 
+classificazione se fosse possibile farla mentre l’esplorazione prosegue (online), permetterebbe di adattare 
+il meccanismo di esplorazione alle proprietà dell’ambiente stesso, andando a migliorare le performance. 
+In caso essa non sia fattibile online, si può pensare di fare una semplice analisi a posteriori, illustrando 
+quale fosse il metodo migliore per procedere all’esplorazione.
+In seguito si vuole anche analizzare più approfonditamente due metriche di valutazione, introdotte nella 
+tesi sopraccitata, ovvero "availability" ed "interference" e vedere più nel dettaglio quanto effettivamente 
+influenzino l'esplorazione e come sia possibile sfruttarle per migliorarla.
+
+
+
