@@ -5,20 +5,20 @@ time elapsed - frontiere
 9 (467,230) , (559,237) , (468,276) , (559,368) , (391,310) , (552,299) , (411,327) , (560,253) , (486,364)
 
 edge connectivity
-1) grafo completo = ogni nodo è connesso anche alle frontiere scoperte successivamente, 
+1) grafo dinamico = ogni nodo[0, ..., t-1] è connesso anche alle frontiere scoperte al tempo t, 
 quindi l'analisi dovrebbe tenere conto anche dei nodi precedenti a quelli elencati sopra, ma qui considero solo questo sottografo 
 	7: 3 frontiere viste da 6 restano (quasi) invariate, 1 scompare e ne vengono generate 2 => ec=2, due archi alla stessa frontiera 
 	8: 5 frontiere precedenti invariate, ne genera 3 => ec=2, come sopra
 	9: ec=2, come sopra
 	
-	In generale, ec_t=min(t,ec_(t-1))=ec_(t-1)=ec_0 infatti, ogni frontiera scoperta all'istante t sarà connessa anche ai nodi precedenti all'istante t, 
+	In generale, ec_t=min(t,ec_(t-1)) infatti, ogni frontiera scoperta all'istante t sarà connessa anche ai nodi precedenti all'istante t, 
 	il che significa che per disconnetterla dal grafo si dovranno rimuovere t archi. 
 	Per tale ragione: 
 		se viene scoperta una frontiera, essa sarà collegata a t nodi, quindi ec_t=ec_(t-1);
 		se le frontiere restano le stesse di quelle del passo precedente, ec_t = ec_k con k < t;
-		se almeno una frontiera viene esplorata, essa avrà al più t-1 connessioni, quindi ec_t = min(t-1, ec_(t-1)) 
+		se almeno una frontiera viene esplorata, essa avrà al più t-1 connessioni, quindi ec_t = min(t-1, ec_(t-1)).
 
-2) grafo ridotto = ogni nodo è connesso solo alle frontiere che vede
+2) grafo statico = ogni nodo è connesso solo alle frontiere che vede
 	7: ec=1, le 2 frontiere appena scoperte sono connesse solo al nodo 7 e non al 6
 	8: ec=1, come sopra per le 3 nuove frontiere
 	9: ec=1, come sopra
@@ -29,3 +29,17 @@ quindi l'analisi dovrebbe tenere conto anche dei nodi precedenti a quelli elenca
 	3) vengono esplorate delle frontiere -> ec=t-k-1 poichè sono connesse solamente al nodo a t-1 (e i suoi predecessori fino al primo nodo nel quale si scopre
 	tale frontiera) e non a quello t, quindi è come il caso 1 
 
+
+vertex connectivity
+1) dinamico
+	in ogni caso, vc_t = t. L'unica eccezione è il caso in cui il nodo t fosse una frontiera a t-1 ed a t è stata esplorata senza scoprire nessun'altra frontiera.
+	In tal caso infatti la vc_t = vc_(t-1).
+2) statico
+	6: grafo a stella, rimuovendo il nodo 6, il grafo diventa disconnesso => vc = 1 
+	7: 3 frontiere invariate dal nodo 6, 1 scompare e 2 generate -> rimuovendo 6 o 7 disconnetto il grafo => vc = 1
+	8: 5 frontiere precedenti invariate, ne genera 3 -> rimuovendo 6 o 8  disconnetto il grafo => vc = 1
+	9: vc = 1, come sopra
+
+	In generale, 
+		se si scopre almeno una frontiera, vc_t = 1 poiché basterà rimuovere il nodo t;
+		altrimenti (= non vengono scoperte nuove frontiere), vc_t = 1 + vc_(t-1), equivalente al rimuovere il nodo t e ricondursi al caso a t-1.
