@@ -1,3 +1,8 @@
+3 possibili modi di considerare il grafo:
+   1) ogni nodo[0, ..., t-1] è connesso anche alle frontiere scoperte al tempo t -> un arco indica che due nodi sono raggiungibili l'uno dall'altro
+   2) ogni nodo è connesso solo alle frontiere che vede e a quelle scoperte precedentemente, ma inesplorate -> un arco non indica nessuna rappresentazione particolare
+   3) ogni nodo è connesso solo alle frontiere che scopre -> un arco tra una frontiera e un nodo del grafo indica che quella frontiera è stata aggiunta da quella posizione
+
 time elapsed - frontiere
 6 (425,293) , (468,231) , (545,297) , (485,361)
 7 (545,297) , (466,230) , (465,274) , (402,313) , (485,363)
@@ -18,7 +23,7 @@ quindi l'analisi dovrebbe tenere conto anche dei nodi precedenti a quelli elenca
 		se le frontiere restano le stesse di quelle del passo precedente, ec_t = ec_k con k < t;
 		se almeno una frontiera viene esplorata, essa avrà al più t-1 connessioni, quindi ec_t = min(t-1, ec_(t-1)).
 
-2) grafo statico = ogni nodo è connesso solo alle frontiere che vede
+2) grafo statico = ogni nodo è connesso solo alle frontiere che vede e a quelle scoperte precedentemente, ma inesplorate
 	7: ec=1, le 2 frontiere appena scoperte sono connesse solo al nodo 7 e non al 6
 	8: ec=1, come sopra per le 3 nuove frontiere
 	9: ec=1, come sopra
@@ -43,3 +48,23 @@ vertex connectivity
 	In generale, 
 		se si scopre almeno una frontiera, vc_t = 1 poiché basterà rimuovere il nodo t;
 		altrimenti (= non vengono scoperte nuove frontiere), vc_t = 1 + vc_(t-1), equivalente al rimuovere il nodo t e ricondursi al caso a t-1.
+
+closeness centrality
+Per un grafo g, è definita come il vettore (1/l_1,1/l_2,...), dove l_i è la distanza media dal nodo i ad ogni altro nodo connesso ad i. Qui la distanza è calcolata 
+semplicemente come la distanza euclidea tra due nodi. Di fatto sarà una sottostima della distanza, pertanto la misura di centralità sarà una sottostima di quella reale.
+2) statico per semplicità nel calcolo
+	d(2,3) = d(3,4) = d(4,5) = 9.9 d(5,6) = 9.2 d(6,7) = 10 d(7,8) = 9.4 d(8,9) = d(9,10) = 9.9 
+	2 = [570,180] f2 = [(647,177) , (523,233) , (468,231) , (444,278) ] d(2,f2) = [77, 70.1, 114, 159.6]
+	3 = [563,187] f3 = [(523,235) , (468,231) , (438,282) ] d(3,f3) = [62.5, 104.7, 157]
+	4 = [556,194] f4 = [(523,240) , (468,231) , (434,285) ] d(4,f4) = [56.6, 95.6, 152.2]
+	5 = [549,201] f5 = [(522,261) , (468,231) , (429,288) ] d(5,f5) = [65.8, 86.4, 148.2]
+	6 = [540,203] f6 = [(425,293) , (468,231) , (545,297) , (485,361) ] d(6,f6) = [146, 77.3, 94.1, 167.3]
+	7 = [530,203] f7 = [(545,297) , (466,230) , (465,274) , (402,313) , (485,363) ] d(7,f7) = [95.2, 69.5, 96.3, 168.8, 166.2]
+	8 = [522,208] f8 = [(559,237) , (466,230) , (466,277) , (555,356) , (399,316) , (548,294) , (486,365) , (560,253) ] d(8,f8) = [47, 60.2, 88.9, 151.6, 163.7, 89.9, 161.1, 58.9]
+	9 = [515,215] f9 = [(467,230) , (559,237) , (468,276) , (559,368) , (391,310) , (552,299) , (411,327) , (560,253) , (486,364) ] d(9,f9) = [50.3, 49.2, 77, 159.2, 156.2, 91.8, 152.8, 58.9, 151.8]
+	
+	closeness al tempo t= 
+	6 : []
+	7 : []
+	8 : []
+	9 : []

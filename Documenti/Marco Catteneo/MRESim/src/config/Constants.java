@@ -48,7 +48,7 @@ import java.awt.Color;
  */
 public class Constants {
 
-    public static final int DISTANCE_THRESHOLD = 2;
+    public static final int DISTANCE_THRESHOLD = 3;
 
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
     public static final int BATCH_RUNS = 1;     //max number of run per configuration
