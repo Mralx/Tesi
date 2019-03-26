@@ -1,7 +1,6 @@
 package exploration.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -10,9 +9,15 @@ public class ExplorationGraph {
 
     //TODO modificare con set anziché con una lista e assicurarsi che gli hashset funzionino con l'equals
     private List<Node> nodes;
+    private Set<Node> nodeSet;
+    private Map<SimpleNode, Node> nodeMap;
+    private SimpleNode lastNode;
 
-    public ExplorationGraph() {
+    ExplorationGraph() {
         this.nodes = new ArrayList<>();
+        this.nodeSet = new HashSet<>();
+        this.nodeMap = new LinkedHashMap<>();
+        this.lastNode = null;
     }
 
     /**
@@ -23,12 +28,9 @@ public class ExplorationGraph {
      * object is found with the coordinates of the SimpleNode
      */
     Node getNode(SimpleNode node){
-        for(Node n: nodes){
-            if(node.equals(n))
-                return n;
-        }
-        return null;
+        return nodeMap.get(node);
     }
+
 
     /**
      * Provides the edge connecting the two SimpleNode in input. Based on the assumption that the graph is undirected,
@@ -38,6 +40,7 @@ public class ExplorationGraph {
      * @return a SimpleEdge of n1 with n2 as adjacent. Returns null if n1 is not a node of the graph or if n2 is not in
      * its list of adjacent nodes.
      */
+    /*
     SimpleEdge getEdge(SimpleNode n1, SimpleNode n2){
         if(this.getNode(n1)!=null) {
             List<SimpleEdge> edges = this.getNode(n1).getAdjacents();
@@ -49,74 +52,103 @@ public class ExplorationGraph {
 
         return null;
     }
-
-    List<Node> getNodes() {
-        return nodes;
-    }
-
-    public void setNodes(List<Node> nodes) {
-        this.nodes = nodes;
-    }
+    */
 
     Node getLastNode(){
-        return nodes.get(nodes.size()-1);
+        return getNode(lastNode);
+    }
+
+    private Double euclideanDistance(SimpleNode node1, SimpleNode node2){
+        return Math.sqrt(
+                Math.pow(node1.x-node2.x,2)+Math.pow(node1.y-node2.y,2)
+        );
     }
 
     void addNode(Node node) {
-        if(nodes.size()>1) {
+        double distance = euclideanDistance(node, lastNode);
+        addNode(node, distance);
+    }
+
+    void addNode(Node node, double distance){
+        if(lastNode != null) {
             Node lastNode = getLastNode();
-            node.addAdjacent(new SimpleEdge(new SimpleNode(lastNode)));
-            lastNode.addAdjacent(new SimpleEdge(new SimpleNode(node)));
+            node.addAdjacent(lastNode, distance);
+            lastNode.addAdjacent(node, distance);
         }
-        nodes.add(node);
+        nodeMap.put(new SimpleNode(node), node);
+        lastNode = node;
     }
 
-    boolean containsNode(SimpleNode node){
-        for(Node n: nodes){
-            if(node.equals(n))
-                return true;
-            else //optimization in the search (is it true?)
-                for(SimpleEdge e: n.getAdjacents()){
-                    if(e.getAdjacent().equals(node))
-                        return true;
-                }
-        }
-        return false;
-    }
-
-    //ricontrollare
+    /**
+     * Computes the distance between two nodes in the graph, provided their coordinates. If one of the two nodes is not
+     * in the graph, then a negative value is returned.
+     * @param n1 first node
+     * @param n2 second node
+     * @return the length of the path connecting the
+     */
     double distanceNodes(SimpleNode n1, SimpleNode n2){
-        if(!containsNode(n1) || !containsNode(n2))
+        double distance = 0;
+        List<SimpleNode> path = getPath(n1,n2);
+        if(path == null)
             return -1;
-        return getEdge(n1,n2).getDistance();
+        for(int i=0; i<path.size()-1; i++){
+            distance += getNode(path.get(i)).getDistance(path.get(i+1));
+        }
+        return distance;
     }
 
-    List<SimpleEdge> getPath(SimpleNode n1, SimpleNode n2){
-        if(!containsNode(n1) || !containsNode(n2))
+    List<SimpleNode> getPath(SimpleNode n1, SimpleNode n2){
+        if(!nodeMap.containsKey(n1) || !nodeMap.containsKey(n2))
             return null;
 
-        List<SimpleEdge> path = new ArrayList<SimpleEdge>();
         if(getNode(n1).getAdjacents().contains(n2)){
-            path.add(getEdge(n1,n2));
+            List<SimpleNode> path = new ArrayList<>();
+            path.add(n1);
+            path.add(n2);
             return path;
         }
 
-        List<SimpleEdge> unsettled = new ArrayList<>();
-        List<SimpleEdge> settled = new ArrayList<>();
-        unsettled.add(new SimpleEdge(n1, 0));
-        while(!unsettled.isEmpty()){
-            double min_d = unsettled.get(0).getDistance();
-            SimpleEdge s_edge = unsettled.get(0);
-            for(SimpleEdge e: unsettled){
-                if(e.getDistance()<min_d){
-                    min_d = e.getDistance();
-                    s_edge = e;
+        HashMap<SimpleNode, SimpleNode> parentMap = new HashMap<>();
+        HashSet<SimpleNode> visited = new HashSet<>();
+        Map<SimpleNode, Double> distances = new HashMap<>();
+        Queue<SimpleNode> priorityQueue = new PriorityQueue<>(
+                (SimpleNode o1, SimpleNode o2) -> distances.get(o1).compareTo(distances.get(o2))
+        );
+
+        distances.put(n1, (double) 0);
+        priorityQueue.add(n1);
+        SimpleNode current;
+
+        while(!priorityQueue.isEmpty()){
+            current = priorityQueue.remove();
+            if(!visited.contains(current)){
+                visited.add(current);
+                if(current.equals(n2)) return reconstructPath(parentMap, n1, n2); //TODO
+            }
+            Set<SimpleNode> neighbors = getNode(current).getAdjacents();
+            for(SimpleNode neighbor : neighbors){
+                if(!visited.contains(neighbor)){
+                    double predictedDistance = euclideanDistance(neighbor,n2);
+                    double neighborDistance = getNode(current).getDistance(neighbor);
+                    double totalDistance = distances.get(current) + neighborDistance + predictedDistance;
+                    if(!distances.containsKey(neighbor) || totalDistance < distances.get(neighbor)){
+                        distances.put(neighbor, totalDistance);
+                        parentMap.put(neighbor, current);
+                        priorityQueue.add(neighbor);
+                    }
                 }
             }
-            unsettled.remove(s_edge);
-            Node n_node = get
         }
-
-        return null; //TODO implement with dijkstra
+        return reconstructPath(parentMap, n1, n2);
     }
+
+    private List<SimpleNode> reconstructPath(HashMap<SimpleNode, SimpleNode> parentMap, SimpleNode n1, SimpleNode n2) {
+        LinkedList<SimpleNode> path = new LinkedList<>();
+        path.addFirst(n2);
+        while(path.getFirst()!=n1){
+            path.addFirst(parentMap.get(path.getFirst()));
+        }
+        return path;
+    }
+
 }

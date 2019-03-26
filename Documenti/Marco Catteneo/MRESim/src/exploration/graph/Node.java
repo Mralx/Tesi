@@ -1,33 +1,45 @@
 package exploration.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Node extends SimpleNode {
 
     //List of adjacents nodes, used to implement the graph as an adjacency list
-    private List<SimpleEdge> adjacents;
+    private Map<SimpleNode, java.lang.Double> adj;
 
     public Node(int x, int y) {
         super(x,y);
-        this.adjacents = new ArrayList<>();
+        this.adj = new HashMap<>();
     }
 
-    public Node(int x, int y, List<SimpleEdge> adjacents) {
-        super(x,y);
-        this.adjacents = adjacents;
+    public Node(int x, int y, Map<SimpleNode, java.lang.Double> adj) {
+        super(x, y);
+        this.adj = adj;
     }
 
-    public List<SimpleEdge> getAdjacents() {
-        return adjacents;
+    public Set<SimpleNode> getAdjacents(){
+        return adj.keySet();
     }
 
-    public void setAdjacents(List<SimpleEdge> adjacents) {
-        this.adjacents = adjacents;
+    public Map<SimpleNode, java.lang.Double> getAdjacentMap() {
+        return adj;
     }
 
-    void addAdjacent(SimpleEdge adjacent){
-        this.adjacents.add(adjacent);
+    public void addAdjacent(SimpleNode node, double distance){
+        adj.put(node, distance);
     }
 
+    public boolean isAdjacent(SimpleNode node){
+        return adj.containsKey(node);
+    }
+
+    public boolean removeAdjacent(SimpleNode node){
+        return adj.remove(node)==null;
+    }
+
+    public double getDistance(SimpleNode node){
+        if(adj.containsKey(node))
+            return adj.get(node);
+        return java.lang.Double.MAX_VALUE;
+    }
 }

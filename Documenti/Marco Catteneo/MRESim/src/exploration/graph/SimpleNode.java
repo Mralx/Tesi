@@ -6,12 +6,23 @@ import static config.Constants.DISTANCE_THRESHOLD;
 
 public class SimpleNode extends Point {
 
-    public SimpleNode(int x, int y) {
+    //Values used to mark frontier nodes. Default is false
+    private boolean isFrontier = false;
+
+    SimpleNode(int x, int y) {
         super(x, y);
     }
 
     SimpleNode(Node node){
         super(node.x, node.y);
+    }
+
+    public boolean isFrontier() {
+        return isFrontier;
+    }
+
+    public void setFrontier(boolean f){
+        isFrontier = f;
     }
 
     @Override
