@@ -2,10 +2,13 @@ package exploration.graph;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class GraphStats {
 
+    //vecchia funzione per calcolare il grado utilizzando il file
     static void f_degree(String src_file, String dest_file){
 
         int min_d=100, max_d=0, d=0;
@@ -59,19 +62,48 @@ class GraphStats {
         }
     }
 
-
-    static void degree(ExplorationGraph graph){
-        List<Integer> deg = new ArrayList<>();
-        int min_d = 100, max_d = 0, avg_d = 0;
-        for(Node n: graph.getNodes()){
-            int d = n.getAdjacents().size();
-            deg.add(d);
-            if(min_d > d) min_d = d;
-            if(max_d < d) max_d = d;
-            avg_d = (d+deg.size()*avg_d)/(deg.size()+1);
+    /**
+     * Computes the degree of each node the graph
+     * @param graph the graph which degree to compute
+     * @return a mapping from each node in the graph to its degree
+     */
+    static Map<SimpleNode, Integer> degree(ExplorationGraph graph){
+        Map<SimpleNode, Integer> deg = new HashMap<>();
+        for(SimpleNode n : graph.getNodeMap().keySet() ){
+            deg.put(n,graph.getNode(n).getAdjacents().size());
         }
+        return deg;
     }
 
+    /**
+     * Computes respectively the maximum, the minimum and the average degree of the nodes in the graph
+     * @param map the mapping from each node to its degree
+     * @return a list of three integers where the first one is the maximum degree, the second one is the minimum degree
+     * and the third one is the average degree of the nodes in the map
+     */
+    static List<Integer> degMaxMinAvg(Map<SimpleNode, Integer> map){
+        List<Integer> stats = new ArrayList<>();
+        int min=0, max=100, avg=0, count=0;
+        for(SimpleNode n: map.keySet()){
+            count+=1;
+            int d = map.get(n);
+            if(d<min) min = d;
+            if(d>max) max = d;
+            avg += d;
+        }
+        stats.add(max);
+        stats.add(min);
+        stats.add(avg/count);
+        return stats;
+    }
+
+    /**
+     * Computes the distance between two nodes in the graph
+     * @param graph
+     * @param n1
+     * @param n2
+     * @return
+     */
     static double distance(ExplorationGraph graph, SimpleNode n1, SimpleNode n2) {
         return graph.distanceNodes(n1, n2);
     }

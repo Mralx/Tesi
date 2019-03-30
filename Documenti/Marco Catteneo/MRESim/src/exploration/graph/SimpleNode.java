@@ -13,8 +13,15 @@ public class SimpleNode extends Point {
         super(x, y);
     }
 
-    SimpleNode(Node node){
+    SimpleNode(SimpleNode node){
         super(node.x, node.y);
+        if(node.isFrontier())
+            this.isFrontier = true;
+    }
+
+    SimpleNode(SimpleNode node, boolean isFrontier){
+        super(node.x, node.y);
+        setFrontier(isFrontier);
     }
 
     public boolean isFrontier() {
@@ -27,7 +34,7 @@ public class SimpleNode extends Point {
 
     @Override
     public String toString() {
-        return new String("["+this.x+","+this.y+"]");
+        return "["+this.x+","+this.y+"]";
     }
 
     public boolean equals(SimpleNode node) {

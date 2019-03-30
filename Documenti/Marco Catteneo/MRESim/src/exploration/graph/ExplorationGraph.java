@@ -7,17 +7,16 @@ import java.util.*;
  */
 public class ExplorationGraph {
 
-    //TODO modificare con set anziché con una lista e assicurarsi che gli hashset funzionino con l'equals
-    private List<Node> nodes;
-    private Set<Node> nodeSet;
     private Map<SimpleNode, Node> nodeMap;
     private SimpleNode lastNode;
 
     ExplorationGraph() {
-        this.nodes = new ArrayList<>();
-        this.nodeSet = new HashSet<>();
         this.nodeMap = new LinkedHashMap<>();
         this.lastNode = null;
+    }
+
+    public Map<SimpleNode, Node> getNodeMap() {
+        return nodeMap;
     }
 
     /**
@@ -64,11 +63,25 @@ public class ExplorationGraph {
         );
     }
 
+    /**
+     * Adds the node to the graph by linking it to the last added node. The distance is computed as the euclidean
+     * distance from the node to which it is linked. Should be used only with non-frontier nodes
+     * @param node node to add to the graph
+     */
     void addNode(Node node) {
-        double distance = euclideanDistance(node, lastNode);
+        double distance = 0;
+        if(lastNode!=null){
+            distance = euclideanDistance(node, lastNode);
+        }
+
         addNode(node, distance);
     }
 
+    /**
+     * Adds the node to the graph by linking it to the last added node. Should be used only with non-frontier nodes
+     * @param node node to add to the graph
+     * @param distance the distance from the last added node
+     */
     void addNode(Node node, double distance){
         if(lastNode != null) {
             Node lastNode = getLastNode();
@@ -80,11 +93,24 @@ public class ExplorationGraph {
     }
 
     /**
+     * Adds a frontier node to the graph, if not already present and links it to a node
+     * @param frontier the frontier node to add to the graph
+     * @param adj a node in the graph to which the frontier is linked
+     * @param distance distance between the node and the frontier node
+     */
+    void addFrontierNode(Node frontier, SimpleNode adj, double distance){
+        nodeMap.putIfAbsent(new SimpleNode(frontier,true), frontier);
+        getNode(adj).addAdjacent(new SimpleNode(frontier,true), distance);
+        frontier.addAdjacent(adj, distance);
+    }
+
+    /**
      * Computes the distance between two nodes in the graph, provided their coordinates. If one of the two nodes is not
      * in the graph, then a negative value is returned.
      * @param n1 first node
      * @param n2 second node
-     * @return the length of the path connecting the
+     * @return the length of the path connecting the two nodes. It returns -1 if at least one of the nodes is not in
+     * the graph
      */
     double distanceNodes(SimpleNode n1, SimpleNode n2){
         double distance = 0;
@@ -97,6 +123,14 @@ public class ExplorationGraph {
         return distance;
     }
 
+    /**
+     * Calculates one path connecting two nodes in the graph. If there are multiple paths, then only the first found
+     * one is returned.
+     * @param n1 starting node
+     * @param n2 arrival node
+     * @return a list of coordinates of the nodes connecting the two nodes in input. Returns null if at least one of
+     * the two input nodes is not in the graph.
+     */
     List<SimpleNode> getPath(SimpleNode n1, SimpleNode n2){
         if(!nodeMap.containsKey(n1) || !nodeMap.containsKey(n2))
             return null;
@@ -123,7 +157,7 @@ public class ExplorationGraph {
             current = priorityQueue.remove();
             if(!visited.contains(current)){
                 visited.add(current);
-                if(current.equals(n2)) return reconstructPath(parentMap, n1, n2); //TODO
+                if(current.equals(n2)) return reconstructPath(parentMap, n1, n2);
             }
             Set<SimpleNode> neighbors = getNode(current).getAdjacents();
             for(SimpleNode neighbor : neighbors){
@@ -142,6 +176,13 @@ public class ExplorationGraph {
         return reconstructPath(parentMap, n1, n2);
     }
 
+    /**
+     * Computes the path according to the map of a node to its parent.
+     * @param parentMap mapping of each node to its parent in the path
+     * @param n1 starting node
+     * @param n2 arrival node
+     * @return the path connecting the two nodes
+     */
     private List<SimpleNode> reconstructPath(HashMap<SimpleNode, SimpleNode> parentMap, SimpleNode n1, SimpleNode n2) {
         LinkedList<SimpleNode> path = new LinkedList<>();
         path.addFirst(n2);

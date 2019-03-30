@@ -1,10 +1,11 @@
 package exploration.graph;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Node extends SimpleNode {
 
-    //List of adjacents nodes, used to implement the graph as an adjacency list
+    //List of adjacent nodes, used to implement the graph as an adjacency list
     private Map<SimpleNode, java.lang.Double> adj;
 
     public Node(int x, int y) {
@@ -17,7 +18,7 @@ public class Node extends SimpleNode {
         this.adj = adj;
     }
 
-    public Set<SimpleNode> getAdjacents(){
+    Set<SimpleNode> getAdjacents(){
         return adj.keySet();
     }
 
@@ -25,8 +26,8 @@ public class Node extends SimpleNode {
         return adj;
     }
 
-    public void addAdjacent(SimpleNode node, double distance){
-        adj.put(node, distance);
+    void addAdjacent(SimpleNode node, double distance){
+        adj.put(new SimpleNode(node), distance);
     }
 
     public boolean isAdjacent(SimpleNode node){
@@ -37,9 +38,19 @@ public class Node extends SimpleNode {
         return adj.remove(node)==null;
     }
 
-    public double getDistance(SimpleNode node){
+    double getDistance(SimpleNode node){
         if(adj.containsKey(node))
             return adj.get(node);
         return java.lang.Double.MAX_VALUE;
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat(".##");
+        String toString = "Node    [" + x + ',' + y + "] -> {" ;
+        for(SimpleNode n: adj.keySet()){
+            toString = toString + n + '=' + df.format(adj.get(n)) + "  ";
+        }
+        return toString + "}";
     }
 }

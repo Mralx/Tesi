@@ -1,12 +1,8 @@
 package exploration.graph;
 
-import exploration.thesisControllers.ExplorationController;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.*;
 
 public class GraphEdit {
@@ -22,10 +18,11 @@ public class GraphEdit {
         //editFile(oldFileName, newFileName);
         //editPng(60,1, newFileName);
         //editCallFrontiersFile();
-        for(int i=0; i<agents.length(); i++){
-            editAgentFrontPng(agents.charAt(i),9);
+        //for(int i=0; i<agents.length(); i++){
+        //    editAgentFrontPng(agents.charAt(i),9);
         //    editAgentFrontFile(agents.charAt(i));
-        }
+        //}
+        shortestPathGraph('A',20);
     }
 
     private static void editAgentFrontPng(char agentName, int n) {
@@ -232,7 +229,7 @@ public class GraphEdit {
 
         String filename = System.getProperty("user.dir")+"/logs/front"+agentName+".txt";
         String newFilename = System.getProperty("user.dir")+"/logs/spg "+agentName+".txt";
-        ExplorationGraph graph = new ExplorationGraph();
+        Builder builder = new Builder();
 
         try {
             File file = new File(newFilename);
@@ -245,8 +242,14 @@ public class GraphEdit {
             while (line != null && i<n) {
                 line = br.readLine();
                 //legge una linea, parsa il nodo, lo aggiunge al grafo
-                graph.addNode(parseNode(line));
+                builder.parseLine(line);
                 i++;
+            }
+
+            ExplorationGraph graph = builder.getGraph();
+            for(SimpleNode node : graph.getNodeMap().keySet()){
+                bw.write(graph.getNode(node).toString());
+                bw.newLine();
             }
 
             bw.close();
@@ -256,44 +259,6 @@ public class GraphEdit {
         }
     }
 
-    private static Node parseNode(String line){
-
-        Node node = getLocation(line);
-        node.setAdjacents(parseEdges(line));
-        return node;
-    }
-
-    private static List<SimpleEdge> parseEdges(String line){
-
-        String fronts = line.substring(line.indexOf('f'),line.indexOf(']'));
-        String dists = line.substring(line.indexOf('d')+2);
-        List<SimpleEdge> edges = new ArrayList<>();
-
-        while(fronts.contains("(")){
-            fronts = fronts.substring('(');
-
-            int x = Integer.parseInt(line.substring(1,line.indexOf(',')));
-            int y = Integer.parseInt(line.substring(line.indexOf(',')+1,line.indexOf(')')));
-            double distance = Double.parseDouble(dists.substring(0,dists.indexOf(',')));
-
-            edges.add(new SimpleEdge(new Node(x,y),distance));
-
-            fronts = fronts.substring(line.indexOf(')'));
-            dists = dists.substring(dists.indexOf(',')+1);
-        }
-
-        return edges;
-    }
-
-    //used to create a Node object given a file where the first element in square brackets is the coordinates of the
-    // point to return
-    private static Node getLocation (String line){
-
-        line = line.substring(line.indexOf('l'+2),line.indexOf(']'));
-        int x = Integer.parseInt(line.substring(0,line.indexOf(',')));
-        int y = Integer.parseInt(line.substring(line.indexOf(',')+1));
-        return new Node(x,y);
-    }
 }
 
 
