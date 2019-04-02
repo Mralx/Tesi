@@ -22,7 +22,7 @@ public class GraphEdit {
         //    editAgentFrontPng(agents.charAt(i),9);
         //    editAgentFrontFile(agents.charAt(i));
         //}
-        shortestPathGraph('A',20);
+        shortestPathGraph('A',30);
     }
 
     private static void editAgentFrontPng(char agentName, int n) {

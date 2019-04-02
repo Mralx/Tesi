@@ -22,6 +22,10 @@ public class Node extends SimpleNode {
         return adj.keySet();
     }
 
+    List<SimpleNode> getAdjacentsList() {
+        return new LinkedList<>(adj.keySet());
+    }
+
     public Map<SimpleNode, java.lang.Double> getAdjacentMap() {
         return adj;
     }
@@ -44,6 +48,21 @@ public class Node extends SimpleNode {
         return java.lang.Double.MAX_VALUE;
     }
 
+    /**
+     * Provides the list of the nearest nodes to this
+     * @return list containing the nearest nodes
+     */
+    List<SimpleNode> getNearestNodes(){
+        double minDist = adj.values().stream().min(Comparator.comparing(java.lang.Double::doubleValue)).get();
+        List<SimpleNode> nodes = new LinkedList<>();
+
+        for(SimpleNode n: adj.keySet()){
+            if (adj.get(n)==minDist)
+                nodes.add(n);
+        }
+        return nodes;
+    }
+
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat(".##");
@@ -51,6 +70,8 @@ public class Node extends SimpleNode {
         for(SimpleNode n: adj.keySet()){
             toString = toString + n + '=' + df.format(adj.get(n)) + "  ";
         }
+        if(isFrontier())
+            toString = toString.replace("Node  ", "Node f");
         return toString + "}";
     }
 }

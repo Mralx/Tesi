@@ -34,8 +34,8 @@ public class ExplorationGraph {
     /**
      * Provides the edge connecting the two SimpleNode in input. Based on the assumption that the graph is undirected,
      * thus if an edge connecting n1 to n2 exists, also an edge connecting n2 to n1 does.
-     * @param n1 node in the graph
-     * @param n2 node adjacent to n1
+    // * @param n1 node in the graph
+    // * @param n2 node adjacent to n1
      * @return a SimpleEdge of n1 with n2 as adjacent. Returns null if n1 is not a node of the graph or if n2 is not in
      * its list of adjacent nodes.
      */
@@ -93,6 +93,16 @@ public class ExplorationGraph {
     }
 
     /**
+     * Adds a frontier node to the graph, if not already present and links it to each of its adjacent nodes
+     * @param frontier the frontier node to add to the graph
+     */
+    void addFrontierNode(Node frontier){
+        for(SimpleNode n : frontier.getAdjacents()){
+            addFrontierNode(frontier, n, frontier.getDistance(n));
+        }
+    }
+
+    /**
      * Adds a frontier node to the graph, if not already present and links it to a node
      * @param frontier the frontier node to add to the graph
      * @param adj a node in the graph to which the frontier is linked
@@ -113,8 +123,12 @@ public class ExplorationGraph {
      * the graph
      */
     double distanceNodes(SimpleNode n1, SimpleNode n2){
+        if(n1.equals(n2))
+            return 0;
+
         double distance = 0;
         List<SimpleNode> path = getPath(n1,n2);
+
         if(path == null)
             return -1;
         for(int i=0; i<path.size()-1; i++){
@@ -124,8 +138,8 @@ public class ExplorationGraph {
     }
 
     /**
-     * Calculates one path connecting two nodes in the graph. If there are multiple paths, then only the first found
-     * one is returned.
+     * Calculates the shortest path connecting two nodes in the graph. If there are multiple paths, then only the first
+     * found one is returned.
      * @param n1 starting node
      * @param n2 arrival node
      * @return a list of coordinates of the nodes connecting the two nodes in input. Returns null if at least one of
@@ -134,6 +148,12 @@ public class ExplorationGraph {
     List<SimpleNode> getPath(SimpleNode n1, SimpleNode n2){
         if(!nodeMap.containsKey(n1) || !nodeMap.containsKey(n2))
             return null;
+
+        if(n1.equals(n2)) {
+            List<SimpleNode> path = new ArrayList<>();
+            path.add(n1);
+            return path;
+        }
 
         if(getNode(n1).getAdjacents().contains(n2)){
             List<SimpleNode> path = new ArrayList<>();
@@ -159,6 +179,7 @@ public class ExplorationGraph {
                 visited.add(current);
                 if(current.equals(n2)) return reconstructPath(parentMap, n1, n2);
             }
+
             Set<SimpleNode> neighbors = getNode(current).getAdjacents();
             for(SimpleNode neighbor : neighbors){
                 if(!visited.contains(neighbor)){
@@ -190,6 +211,40 @@ public class ExplorationGraph {
             path.addFirst(parentMap.get(path.getFirst()));
         }
         return path;
+    }
+
+    //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
+    void cleanFrontiers(){
+        List<Node> frontierList = new LinkedList<>();
+
+        //initialization
+        for (SimpleNode n : nodeMap.keySet()){
+            if(n.isFrontier())
+                frontierList.add(nodeMap.get(n)); //aggiungo la frontiera
+        }
+
+        //retrieve list of nearest nodes and remove all the others
+        for(Node f : frontierList){
+            List<SimpleNode> nonNearestNodes = f.getAdjacentsList();
+            nonNearestNodes.removeAll(f.getNearestNodes());
+            for(SimpleNode n : nonNearestNodes)
+                removeEdge(f, n);
+        }
+
+    }
+
+    /**
+     * Removes the edge comprised between the two nodes provided
+     * @param n1 starting node
+     * @param n2 arrival node
+     * @return true if the edge was in the graph and it has been removed, false if there is no such edge
+     */
+    boolean removeEdge(SimpleNode n1, SimpleNode n2){
+        boolean result;
+        result = nodeMap.get(n1).removeAdjacent(n2);
+        if(!result)
+            result = nodeMap.get(n2).removeAdjacent(n1);
+        return !result;
     }
 
 }

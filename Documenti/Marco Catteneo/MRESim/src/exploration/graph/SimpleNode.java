@@ -34,7 +34,11 @@ public class SimpleNode extends Point {
 
     @Override
     public String toString() {
-        return "["+this.x+","+this.y+"]";
+        if(!isFrontier)
+            return "["+this.x+","+this.y+"]";
+        else
+            return "("+this.x+","+this.y+")";
+
     }
 
     public boolean equals(SimpleNode node) {
