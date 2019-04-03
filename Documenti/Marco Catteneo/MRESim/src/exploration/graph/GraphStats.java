@@ -124,6 +124,24 @@ class GraphStats {
     }
 
     /**
+     * Computes the closeness centrality of the graph. It is defined for each vertex as the average distance from that
+     * vertex to all other vertices connected to it. The closeness centrality for isolated vertices is taken to be zero.
+     * @param graph the graph to analyze
+     * @return a map with key the vertex and as value the value of its closeness
+     */
+    static Map<SimpleNode, Double> closenessCentrality(ExplorationGraph graph){
+        Map<SimpleNode, Double> closeness = new HashMap<>();
+        Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = graphDistanceMatrix(graph);
+        for(SimpleNode n : distanceMatrix.keySet()){
+            double avgDist = distanceMatrix.get(n).values().stream().
+                    mapToDouble(Double::doubleValue).average().orElse(0);
+            closeness.put(n, 1/avgDist);
+        }
+
+        return closeness;
+    }
+
+    /**
      * Computes the degree of each node the graph
      * @param graph the graph which degree to compute
      * @return a mapping from each node in the graph to its degree
@@ -156,17 +174,6 @@ class GraphStats {
         stats.add(min);
         stats.add(avg/count);
         return stats;
-    }
-
-    /**
-     * Computes the distance between two nodes in the graph
-     * @param graph
-     * @param n1
-     * @param n2
-     * @return
-     */
-    static double distance(ExplorationGraph graph, SimpleNode n1, SimpleNode n2) {
-        return graph.distanceNodes(n1, n2);
     }
 
 }
