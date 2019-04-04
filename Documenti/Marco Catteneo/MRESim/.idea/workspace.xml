@@ -249,8 +249,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2397">
-              <caret line="147" column="59" selection-start-line="147" selection-start-column="59" selection-end-line="147" selection-end-column="59" />
+            <state relative-caret-position="199">
+              <caret line="218" column="92" selection-start-line="218" selection-start-column="92" selection-end-line="218" selection-end-column="92" />
               <folding>
                 <element signature="e#324#325#0" expanded="true" />
                 <element signature="e#354#355#0" expanded="true" />
@@ -276,8 +276,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="471">
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#582#583#0" expanded="true" />
@@ -304,20 +304,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="255">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphStats.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="443">
+              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#f_degree#0;class#GraphStats#0" />
@@ -420,16 +420,16 @@
         <option value="$PROJECT_DIR$/src/exploration/graph/Edge.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/SimpleEdge.java" />
         <option value="$PROJECT_DIR$/src/config/Constants.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/Node.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/SimpleNode.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/Builder.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/GraphEdit.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/GraphStats.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/Node.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/Builder.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="281" />
     <option name="y" value="-16" />
     <option name="width" value="697" />
@@ -877,15 +877,16 @@
       <workItem from="1554211196280" duration="2241000" />
       <workItem from="1554221941165" duration="4260000" />
       <workItem from="1554228270965" duration="46000" />
-      <workItem from="1554283830393" duration="2714000" />
+      <workItem from="1554283830393" duration="2800000" />
+      <workItem from="1554370765927" duration="2774000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590698000" />
+    <option name="totallyTimeSpent" value="593558000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.33207262" />
@@ -1353,14 +1354,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/stream/DoubleStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="147" column="59" selection-start-line="147" selection-start-column="59" selection-end-line="147" selection-end-column="59" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#354#355#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="402">
+          <caret line="763" column="29" lean-forward="true" selection-start-line="763" selection-start-column="29" selection-end-line="763" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -1372,18 +1369,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#593#594#0" expanded="true" />
             <element signature="e#626#627#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1403,28 +1388,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="471">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#582#583#0" expanded="true" />
+            <element signature="e#635#636#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/stream/DoubleStream.java">
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="763" column="29" lean-forward="true" selection-start-line="763" selection-start-column="29" selection-end-line="763" selection-end-column="29" />
+        <state relative-caret-position="199">
+          <caret line="218" column="92" selection-start-line="218" selection-start-column="92" selection-end-line="218" selection-end-column="92" />
+          <folding>
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphStats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+        <state relative-caret-position="443">
+          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#f_degree#0;class#GraphStats#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>

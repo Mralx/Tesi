@@ -14,7 +14,20 @@ class Builder {
         this.lastAddedFrontiers = new LinkedList<>();
     }
 
+    /**
+     * Provides the built graph
+     * @return the graph
+     */
     public ExplorationGraph getGraph() {
+        addFrontiers();
+        return graph;
+    }
+
+    /**
+     * Returns the graph after having removed all the non nearest adjacent nodes from frontiers adjacency list
+     * @return the shortest path graph
+     */
+    public ExplorationGraph getShortestPathGraph() {
         addFrontiers();
         graph.cleanFrontiers();
         return graph;

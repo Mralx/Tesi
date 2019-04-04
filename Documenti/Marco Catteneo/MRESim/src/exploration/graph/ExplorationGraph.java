@@ -214,6 +214,10 @@ public class ExplorationGraph {
     }
 
     //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
+
+    /**
+     * Removes all the adjacent nodes from each frontier node, leaving only the nearest ones
+     */
     void cleanFrontiers(){
         List<Node> frontierList = new LinkedList<>();
 

@@ -246,7 +246,7 @@ public class GraphEdit {
                 i++;
             }
 
-            ExplorationGraph graph = builder.getGraph();
+            ExplorationGraph graph = builder.getShortestPathGraph();
             for(SimpleNode node : graph.getNodeMap().keySet()){
                 bw.write(graph.getNode(node).toString());
                 bw.newLine();

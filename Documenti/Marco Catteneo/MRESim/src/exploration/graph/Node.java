@@ -49,15 +49,16 @@ public class Node extends SimpleNode {
     }
 
     /**
-     * Provides the list of the nearest nodes to this
-     * @return list containing the nearest nodes
+     * Provides the list of the nearest nodes to this, excluding frontier nodes. This is done to avoid that the nearest
+     * node to a frontier node is another frontier node
+     * @return list containing the nearest non frontier nodes
      */
     List<SimpleNode> getNearestNodes(){
         double minDist = adj.values().stream().min(Comparator.comparing(java.lang.Double::doubleValue)).get();
         List<SimpleNode> nodes = new LinkedList<>();
 
         for(SimpleNode n: adj.keySet()){
-            if (adj.get(n)==minDist)
+            if (adj.get(n)==minDist && !n.isFrontier())
                 nodes.add(n);
         }
         return nodes;
