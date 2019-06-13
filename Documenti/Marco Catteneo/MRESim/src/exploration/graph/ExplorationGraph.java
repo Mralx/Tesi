@@ -1,5 +1,11 @@
 package exploration.graph;
 
+import path.Path;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -9,14 +15,20 @@ public class ExplorationGraph {
 
     private Map<SimpleNode, Node> nodeMap;
     private SimpleNode lastNode;
+    private boolean multiplePaths;
 
     ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
         this.lastNode = null;
+        this.multiplePaths = false;
     }
 
-    public Map<SimpleNode, Node> getNodeMap() {
+    Map<SimpleNode, Node> getNodeMap() {
         return nodeMap;
+    }
+
+    void setNodeMap(Map<SimpleNode, Node> nodeMap) {
+        this.nodeMap = nodeMap;
     }
 
     /**
@@ -53,8 +65,12 @@ public class ExplorationGraph {
     }
     */
 
-    Node getLastNode(){
+    private Node getLastNode(){
         return getNode(lastNode);
+    }
+
+    public boolean isMultiplePaths() {
+        return multiplePaths;
     }
 
     private Double euclideanDistance(SimpleNode node1, SimpleNode node2){
@@ -83,12 +99,14 @@ public class ExplorationGraph {
      * @param distance the distance from the last added node
      */
     void addNode(Node node, double distance){
+        SimpleNode simpleNode = new SimpleNode(node);
         if(lastNode != null) {
+            if(nodeMap.containsKey(simpleNode)) node = nodeMap.get(simpleNode);
             Node lastNode = getLastNode();
             node.addAdjacent(lastNode, distance);
             lastNode.addAdjacent(node, distance);
         }
-        nodeMap.put(new SimpleNode(node), node);
+        nodeMap.put(simpleNode, node);
         lastNode = node;
     }
 
@@ -126,15 +144,11 @@ public class ExplorationGraph {
         if(n1.equals(n2))
             return 0;
 
-        double distance = 0;
-        List<SimpleNode> path = getPath(n1,n2);
+        GraphPath path = getPath(n1,n2);
 
         if(path == null)
             return -1;
-        for(int i=0; i<path.size()-1; i++){
-            distance += getNode(path.get(i)).getDistance(path.get(i+1));
-        }
-        return distance;
+        else return path.getLength();
     }
 
     /**
@@ -142,26 +156,27 @@ public class ExplorationGraph {
      * found one is returned.
      * @param n1 starting node
      * @param n2 arrival node
-     * @return a list of coordinates of the nodes connecting the two nodes in input. Returns null if at least one of
-     * the two input nodes is not in the graph.
+     * @return a path connecting the two nodes in input. Returns null if at least one of the two input nodes is not in
+     * the graph.
      */
-    List<SimpleNode> getPath(SimpleNode n1, SimpleNode n2){
+    GraphPath getPath(SimpleNode n1, SimpleNode n2){
         if(!nodeMap.containsKey(n1) || !nodeMap.containsKey(n2))
             return null;
 
         if(n1.equals(n2)) {
-            List<SimpleNode> path = new ArrayList<>();
-            path.add(n1);
+            GraphPath path = new GraphPath();
+            path.addNode(n1, 0);
             return path;
         }
 
         if(getNode(n1).getAdjacents().contains(n2)){
-            List<SimpleNode> path = new ArrayList<>();
-            path.add(n1);
-            path.add(n2);
+            GraphPath path = new GraphPath();
+            path.addNode(n1, 0);
+            path.addNode(n2, getNode(n1).getDistance(n2));
             return path;
         }
 
+        this.multiplePaths = false; //reset of the variable, otherwise it is not meaningful
         HashMap<SimpleNode, SimpleNode> parentMap = new HashMap<>();
         HashSet<SimpleNode> visited = new HashSet<>();
         Map<SimpleNode, Double> distances = new HashMap<>();
@@ -186,6 +201,9 @@ public class ExplorationGraph {
                     double predictedDistance = euclideanDistance(neighbor,n2);
                     double neighborDistance = getNode(current).getDistance(neighbor);
                     double totalDistance = distances.get(current) + neighborDistance + predictedDistance;
+                    if(neighbor.equals(n2) && distances.containsKey(neighbor) && totalDistance == distances.get(neighbor))
+                        //if the total computed distance is equal to the one stored for the arrival node, there might be multiple paths
+                        multiplePaths = true;
                     if(!distances.containsKey(neighbor) || totalDistance < distances.get(neighbor)){
                         distances.put(neighbor, totalDistance);
                         parentMap.put(neighbor, current);
@@ -204,17 +222,88 @@ public class ExplorationGraph {
      * @param n2 arrival node
      * @return the path connecting the two nodes
      */
-    private List<SimpleNode> reconstructPath(HashMap<SimpleNode, SimpleNode> parentMap, SimpleNode n1, SimpleNode n2) {
-        LinkedList<SimpleNode> path = new LinkedList<>();
-        path.addFirst(n2);
-        while(path.getFirst()!=n1){
-            path.addFirst(parentMap.get(path.getFirst()));
+    private GraphPath reconstructPath(HashMap<SimpleNode, SimpleNode> parentMap, SimpleNode n1, SimpleNode n2) {
+        GraphPath path = new GraphPath();
+        path.setStartingNode(n2, 0);
+        while(path.getStartingNode()!=n1){
+            SimpleNode father = parentMap.get(path.getStartingNode());
+            //useless to specify, just for debugging
+            Node fatherNode = getNode(father);
+            SimpleNode startingNode = path.getStartingNode();
+            //end debugging
+            double distance = fatherNode.getDistance(startingNode);
+            path.setStartingNode(father, distance);
         }
         return path;
     }
 
-    //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
+    /**
+     * Provides all the the paths going from the starting node to the arrival node in input
+     * @param startNode the starting node for the paths
+     * @param arrivalNode the arrival node for the paths
+     * @return a list containing all the shortest paths from the source to the arrival node
+     */
+    List<GraphPath> getMultiplePaths(SimpleNode startNode, SimpleNode arrivalNode) {
+        List<GraphPath> pathsList = new LinkedList<>();
+        HashMap<SimpleNode, Boolean> visited = new HashMap<>();
+        GraphPath path = getPath(startNode, arrivalNode);
+        pathsList.add(path);
+        double minDistance = path.getLength();
+        path = new GraphPath();
 
+        //Visited map initialization
+        for (SimpleNode node : nodeMap.keySet())
+            visited.put(node,node.isFrontier());
+        visited.put(arrivalNode,false);
+
+        path.setStartingNode(startNode, 0);
+        log("Starting search from "+startNode.toString()+" to "+arrivalNode.toString());
+        depthFirstSearch(startNode, arrivalNode, visited, path, (double) 0, (double) 0, minDistance, pathsList);
+
+        //removes every non shortest path -> might be useless, but it's just to be sure
+        minDistance = pathsList.stream().mapToDouble(GraphPath::getLength).min().getAsDouble();
+        List<GraphPath> longerPaths = new LinkedList<>();
+        for(GraphPath p : pathsList){
+            if(p.getLength()>minDistance)
+                longerPaths.add(p);
+        }
+        pathsList.removeAll(longerPaths);
+        return pathsList;
+    }
+
+    private void depthFirstSearch(SimpleNode startNode, SimpleNode arrivalNode, HashMap<SimpleNode, Boolean> visited,
+                          GraphPath path, double delta, double length, double minDist, List<GraphPath> pathsList){
+        log("   "+startNode.toString()+" ----> "+arrivalNode.toString());
+        if(startNode.equals(arrivalNode)) {
+            if(!pathsList.contains(path))
+                pathsList.add(new GraphPath(path));
+            path.removeNode(startNode, delta);
+            return;
+        }
+        if(startNode.isFrontier()){
+            path.removeNode(startNode,delta);
+            return;
+        }
+
+        visited.put(startNode,true);
+
+        for(SimpleNode adj : getNode(startNode).getAdjacents()){
+            double newDelta = getNode(startNode).getDistance(adj);
+            double newLength = length + newDelta;
+
+            if(!visited.get(adj)) {
+                if(newLength < minDist || (newLength == minDist && adj.equals(arrivalNode))){
+                    path.addNode(adj, newDelta);
+                    depthFirstSearch(adj, arrivalNode, visited, path, newDelta, newLength, minDist, pathsList);
+                }
+            }
+        }
+
+        visited.put(startNode, false);
+        path.removeNode(startNode, delta);
+    }
+
+    //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
     /**
      * Removes all the adjacent nodes from each frontier node, leaving only the nearest ones
      */
@@ -249,6 +338,30 @@ public class ExplorationGraph {
         if(!result)
             result = nodeMap.get(n2).removeAdjacent(n1);
         return !result;
+    }
+
+    public static void log(String data){
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            File file;
+            file = new File(System.getProperty("user.dir")+"/logs/search log.txt");
+            fw = new FileWriter(file.getAbsoluteFile(), true);
+            bw = new BufferedWriter(fw);
+            bw.write(data);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 }

@@ -27,7 +27,7 @@ class Builder {
      * Returns the graph after having removed all the non nearest adjacent nodes from frontiers adjacency list
      * @return the shortest path graph
      */
-    public ExplorationGraph getShortestPathGraph() {
+    ExplorationGraph getShortestPathGraph() {
         addFrontiers();
         graph.cleanFrontiers();
         return graph;

@@ -4,3 +4,13 @@
 1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
 1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
 1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+1      Obs area: 245836.0      Size: 150083     Openness: 0.6209249871817215
+2      Obs area: 164271.0      Size: 220793     Openness: 0.42660700558868137
+3      Obs area: 82142.0      Size: 149356     Openness: 0.35482811946539494
+4      Obs area: 142412.0      Size: 284967     Openness: 0.33322180079039915

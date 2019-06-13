@@ -48,14 +48,16 @@ import java.awt.Color;
  */
 public class Constants {
 
-    public static final int DISTANCE_THRESHOLD = 3;
+    public static final int DISTANCE_THRESHOLD = 0;
 
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
     public static final int BATCH_RUNS = 1;     //max number of run per configuration
 
-    public static final int BATCH_AGENTS = 4;   //max team size
+    public static final int MIN_AGENTS = 3;     //starting team size, always >=3
 
-    public static final int BATCH_ENVS = 1;     //max number of simulated environment
+    public static final int BATCH_AGENTS = 8;   //max team size
+
+    public static final int BATCH_ENVS = 6;     //max number of simulated environment
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Clustering constants">

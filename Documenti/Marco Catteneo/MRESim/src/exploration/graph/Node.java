@@ -66,7 +66,7 @@ public class Node extends SimpleNode {
 
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat(".##");
+        DecimalFormat df = new DecimalFormat(".###");
         String toString = "Node    [" + x + ',' + y + "] -> {" ;
         for(SimpleNode n: adj.keySet()){
             toString = toString + n + '=' + df.format(adj.get(n)) + "  ";

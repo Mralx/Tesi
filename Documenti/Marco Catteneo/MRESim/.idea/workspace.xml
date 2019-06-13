@@ -3,11 +3,15 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" line="281" />
     <bookmark url="file://$PROJECT_DIR$/src/exploration/graph/SimpleEdge.java" line="6" />
-    <bookmark url="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" line="83" />
+    <bookmark url="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" line="87" />
+    <bookmark url="file://$PROJECT_DIR$/src/exploration/graph/GraphEdit.java" line="348" />
+    <bookmark url="file://$PROJECT_DIR$/src/exploration/graph/GraphStats.java" line="389" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1af4ec83-2cb6-438c-a042-35fb095a1534" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Alex.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/exploration/graph/Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/exploration/graph/GraphPath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
@@ -234,6 +238,20 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
@@ -247,27 +265,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
+        <entry file="file://$PROJECT_DIR$/src/exploration/SimulationFramework.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="218" column="92" selection-start-line="218" selection-start-column="92" selection-end-line="218" selection-end-column="92" />
+            <state relative-caret-position="1309">
+              <caret line="1450" selection-start-line="1450" selection-end-line="1472" selection-end-column="5" />
               <folding>
-                <element signature="e#324#325#0" expanded="true" />
-                <element signature="e#354#355#0" expanded="true" />
+                <element signature="e#17819#17887#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/exploration/graph/SimpleNode.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphEdit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+            <state relative-caret-position="119">
+              <caret line="116" column="31" lean-forward="true" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#593#594#0" expanded="true" />
-                <element signature="e#626#627#0" expanded="true" />
+                <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
+                <element signature="method#editFile#0;class#GraphEdit#0" />
+                <element signature="method#editPng#0;class#GraphEdit#0" />
+                <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
+                <element signature="method#testPath#0;class#GraphEdit#0" />
               </folding>
             </state>
           </provider>
@@ -276,39 +295,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="442">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#504#505#0" expanded="true" />
+                <element signature="e#539#540#0" expanded="true" />
                 <element signature="e#582#583#0" expanded="true" />
                 <element signature="e#635#636#0" expanded="true" />
+                <element signature="e#783#784#0" expanded="true" />
+                <element signature="e#838#839#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphEdit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#editAgentFrontPng#0;class#GraphEdit#0" />
-                <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
-                <element signature="method#editFile#0;class#GraphEdit#0" />
-                <element signature="method#editPng#0;class#GraphEdit#0" />
-                <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="1462">
+              <caret line="86" column="23" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -316,11 +322,54 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphStats.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="101">
+              <caret line="238" selection-start-line="238" selection-end-line="238" />
+              <folding>
+                <element signature="docComment;method#nodeCount#0;class#GraphStats#0" />
+                <element signature="docComment;method#frontierNodeCount#0;class#GraphStats#0" />
+                <element signature="method#frontierNodeCount#0;class#GraphStats#0" />
+                <element signature="docComment;method#edgeCount#0;class#GraphStats#0" />
+                <element signature="method#edgeCount#0;class#GraphStats#0" />
+                <element signature="docComment;method#computeRow#0;class#GraphStats#0" />
+                <element signature="method#restrictedNodeSet#0;class#GraphStats#0" />
+                <element signature="docComment;method#closenessCentrality#0;class#GraphStats#0" />
+                <element signature="docComment;method#betweennessCentrality#0;class#GraphStats#0" />
+                <element signature="method#betweennessCentrality#0;class#GraphStats#0" />
+                <element signature="docComment;method#computeNodeBetweenness#0;class#GraphStats#0" />
+                <element signature="method#normalization#0;class#GraphStats#0" />
+                <element signature="docComment;method#degree#0;class#GraphStats#0" />
+                <element signature="method#degree#0;class#GraphStats#0" />
+                <element signature="docComment;method#degMaxMinAvg#0;class#GraphStats#0" />
+                <element signature="method#degMaxMinAvg#0;class#GraphStats#0" />
+                <element signature="method#writeAdjacencyMatrix#0;class#GraphStats#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4046">
+              <caret line="254" column="48" selection-start-line="254" selection-start-column="48" selection-end-line="254" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#f_degree#0;class#GraphStats#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphPath.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1343">
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1165#1166#0" expanded="true" />
+                <element signature="e#1194#1195#0" expanded="true" />
+                <element signature="e#1310#1311#0" expanded="true" />
+                <element signature="e#1345#1346#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -337,36 +386,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>frontiergraph</find>
-      <find>frontiersgraph</find>
-      <find>callfr</find>
-      <find>reservecontroller</find>
-      <find>ReserveController</find>
-      <find>clean</find>
-      <find>clea</find>
-      <find>contou</find>
-      <find>Clean</find>
-      <find>tmpP</find>
-      <find>tmp</find>
-      <find>agentFrontiers</find>
-      <find>distance</find>
       <find>setsta</find>
-      <find>front</find>
       <find>round</find>
       <find>equal</find>
       <find>dista</find>
       <find>thres</find>
       <find>put</find>
-      <find>remove</find>
       <find>get</find>
       <find>key</find>
       <find>value</find>
-      <find>add</find>
-      <find>static</find>
       <find>tostring</find>
       <find>tostrin</find>
       <find>values</find>
       <find>values(</find>
+      <find>remo</find>
+      <find>different</find>
+      <find>multiple</find>
+      <find>format</find>
+      <find>df</find>
+      <find>get(</find>
+      <find>add</find>
+      <find>remove</find>
+      <find>linked</find>
+      <find>static</find>
+      <find>bufferedw</find>
+      <find>f</find>
+      <find>front</find>
+      <find>metriccon</find>
+      <find>&quot;ma&quot;</find>
+      <find>restr</find>
+      <find>log</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -375,7 +424,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/exploration/thesis/PureExploration.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisControllers/DivideController.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisControllers/ReserveController.java" />
         <option value="$PROJECT_DIR$/src/agents/RealAgent.java" />
@@ -399,19 +447,14 @@
         <option value="$PROJECT_DIR$/logs/frontiersGraph.txt" />
         <option value="$PROJECT_DIR$/config/grassTeam/2.txt" />
         <option value="$PROJECT_DIR$/src/path/Path.java" />
-        <option value="$PROJECT_DIR$/config/lastSimulatorConfig.txt" />
         <option value="$PROJECT_DIR$/config/roomsTeam/4.txt" />
-        <option value="$PROJECT_DIR$/src/gui/MainGUI.java" />
-        <option value="$PROJECT_DIR$/config/lastteamconfig.txt" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java" />
         <option value="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" />
-        <option value="$PROJECT_DIR$/src/exploration/SimulationFramework.java" />
         <option value="$PROJECT_DIR$/src/exploration/GraphStats.java" />
-        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" />
         <option value="$PROJECT_DIR$/src/exploration/GraphEdit.java" />
         <option value="$PROJECT_DIR$/src/exploration/ExplorationGraph.java" />
         <option value="$PROJECT_DIR$/src/exploration/GraphNode.java" />
@@ -419,19 +462,24 @@
         <option value="$PROJECT_DIR$/src/exploration/graph/GraphNode.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/Edge.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/SimpleEdge.java" />
-        <option value="$PROJECT_DIR$/src/config/Constants.java" />
+        <option value="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/SimpleNode.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/GraphEdit.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/GraphStats.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/Node.java" />
-        <option value="$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" />
+        <option value="$PROJECT_DIR$/src/exploration/SimulationFramework.java" />
         <option value="$PROJECT_DIR$/src/exploration/graph/Builder.java" />
+        <option value="$PROJECT_DIR$/config/lastSimulatorConfig.txt" />
+        <option value="$PROJECT_DIR$/src/config/Constants.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainGUI.java" />
+        <option value="$PROJECT_DIR$/config/lastteamconfig.txt" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/Node.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/GraphPath.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/GraphStats.java" />
+        <option value="$PROJECT_DIR$/src/exploration/graph/GraphEdit.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="281" />
-    <option name="y" value="-16" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
     <option name="width" value="697" />
     <option name="height" value="745" />
   </component>
@@ -440,8 +488,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -452,20 +500,18 @@
             <path>
               <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
               <item name="MRESim" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MRESim" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="openTeam" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
               <item name="MRESim" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="exploration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MRESim" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MRESim" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="exploration" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -481,6 +527,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553886332147" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -879,14 +926,55 @@
       <workItem from="1554228270965" duration="46000" />
       <workItem from="1554283830393" duration="2800000" />
       <workItem from="1554370765927" duration="2774000" />
+      <workItem from="1554378762099" duration="651000" />
+      <workItem from="1554483130404" duration="2704000" />
+      <workItem from="1554629523223" duration="1142000" />
+      <workItem from="1554725374046" duration="1340000" />
+      <workItem from="1554735730793" duration="7259000" />
+      <workItem from="1554796663668" duration="5876000" />
+      <workItem from="1554826356415" duration="8080000" />
+      <workItem from="1554886380223" duration="6665000" />
+      <workItem from="1554910026033" duration="6505000" />
+      <workItem from="1554931617372" duration="3767000" />
+      <workItem from="1554975478019" duration="503000" />
+      <workItem from="1554979113955" duration="808000" />
+      <workItem from="1555057727750" duration="6427000" />
+      <workItem from="1555085481442" duration="6915000" />
+      <workItem from="1555145101365" duration="6723000" />
+      <workItem from="1555254882892" duration="4256000" />
+      <workItem from="1555321353390" duration="4879000" />
+      <workItem from="1555344996563" duration="7230000" />
+      <workItem from="1555408119688" duration="594000" />
+      <workItem from="1555434584492" duration="650000" />
+      <workItem from="1555488569593" duration="6904000" />
+      <workItem from="1555521872895" duration="3690000" />
+      <workItem from="1555749068880" duration="345000" />
+      <workItem from="1555750170569" duration="598000" />
+      <workItem from="1556442365337" duration="10013000" />
+      <workItem from="1557131316591" duration="8860000" />
+      <workItem from="1557560285218" duration="161000" />
+      <workItem from="1557560725232" duration="9329000" />
+      <workItem from="1557736299937" duration="5521000" />
+      <workItem from="1557823288624" duration="39000" />
+      <workItem from="1559031743794" duration="13642000" />
+      <workItem from="1559553771720" duration="59000" />
+      <workItem from="1559554245164" duration="3317000" />
+      <workItem from="1559811175307" duration="6444000" />
+      <workItem from="1559836542124" duration="1208000" />
+      <workItem from="1559852241136" duration="1637000" />
+      <workItem from="1559891964877" duration="10085000" />
+      <workItem from="1560155872055" duration="593000" />
+      <workItem from="1560180834774" duration="10057000" />
+      <workItem from="1560264049602" duration="5192000" />
+      <workItem from="1560349494882" duration="7267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="593558000" />
+    <option name="totallyTimeSpent" value="781493000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-7" y="0" width="697" height="745" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.33207262" />
@@ -898,7 +986,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32206118" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.43317232" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.4605475" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5797101" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -941,6 +1029,12 @@
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/exploration/graph/GraphPath.java</url>
+          <line>154</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -949,330 +1043,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/exploration/UtilityExploration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="188" column="60" selection-start-line="188" selection-start-column="60" selection-end-line="188" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/agents/AgentStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/lastteamconfig.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/AgentStepRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
-          <folding>
-            <element signature="e#3328#3581#1" />
-            <element signature="e#5705#5804#0" expanded="true" />
-            <element signature="e#6575#6655#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="400" column="24" selection-start-line="400" selection-start-column="24" selection-end-line="400" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/agents/BasicAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="206" column="17" selection-start-line="206" selection-start-column="17" selection-end-line="206" selection-end-column="17" />
-          <folding>
-            <element signature="e#4512#4513#0" expanded="true" />
-            <element signature="e#4545#4546#0" expanded="true" />
-            <element signature="e#5832#5833#0" expanded="true" />
-            <element signature="e#5870#5871#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/SideFollower.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="126" column="60" selection-start-line="126" selection-start-column="60" selection-end-line="126" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="149" column="60" selection-start-line="149" selection-start-column="60" selection-end-line="149" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/DivideAndConquer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
-          <folding>
-            <element signature="e#3276#3332#0" expanded="true" />
-            <element signature="n#!!doc;n#activationFunction#0;n#BuddySystem#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/Reserve.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="102" column="60" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="60" />
-          <folding>
-            <element signature="e#444#501#0" expanded="true" />
-            <element signature="e#762#836#0" expanded="true" />
-            <element signature="e#976#1060#0" expanded="true" />
-            <element signature="e#1652#1732#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/OccupancyGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/image/BufferedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16422">
-          <caret line="1015" selection-start-line="1015" selection-end-line="1015" />
-          <folding>
-            <element signature="e#41021#41022#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/sun/awt/image/ByteInterleavedRaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8466">
-          <caret line="540" selection-start-line="540" selection-end-line="540" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/path/Path.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="55" column="13" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding>
-            <element signature="e#51070#51071#0" expanded="true" />
-            <element signature="e#51111#51112#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/io/BufferedReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="348" column="35" selection-start-line="348" selection-start-column="35" selection-end-line="348" selection-end-column="35" />
-          <folding>
-            <element signature="n#!!doc;n#starterSelected#0;n#ExplorationController#0" expanded="true" />
-            <element signature="method#closeToObstacle#0;class#ExplorationController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/agents/RealAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="744" column="13" selection-start-line="744" selection-start-column="13" selection-end-line="744" selection-end-column="13" />
-          <folding>
-            <element signature="e#2503#2588#0" expanded="true" />
-            <element signature="e#7437#7497#0" expanded="true" />
-            <element signature="e#9248#9249#0" expanded="true" />
-            <element signature="e#9276#9277#0" expanded="true" />
-            <element signature="e#11332#11333#0" expanded="true" />
-            <element signature="e#11367#11368#0" expanded="true" />
-            <element signature="e#17063#17140#0" expanded="true" />
-            <element signature="e#27688#27689#0" expanded="true" />
-            <element signature="e#27754#27755#0" expanded="true" />
-            <element signature="e#30511#30568#0" expanded="true" />
-            <element signature="e#52288#52348#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/SimulationFramework.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5066">
-          <caret line="704" column="61" selection-start-line="704" selection-start-column="61" selection-end-line="704" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="50" column="46" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="46" />
-          <folding>
-            <element signature="e#1955#2019#0" expanded="true" />
-            <element signature="e#2764#2838#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Edge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#436#437#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/AbstractSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1314">
-          <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/HashSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="182" column="5" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
-          <folding>
-            <element signature="e#3745#3746#0" expanded="true" />
-            <element signature="e#3782#3783#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/LinkedHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/PriorityQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="122" column="11" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
-          <folding>
-            <element signature="e#4375#4376#0" expanded="true" />
-            <element signature="e#4427#4428#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/geom/Point2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/Override.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Comparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/LinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/SimpleEdge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding>
-            <element signature="e#154#155#0" expanded="true" />
-            <element signature="e#194#195#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-24">
-          <caret line="475" column="66" selection-start-line="475" selection-start-column="63" selection-end-line="475" selection-end-column="66" />
-          <folding>
-            <element signature="e#6326#6327#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/StringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
-          <folding>
-            <element signature="e#4351#4352#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/AbstractMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="553" selection-start-line="553" selection-end-line="553" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1291,46 +1061,334 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/List.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Random.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-567">
+          <caret line="327" column="15" selection-start-line="327" selection-start-column="15" selection-end-line="327" selection-end-column="15" />
+          <folding>
+            <element signature="e#3513#3514#0" expanded="true" />
+            <element signature="e#3571#3572#0" expanded="true" />
+            <element signature="e#11994#11995#0" expanded="true" />
+            <element signature="e#12025#12026#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/PriorityQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="55" />
+          <folding>
+            <element signature="e#4375#4376#0" expanded="true" />
+            <element signature="e#4427#4428#0" expanded="true" />
+            <element signature="e#5354#5355#0" expanded="true" />
+            <element signature="e#5412#5413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Queue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="184" column="6" selection-start-line="184" selection-start-column="6" selection-end-line="184" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/Comparable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-260">
+          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="3715" column="28" selection-start-line="3715" selection-start-column="28" selection-end-line="3715" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="520" column="9" selection-start-line="520" selection-start-column="9" selection-end-line="520" selection-end-column="9" />
+          <caret line="183" column="40" selection-start-line="183" selection-start-column="40" selection-end-line="183" selection-end-column="40" />
+          <folding>
+            <element signature="e#6326#6327#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Map.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8370">
+          <caret line="137" column="17" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/stream/DoubleStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
-          <caret line="270" column="6" selection-start-line="270" selection-start-column="6" selection-end-line="270" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="1839" column="18" selection-start-line="1839" selection-start-column="18" selection-end-line="1839" selection-end-column="18" />
-          <folding>
-            <element signature="e#60926#60927#0" expanded="true" />
-            <element signature="e#60963#60964#0" expanded="true" />
-            <element signature="e#64137#64138#0" expanded="true" />
-            <element signature="e#64189#64190#0" expanded="true" />
-            <element signature="e#112071#112072#0" expanded="true" />
-            <element signature="e#112133#112134#0" expanded="true" />
-          </folding>
+          <caret line="763" column="19" selection-start-line="763" selection-start-column="19" selection-end-line="763" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/stream/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="796" column="16" selection-start-line="796" selection-start-column="16" selection-end-line="796" selection-end-column="16" />
+        <state relative-caret-position="351">
+          <caret line="973" column="58" lean-forward="true" selection-start-line="973" selection-start-column="58" selection-end-line="973" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="355" column="11" selection-start-line="355" selection-start-column="11" selection-end-line="355" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/io/Writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/text/Format.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="156" column="24" selection-start-line="156" selection-start-column="24" selection-end-line="156" selection-end-column="24" />
+          <folding>
+            <element signature="e#5554#5555#0" expanded="true" />
+            <element signature="e#5641#5642#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/javafx.base/javafx/collections/transformation/SortedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
+          <folding>
+            <element signature="e#2618#2619#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="239" selection-start-line="239" selection-end-line="239" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/io/BufferedWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="129" column="16" selection-start-line="129" selection-start-column="16" selection-end-line="129" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lairTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/officeTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/SimpleNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisStrategies/BuddySystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="133" column="62" selection-start-line="133" selection-start-column="62" selection-end-line="133" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/roomsTeam/4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/mazeTeam/4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/SimulatorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="67" column="27" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="30" />
+          <folding>
+            <element signature="e#11997#12059#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/path/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2822">
+          <caret line="212" column="9" lean-forward="true" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="9" />
+          <folding>
+            <element signature="e#51070#51071#0" expanded="true" />
+            <element signature="e#51111#51112#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/TopologicalMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="275" column="21" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
+          <folding>
+            <element signature="e#11389#11390#0" expanded="true" />
+            <element signature="e#11428#11429#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+            <element signature="e#12078#12079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/RealAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="765" column="34" lean-forward="true" selection-start-line="765" selection-start-column="34" selection-end-line="765" selection-end-column="34" />
+          <folding>
+            <element signature="e#2503#2588#0" expanded="true" />
+            <element signature="e#7437#7497#0" expanded="true" />
+            <element signature="e#9248#9249#0" expanded="true" />
+            <element signature="e#9276#9277#0" expanded="true" />
+            <element signature="e#11332#11333#0" expanded="true" />
+            <element signature="e#11367#11368#0" expanded="true" />
+            <element signature="e#17063#17140#0" expanded="true" />
+            <element signature="e#27688#27689#0" expanded="true" />
+            <element signature="e#27754#27755#0" expanded="true" />
+            <element signature="e#30511#30568#0" expanded="true" />
+            <element signature="e#52288#52348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="346" lean-forward="true" selection-start-line="346" selection-end-line="346" />
+          <folding>
+            <element signature="n#!!doc;n#starterSelected#0;n#ExplorationController#0" expanded="true" />
+            <element signature="e#865#948#0" expanded="true" />
+            <element signature="method#closeToObstacle#0;class#ExplorationController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/Set.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="324" column="12" selection-start-line="324" selection-start-column="12" selection-end-line="324" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/roomsTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="400" column="24" selection-start-line="400" selection-start-column="24" selection-end-line="400" selection-end-column="24" />
+          <folding>
+            <element signature="e#38831#38875#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="59" column="42" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/text/DecimalFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4443">
+          <caret line="385" column="13" selection-start-line="385" selection-start-column="13" selection-end-line="385" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="367" selection-start-line="367" selection-end-line="367" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="216" selection-start-line="216" selection-end-line="216" />
+          <folding>
+            <element signature="e#1992#1993#0" expanded="true" />
+            <element signature="e#2016#2017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lastSimulatorConfig.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/openTeam/2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lastteamconfig.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="88" column="19" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="466" column="11" selection-start-line="466" selection-start-column="11" selection-end-line="466" selection-end-column="11" />
+        <state relative-caret-position="249">
+          <caret line="610" column="13" selection-start-line="610" selection-start-column="13" selection-end-line="610" selection-end-column="13" />
           <folding>
             <element signature="e#12150#13478#0" />
             <element signature="e#19069#19070#0" expanded="true" />
@@ -1343,10 +1401,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/SimulationFramework.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="1450" selection-start-line="1450" selection-end-line="1472" selection-end-column="5" />
+          <folding>
+            <element signature="e#17819#17887#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#539#540#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="true" />
+            <element signature="e#635#636#0" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="86" column="23" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4046">
+          <caret line="254" column="48" selection-start-line="254" selection-start-column="48" selection-end-line="254" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1165#1166#0" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/jdk/internal/math/FloatingDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="109" column="15" selection-start-line="109" selection-start-column="15" selection-end-line="109" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/Double.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="697" column="15" selection-start-line="697" selection-start-column="15" selection-end-line="697" selection-end-column="15" />
+        <state relative-caret-position="95">
+          <caret line="542" column="31" selection-start-line="542" selection-start-column="31" selection-end-line="542" selection-end-column="31" />
           <folding>
             <element signature="e#27027#27028#0" expanded="true" />
             <element signature="e#27060#27061#0" expanded="true" />
@@ -1354,78 +1476,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/util/stream/DoubleStream.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.desktop/java/awt/Color.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="763" column="29" lean-forward="true" selection-start-line="763" selection-start-column="29" selection-end-line="763" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/SimpleNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+        <state relative-caret-position="-1995">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#626#627#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphEdit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#editAgentFrontPng#0;class#GraphEdit#0" />
-            <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
-            <element signature="method#editFile#0;class#GraphEdit#0" />
-            <element signature="method#editPng#0;class#GraphEdit#0" />
-            <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/ExplorationGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="218" column="92" selection-start-line="218" selection-start-column="92" selection-end-line="218" selection-end-column="92" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#18163#18164#0" expanded="true" />
+            <element signature="e#18191#18192#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphStats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="101">
+          <caret line="238" selection-start-line="238" selection-end-line="238" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#f_degree#0;class#GraphStats#0" />
+            <element signature="docComment;method#nodeCount#0;class#GraphStats#0" />
+            <element signature="docComment;method#frontierNodeCount#0;class#GraphStats#0" />
+            <element signature="method#frontierNodeCount#0;class#GraphStats#0" />
+            <element signature="docComment;method#edgeCount#0;class#GraphStats#0" />
+            <element signature="method#edgeCount#0;class#GraphStats#0" />
+            <element signature="docComment;method#computeRow#0;class#GraphStats#0" />
+            <element signature="method#restrictedNodeSet#0;class#GraphStats#0" />
+            <element signature="docComment;method#closenessCentrality#0;class#GraphStats#0" />
+            <element signature="docComment;method#betweennessCentrality#0;class#GraphStats#0" />
+            <element signature="method#betweennessCentrality#0;class#GraphStats#0" />
+            <element signature="docComment;method#computeNodeBetweenness#0;class#GraphStats#0" />
+            <element signature="method#normalization#0;class#GraphStats#0" />
+            <element signature="docComment;method#degree#0;class#GraphStats#0" />
+            <element signature="method#degree#0;class#GraphStats#0" />
+            <element signature="docComment;method#degMaxMinAvg#0;class#GraphStats#0" />
+            <element signature="method#degMaxMinAvg#0;class#GraphStats#0" />
+            <element signature="method#writeAdjacencyMatrix#0;class#GraphStats#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/exploration/graph/Builder.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="402">
+          <caret line="1983" column="18" selection-start-line="1983" selection-start-column="18" selection-end-line="1983" selection-end-column="18" />
+          <folding>
+            <element signature="e#60926#60927#0" expanded="true" />
+            <element signature="e#60963#60964#0" expanded="true" />
+            <element signature="e#64137#64138#0" expanded="true" />
+            <element signature="e#64189#64190#0" expanded="true" />
+            <element signature="e#112071#112072#0" expanded="true" />
+            <element signature="e#112133#112134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exploration/graph/GraphEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="116" column="31" lean-forward="true" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="31" />
+          <folding>
+            <element signature="method#editAgentFrontFile#0;class#GraphEdit#0" />
+            <element signature="method#editFile#0;class#GraphEdit#0" />
+            <element signature="method#editPng#0;class#GraphEdit#0" />
+            <element signature="method#editCallFrontiersFile#0;class#GraphEdit#0" />
+            <element signature="method#testPath#0;class#GraphEdit#0" />
+          </folding>
         </state>
       </provider>
     </entry>

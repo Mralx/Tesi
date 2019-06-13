@@ -46,6 +46,7 @@ import agents.sets.ActiveSet;
 import agents.sets.IdleSet;
 import environment.*;
 import config.*;
+import exploration.graph.SimpleNode;
 import exploration.thesisControllers.BuddyController;
 import exploration.thesisControllers.ExplorationController;
 import exploration.thesisControllers.ReserveController;
@@ -665,17 +666,6 @@ public class SimulationFramework implements ActionListener {
             //Compute decision time
             long decisionTime = this.decisionEndTime - this.decisionStartTime;
 
-            //Compute environment metrics exploiting occupancy grid
-            double freeCells = currAgent.getOccupancyGrid().getNumFreeCells();
-            double obsCells = 0;
-
-            for (int x = 0; x < currAgent.getOccupancyGrid().width; x++)
-                for (int y = 0; y < currAgent.getOccupancyGrid().height; y++)
-                    if (currAgent.getOccupancyGrid().obstacleAt(x, y))
-                        obsCells++;
-
-            double openness = obsCells/(obsCells+freeCells);
-
             //Print
             SimulationFramework.log(
                     environmentCounter
@@ -698,52 +688,14 @@ public class SimulationFramework implements ActionListener {
                     +"    "
                     +timeElapsed
                     +"    l"
-                    +currAgent.getLocation().toString()
+                    +(new SimpleNode(currAgent.getLocation().x,currAgent.getLocation().y)).toString()
                     +"    f"
                     +frontiersList.toString()
                     +"    d"
-                    +df.format(ExplorationController.computeDistances(frontiersList, currAgent).toString()),
-                    "front"+currAgent.getName());
+                    +ExplorationController.computeDistances(frontiersList, currAgent).toString(),
+                    "/"+simConfig.getExpAlgorithm().toString()+"/data/"+environmentCounter+
+                            "/front"+currAgent.getName()+"_"+numRobots);
 
-            /*
-            SimulationFramework.log(
-                    environmentCounter
-                    +"          "
-                    +currAgent.getName()
-                    +"          "
-                    +timeElapsed
-                    +"          "
-                    +df.format(freeCells)
-                    +"          "
-                    +df.format(obsCells)
-                    +"          "
-                    +df.format(openness),
-                    "environmentFeaturesConsole");
-
-            SimulationFramework.log(
-                    timeElapsed
-                            +"          "
-                            +ReserveController.getInstance().getCallFrontiers()
-                            +"          "
-                            +ReserveController.getInstance().getNotAssignedFrontiers()
-                            +"          "
-                            +ReserveController.getInstance().getAssignedFrontiers()
-                            +"  Agent "
-                            +currAgent.getName()
-                            +"  "
-                            +currAgent.getLocation().toString(),
-                    "callFrontiers"
-            );
-
-            SimulationFramework.log(
-                    timeElapsed
-                    +"  "
-                    +currAgent.getLocation().toString()
-                    +"  "
-                    +currAgent.getFrontiers().toString(),
-                    "agentFrontiers"+currAgent.getName()
-            );
-            */
         }
 
         boolean allAgentsAtBase = true;
@@ -769,42 +721,26 @@ public class SimulationFramework implements ActionListener {
 
     private void updateRobotsAndRestart(int dim) {
         if(dim > (Constants.BATCH_AGENTS+1)){
-            updateEnvironmentAndRestart(this.environmentCounter+1);
+            updateEnvironmentAndRestart(environmentCounter+1);
             return;
         }
         writeToTeamConfig(dim);
 
         this.mainGUI.closeGUI();
         String [] par = new String[1];
-        par[0] = String.valueOf(this.environmentCounter);
+        par[0] = String.valueOf(environmentCounter);
         MainGUI.main(par);
     }
 
     private void updateEnvironmentAndRestart(int n){
-
-        double obsArea = env.getTotalObsSpace();
-        double freeArea = env.getTotalFreeSpace();
-        double openness = obsArea/(obsArea+freeArea);
-
-        log(environmentCounter
-                        +"      "
-                        +"Obs area: "
-                        +obsArea
-                        +"      "
-                        +"Size: "
-                        +env.getTotalFreeSpace()
-                        +"     "
-                        +"Openness: "
-                        +openness,
-                "EnvironmentFeatures");
-
         if(n > Constants.BATCH_ENVS){
             System.exit(1);
             return;
         }
 
         environmentCounter = n;
-        writeToTeamConfig(3);
+        //made parametric to start simulation with an arbitrary team size
+        writeToTeamConfig(Constants.MIN_AGENTS);
 
         this.mainGUI.closeGUI();
         String [] par = new String[1];
@@ -1496,50 +1432,6 @@ public class SimulationFramework implements ActionListener {
                 +df.format(av_dist),
                 "personalConsole"
         );
-
-        logFrontiers();
-    }
-
-    private void logFrontiers(){
-        List<Integer> keys = ExplorationController.sortFrontiersKeys();
-        keys.forEach(key ->
-                log(environmentCounter
-                        +"      "
-                        +(numRobots-1)
-                        +"      "
-                        +key.toString()
-                        +"      "
-                        +"Total f: "
-                        +ExplorationController.getFrontiersCount(key)
-                        +"      "
-                        +ExplorationController.getFrontiers(key)
-                        +"      "
-                        +"New f: "
-                        +ExplorationController.getModifiedFrontiersCount(key, true)
-                        +"      "
-                        +ExplorationController.getModifiedFrontiers(key, true)
-                        +"      "
-                        +"Explored f: "
-                        +ExplorationController.getModifiedFrontiersCount(key, false)
-                        +"      "
-                        +ExplorationController.getModifiedFrontiers(key, false),
-                        "frontiersGraph")
-        );
-    }
-
-    public void logPositions(RealAgent agent){
-        log(
-                environmentCounter
-                        +"      "
-                        +(numRobots-1)
-                        +"      "
-                        +timeElapsed
-                        +"      "
-                        +agent.getLocation().x
-                        +","
-                        +agent.getLocation().y,
-                "positions"
-        );
     }
 
     public static void logIdleSet(){
@@ -1623,31 +1515,6 @@ public class SimulationFramework implements ActionListener {
         image.fullUpdate(mainGUI.getShowSettings(), mainGUI.getShowSettingsAgents(), env, agent, agentRange);
         image.saveScreenshot(simConfig.getLogScreenshotsDirname(), timeElapsed);
     }
-/*
-    private void logFrontiers(){
-
-        String line;
-        Set<Point> frontiers = new HashSet<Point>();
-        try {
-            line = readFile("frontiersConsole.txt");
-            line = line.replaceAll(",", "");
-            line = line.replaceAll(" ", "");
-            line = line.substring(line.indexOf("[")+1, line.indexOf("]")-1);
-            for(int i = 0; i<line.length(); i++){
-                String point = line.substring(line.indexOf("(")+1,line.indexOf(")-1"));
-                int x = Integer.parseInt(point.substring(0,point.indexOf(",")));
-                int y = Integer.parseInt(point.substring(point.indexOf(",")));
-                frontiers.add(new Point(x,y));
-                line = line.replace(point, "");
-            }
-
-
-        }
-        catch(IOException e){
-            System.out.println("IOException reading frontiersConsole file");
-        }
-    }
-*/
 // </editor-fold>     
     
 // <editor-fold defaultstate="collapsed" desc="GUI Interaction">

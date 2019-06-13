@@ -18,6 +18,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.lang.System.exit;
+
 /**
  * Created by marco on 05/04/2017.
  */
@@ -171,6 +173,7 @@ public class ExplorationController {
             }
             catch (NullPointerException e){
                 e.printStackTrace();
+                exit(-2);
             }
         }
 
