@@ -1,5 +1,6 @@
 package exploration.graph;
 
+import environment.OccupancyGrid;
 import path.Path;
 
 import java.io.BufferedWriter;
@@ -257,7 +258,6 @@ public class ExplorationGraph {
         visited.put(arrivalNode,false);
 
         path.setStartingNode(startNode, 0);
-        log("Starting search from "+startNode.toString()+" to "+arrivalNode.toString());
         depthFirstSearch(startNode, arrivalNode, visited, path, (double) 0, (double) 0, minDistance, pathsList);
 
         //removes every non shortest path -> might be useless, but it's just to be sure
@@ -273,7 +273,6 @@ public class ExplorationGraph {
 
     private void depthFirstSearch(SimpleNode startNode, SimpleNode arrivalNode, HashMap<SimpleNode, Boolean> visited,
                           GraphPath path, double delta, double length, double minDist, List<GraphPath> pathsList){
-        log("   "+startNode.toString()+" ----> "+arrivalNode.toString());
         if(startNode.equals(arrivalNode)) {
             if(!pathsList.contains(path))
                 pathsList.add(new GraphPath(path));
@@ -307,13 +306,13 @@ public class ExplorationGraph {
     /**
      * Removes all the adjacent nodes from each frontier node, leaving only the nearest ones
      */
-    void cleanFrontiers(){
+    void shortestPathFrontiers(){
         List<Node> frontierList = new LinkedList<>();
 
         //initialization
         for (SimpleNode n : nodeMap.keySet()){
             if(n.isFrontier())
-                frontierList.add(nodeMap.get(n)); //aggiungo la frontiera
+                frontierList.add(nodeMap.get(n));
         }
 
         //retrieve list of nearest nodes and remove all the others
@@ -324,6 +323,30 @@ public class ExplorationGraph {
                 removeEdge(f, n);
         }
 
+    }
+
+    /**
+     * Removes all the nodes which are not visible from the frontier nodes. To do this it checks whether there is a
+     * direct line possible in the occupancy grid between each frontier node and its adjacent nodes.
+     * @param environment the occupancy grid of the environment
+     */
+    void cleanVisibleFrontiers(OccupancyGrid environment){
+        List<Node> frontierList = new LinkedList<>();
+
+        //initialization
+        for (SimpleNode n : nodeMap.keySet()){
+            if(n.isFrontier())
+                frontierList.add(nodeMap.get(n));
+        }
+
+        //retrieve list of adjacent nodes and remove all the non visible ones
+        for(Node f : frontierList){
+            List<SimpleNode> nodes = f.getAdjacentsList();
+            for(SimpleNode n : nodes){
+                if(!environment.directLinePossible(f.x,f.y,n.x,n.y))
+                    removeEdge(f, n);
+            }
+        }
     }
 
     /**

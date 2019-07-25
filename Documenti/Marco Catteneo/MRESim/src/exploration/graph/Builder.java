@@ -1,17 +1,27 @@
 package exploration.graph;
 
+import environment.OccupancyGrid;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 class Builder {
 
     private ExplorationGraph graph;
     private Map<SimpleNode, Node> frontierMap;
     private List<Node> lastAddedFrontiers;
+    private OccupancyGrid environment;
 
     Builder() {
         this.graph = new ExplorationGraph();
         this.frontierMap = new HashMap<>();
         this.lastAddedFrontiers = new LinkedList<>();
+        this.environment = null;
     }
 
     /**
@@ -23,19 +33,47 @@ class Builder {
         return graph;
     }
 
+    public ExplorationGraph getVisibilityGraph(){
+        addFrontiers();
+        graph.cleanVisibleFrontiers(environment);
+        return graph;
+    }
+
+    private void computeOccupancyGrid(int env){
+        OccupancyGrid envGrid = new OccupancyGrid(800,600);
+        BufferedImage bi;
+        try{
+            System.out.println(System.getProperty("user.dir") + "/environments/Tesi/env_"+env+".png");
+            bi = ImageIO.read(new File(System.getProperty("user.dir") + "/environments/Tesi/env_"+env+".png"));
+            for (int i = 0; i < 800; i++) {
+                for (int j = 0; j < 600; j++) {
+                    if (bi.getRGB(i,j)==Color.WHITE.getRGB()) envGrid.setFreeSpaceAt(i,j);
+                    else envGrid.setObstacleAt(i,j);
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.environment = envGrid;
+    }
+
     /**
      * Returns the graph after having removed all the non nearest adjacent nodes from frontiers adjacency list
      * @return the shortest path graph
      */
     ExplorationGraph getShortestPathGraph() {
         addFrontiers();
-        graph.cleanFrontiers();
+        graph.shortestPathFrontiers();
         return graph;
     }
 
     void parseLine(String line){
         if(line==null)
             return;
+        if(this.environment==null)
+            computeOccupancyGrid(Integer.parseInt(line.substring(0,1)));
         Node node = getLocation(line);
         parseFrontiers(line,node);
         this.graph.addNode(node);
@@ -91,9 +129,9 @@ class Builder {
     // point to return
     private Node getLocation (String line){
 
-        int statingIdx = line.indexOf('l')+2;
+        int startingIdx = line.indexOf('l')+2;
         int endingIdx = line.indexOf(']');
-        line = line.substring(statingIdx,endingIdx);
+        line = line.substring(startingIdx,endingIdx);
 
         int x = Integer.parseInt(line.substring(0,line.indexOf(',')));
         int y = Integer.parseInt(line.substring(line.indexOf(',')+1));

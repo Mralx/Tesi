@@ -123,6 +123,7 @@ class GraphStats {
         Set<SimpleNode> worthNodes = restrictedNodeSet(graph);
 
         //computing restricted graph distance matrix
+        System.out.println("Matrix computation");
         Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = graphDistanceMatrix(graph,restrictedNodeSet(graph));
 
         //closeness computation
@@ -218,6 +219,7 @@ class GraphStats {
     }
 
     private void fillMatrix(ExplorationGraph graph){
+        long time = System.currentTimeMillis();
         List<SimpleNode> nodes = new ArrayList<>(graph.getNodeMap().keySet());
         SimpleNode starter, arrival;
 
@@ -235,6 +237,8 @@ class GraphStats {
             //System.out.println("Retrieved sub matrix for "+starter.toString());
             this.spgMatrix.put(starter,subMatrix);
         }
+        time = System.currentTimeMillis() - time;
+        System.out.println("Fill matrix took "+time+" ms to be computed");
     }
 
     /**
@@ -329,7 +333,7 @@ class GraphStats {
         File file;
         FileWriter fw;
         long time;
-
+        System.out.println("Degree computation");
         try {
             file = new File(statsFile);
             fw = new FileWriter(file, false);
@@ -359,6 +363,7 @@ class GraphStats {
             bw.newLine();
             bw.newLine();
 
+            System.out.println("Closeness computation");
             time = System.currentTimeMillis();
             bw.write("Closeness centrality:");
             Map<SimpleNode,Double> centralities = this.closenessCentrality(graph);
@@ -372,6 +377,7 @@ class GraphStats {
             bw.newLine();
             bw.newLine();
 
+            System.out.println("Bet computation");
             time = System.currentTimeMillis();
             bw.write("Betweenness centrality:");
             centralities = this.betweennessCentrality(graph);

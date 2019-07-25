@@ -16,44 +16,54 @@ public class GraphEdit {
 
     public static void main(String args[]) {
 
-        int env = 4;
-        char agentName = 'A';
-        int teamSize = 6;
+        int env = 1;
+        String agents = "ABCDEFGHI";
+        char agentName;
+        int teamSize = 5;
         String expAlgorithm = "ProactiveReserve";
-        int n = 35;
 
         try {
-            while (env <= 4) {
-                while (teamSize <= 6) {
-                    String dataFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/data/"
-                            + env + "/front" + agentName + "_" + teamSize + ".txt";
-                    String spgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
-                            + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
-                    String spgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
-                            + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
-                    String graphFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
-                            + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
-                    String gStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
-                            + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
-                    String statsImage = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
-                            + env + "/" + agentName + "_" + teamSize + " " + n + ".png";
+            for (int n = 65; n<= 65 ; n++){
+            //while (env <= 5) {
+                while (teamSize <= 5) {
+                    for (int i = 0; i < teamSize-1; i++) {
+                        agentName = agents.charAt(i);
+                        String dataFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/data/"
+                                + env + "/front" + agentName + "_" + teamSize + ".txt";
+                        String spgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
+                        String spgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
+                        String graphFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
+                        String gStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
+                        String statsImage = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + ".png";
 
 
-                    graphs(dataFile, spgFile, graphFile, spgStatsFile, gStatsFile, n);
-                    editAgentFrontPng(statsImage,gStatsFile,env);
+                        //graphs(dataFile, spgFile, graphFile, spgStatsFile, gStatsFile, n);
+                        editAgentFrontPng(statsImage,gStatsFile,env);
+                        //drawFrontiersPng(env,
+                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\1\\" + agentName + "_5 "+n+".txt",
+                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\1\\" + agentName + "_5 "+n+" graph.png");
+                        //        editPng(env,System.getProperty("user.dir")+"\\logs\\ProactiveReserve\\g\\"+env+"\\" + agentName + "_5 "+n+".txt",
+                        //                System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\"+env+"\\" + agentName + "_5 "+n+" graph.png");
 
-                    System.out.println("Completed team size " + teamSize + " for env " + env);
-                    teamSize++;
+                    }
+                        System.out.println("Completed team size " + teamSize + " for env " + env);
+                        teamSize++;
                 }
+
                 teamSize = 5;
                 System.out.println("Completed env " + env);
-                env++;
+                //env++;
+            //}
+
             }
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
-
     }
 
     private static void editAgentFrontPng(String imageFilename, String statsFilename,int env) {
@@ -68,9 +78,11 @@ public class GraphEdit {
             //print agent positions from time 1 to time n-1
             line = br.readLine();
             while(!line.equals("Closeness centrality:"))
+            //while(!line.equals("Betweenness centrality:"))
                 line = br.readLine();
             line = br.readLine();
 
+            //while(!line.substring(0,9).equals("Betweenne")) {
             while(!line.substring(0,9).equals("Closeness")) {
                 System.out.println("Parsed "+line);
                 boolean front = false;
@@ -90,7 +102,9 @@ public class GraphEdit {
                 }
                 System.out.println("Parsed point "+x+","+y+" and front is "+front);
                 line = line.replace(',','.');
-                val = Double.parseDouble(line)*1000;
+                val = Double.parseDouble(line);
+                //val = (val-300)/1200*5;   // use for betweenness
+                val = val*1000;           // use for closeness
                 System.out.println("Parsed value "+val);
 
                 /*
@@ -113,6 +127,9 @@ public class GraphEdit {
                 }
                 */
                 switch (val.intValue()){
+                    case 0:
+                        color = Color.PINK.getRGB();
+                        break;
                     case 1:
                         color = Color.YELLOW.getRGB();
                         break;
@@ -127,6 +144,9 @@ public class GraphEdit {
                         break;
                     case 5:
                         color = Color.BLUE.getRGB();
+                        break;
+                    case 6:
+                        color = Color.CYAN.getRGB();
                         break;
                     default: color=Color.LIGHT_GRAY.getRGB();
                 }
@@ -235,72 +255,62 @@ public class GraphEdit {
         }
     }
 
-    private static void editPng(int n, int env, String filename){
-        BufferedImage bi = null;
+    private static void editPng(int env, String filename, String destFilename){
+        BufferedImage bi;
         try{
             bi = ImageIO.read(new File(System.getProperty("user.dir")+"/environments/Tesi/env_"+env+".png"));
             BufferedReader br = new BufferedReader(new FileReader(filename));
-            String line;
+            String line=br.readLine();
             int x, y;
-            for(int i=0; i<n; i++){
-                line=br.readLine();
-                if(line == null)
-                    break;
-                while(line.contains("[")){
-                    if(line.contains("$"))
-                        break;
-                    x = Integer.parseInt(line.substring(line.indexOf('[')+1,line.indexOf(',')));
-                    y = Integer.parseInt(line.substring(line.indexOf(',')+1,line.indexOf(']')));
-                    line = line.substring(line.indexOf(']')+1);
-                    if(line.contains("["))
-                        line = line.substring(line.indexOf('['));
-
-                    for(int x_i=-1; x_i < 2; x_i++){
-                        for(int y_i=-1; y_i < 2; y_i++){
-                            if(i==n-1)
-                                bi.setRGB(x+x_i, y+y_i,Color.GREEN.getRGB());
-                            else
-                                bi.setRGB(x+x_i, y+y_i,Color.RED.getRGB());
-                        }
+            while(line!=null) {
+                boolean isF = line.contains("f");
+                boolean isE = line.contains("{}");
+                line = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
+                x = Integer.parseInt(line.substring(0, line.indexOf(',')));
+                y = Integer.parseInt(line.substring(line.indexOf(',') + 1));
+                for (int x_i = -1; x_i < 2; x_i++) {
+                    for (int y_i = -1; y_i < 2; y_i++) {
+                        if (isF)
+                            bi.setRGB(x + x_i, y + y_i, Color.GREEN.getRGB());
+                        else
+                            bi.setRGB(x + x_i, y + y_i, Color.RED.getRGB());
+                        if (isE)
+                            bi.setRGB(x + x_i, y + y_i, Color.BLACK.getRGB());
                     }
                 }
+            line= br.readLine();
             }
-
-            File file = new File(System.getProperty("user.dir")+"/image.png");
+            File file = new File(destFilename);
             ImageIO.write(bi, "png",file);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void editCallFrontiersFile(){
-        String oldFN = System.getProperty("user.dir")+"/logs/callFrontiers.txt";
-        String newFN = System.getProperty("user.dir")+"/logs/tmp-callFrontiers.txt";
-
-        FileWriter fw;
-        BufferedWriter bw;
-
-        try {
-            File file;
-            file = new File(newFN);
-            fw = new FileWriter(file.getAbsoluteFile(), true);
-
-            BufferedReader br = new BufferedReader(new FileReader(oldFN));
-            bw = new BufferedWriter(fw);
-            String line1, line2, c_line1, c_line2;
-            line1 = br.readLine();
-            while ((line2 = br.readLine()) != null) {
-                c_line1 = line1.substring(line1.indexOf(" "));
-                c_line2 = line2.substring(line2.indexOf(" "));
-                if(!c_line1.equals(c_line2)){
-                    bw.write(line1);
-                    bw.newLine();
-                    line1 = line2;
+    private static void drawFrontiersPng(int env, String filename, String destFilename){
+        BufferedImage bi;
+        try{
+            bi = ImageIO.read(new File(System.getProperty("user.dir")+"/environments/Tesi/env_"+env+".png"));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            String line=br.readLine();
+            int x, y;
+            while(line!=null) {
+                boolean isF = line.contains("f");
+                line = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
+                x = Integer.parseInt(line.substring(0, line.indexOf(',')));
+                y = Integer.parseInt(line.substring(line.indexOf(',') + 1));
+                for (int x_i = -1; x_i < 2; x_i++) {
+                    for (int y_i = -1; y_i < 2; y_i++) {
+                        if (isF)
+                            bi.setRGB(x + x_i, y + y_i, Color.GREEN.getRGB());
+                        else
+                            bi.setRGB(x + x_i, y + y_i, Color.RED.getRGB());
+                    }
                 }
+                line= br.readLine();
             }
-
-            bw.close();
-            fw.close();
+            File file = new File(destFilename);
+            ImageIO.write(bi, "png",file);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -324,7 +334,9 @@ public class GraphEdit {
             }
 
             pathG(g,gStats,builder);
+
             //shortestPathG(spg,spgStats,builder);
+            //visibilityPathG(spg,spgStats,builder);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -358,9 +370,27 @@ public class GraphEdit {
             BufferedWriter bw = new BufferedWriter(fw);
 
             ExplorationGraph graph = builder.getGraph();
-            //System.out.println("Retrieved g");
+            System.out.println("Retrieved g");
             logGraphStats(statsFile, fw, bw, graph);
-            //System.out.println("Stats computed for g");
+            System.out.println("Stats computed for g");
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void visibilityPathG(String vgFile, String statsFile, Builder builder) {
+        System.out.println("Starting vg");
+        try {
+            File file = new File(vgFile);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            ExplorationGraph graph = builder.getVisibilityGraph();
+            System.out.println("Retrieved vg");
+            logGraphStats(statsFile, fw, bw, graph);
+            System.out.println("Stats computed for vg");
 
         }
         catch (IOException e){
