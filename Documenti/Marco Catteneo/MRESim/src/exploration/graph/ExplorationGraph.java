@@ -1,7 +1,6 @@
 package exploration.graph;
 
 import environment.OccupancyGrid;
-import path.Path;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,7 +13,7 @@ import java.util.*;
  */
 public class ExplorationGraph {
 
-    private Map<SimpleNode, Node> nodeMap;
+    Map<SimpleNode, Node> nodeMap;
     private SimpleNode lastNode;
     private boolean multiplePaths;
 
@@ -43,7 +42,6 @@ public class ExplorationGraph {
         return nodeMap.get(node);
     }
 
-
     /**
      * Provides the edge connecting the two SimpleNode in input. Based on the assumption that the graph is undirected,
      * thus if an edge connecting n1 to n2 exists, also an edge connecting n2 to n1 does.
@@ -70,11 +68,19 @@ public class ExplorationGraph {
         return getNode(lastNode);
     }
 
+    public void setLastNode(SimpleNode lastNode) {
+        this.lastNode = lastNode;
+    }
+
     public boolean isMultiplePaths() {
         return multiplePaths;
     }
 
-    private Double euclideanDistance(SimpleNode node1, SimpleNode node2){
+    public void setMultiplePaths(boolean multiplePaths) {
+        this.multiplePaths = multiplePaths;
+    }
+
+    Double euclideanDistance(SimpleNode node1, SimpleNode node2){
         return Math.sqrt(
                 Math.pow(node1.x-node2.x,2)+Math.pow(node1.y-node2.y,2)
         );
@@ -302,6 +308,96 @@ public class ExplorationGraph {
         path.removeNode(startNode, delta);
     }
 
+    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix){
+        List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
+        double[][] distances = new double[nodes.size()][nodes.size()];
+        Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap = new HashMap<>();
+        Map<SimpleNode, List<SimpleNode>> matrixRow;
+        List<SimpleNode> matrixCell;
+
+        //matrix of distances initialization
+        for(int i=0; i<nodes.size()-1;i++){
+            for(int j=i; j<nodes.size();j++){
+
+                if(i==j)
+                    distances[i][j] = 0.0;
+                else {
+                    //works because the returned distance is infinite, if the two nodes are not adjacent
+                    distances[i][j] = getNode(nodes.get(i)).getDistance(nodes.get(j));
+                    distances[j][i] = distances[i][j]; //undirected graph
+                }
+            }
+        }
+
+        //childMap initialization
+        for(SimpleNode n : nodes){
+            matrixRow = new HashMap<>();
+            //child(n,n) = n;
+            matrixCell = new LinkedList<>();
+            matrixCell.add(n);
+            matrixRow.put(n,matrixCell);
+            //child(n,adj) = adj;
+            for(SimpleNode adj : getNode(n).getAdjacents()){
+                matrixCell = new LinkedList<>();
+                matrixCell.add(adj);
+                matrixRow.put(adj,matrixCell);
+            }
+            childMap.put(n,matrixRow);
+        }
+
+        //Floyd-Warshall
+        for(int k=0; k<nodes.size(); k++){
+            for(int i=0; i<nodes.size(); i++){
+                matrixRow = childMap.get(nodes.get(i));
+                for(int j=i+1; j<nodes.size(); j++){
+                    matrixCell = new LinkedList<>();
+                    if(distances[i][j] == distances[i][k] + distances[k][j]) {
+                        matrixCell = matrixRow.get(nodes.get(j));
+                    }
+                    if(distances[i][j] > distances[i][k] + distances[k][j]) {
+                        distances[i][j] = distances[i][k] + distances[k][j];
+                        distances[j][i] = distances[i][j];
+                    }
+                    if(matrixCell!=null){
+                        matrixCell.add(nodes.get(k));
+                        matrixRow.put(nodes.get(j),matrixCell);
+                        childMap.put(nodes.get(i),matrixRow);
+                    }
+                }
+            }
+        }
+
+        fillGraphDistanceMatrix(graphDistanceMatrix,distances,nodes);
+        return childMap;
+        /*
+        non serve ricostruire i path, con la childmap fatta per bene è possibile calcolare la betweenness, che alla fine
+        è ciò per cui tutto questo viene fatto. la closeness necessita solo della matrice delle distanze, che viene
+        calcolata involontariamente qua. quindi
+        1. applicare floyd-warshall
+        2. la matrice delle distanze calcolata nell'algoritmo viene copiata nella matrice delle distanze passata come input
+        3. ritornare la childMap
+        il chiamante si occuperà di :
+        1. inizializzare la matrice delle distanze
+        2. invocare il metodo di floyd-warshall, passandogli questa matrice
+        3. prendere la childMap ritornata
+        4. calcolarci la betweenness, senza ricostruire i path, basta contare le occorrenze dei vari nodi in ogni riga
+
+         */
+    }
+
+    private void fillGraphDistanceMatrix(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,
+                                         double[][] distances, List<SimpleNode> nodes ){
+        Map<SimpleNode, Double> matrixRow;
+        for(SimpleNode n : nodes){
+            int idx = nodes.indexOf(n);
+            matrixRow = new HashMap<>();
+            for(int j=0;j<nodes.size();j++){
+                matrixRow.put(nodes.get(j),distances[idx][j]);
+            }
+            graphDistanceMatrix.put(n,matrixRow);
+        }
+    }
+
     //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
     /**
      * Removes all the adjacent nodes from each frontier node, leaving only the nearest ones
@@ -343,7 +439,11 @@ public class ExplorationGraph {
         for(Node f : frontierList){
             List<SimpleNode> nodes = f.getAdjacentsList();
             for(SimpleNode n : nodes){
-                if(!environment.directLinePossible(f.x,f.y,n.x,n.y))
+                //debug
+                log("f=("+f.x+","+f.y+") n="+n+"obs= "+environment.numObstaclesOnLine(f.x,f.y,n.x,n.y));
+                //fine debug
+
+                if(environment.numObstaclesOnLine(f.x,f.y,n.x,n.y)>0)
                     removeEdge(f, n);
             }
         }
@@ -361,6 +461,28 @@ public class ExplorationGraph {
         if(!result)
             result = nodeMap.get(n2).removeAdjacent(n1);
         return !result;
+    }
+
+    /**
+     * Removes the node from the graph and disconnects it from every other node it is linked to
+     * @param n the node to remove
+     */
+    void removeNode(SimpleNode n){
+        for (SimpleNode adjacent: getNode(n).getAdjacents())
+            removeEdge(n,adjacent);
+        this.nodeMap.remove(n);
+    }
+
+    /**
+     * Provides a copy of this graph.
+     * @return an identical copy of this graph
+     */
+    ExplorationGraph copy(){
+        ExplorationGraph copy = new ExplorationGraph();
+        copy.setNodeMap(this.nodeMap);
+        copy.setLastNode(this.lastNode);
+        copy.setMultiplePaths(this.multiplePaths);
+        return copy;
     }
 
     public static void log(String data){
@@ -386,5 +508,4 @@ public class ExplorationGraph {
             }
         }
     }
-
 }

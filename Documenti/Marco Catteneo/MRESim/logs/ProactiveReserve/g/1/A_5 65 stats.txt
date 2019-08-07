@@ -80,7 +80,7 @@ Nodes degrees
    (599,425)    1
    [570,180]    1
 Max: 43   Min: 1   Avg: 6
-Degree computed in 29 ms
+Degree computed in 28 ms
 
 Closeness centrality:
    [504,231]    0,00451
@@ -143,7 +143,7 @@ Closeness centrality:
    (141,361)    0,00114
    (86,365)    0,00111
    (68,358)    0,00109
-Closeness computed in 456669 ms
+Closeness computed in 677 ms
 
 Betweenness centrality:
    [470,246]    1544
@@ -206,4 +206,4 @@ Betweenness centrality:
    (356,390)    0
    (457,390)    0
    (365,252)    0
-Betweenness computed in 75 ms
+Betweenness computed in 200 ms

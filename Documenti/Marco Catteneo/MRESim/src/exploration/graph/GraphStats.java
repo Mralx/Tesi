@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 class GraphStats {
 
     HashMap<SimpleNode, HashMap<SimpleNode, List<GraphPath>>> spgMatrix;
-    String statsFile;
+    private Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> FWChildMap;
+    private String statsFile;
 
     GraphStats() {
         this.spgMatrix = new HashMap<>();
+        this.FWChildMap = new HashMap<>();
         this.statsFile = null;
     }
 
@@ -57,13 +59,10 @@ class GraphStats {
      * @return a map containing as key the node, and as value another map. This second map has as key another node in
      * the graph and as value, the distance between the key of the first map and the key of this one
      */
-    Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix(ExplorationGraph graph, Set<SimpleNode> restrictedNodeSet){
-        if(spgMatrix.size()==0)
-            fillMatrix(graph);
-        Map<SimpleNode, Map<SimpleNode, Double>> matrix = new HashMap<>();
-        for(SimpleNode n: restrictedNodeSet)
-            matrix.put(n,computeRow(graph, n));
-        return matrix;
+    Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix(ExplorationGraph graph){
+        Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix = new HashMap<>();
+        this.FWChildMap = graph.allPairsShortestPaths(graphDistanceMatrix);
+        return graphDistanceMatrix;
     }
 
     /**
@@ -124,7 +123,7 @@ class GraphStats {
 
         //computing restricted graph distance matrix
         System.out.println("Matrix computation");
-        Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = graphDistanceMatrix(graph,restrictedNodeSet(graph));
+        Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = graphDistanceMatrix(graph);
 
         //closeness computation
         for(SimpleNode n : worthNodes){
@@ -146,7 +145,7 @@ class GraphStats {
     /**
      * Computes the betweenness of the graph provided in input. To compute this measure a two steps procedure is
      * performed. The first one consists in retrieving all the shortest paths between each couple of nodes in the graph.
-     * For efficiency reasons, this are stored to be reused in further analysis. After all of this are obtained, for
+     * For efficiency reasons, this are stored to be reused in further analysis. After all of these are obtained, for
      * each node i in the graph, two values are computed: one representing the number of shortest paths from node s to
      * node t which contain i as intermediate node; and the second one is the number of shortest paths from node s to
      * node t. Once they are found for each node, the betweenness of each node is calculated.
@@ -154,8 +153,8 @@ class GraphStats {
      * @param graph the graph to analyze
      */
     Map<SimpleNode, Double> betweennessCentrality(ExplorationGraph graph){
-        if(spgMatrix.size()==0)
-            fillMatrix(graph);
+        if(FWChildMap.size()==0)
+            graphDistanceMatrix(graph); //TODO inutilmente complesso
 
         Map<SimpleNode, Double> betweenness = new HashMap<>();
         for(SimpleNode n: restrictedNodeSet(graph)) {
@@ -181,8 +180,8 @@ class GraphStats {
      */
     private double computeNodeBetweenness(SimpleNode entryNode){
 
-        double betweenness = (double) 0;
-        double occurrences = (double) 0;
+        double betweenness = 0.0;
+        double occurrences = 0.0;
         double diffPaths;
         for(SimpleNode n : spgMatrix.keySet().stream().filter(node-> node!=entryNode).collect(Collectors.toList())){
             for (SimpleNode m : spgMatrix.get(n).keySet().stream().filter(node -> node != entryNode).collect(Collectors.toList())) {
@@ -226,7 +225,7 @@ class GraphStats {
         for(int i=0; i<nodes.size()-1;i++){
             HashMap<SimpleNode, List<GraphPath>> subMatrix = new HashMap<>();
             starter = nodes.get(i);
-            //System.out.println("Starting sub matrix computation for "+starter.toString());
+            System.out.println("Starting sub matrix computation for "+starter.toString());
             for(int j=i+1; j<nodes.size(); j++){
                 arrival = nodes.get(j);
                 //double percentage = (i*(nodes.size()-1)+j)/((nodes.size()-1)*(nodes.size()-1))*100;
@@ -234,7 +233,7 @@ class GraphStats {
                 List<GraphPath> paths = graph.getMultiplePaths(starter,arrival);
                 subMatrix.put(arrival, paths);
             }
-            //System.out.println("Retrieved sub matrix for "+starter.toString());
+            System.out.println("Retrieved sub matrix for "+starter.toString());
             this.spgMatrix.put(starter,subMatrix);
         }
         time = System.currentTimeMillis() - time;
@@ -329,10 +328,37 @@ class GraphStats {
 
     }
 
+    /**
+     * Computes a new graph such that it is connected. It only deals with disconnected frontiers, no node can be
+     * disconnected according to how graph is built. In particular, this is useful with intermediary visibility graphs
+     * because they might have some frontiers not linked to any node.
+     * @param graph the graph to transform
+     * @return a new graph where each frontier is connected to at least a non-frontier node
+     */
+    ExplorationGraph dropDisconnectedFrontiers(ExplorationGraph graph){
+        ExplorationGraph connectedGraph = graph.copy();
+        for(SimpleNode frontier : graph.getNodeMap().keySet().stream().
+                filter(SimpleNode::isFrontier).collect(Collectors.toSet())){
+            for(SimpleNode adjacentFrontier : graph.getNode(frontier).getAdjacents().stream().
+                    filter(SimpleNode::isFrontier).collect(Collectors.toSet()))
+                connectedGraph.removeEdge(frontier,adjacentFrontier);
+            if(connectedGraph.getNode(frontier).getAdjacents().size()==0)
+                connectedGraph.removeNode(frontier);
+        }
+
+        return connectedGraph;
+
+    }
+
     void logStats(ExplorationGraph graph, String statsFile){
         File file;
         FileWriter fw;
         long time;
+
+        System.out.println("Ensuring connectivity of the graph");
+        graph = dropDisconnectedFrontiers(graph);
+        System.out.println("Done");
+
         System.out.println("Degree computation");
         try {
             file = new File(statsFile);
@@ -362,6 +388,7 @@ class GraphStats {
             bw.write("Degree computed in " + time + " ms");
             bw.newLine();
             bw.newLine();
+            bw.flush();
 
             System.out.println("Closeness computation");
             time = System.currentTimeMillis();
@@ -376,7 +403,9 @@ class GraphStats {
             bw.write("Closeness computed in " + time + " ms");
             bw.newLine();
             bw.newLine();
+            bw.flush();
 
+            /*
             System.out.println("Bet computation");
             time = System.currentTimeMillis();
             bw.write("Betweenness centrality:");
@@ -389,8 +418,9 @@ class GraphStats {
             bw.newLine();
             bw.write("Betweenness computed in " + time + " ms");
             bw.newLine();
+            bw.flush();
             //this.writeAdjacencyMatrix(graph);
-
+            gra */
             bw.close();
             fw.close();
         }

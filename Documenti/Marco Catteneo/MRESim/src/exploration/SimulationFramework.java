@@ -962,7 +962,6 @@ public class SimulationFramework implements ActionListener {
                 }
             }
         }
-        
         return sensorData;
     }    
     

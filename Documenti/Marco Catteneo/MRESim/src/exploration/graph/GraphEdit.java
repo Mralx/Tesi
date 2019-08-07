@@ -7,10 +7,8 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class GraphEdit {
 
@@ -21,6 +19,7 @@ public class GraphEdit {
         char agentName;
         int teamSize = 5;
         String expAlgorithm = "ProactiveReserve";
+        Builder builder = new Builder();
 
         try {
             for (int n = 65; n<= 65 ; n++){
@@ -34,6 +33,10 @@ public class GraphEdit {
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
                         String spgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
+                        String vgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + "test.txt";
+                        String vgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                                + env + "/" + agentName + "_" + teamSize + " " + n + " stats test.txt";
                         String graphFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
                         String gStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
@@ -42,17 +45,27 @@ public class GraphEdit {
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".png";
 
 
-                        //graphs(dataFile, spgFile, graphFile, spgStatsFile, gStatsFile, n);
-                        editAgentFrontPng(statsImage,gStatsFile,env);
+                        graphs(dataFile, vgFile, graphFile, vgStatsFile, gStatsFile, n, builder);
+                        //editAgentFrontPng(statsImage,gStatsFile,env);
                         //drawFrontiersPng(env,
-                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\1\\" + agentName + "_5 "+n+".txt",
-                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\1\\" + agentName + "_5 "+n+" graph.png");
-                        //        editPng(env,System.getProperty("user.dir")+"\\logs\\ProactiveReserve\\g\\"+env+"\\" + agentName + "_5 "+n+".txt",
-                        //                System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\g\\"+env+"\\" + agentName + "_5 "+n+" graph.png");
+                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\1\\" + agentName + "_5 "+n+".txt",
+                        //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\1\\" + agentName + "_5 "+n+" graph.png");
+                        //        editPng(env,System.getProperty("user.dir")+"\\logs\\ProactiveReserve\\spg\\"+env+"\\" + agentName + "_5 "+n+".txt",
+                        //                System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\"+env+"\\" + agentName + "_5 "+n+" graph 0.png");
+                        /*
+                        if(i==teamSize-2){
+                            logTestGraph(vgFile,vgStatsFile,builder.getMergedGraph());
+                            drawFrontiersPng(env,
+                                    System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\vg\\1\\graph.txt",
+                                    System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\vg\\1\\graph.png");
+                        }
+
+                         */
 
                     }
                         System.out.println("Completed team size " + teamSize + " for env " + env);
                         teamSize++;
+                        builder = new Builder();
                 }
 
                 teamSize = 5;
@@ -66,6 +79,7 @@ public class GraphEdit {
         }
     }
 
+    //disegna le metriche
     private static void editAgentFrontPng(String imageFilename, String statsFilename,int env) {
         BufferedImage bi;
         try {
@@ -196,6 +210,7 @@ public class GraphEdit {
         }
     }
 
+    /*inutilizzato
     private static void editAgentFrontFile(char agentName){
         String filename = System.getProperty("user.dir") + "/logs/agentFrontiers" + agentName +"2.txt";
         FileWriter fw;
@@ -254,7 +269,9 @@ public class GraphEdit {
             e.printStackTrace();
         }
     }
+     */
 
+    //disegna il grafo completo, in verde le frontiere, rosso i nodi e in nero le frontiere disconnesse
     private static void editPng(int env, String filename, String destFilename){
         BufferedImage bi;
         try{
@@ -287,6 +304,7 @@ public class GraphEdit {
         }
     }
 
+    //disegna il grafo completo, in verde le frontiere, rosso i nodi
     private static void drawFrontiersPng(int env, String filename, String destFilename){
         BufferedImage bi;
         try{
@@ -317,9 +335,7 @@ public class GraphEdit {
     }
 
     private static void graphs(String filename, String spg, String g,
-                               String spgStats, String gStats, int n){
-
-        Builder builder = new Builder();
+                               String spgStats, String gStats, int n, Builder builder){
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -333,10 +349,9 @@ public class GraphEdit {
                 i++;
             }
 
-            pathG(g,gStats,builder);
-
+            //pathG(g,gStats,builder);
             //shortestPathG(spg,spgStats,builder);
-            //visibilityPathG(spg,spgStats,builder);
+            visibilityPathG(spg,spgStats,builder);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -398,17 +413,31 @@ public class GraphEdit {
         }
     }
 
+    private static void logTestGraph(String vgFile, String statsFile, VisibilityGraph graph) {
+        try {
+            File file = new File(vgFile);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            logGraphStats(statsFile, fw, bw, graph);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     private static void logGraphStats(String statsFile, FileWriter fw, BufferedWriter bw, ExplorationGraph graph) throws IOException {
         for(SimpleNode node : graph.getNodeMap().keySet()){
             bw.write(graph.getNode(node).toString());
             bw.newLine();
         }
 
+        bw.close();
+        fw.close();
+
         GraphStats stats = new GraphStats();
         stats.logStats(graph,statsFile);
 
-        bw.close();
-        fw.close();
     }
 
     private static void testPath(){

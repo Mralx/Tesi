@@ -557,9 +557,9 @@ public class OccupancyGrid {
     public boolean directLinePossible(int sourceX, int sourceY, int destX, int destY) {
         for(int i=Math.min(sourceX, destX)+1; i<=Math.max(sourceX, destX)-1; i++)
             for(int j=Math.min(sourceY, destY)+1; j<=Math.max(sourceY, destY)-1; j++)
-                if((distPointToLine(sourceX,sourceY,destX,destY,i,j) <= 0.5) && obstacleAt(i,j))
+                if ((distPointToLine(sourceX, sourceY, destX, destY, i, j) <= 0.5) && obstacleAt(i, j))
                     return false;
-        
+
         return true;
     }
     

@@ -17215,3 +17215,4 @@
 14 60 280 60.0 280.0 BaseStation GetInfoFromChild 0 118 195 70.0 250.0 Explorer Initial 0 168 321 70.0 270.0 Explorer Initial 0 121 216 70.0 290.0 Explorer Initial 0 141 399 70.0 310.0 Explorer Initial 0 
 15 60 280 60.0 280.0 BaseStation GetInfoFromChild 0 128 196 70.0 250.0 Explorer Initial 0 178 321 70.0 270.0 Explorer Initial 0 128 211 70.0 290.0 Explorer Initial 0 147 407 70.0 310.0 Explorer Initial 0 
 16 60 280 60.0 280.0 BaseStation GetInfoFromChild 0 138 196 70.0 250.0 Explorer Initial 0 188 321 70.0 270.0 Explorer Initial 0 135 218 70.0 290.0 Explorer Initial 0 153 415 70.0 310.0 Explorer Initial 0 
+1 60 280 60.0 280.0 BaseStation GetInfoFromChild 0 70 250 70.0 250.0 Explorer Initial 0 70 270 70.0 270.0 Explorer Initial 0 70 290 70.0 290.0 Explorer Initial 0 70 310 70.0 310.0 Explorer Initial 0 

@@ -12,12 +12,14 @@ import java.util.List;
 
 class Builder {
 
+    private List<ExplorationGraph> graphs;
     private ExplorationGraph graph;
     private Map<SimpleNode, Node> frontierMap;
     private List<Node> lastAddedFrontiers;
     private OccupancyGrid environment;
 
     Builder() {
+        this.graphs = new LinkedList<>();
         this.graph = new ExplorationGraph();
         this.frontierMap = new HashMap<>();
         this.lastAddedFrontiers = new LinkedList<>();
@@ -30,13 +32,28 @@ class Builder {
      */
     public ExplorationGraph getGraph() {
         addFrontiers();
-        return graph;
+        this.graphs.add(graph);
+        ExplorationGraph result = graph.copy();
+        this.reset();
+        return result;
     }
 
-    public ExplorationGraph getVisibilityGraph(){
+    ExplorationGraph getVisibilityGraph(){
         addFrontiers();
-        graph.cleanVisibleFrontiers(environment);
-        return graph;
+        VisibilityGraph result = (new VisibilityGraph()).transform(graph, environment);
+        this.reset();
+        return result;
+    }
+
+    VisibilityGraph getMergedGraph(){
+        VisibilityGraph visibilityGraph = new VisibilityGraph();
+        return visibilityGraph.mergeGraphs(graphs,environment);
+    }
+
+    private void reset(){
+        this.graph = new ExplorationGraph();
+        this.frontierMap = new HashMap<>();
+        this.lastAddedFrontiers = new LinkedList<>();
     }
 
     private void computeOccupancyGrid(int env){
@@ -66,7 +83,9 @@ class Builder {
     ExplorationGraph getShortestPathGraph() {
         addFrontiers();
         graph.shortestPathFrontiers();
-        return graph;
+        ExplorationGraph result = graph.copy();
+        this.reset();
+        return result;
     }
 
     void parseLine(String line){
