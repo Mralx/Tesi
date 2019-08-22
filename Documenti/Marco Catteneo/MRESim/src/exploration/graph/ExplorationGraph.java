@@ -308,23 +308,29 @@ public class ExplorationGraph {
         path.removeNode(startNode, delta);
     }
 
-    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix){
+    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,
+                                                                             Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix){
         List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
         double[][] distances = new double[nodes.size()][nodes.size()];
+        int[][] spCounts = new int[nodes.size()][nodes.size()];
         Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap = new HashMap<>();
         Map<SimpleNode, List<SimpleNode>> matrixRow;
         List<SimpleNode> matrixCell;
 
-        //matrix of distances initialization
+        //matrices of distances and counts initialization
         for(int i=0; i<nodes.size()-1;i++){
             for(int j=i; j<nodes.size();j++){
 
-                if(i==j)
+                if(i==j) {
                     distances[i][j] = 0.0;
+                    spCounts[i][j] = 0;
+                }
                 else {
                     //works because the returned distance is infinite, if the two nodes are not adjacent
                     distances[i][j] = getNode(nodes.get(i)).getDistance(nodes.get(j));
                     distances[j][i] = distances[i][j]; //undirected graph
+                    spCounts[i][j] = (distances[i][j] == java.lang.Double.MAX_VALUE ? 0 : 1);
+                    spCounts[j][i] = spCounts[i][j];
                 }
             }
         }
@@ -353,36 +359,37 @@ public class ExplorationGraph {
                     matrixCell = new LinkedList<>();
                     if(distances[i][j] == distances[i][k] + distances[k][j]) {
                         matrixCell = matrixRow.get(nodes.get(j));
+                        spCounts[i][j] +=1;
                     }
                     if(distances[i][j] > distances[i][k] + distances[k][j]) {
                         distances[i][j] = distances[i][k] + distances[k][j];
                         distances[j][i] = distances[i][j];
+                        spCounts[i][j] = 1;
                     }
                     if(matrixCell!=null){
                         matrixCell.add(nodes.get(k));
                         matrixRow.put(nodes.get(j),matrixCell);
                         childMap.put(nodes.get(i),matrixRow);
                     }
+                    spCounts[j][i] = spCounts[i][j];
                 }
             }
         }
 
+        fillSpCountMatrix(spCountMatrix, spCounts, nodes);
         fillGraphDistanceMatrix(graphDistanceMatrix,distances,nodes);
         return childMap;
-        /*
-        non serve ricostruire i path, con la childmap fatta per bene è possibile calcolare la betweenness, che alla fine
-        è ciò per cui tutto questo viene fatto. la closeness necessita solo della matrice delle distanze, che viene
-        calcolata involontariamente qua. quindi
-        1. applicare floyd-warshall
-        2. la matrice delle distanze calcolata nell'algoritmo viene copiata nella matrice delle distanze passata come input
-        3. ritornare la childMap
-        il chiamante si occuperà di :
-        1. inizializzare la matrice delle distanze
-        2. invocare il metodo di floyd-warshall, passandogli questa matrice
-        3. prendere la childMap ritornata
-        4. calcolarci la betweenness, senza ricostruire i path, basta contare le occorrenze dei vari nodi in ogni riga
+    }
 
-         */
+    private void fillSpCountMatrix(Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix, int[][] spCounts, List<SimpleNode> nodes) {
+        Map<SimpleNode, Integer> matrixCell = new HashMap<>();
+        for(int i=0;i<nodes.size()-1;i++){
+            for(int j=i+1;j<nodes.size();j++){
+                matrixCell.put(nodes.get(j),spCounts[i][j]);
+            }
+            spCountMatrix.put(nodes.get(i),matrixCell);
+            matrixCell = new HashMap<>();
+        }
     }
 
     private void fillGraphDistanceMatrix(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,

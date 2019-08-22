@@ -124,7 +124,7 @@ Closeness centrality:
    (663,292)    0,00445
    (680,297)    0,00426
    (475,411)    0,00402
-Closeness computed in 22 ms
+Closeness computed in 23 ms
 
 Betweenness centrality:
    [546,315]    1846
@@ -182,4 +182,4 @@ Betweenness centrality:
    [544,180]    0
    (457,390)    0
    [544,251]    0
-Betweenness computed in 93 ms
+Betweenness computed in 1120 ms

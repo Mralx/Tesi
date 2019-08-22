@@ -1,7 +1,5 @@
 package exploration.graph;
 
-import javafx.collections.transformation.SortedList;
-
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -9,18 +7,12 @@ import java.util.stream.Collectors;
 
 class GraphStats {
 
-    HashMap<SimpleNode, HashMap<SimpleNode, List<GraphPath>>> spgMatrix;
-    private Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> FWChildMap;
-    private String statsFile;
+    private Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix;
+    private Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix;
 
     GraphStats() {
-        this.spgMatrix = new HashMap<>();
-        this.FWChildMap = new HashMap<>();
-        this.statsFile = null;
-    }
-
-    void setStatsFile(String statsFile) {
-        this.statsFile = statsFile;
+        this.graphDistanceMatrix = new HashMap<>();
+        this.spCountMatrix = new HashMap<>();
     }
 
     /**
@@ -28,7 +20,7 @@ class GraphStats {
      * @param graph the graph to analyze
      * @return the number of nodes of the graph
      */
-    int nodeCount(ExplorationGraph graph){
+    private int nodeCount(ExplorationGraph graph){
         return graph.getNodeMap().size();
     }
 
@@ -37,7 +29,7 @@ class GraphStats {
      * @param graph the graph to analyze
      * @return the number of nodes of the graph
      */
-    int frontierNodeCount(ExplorationGraph graph){
+    private int frontierNodeCount(ExplorationGraph graph){
         return (int) graph.getNodeMap().keySet().stream().
                 filter(SimpleNode::isFrontier).count();
     }
@@ -47,7 +39,7 @@ class GraphStats {
      * @param graph the graph to analyze
      * @return the number of edges of the graph
      */
-    int edgeCount(ExplorationGraph graph){
+    private int edgeCount(ExplorationGraph graph){
         return graph.getNodeMap().values().stream().
                 mapToInt(node -> node.getAdjacentsList().size()).
                 sum()/2;
@@ -59,38 +51,10 @@ class GraphStats {
      * @return a map containing as key the node, and as value another map. This second map has as key another node in
      * the graph and as value, the distance between the key of the first map and the key of this one
      */
-    Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix(ExplorationGraph graph){
+    private Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix(ExplorationGraph graph){
         Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix = new HashMap<>();
-        this.FWChildMap = graph.allPairsShortestPaths(graphDistanceMatrix);
+        graph.allPairsShortestPaths(graphDistanceMatrix,spCountMatrix);
         return graphDistanceMatrix;
-    }
-
-    /**
-     * Starting from a node, stocks the distances from this node to every other node in the graph into a map and returns
-     * it
-     * @param graph the graph to analyze
-     * @param node the starting node
-     * @return a map containing as key the nodes of the graph and as values the distances from each node to the one in
-     * input
-     */
-    private Map<SimpleNode, Double> computeRow(ExplorationGraph graph, SimpleNode node){
-        Map<SimpleNode, Double> row = new HashMap<>();
-        Set<SimpleNode> nodes = new HashSet<>(graph.getNodeMap().keySet());
-        nodes.remove(node);
-        for(SimpleNode n : nodes){
-            List<GraphPath> paths;
-            double distance;
-            if(spgMatrix.containsKey(node) && spgMatrix.get(node).containsKey(n))
-                paths = spgMatrix.get(node).get(n);
-            else
-                paths = spgMatrix.get(n).get(node);
-
-            if(paths==null)
-                System.exit(2);
-            distance = paths.get(0).getLength();
-            row.put(n, distance);
-        }
-        return row;
     }
 
     private Set<SimpleNode> restrictedNodeSet(ExplorationGraph graph){
@@ -117,17 +81,17 @@ class GraphStats {
      * @param graph the graph to analyze
      * @return a map with key the vertex and as value the value of its closeness
      */
-    Map<SimpleNode, Double> closenessCentrality(ExplorationGraph graph){
+    private Map<SimpleNode, Double> closenessCentrality(ExplorationGraph graph){
         Map<SimpleNode, Double> closeness = new HashMap<>();
         Set<SimpleNode> worthNodes = restrictedNodeSet(graph);
 
         //computing restricted graph distance matrix
         System.out.println("Matrix computation");
-        Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = graphDistanceMatrix(graph);
+        this.graphDistanceMatrix = graphDistanceMatrix(graph);
 
         //closeness computation
         for(SimpleNode n : worthNodes){
-            double avgDist = distanceMatrix.get(n).values().stream().
+            double avgDist = this.graphDistanceMatrix.get(n).values().stream().
                     mapToDouble(Double::doubleValue).average().orElse(0);
             closeness.put(n, 1/avgDist);
         }
@@ -153,14 +117,8 @@ class GraphStats {
      * @param graph the graph to analyze
      */
     Map<SimpleNode, Double> betweennessCentrality(ExplorationGraph graph){
-        if(FWChildMap.size()==0)
-            graphDistanceMatrix(graph); //TODO inutilmente complesso
 
-        Map<SimpleNode, Double> betweenness = new HashMap<>();
-        for(SimpleNode n: restrictedNodeSet(graph)) {
-            double b = computeNodeBetweenness(n);
-            betweenness.put(n, b);
-        }
+        Map<SimpleNode, Double> betweenness = nodeBetweenness(graph,restrictedNodeSet(graph));
 
         //sorting by values
         return betweenness
@@ -172,72 +130,53 @@ class GraphStats {
                                 LinkedHashMap::new));
     }
 
-    /**
-     * Computes the betweenness of the node provided in input.
-     *
-     * @param entryNode the node whose betweenness is looked for
-     * @return the betweenness of the node
-     */
-    private double computeNodeBetweenness(SimpleNode entryNode){
-
-        double betweenness = 0.0;
-        double occurrences = 0.0;
-        double diffPaths;
-        for(SimpleNode n : spgMatrix.keySet().stream().filter(node-> node!=entryNode).collect(Collectors.toList())){
-            for (SimpleNode m : spgMatrix.get(n).keySet().stream().filter(node -> node != entryNode).collect(Collectors.toList())) {
-                List<GraphPath> paths = spgMatrix.get(n).get(m);
-                for (GraphPath p : paths) {
-                    if (p.contains(entryNode)) occurrences += 1;
-                }
-                diffPaths = paths.size();
-                if(diffPaths!=0)
-                    betweenness += occurrences / diffPaths;
-                occurrences = 0;
+    private Map<SimpleNode, Integer> retrieveSigmaS(ExplorationGraph graph, SimpleNode s){
+        Map<SimpleNode, Integer> sigmaS = new HashMap<>();
+        for(SimpleNode n: graph.getNodeMap().keySet()){
+            if(!n.equals(s)){
+                if (spCountMatrix.containsKey(s) && spCountMatrix.get(s).containsKey(n))
+                    sigmaS.put(n, spCountMatrix.get(s).get(n));
+                else sigmaS.put(n, spCountMatrix.get(n).get(s));
             }
         }
+        if(sigmaS.containsValue(null))
+            System.out.println("Null sigma found!");
+        return sigmaS;
+    }
+
+    private Map<SimpleNode, Double> nodeBetweenness(ExplorationGraph graph, Set<SimpleNode> worthNodes){
+        int sigma_st;
+        double val;
+        Map<SimpleNode, Integer> sigmaS, sigmaT;
+        Map<SimpleNode, Double> betweenness = new HashMap<>();
+
+        for(SimpleNode node : worthNodes)
+            betweenness.put(node, 0.0);
+
+        for(SimpleNode s : graph.getNodeMap().keySet()){
+            sigmaS = retrieveSigmaS(graph, s);
+            for(SimpleNode t : graph.getNodeMap().keySet().stream().filter(node -> !node.equals(s)).collect(Collectors.toList())){
+                sigmaT = retrieveSigmaS(graph, t);
+                sigma_st = sigmaS.get(t);
+                for(SimpleNode v : worthNodes.stream().filter(node -> !node.equals(s) && !node.equals(t)).collect(Collectors.toList())){
+                    val = betweenness.get(v);
+                    if(shortestPathLength(s,t)>= shortestPathLength(s,v)+ shortestPathLength(v,t))
+                        val += (sigmaS.get(v)*sigmaT.get(v))/sigma_st;
+                    betweenness.put(v,val);
+                }
+            }
+        }
+
+        for(SimpleNode n : worthNodes)
+            betweenness.put(n,betweenness.get(n)/2);
         return betweenness;
     }
 
-    private Map<SimpleNode, Double> normalization(Map<SimpleNode,Double> centralityMeasure){
-        //max and min computation
-        double cMin = Double.MAX_VALUE, cMax=0;
-        for(SimpleNode node: centralityMeasure.keySet()){
-            if(centralityMeasure.get(node)<cMin)
-                cMin = centralityMeasure.get(node);
-            if(centralityMeasure.get(node)>cMax)
-                cMax = centralityMeasure.get(node);
-        }
-
-        //normalization
-        for(SimpleNode node: centralityMeasure.keySet()){
-            double c = centralityMeasure.get(node);
-            centralityMeasure.put(node, (c-cMin)/(cMax-cMin));
-        }
-
-        return centralityMeasure;
-    }
-
-    private void fillMatrix(ExplorationGraph graph){
-        long time = System.currentTimeMillis();
-        List<SimpleNode> nodes = new ArrayList<>(graph.getNodeMap().keySet());
-        SimpleNode starter, arrival;
-
-        for(int i=0; i<nodes.size()-1;i++){
-            HashMap<SimpleNode, List<GraphPath>> subMatrix = new HashMap<>();
-            starter = nodes.get(i);
-            System.out.println("Starting sub matrix computation for "+starter.toString());
-            for(int j=i+1; j<nodes.size(); j++){
-                arrival = nodes.get(j);
-                //double percentage = (i*(nodes.size()-1)+j)/((nodes.size()-1)*(nodes.size()-1))*100;
-                //System.out.println("Completed "+percentage+"%");
-                List<GraphPath> paths = graph.getMultiplePaths(starter,arrival);
-                subMatrix.put(arrival, paths);
-            }
-            System.out.println("Retrieved sub matrix for "+starter.toString());
-            this.spgMatrix.put(starter,subMatrix);
-        }
-        time = System.currentTimeMillis() - time;
-        System.out.println("Fill matrix took "+time+" ms to be computed");
+    private double shortestPathLength(SimpleNode n1, SimpleNode n2){
+        return (this.graphDistanceMatrix.containsKey(n1) &&
+                this.graphDistanceMatrix.get(n1).containsKey(n2) ?
+            this.graphDistanceMatrix.get(n1).get(n2) :
+                this.graphDistanceMatrix.get(n2).get(n1));
     }
 
     /**
@@ -245,7 +184,7 @@ class GraphStats {
      * @param graph the graph which degree to compute
      * @return a mapping from each node in the graph to its degree
      */
-    Map<SimpleNode, Integer> degree(ExplorationGraph graph){
+    private Map<SimpleNode, Integer> degree(ExplorationGraph graph){
         Map<SimpleNode, Integer> deg = new HashMap<>();
         for(SimpleNode n : graph.getNodeMap().keySet() ){
             deg.put(n,graph.getNode(n).getAdjacents().size());
@@ -266,7 +205,7 @@ class GraphStats {
      * @return a list of three integers where the first one is the maximum degree, the second one is the minimum degree
      * and the third one is the average degree of the nodes in the map
      */
-    List<Integer> degMaxMinAvg(Map<SimpleNode, Integer> map){
+    private List<Integer> degMaxMinAvg(Map<SimpleNode, Integer> map){
         List<Integer> stats = new ArrayList<>();
         int min=100, max=0, avg=0, count=0;
         for(SimpleNode n: map.keySet()){
@@ -278,54 +217,8 @@ class GraphStats {
         }
         stats.add(max);
         stats.add(min);
-        stats.add(avg/count);
+        stats.add(avg / count);
         return stats;
-    }
-
-    void writeAdjacencyMatrix(ExplorationGraph graph){
-        List<SimpleNode> nodes = new LinkedList<>(graph.getNodeMap().keySet());
-        int dim = nodes.size();
-        int[][] adjMatrix = new int[dim][dim];
-        for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++)
-                adjMatrix[i][j] = 0;
-        for(SimpleNode n : nodes){
-            int idx1 = nodes.indexOf(n);
-            adjMatrix[idx1][idx1]=0;
-            int idx2;
-            for(SimpleNode adj : graph.getNode(n).getAdjacents()){
-                idx2 = nodes.indexOf(adj);
-                adjMatrix[idx1][idx2] = 1;
-                adjMatrix[idx2][idx1] = 1;
-            }
-        }
-
-        FileWriter fw;
-        String fileName = System.getProperty("user.dir")+"/logs/matrix.txt";
-
-        try {
-            File file;
-            file = new File(fileName);
-            fw = new FileWriter(file.getAbsoluteFile(), false);
-            BufferedWriter bw = new BufferedWriter(fw);
-            for(SimpleNode n: nodes)
-                bw.write(n.toString());
-            for(int i=0;i<dim;i++) {
-                for (int j = 0; j < dim; j++) {
-                    int n = adjMatrix[i][j];
-                    bw.write(" "+n);
-
-                    if (j != dim - 1)
-                        bw.write(",");
-                }
-                bw.newLine();
-            }
-            bw.close();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -335,7 +228,7 @@ class GraphStats {
      * @param graph the graph to transform
      * @return a new graph where each frontier is connected to at least a non-frontier node
      */
-    ExplorationGraph dropDisconnectedFrontiers(ExplorationGraph graph){
+    private ExplorationGraph dropDisconnectedFrontiers(ExplorationGraph graph){
         ExplorationGraph connectedGraph = graph.copy();
         for(SimpleNode frontier : graph.getNodeMap().keySet().stream().
                 filter(SimpleNode::isFrontier).collect(Collectors.toSet())){
@@ -405,7 +298,7 @@ class GraphStats {
             bw.newLine();
             bw.flush();
 
-            /*
+
             System.out.println("Bet computation");
             time = System.currentTimeMillis();
             bw.write("Betweenness centrality:");
@@ -420,7 +313,7 @@ class GraphStats {
             bw.newLine();
             bw.flush();
             //this.writeAdjacencyMatrix(graph);
-            gra */
+
             bw.close();
             fw.close();
         }
@@ -429,20 +322,72 @@ class GraphStats {
         }
     }
 
-    private void log(String string){
+    //Useless methods up to now
+    /*
+    private Map<SimpleNode, Double> normalization(Map<SimpleNode,Double> centralityMeasure){
+        //max and min computation
+        double cMin = Double.MAX_VALUE, cMax=0;
+        for(SimpleNode node: centralityMeasure.keySet()){
+            if(centralityMeasure.get(node)<cMin)
+                cMin = centralityMeasure.get(node);
+            if(centralityMeasure.get(node)>cMax)
+                cMax = centralityMeasure.get(node);
+        }
+
+        //normalization
+        for(SimpleNode node: centralityMeasure.keySet()){
+            double c = centralityMeasure.get(node);
+            centralityMeasure.put(node, (c-cMin)/(cMax-cMin));
+        }
+
+        return centralityMeasure;
+    }
+
+    void writeAdjacencyMatrix(ExplorationGraph graph){
+        List<SimpleNode> nodes = new LinkedList<>(graph.getNodeMap().keySet());
+        int dim = nodes.size();
+        int[][] adjMatrix = new int[dim][dim];
+        for(int i=0;i<dim;i++)
+            for(int j=0;j<dim;j++)
+                adjMatrix[i][j] = 0;
+        for(SimpleNode n : nodes){
+            int idx1 = nodes.indexOf(n);
+            adjMatrix[idx1][idx1]=0;
+            int idx2;
+            for(SimpleNode adj : graph.getNode(n).getAdjacents()){
+                idx2 = nodes.indexOf(adj);
+                adjMatrix[idx1][idx2] = 1;
+                adjMatrix[idx2][idx1] = 1;
+            }
+        }
+
         FileWriter fw;
+        String fileName = System.getProperty("user.dir")+"/logs/matrix.txt";
 
         try {
             File file;
-            file = new File(this.statsFile);
-            fw = new FileWriter(file.getAbsoluteFile(), true);
+            file = new File(fileName);
+            fw = new FileWriter(file.getAbsoluteFile(), false);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(string);
-            bw.newLine();
+            for(SimpleNode n: nodes)
+                bw.write(n.toString());
+            for(int i=0;i<dim;i++) {
+                for (int j = 0; j < dim; j++) {
+                    int n = adjMatrix[i][j];
+                    bw.write(" "+n);
+
+                    if (j != dim - 1)
+                        bw.write(",");
+                }
+                bw.newLine();
+            }
             bw.close();
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+     */
+
 }

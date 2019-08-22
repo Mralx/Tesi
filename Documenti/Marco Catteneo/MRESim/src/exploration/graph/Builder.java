@@ -40,6 +40,7 @@ class Builder {
 
     ExplorationGraph getVisibilityGraph(){
         addFrontiers();
+        this.graphs.add(graph);
         VisibilityGraph result = (new VisibilityGraph()).transform(graph, environment);
         this.reset();
         return result;
@@ -83,6 +84,7 @@ class Builder {
     ExplorationGraph getShortestPathGraph() {
         addFrontiers();
         graph.shortestPathFrontiers();
+        this.graphs.add(graph);
         ExplorationGraph result = graph.copy();
         this.reset();
         return result;

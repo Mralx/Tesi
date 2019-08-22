@@ -20,6 +20,8 @@ public class GraphEdit {
         int teamSize = 5;
         String expAlgorithm = "ProactiveReserve";
         Builder builder = new Builder();
+        String dataFile, spgFile, spgStatsFile, graphFile, gStatsFile, statsImage;
+        String vgFile, vgStatsFile, vgMergedFile = null, vgMergedStatsFile = null;
 
         try {
             for (int n = 65; n<= 65 ; n++){
@@ -27,26 +29,30 @@ public class GraphEdit {
                 while (teamSize <= 5) {
                     for (int i = 0; i < teamSize-1; i++) {
                         agentName = agents.charAt(i);
-                        String dataFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/data/"
+                        dataFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/data/"
                                 + env + "/front" + agentName + "_" + teamSize + ".txt";
-                        String spgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
+                        spgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
-                        String spgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
+                        spgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/spg/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
-                        String vgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                        vgFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + "test.txt";
-                        String vgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                        vgStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + " stats test.txt";
-                        String graphFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                        vgMergedFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                                + env + "/" + teamSize + " " + n + "merged.txt";
+                        vgMergedStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/vg/"
+                                + env + "/" + teamSize + " " + n + " stats merged.txt";
+                        graphFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".txt";
-                        String gStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                        gStatsFile = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + " stats.txt";
-                        String statsImage = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
+                        statsImage = System.getProperty("user.dir") + "/logs/" + expAlgorithm + "/g/"
                                 + env + "/" + agentName + "_" + teamSize + " " + n + ".png";
 
 
                         graphs(dataFile, vgFile, graphFile, vgStatsFile, gStatsFile, n, builder);
-                        //editAgentFrontPng(statsImage,gStatsFile,env);
+                        //editAgentFrontPng(statsImage,vgMergedStatsFile,env);
                         //drawFrontiersPng(env,
                         //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\1\\" + agentName + "_5 "+n+".txt",
                         //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\1\\" + agentName + "_5 "+n+" graph.png");
@@ -63,6 +69,7 @@ public class GraphEdit {
                          */
 
                     }
+                        mergedPathG(vgMergedFile, vgMergedStatsFile, builder);
                         System.out.println("Completed team size " + teamSize + " for env " + env);
                         teamSize++;
                         builder = new Builder();
@@ -413,6 +420,24 @@ public class GraphEdit {
         }
     }
 
+    private static void mergedPathG(String vgMergedFile, String mergedStatsFile, Builder builder) {
+        System.out.println("Starting merged graph");
+        try {
+            File file = new File(vgMergedFile);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            VisibilityGraph graph = builder.getMergedGraph();
+            System.out.println("Retrieved merged graph");
+            logGraphStats(mergedStatsFile, fw, bw, graph);
+            System.out.println("Stats computed for merged graph");
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     private static void logTestGraph(String vgFile, String statsFile, VisibilityGraph graph) {
         try {
             File file = new File(vgFile);
@@ -484,7 +509,6 @@ public class GraphEdit {
         GraphStats stat = new GraphStats();
         Map<SimpleNode,Double> bet = stat.betweennessCentrality(graph);
         System.out.println(bet.toString());
-        System.out.println(stat.spgMatrix.toString());
     }
 
 
