@@ -1,0 +1,5 @@
+[31] F. Homann. One pebble does not suce to search plane labyrinths.
+[44] P. Panaite and A. Pelc. Impact of topographic information on graph ex-
+ploration eciency.
+[59] C. Papadimitriou X. Deng. Exploring an Unknown Graph. In Proceedings
+of the IEEE 33th Annual Symposium on Foundations of Computer Science,
