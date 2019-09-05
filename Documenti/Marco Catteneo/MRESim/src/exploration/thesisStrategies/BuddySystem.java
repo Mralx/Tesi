@@ -129,13 +129,6 @@ public class BuddySystem {
             }
         }
 
-        //Logging of frontiers and nextStep
-        try {
-            ExplorationController.updateFrontiers(agent, env);
-        }
-        catch (NullPointerException e){
-            System.out.println("No frontier assigned yet!");
-        }
         return goal;
     }
     // </editor-fold>

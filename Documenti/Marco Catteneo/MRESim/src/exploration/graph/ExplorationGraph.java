@@ -1,5 +1,6 @@
 package exploration.graph;
 
+import environment.Frontier;
 import environment.OccupancyGrid;
 
 import java.io.BufferedWriter;
@@ -8,19 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-/**
- *
- */
 public class ExplorationGraph {
 
     Map<SimpleNode, Node> nodeMap;
     private SimpleNode lastNode;
-    private boolean multiplePaths;
 
     ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
         this.lastNode = null;
-        this.multiplePaths = false;
     }
 
     Map<SimpleNode, Node> getNodeMap() {
@@ -42,42 +38,12 @@ public class ExplorationGraph {
         return nodeMap.get(node);
     }
 
-    /**
-     * Provides the edge connecting the two SimpleNode in input. Based on the assumption that the graph is undirected,
-     * thus if an edge connecting n1 to n2 exists, also an edge connecting n2 to n1 does.
-    // * @param n1 node in the graph
-    // * @param n2 node adjacent to n1
-     * @return a SimpleEdge of n1 with n2 as adjacent. Returns null if n1 is not a node of the graph or if n2 is not in
-     * its list of adjacent nodes.
-     */
-    /*
-    SimpleEdge getEdge(SimpleNode n1, SimpleNode n2){
-        if(this.getNode(n1)!=null) {
-            List<SimpleEdge> edges = this.getNode(n1).getAdjacents();
-            for (SimpleEdge e : edges) {
-                if (e.getAdjacent().equals(n2))
-                    return e;
-            }
-        }
-
-        return null;
-    }
-    */
-
     private Node getLastNode(){
         return getNode(lastNode);
     }
 
-    public void setLastNode(SimpleNode lastNode) {
+    private void setLastNode(SimpleNode lastNode) {
         this.lastNode = lastNode;
-    }
-
-    public boolean isMultiplePaths() {
-        return multiplePaths;
-    }
-
-    public void setMultiplePaths(boolean multiplePaths) {
-        this.multiplePaths = multiplePaths;
     }
 
     Double euclideanDistance(SimpleNode node1, SimpleNode node2){
@@ -105,7 +71,7 @@ public class ExplorationGraph {
      * @param node node to add to the graph
      * @param distance the distance from the last added node
      */
-    void addNode(Node node, double distance){
+    private void addNode(Node node, double distance){
         SimpleNode simpleNode = new SimpleNode(node);
         if(lastNode != null) {
             if(nodeMap.containsKey(simpleNode)) node = nodeMap.get(simpleNode);
@@ -133,7 +99,7 @@ public class ExplorationGraph {
      * @param adj a node in the graph to which the frontier is linked
      * @param distance distance between the node and the frontier node
      */
-    void addFrontierNode(Node frontier, SimpleNode adj, double distance){
+    private void addFrontierNode(Node frontier, SimpleNode adj, double distance){
         nodeMap.putIfAbsent(new SimpleNode(frontier,true), frontier);
         getNode(adj).addAdjacent(new SimpleNode(frontier,true), distance);
         frontier.addAdjacent(adj, distance);
@@ -166,7 +132,7 @@ public class ExplorationGraph {
      * @return a path connecting the two nodes in input. Returns null if at least one of the two input nodes is not in
      * the graph.
      */
-    GraphPath getPath(SimpleNode n1, SimpleNode n2){
+    private GraphPath getPath(SimpleNode n1, SimpleNode n2){
         if(!nodeMap.containsKey(n1) || !nodeMap.containsKey(n2))
             return null;
 
@@ -183,7 +149,6 @@ public class ExplorationGraph {
             return path;
         }
 
-        this.multiplePaths = false; //reset of the variable, otherwise it is not meaningful
         HashMap<SimpleNode, SimpleNode> parentMap = new HashMap<>();
         HashSet<SimpleNode> visited = new HashSet<>();
         Map<SimpleNode, Double> distances = new HashMap<>();
@@ -208,9 +173,7 @@ public class ExplorationGraph {
                     double predictedDistance = euclideanDistance(neighbor,n2);
                     double neighborDistance = getNode(current).getDistance(neighbor);
                     double totalDistance = distances.get(current) + neighborDistance + predictedDistance;
-                    if(neighbor.equals(n2) && distances.containsKey(neighbor) && totalDistance == distances.get(neighbor))
-                        //if the total computed distance is equal to the one stored for the arrival node, there might be multiple paths
-                        multiplePaths = true;
+
                     if(!distances.containsKey(neighbor) || totalDistance < distances.get(neighbor)){
                         distances.put(neighbor, totalDistance);
                         parentMap.put(neighbor, current);
@@ -488,7 +451,6 @@ public class ExplorationGraph {
         ExplorationGraph copy = new ExplorationGraph();
         copy.setNodeMap(this.nodeMap);
         copy.setLastNode(this.lastNode);
-        copy.setMultiplePaths(this.multiplePaths);
         return copy;
     }
 

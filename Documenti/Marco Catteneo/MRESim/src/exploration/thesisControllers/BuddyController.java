@@ -5,7 +5,6 @@ import agents.sets.FollowerSet;
 import agents.sets.IdleSet;
 import agents.sets.LeaderSet;
 import environment.Frontier;
-import exploration.SimulationFramework;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -25,7 +24,7 @@ public class BuddyController {
 
     // <editor-fold defaultstate="collapsed" desc="Constructor">
     public BuddyController(){}
-    // /editor-fold>
+    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Get instance">
     public static synchronized BuddyController getInstance(){
@@ -57,7 +56,7 @@ public class BuddyController {
     public void setSem(Semaphore s){ sem = s; }
 
     public void setAssignedFrontier(Frontier f){
-        for(Frontier cf : this.callFrontiers){
+        for(Frontier cf : callFrontiers){
             if(cf.isClose(f)){
                 cf.setAssigned(true);
             }
@@ -111,7 +110,6 @@ public class BuddyController {
     }
 
     public void addFollowerFrontier(Frontier splitFront, RealAgent follower){
-        double distance = splitFront.getCentre().distance(follower.getLocation());
         ExplorationController.AgentFrontierPair pair = new ExplorationController.AgentFrontierPair(follower,splitFront);
         followerFrontiers.add(pair);
     }

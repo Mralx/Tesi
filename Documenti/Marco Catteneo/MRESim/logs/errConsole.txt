@@ -12322,3 +12322,10 @@ Out. point: java.awt.Point[x=326,y=346]
 [B] Env error
 [B] Env error
 [B] Env error
+[B] Env error
+[B] Env error
+[B] Env error
+Path problems
+Out. point: java.awt.Point[x=147,y=158]
+Path problems
+Out. point: java.awt.Point[x=148,y=154]

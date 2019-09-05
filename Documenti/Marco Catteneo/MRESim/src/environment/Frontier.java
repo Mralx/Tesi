@@ -85,7 +85,7 @@ public class Frontier implements Comparable<Frontier>  {
 
 // </editor-fold>     
 
-// <editor-fold defaultstate="collapsed" desc="Key functions copy, compareto, isClose">
+// <editor-fold defaultstate="collapsed" desc="Key functions copy, compareTo, isClose">
     public boolean isClose(Frontier other){
         if(this.centre.distance(other.getCentre()) < Constants.CLOSE_PARAM){
             return true;

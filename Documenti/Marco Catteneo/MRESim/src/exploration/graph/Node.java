@@ -31,7 +31,8 @@ public class Node extends SimpleNode {
     }
 
     void addAdjacent(SimpleNode node, double distance){
-        adj.put(new SimpleNode(node), distance);
+        if(distance>0)
+            adj.put(new SimpleNode(node), distance);
     }
 
     public boolean isAdjacent(SimpleNode node){

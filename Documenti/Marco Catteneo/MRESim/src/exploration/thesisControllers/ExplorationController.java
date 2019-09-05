@@ -1,8 +1,8 @@
 package exploration.thesisControllers;
 
+import agents.RealAgent;
 import agents.sets.ActiveSet;
 import agents.sets.IdleSet;
-import agents.RealAgent;
 import config.Constants;
 import environment.ContourTracer;
 import environment.Environment;
@@ -12,10 +12,8 @@ import exploration.SimulationFramework;
 import path.Path;
 
 import java.awt.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.lang.System.exit;
@@ -28,8 +26,8 @@ public class ExplorationController {
     // <editor-fold defaultstate="collapsed" desc="Variables">
     public static boolean starterSelected = false;
 
+    //Old variable, might be removed (Alex)
     public static ConcurrentHashMap<Integer, Set<Point>> frontiers = new ConcurrentHashMap<>();
-
 
     // </editor-fold>
 
@@ -63,7 +61,7 @@ public class ExplorationController {
 
     // <editor-fold defaultstate="collapsed" desc="Filter clean frontiers">
 
-    public static LinkedList<Frontier> filterCleanFrontiers(RealAgent agent, Environment env) {
+    private static LinkedList<Frontier> filterCleanFrontiers(RealAgent agent, Environment env) {
         PriorityQueue<Frontier> frontiers = agent.getFrontiers();
         LinkedList<Frontier> clean = new LinkedList<>();
         for(Frontier f: frontiers){
@@ -75,15 +73,12 @@ public class ExplorationController {
         return clean;
     }
 
-    public static boolean closeToObstacle(Point p,Environment env){
+    private static boolean closeToObstacle(Point p, Environment env){
         int x = (int)p.getX();
         int y = (int)p.getY();
         int margin = 2;
 
-        if(env.obstacleAt(x,y+margin) || env.obstacleAt(x,y-margin) || env.obstacleAt(x+margin,y) || env.obstacleAt(x-margin,y)){
-            return true;
-        }
-        return false;
+        return env.obstacleAt(x, y + margin) || env.obstacleAt(x, y - margin) || env.obstacleAt(x + margin, y) || env.obstacleAt(x - margin, y);
     }
 
     // </editor-fold>
@@ -163,11 +158,8 @@ public class ExplorationController {
 
         LinkedList<AgentFrontierPair> pairs = new LinkedList<>();
         for(Frontier f: frontiers) {
-            Point currCenter = f.getCentre();
             try {
                 for (RealAgent a : team) {
-                    Point currLoc = a.getLocation();
-                    double currDist = currLoc.distance(currCenter);
                     pairs.add(new AgentFrontierPair(a, f));
                 }
             }
@@ -244,6 +236,7 @@ public class ExplorationController {
     }
     // </editor-fold>
 
+    //<editor-fold defaultstate="collapse" desc="Old methods, might be deleted (Alex)">
     public static void updateFrontiers(RealAgent agent, Environment env){
         Integer time = agent.getTimeElapsed();
         SortedSet<Point> frontSet = Collections.synchronizedSortedSet(new TreeSet<>(
@@ -261,13 +254,11 @@ public class ExplorationController {
         else frontiers.put(time, frontSet);
     }
 
-    public static List<Integer> sortFrontiersKeys(){
+    private static List<Integer> sortFrontiersKeys(){
         List<Integer> keys = Collections.list(ExplorationController.frontiers.keys());
         Collections.sort(keys);
         return keys;
     }
-
-    //<editor-fold defaultstate="collapsed" desc="Auxiliary method to compute frontiers set">
 
     public static Set<Point> getFrontiers(Integer key){
         return frontiers.get(key);
@@ -297,8 +288,6 @@ public class ExplorationController {
     private static void collapseFrontiers(Integer key){
 
     }
-
-    // </editor-fold>
 
     public static int getFrontiersCount(Integer key){
         return frontiers.get(key).size();
@@ -354,30 +343,5 @@ public class ExplorationController {
         return distances;
     }
 
-    /*
-    public static void log(RealAgent agent){
-
-        Point goal = agent.getCurFrontier().getCentre();
-
-        SimulationFramework.log(
-                SimulationFramework.environmentCounter
-                +"          "
-                +agent.getName()
-                +"          "
-                +agent.getTimeElapsed()
-                +"          "
-                +"F:"
-                +agent.getFrontiers().toString()
-                +" L:"
-                +"("+agent.getLocation().x+","+agent.getLocation().y+")"
-                +" G:"
-                +"("+goal.x+","+goal.y+")",
-        //        +" SP:"
-        //        +"("+agent.getPath().getStartPoint().x+","+agent.getPath().getStartPoint().y+")"
-        //        +" GP:"
-        //        +"("+agent.getPath().getGoalPoint().x+","+agent.getPath().getGoalPoint().y+")",
-                "frontiersConsole"
-        );
-    }*/
-
+    // </editor-fold>
 }

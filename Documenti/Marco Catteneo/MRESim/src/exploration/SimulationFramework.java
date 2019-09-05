@@ -683,18 +683,27 @@ public class SimulationFramework implements ActionListener {
             );
 
             LinkedList<Frontier> frontiersList = ExplorationController.calculateFrontiers(currAgent,env);
+            Double[] diss = new Double[frontiersList.size()];
+            for(Frontier f : frontiersList){
+                int iii = frontiersList.indexOf(f);
+                diss[iii] = currAgent.getLocation().distance(frontiersList.get(iii).getCentre());
+            }
+
+            String frontierLogFilename = "/"+simConfig.getExpAlgorithm().toString()+"/data/"+environmentCounter+
+                    "/front"+currAgent.getName()+"_"+numRobots+" exp";
 
             SimulationFramework.log(environmentCounter
-                    +"    "
-                    +timeElapsed
-                    +"    l"
-                    +(new SimpleNode(currAgent.getLocation().x,currAgent.getLocation().y)).toString()
-                    +"    f"
-                    +frontiersList.toString()
-                    +"    d"
-                    +ExplorationController.computeDistances(frontiersList, currAgent).toString(),
-                    "/"+simConfig.getExpAlgorithm().toString()+"/data/"+environmentCounter+
-                            "/front"+currAgent.getName()+"_"+numRobots);
+                            +"    "
+                            +timeElapsed
+                            +"    l"
+                            +(new SimpleNode(currAgent.getLocation().x,currAgent.getLocation().y)).toString()
+                            +"    f"
+                            +frontiersList.toString()
+                            +"    d"
+                            +ExplorationController.computeDistances(frontiersList, currAgent).toString()
+                            +"    d2"
+                            + Arrays.toString(diss),
+                            frontierLogFilename);
 
         }
 
