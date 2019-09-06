@@ -1,5 +1,6 @@
 package exploration.graph;
 
+import environment.Frontier;
 import environment.OccupancyGrid;
 
 import javax.imageio.ImageIO;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-class Builder {
+public class Builder {
 
     private List<ExplorationGraph> graphs;
     private ExplorationGraph graph;
@@ -38,6 +39,19 @@ class Builder {
         return result;
     }
 
+    /**
+     * Returns the graph after having removed all the non nearest adjacent nodes from frontiers adjacency list
+     * @return the shortest path graph
+     */
+    ExplorationGraph getShortestPathGraph() {
+        addFrontiers();
+        graph.shortestPathFrontiers();
+        this.graphs.add(graph);
+        ExplorationGraph result = graph.copy();
+        this.reset();
+        return result;
+    }
+
     ExplorationGraph getVisibilityGraph(){
         addFrontiers();
         this.graphs.add(graph);
@@ -55,6 +69,43 @@ class Builder {
         this.graph = new ExplorationGraph();
         this.frontierMap = new HashMap<>();
         this.lastAddedFrontiers = new LinkedList<>();
+    }
+
+    /**
+     * Adds each frontier in the map to the graph
+     */
+    private void addFrontiers(){
+        for(SimpleNode n : lastAddedFrontiers)
+            this.graph.addFrontierNode(frontierMap.get(n));
+    }
+
+    /**
+     * Given a list of points representing the locations of the robots in the team at a certain time, this method adds
+     * them into the graph as new nodes.
+     *
+     * @param agentLocations the list of locations of the robots in the team at a certain time
+     */
+    void updateLocations(List<Point> agentLocations){
+        for(Point p: agentLocations){
+            this.graph.addNode(new Node(p.x, p.y));
+        }
+    }
+
+    /**
+     * Given the list of frontiers at a certain time step, updates the ones in the graph. If a certain node is still a
+     * frontier, then it remains the same. Otherwise, it is removed from the graph.
+     * TODO only works for visibility graph, extend to others too.
+     * TODO Might be optimized as well by not removing frontiers and then adding them again, if already there.
+     * @param frontiers the list of frontiers at a certain time
+     */
+    void updateFrontiers(List<Frontier> frontiers){
+        this.graph.removeFrontiers();
+
+        for(Frontier f : frontiers){
+            Node frontierNode = new Node(f.getCentre().x,f.getCentre().y);
+            frontierNode.setFrontier(true);
+            this.graph.addFrontierNode(frontierNode);
+        }
     }
 
     private void computeOccupancyGrid(int env){
@@ -77,19 +128,9 @@ class Builder {
         this.environment = envGrid;
     }
 
-    /**
-     * Returns the graph after having removed all the non nearest adjacent nodes from frontiers adjacency list
-     * @return the shortest path graph
-     */
-    ExplorationGraph getShortestPathGraph() {
-        addFrontiers();
-        graph.shortestPathFrontiers();
-        this.graphs.add(graph);
-        ExplorationGraph result = graph.copy();
-        this.reset();
-        return result;
-    }
+    //<editor-fold defaultstate="collapsed' desc="Obsolete methods">
 
+    //Obsolete methods used to process the offline version of the graph
     void parseLine(String line){
         if(line==null)
             return;
@@ -138,14 +179,6 @@ class Builder {
         }
     }
 
-    /**
-     * Adds each frontier in the map to the graph
-     */
-    private void addFrontiers(){
-        for(SimpleNode n : lastAddedFrontiers)
-            this.graph.addFrontierNode(frontierMap.get(n));
-    }
-
     //used to create a Node object given a file where the first element in square brackets is the coordinates of the
     // point to return
     private Node getLocation (String line){
@@ -158,4 +191,7 @@ class Builder {
         int y = Integer.parseInt(line.substring(line.indexOf(',')+1));
         return new Node(x,y);
     }
+
+
+    //</editor-fold>>
 }

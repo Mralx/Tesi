@@ -8,11 +8,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ExplorationGraph {
 
     Map<SimpleNode, Node> nodeMap;
     private SimpleNode lastNode;
+    //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
 
     ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
@@ -441,6 +443,16 @@ public class ExplorationGraph {
         for (SimpleNode adjacent: getNode(n).getAdjacents())
             removeEdge(n,adjacent);
         this.nodeMap.remove(n);
+    }
+
+    /**
+     * Removes all the frontier nodes from the graph and all their edges
+     */
+    void removeFrontiers(){
+        List<SimpleNode> frontiersList = nodeMap.keySet().stream().
+                filter(SimpleNode::isFrontier).collect(Collectors.toCollection(LinkedList::new));
+        for(SimpleNode n: frontiersList)
+            this.removeNode(n);
     }
 
     /**

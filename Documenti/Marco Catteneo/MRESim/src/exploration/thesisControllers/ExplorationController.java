@@ -9,6 +9,7 @@ import environment.Environment;
 import environment.Frontier;
 import exploration.RandomWalk;
 import exploration.SimulationFramework;
+import exploration.graph.Builder;
 import path.Path;
 
 import java.awt.*;

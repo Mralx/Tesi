@@ -682,6 +682,8 @@ public class SimulationFramework implements ActionListener {
                     "metricConsole"
             );
 
+            /*
+            //The following code was used to create and work on an offline version of the graph
             LinkedList<Frontier> frontiersList = ExplorationController.calculateFrontiers(currAgent,env);
             Double[] diss = new Double[frontiersList.size()];
             for(Frontier f : frontiersList){
@@ -704,8 +706,11 @@ public class SimulationFramework implements ActionListener {
                             +"    d2"
                             + Arrays.toString(diss),
                             frontierLogFilename);
+                            
+             */
 
         }
+
 
         boolean allAgentsAtBase = true;
         
