@@ -10,6 +10,7 @@ import environment.Frontier;
 import exploration.RandomWalk;
 import exploration.SimulationFramework;
 import exploration.graph.Builder;
+import exploration.graph.ExplorationGraph;
 import path.Path;
 
 import java.awt.*;
@@ -26,6 +27,8 @@ public class ExplorationController {
 
     // <editor-fold defaultstate="collapsed" desc="Variables">
     public static boolean starterSelected = false;
+
+    private static ExplorationGraph graph = new ExplorationGraph();
 
     //Old variable, might be removed (Alex)
     public static ConcurrentHashMap<Integer, Set<Point>> frontiers = new ConcurrentHashMap<>();
@@ -99,6 +102,7 @@ public class ExplorationController {
         for(RealAgent a: aSet.getActive()){
             positioning.add(a.getLocation());
         }
+
 
         return positioning;
     }

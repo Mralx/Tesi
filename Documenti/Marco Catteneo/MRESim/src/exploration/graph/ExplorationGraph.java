@@ -3,11 +3,13 @@ package exploration.graph;
 import environment.Frontier;
 import environment.OccupancyGrid;
 
+import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExplorationGraph {
@@ -16,7 +18,7 @@ public class ExplorationGraph {
     private SimpleNode lastNode;
     //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
 
-    ExplorationGraph() {
+    public ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
         this.lastNode = null;
     }
@@ -31,7 +33,8 @@ public class ExplorationGraph {
 
     /**
      * Provides the real node in the graph, provided a SimpleNode element. A SimpleNode object is composed only by its
-     * coordinates x and y. Through this we can have access also to its list of adjacent nodes.
+     * coordinates x and y. Through this we can have access also to its list of adjacent nodes
+     *
      * @param node the SimpleNode to retrieve
      * @return the Node in the adjacency list, corresponding to the SimpleNode in input. Returns null if no Node
      * object is found with the coordinates of the SimpleNode
@@ -57,6 +60,7 @@ public class ExplorationGraph {
     /**
      * Adds the node to the graph by linking it to the last added node. The distance is computed as the euclidean
      * distance from the node to which it is linked. Should be used only with non-frontier nodes
+     *
      * @param node node to add to the graph
      */
     void addNode(Node node) {
@@ -86,6 +90,30 @@ public class ExplorationGraph {
     }
 
     /**
+     * Adds a list of points to the graph as nodes. Doesn't take into account edges up to now, might be extended
+     * according to the graph type.
+     * @param nodes the list of coordinates
+     */
+    void addNodesList(LinkedList<Point> nodes){
+        for(Point n : nodes)
+            this.nodeMap.put(new SimpleNode(n.x, n.y), new Node(n.x, n.y));
+    }
+
+    /**
+     * Adds the node to the graph. If already present, only updates the information about the presence of the
+     * agent
+     *
+     * @param node the node to add to the graph or to update
+     * @param agentName the name of the agent going through the node
+     * @param time the time at which the agent is at the node
+     */
+    void addNode(SimpleNode node, String agentName, Integer time){
+       if(this.nodeMap.containsKey(node)) this.nodeMap.get(node).addAgentTime(agentName, time);
+       else this.nodeMap.put(node, new Node(node.x, node.y, agentName, time));
+    }
+
+    //TODO pensare a come gestire le frontiere per avere tutti i tipi di grafo
+    /**
      * Adds a frontier node to the graph, if not already present and links it to each of its adjacent nodes
      * @param frontier the frontier node to add to the graph
      */
@@ -106,6 +134,17 @@ public class ExplorationGraph {
         getNode(adj).addAdjacent(new SimpleNode(frontier,true), distance);
         frontier.addAdjacent(adj, distance);
     }
+
+    /**
+     * Adds a list of frontiers to the graph as frontier nodes. Doesn't take into account edges up to now, might be
+     * extended according to the graph type.
+     * @param frontiers the list of coordinates of the frontiers
+     */
+    void addFrontiersList(LinkedList<Point> frontiers){
+        for(Point n : frontiers)
+            this.nodeMap.put(new SimpleNode(n.x, n.y), new Node(n.x, n.y));
+    }
+
 
     /**
      * Computes the distance between two nodes in the graph, provided their coordinates. If one of the two nodes is not

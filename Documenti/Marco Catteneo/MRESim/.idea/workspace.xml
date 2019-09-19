@@ -264,6 +264,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1OuQ2vhRbMtlXVWv2MqSBp2CJDM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -274,7 +277,10 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="vcs.Perforce" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -746,7 +752,13 @@
       <workItem from="1567517692475" duration="599000" />
       <workItem from="1567671704276" duration="4300000" />
       <workItem from="1567689378711" duration="12250000" />
-      <workItem from="1567759234991" duration="984000" />
+      <workItem from="1567759234991" duration="1576000" />
+      <workItem from="1568381438925" duration="1521000" />
+      <workItem from="1568709063611" duration="205000" />
+      <workItem from="1568709973059" duration="1777000" />
+      <workItem from="1568798246239" duration="14060000" />
+      <workItem from="1568843403493" duration="1981000" />
+      <workItem from="1568902117882" duration="8479000" />
     </task>
     <servers />
   </component>
@@ -787,27 +799,16 @@
           <line>154</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>10</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
