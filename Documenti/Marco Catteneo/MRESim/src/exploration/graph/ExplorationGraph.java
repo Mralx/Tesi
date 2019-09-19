@@ -15,11 +15,13 @@ import java.util.stream.Collectors;
 public class ExplorationGraph {
 
     Map<SimpleNode, Node> nodeMap;
+    private Map<String, SimpleNode> lastAddedNodes;
     private SimpleNode lastNode;
     //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
 
     public ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
+        this.lastAddedNodes = new HashMap<>();
         this.lastNode = null;
     }
 
@@ -29,6 +31,16 @@ public class ExplorationGraph {
 
     void setNodeMap(Map<SimpleNode, Node> nodeMap) {
         this.nodeMap = nodeMap;
+    }
+
+    /**
+     * Initializes the map with an entry for each agent
+     *
+     * @param agents the names of the agents in the team
+     */
+    void initializeAgents(List<String> agents){
+        for(String a : agents)
+            this.lastAddedNodes.put(a,null);
     }
 
     /**
@@ -103,16 +115,26 @@ public class ExplorationGraph {
      * Adds the node to the graph. If already present, only updates the information about the presence of the
      * agent
      *
-     * @param node the node to add to the graph or to update
+     * @param simpleNode the node to add to the graph or to update
      * @param agentName the name of the agent going through the node
      * @param time the time at which the agent is at the node
      */
-    void addNode(SimpleNode node, String agentName, Integer time){
-       if(this.nodeMap.containsKey(node)) this.nodeMap.get(node).addAgentTime(agentName, time);
-       else this.nodeMap.put(node, new Node(node.x, node.y, agentName, time));
+    void addNode(SimpleNode simpleNode, String agentName, Integer time){
+        Node node = new Node(simpleNode.x, simpleNode.y, agentName, time);
+       if(this.nodeMap.containsKey(simpleNode)) {
+           node = this.nodeMap.get(simpleNode);
+           node.addAgentTime(agentName, time);
+       }
+
+        SimpleNode simpleLastNode = this.lastAddedNodes.get(agentName);
+        double distance = euclideanDistance(simpleNode,simpleLastNode);
+        node.addAdjacent(simpleLastNode, distance);
+        this.nodeMap.get(simpleLastNode).addAdjacent(node, distance);
+        this.nodeMap.put(simpleNode, node);
+       this.lastAddedNodes.put(agentName,simpleNode);
     }
 
-    //TODO pensare a come gestire le frontiere per avere tutti i tipi di grafo
+    //TODO implementare quello scritto sul foglio
     /**
      * Adds a frontier node to the graph, if not already present and links it to each of its adjacent nodes
      * @param frontier the frontier node to add to the graph

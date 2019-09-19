@@ -65,7 +65,7 @@ public class Node extends SimpleNode {
     /**
      * Provides the name of the last agent gone through the node
      *
-      * @return the name of the agent or null if there is no mapping (should never happen)
+      * @return the name of the agent or null if there is no mapping (should never happen, unless it is a frontier)
      */
     public String getLastVisitor(){
         if(this.agentTime.keySet().size()==0)

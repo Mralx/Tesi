@@ -2,6 +2,7 @@ package exploration.graph;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class GraphHandler {
 
