@@ -79,7 +79,7 @@ public class Node extends SimpleNode {
      * @param agentName the agent that has gone through the node
      * @param time the time at which the agent did it
      */
-    public void addAgentTime(String agentName, Integer time){
+    void addAgentTime(String agentName, Integer time){
         this.agentTime.put(time, agentName);
     }
 

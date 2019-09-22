@@ -55,14 +55,14 @@ public class Builder {
     ExplorationGraph getVisibilityGraph(){
         addFrontiers();
         this.graphs.add(graph);
-        VisibilityGraph result = (new VisibilityGraph()).transform(graph, environment);
+        VisibilityGraph result = (new VisibilityGraph()).transform(graph);
         this.reset();
         return result;
     }
 
     VisibilityGraph getMergedGraph(){
         VisibilityGraph visibilityGraph = new VisibilityGraph();
-        return visibilityGraph.mergeGraphs(graphs,environment);
+        return visibilityGraph.mergeGraphs(graphs);
     }
 
     private void reset(){

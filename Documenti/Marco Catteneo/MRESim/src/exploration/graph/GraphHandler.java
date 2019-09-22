@@ -1,18 +1,18 @@
 package exploration.graph;
 
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.Map;
+import environment.OccupancyGrid;
 
 public class GraphHandler {
 
     private static GraphHandler handler;
     private static ExplorationGraph graph;
+    private static OccupancyGrid environment;
 
     public static GraphHandler getInstance(){
         if (handler == null){
             handler = new GraphHandler();
             graph = new ExplorationGraph();
+            environment = null;
         }
         return handler;
     }
@@ -21,14 +21,12 @@ public class GraphHandler {
         return graph;
     }
 
-    public static void updateLocations(LinkedList<Point> locations){
-        graph.addNodesList(locations);
+    public static OccupancyGrid getEnvironment() {
+        return environment;
     }
 
-    public static void updateFrontiers(LinkedList<Point> frontiers){
-        graph.addFrontiersList(frontiers);
+    public static void setEnvironment(OccupancyGrid environment) {
+        GraphHandler.environment = environment;
     }
-
-
 }
 

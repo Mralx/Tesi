@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ExplorationGraph {
 
     Map<SimpleNode, Node> nodeMap;
-    private Map<String, SimpleNode> lastAddedNodes;
+    Map<String, SimpleNode> lastAddedNodes;
     private SimpleNode lastNode;
     //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
 
@@ -55,6 +55,31 @@ public class ExplorationGraph {
         return nodeMap.get(node);
     }
 
+    /**
+     * Provides the real node in the graph if already present and it updates the time an agent visits it. If it is not
+     * present, creates a new node and returns it
+     *
+     * @param simpleNode the node to retrieve
+     * @param agentName the name of the agent visiting the node. If a frontier node, has to be set to null
+     * @param time the time at which the request is done, allows to update the agents time in the node
+     * @param isFrontier true if the node is a frontier
+     * @return the Node in the graph if present, otherwise creates a new node and returns it without linking it to the
+     * graph
+     */
+    Node getNode(SimpleNode simpleNode, String agentName, Integer time, boolean isFrontier){
+        Node node;
+        if(this.nodeMap.containsKey(simpleNode)) {
+            node = this.nodeMap.get(simpleNode);
+            if (!isFrontier) node.addAgentTime(agentName,time);
+        }
+        else{
+            node = new Node(simpleNode.x, simpleNode.y, agentName, time);
+            node.setFrontier(isFrontier);
+        }
+
+        return node;
+    }
+
     private Node getLastNode(){
         return getNode(lastNode);
     }
@@ -69,6 +94,7 @@ public class ExplorationGraph {
         );
     }
 
+    // <editor-fold defaultState="collapsed" desc="Old methods to add nodes">
     /**
      * Adds the node to the graph by linking it to the last added node. The distance is computed as the euclidean
      * distance from the node to which it is linked. Should be used only with non-frontier nodes
@@ -102,40 +128,6 @@ public class ExplorationGraph {
     }
 
     /**
-     * Adds a list of points to the graph as nodes. Doesn't take into account edges up to now, might be extended
-     * according to the graph type.
-     * @param nodes the list of coordinates
-     */
-    void addNodesList(LinkedList<Point> nodes){
-        for(Point n : nodes)
-            this.nodeMap.put(new SimpleNode(n.x, n.y), new Node(n.x, n.y));
-    }
-
-    /**
-     * Adds the node to the graph. If already present, only updates the information about the presence of the
-     * agent
-     *
-     * @param simpleNode the node to add to the graph or to update
-     * @param agentName the name of the agent going through the node
-     * @param time the time at which the agent is at the node
-     */
-    void addNode(SimpleNode simpleNode, String agentName, Integer time){
-        Node node = new Node(simpleNode.x, simpleNode.y, agentName, time);
-       if(this.nodeMap.containsKey(simpleNode)) {
-           node = this.nodeMap.get(simpleNode);
-           node.addAgentTime(agentName, time);
-       }
-
-        SimpleNode simpleLastNode = this.lastAddedNodes.get(agentName);
-        double distance = euclideanDistance(simpleNode,simpleLastNode);
-        node.addAdjacent(simpleLastNode, distance);
-        this.nodeMap.get(simpleLastNode).addAdjacent(node, distance);
-        this.nodeMap.put(simpleNode, node);
-       this.lastAddedNodes.put(agentName,simpleNode);
-    }
-
-    //TODO implementare quello scritto sul foglio
-    /**
      * Adds a frontier node to the graph, if not already present and links it to each of its adjacent nodes
      * @param frontier the frontier node to add to the graph
      */
@@ -157,16 +149,69 @@ public class ExplorationGraph {
         frontier.addAdjacent(adj, distance);
     }
 
+    //</editor-fold>
+
     /**
-     * Adds a list of frontiers to the graph as frontier nodes. Doesn't take into account edges up to now, might be
-     * extended according to the graph type.
-     * @param frontiers the list of coordinates of the frontiers
+     * Adds the node to the graph if not present, otherwise updates the information about the presence of the agent in
+     * the node. In both cases, links it to the last added nodes for that agent
+     *
+     * @param simpleNode the node to add to the graph or to update
+     * @param agentName the name of the agent going through the node
+     * @param time the time at which the agent is at the node
      */
-    void addFrontiersList(LinkedList<Point> frontiers){
-        for(Point n : frontiers)
-            this.nodeMap.put(new SimpleNode(n.x, n.y), new Node(n.x, n.y));
+    void addNode(SimpleNode simpleNode, String agentName, Integer time){
+        Node node = getNode(simpleNode, agentName, time, false);
+        SimpleNode simpleLastNode = this.lastAddedNodes.get(agentName);
+        this.nodeMap.put(simpleNode, createEdge(node, simpleLastNode));
+        this.lastAddedNodes.put(agentName,simpleNode);
     }
 
+    /**
+     * Adds the frontier node to the graph, if not already present. The parameter time is used only in the case
+     * in which the frontier node is not present, by setting it as the time at which the frontier has been
+     * discovered. If it was already in the graph, it is not used
+     *
+     * @param frontierSNode the frontier node to add to the graph
+     * @param time the time at which this method is called
+     */
+    void addFrontierNode(SimpleNode frontierSNode, Integer time){
+        Node node = getNode(frontierSNode, null, time, true);
+        linkFrontier(node);
+        this.nodeMap.put(frontierSNode, node);
+    }
+
+    /**
+     * Creates an edge between a node and a node of the graph. The first node in input doesn't need to be
+     * already in the graph, this only holds for the second one. After having linked the two nodes, returns
+     * the first node in input with the updated adjacency list. The distance between the two nodes is
+     * computed as the euclidean distance between them
+     *
+     * @param node the node to link, doesn't need to be in the graph
+     * @param adjacentNode the node in the graph the first node links to
+     * @return the first node in input with the updated adjacency list
+     */
+    Node createEdge(Node node, SimpleNode adjacentNode){
+        if(node.equals(adjacentNode))
+            return node;
+
+        double distance = euclideanDistance(node,adjacentNode);
+        node.addAdjacent(adjacentNode, distance);
+        this.nodeMap.get(adjacentNode).addAdjacent(node, distance);
+        return node;
+    }
+
+    /**
+     * Method implementing the logic of connection between frontiers and nodes. It has to be modified according to the
+     * particular implementation of the graph. In particular, here frontiers are linked to all the nodes visited after
+     * the first time the frontier is known. This means that if a frontier node f_1 is created at time t, then it is
+     * linked to all the nodes n_i visited between t and T, where T is the time at which f_1 is explored
+     *
+     * @param node the Node object representing the frontier node
+     */
+    void linkFrontier(Node node){
+        for(SimpleNode simpleLastNode : lastAddedNodes.values())
+            this.nodeMap.put(simpleLastNode, createEdge(node, simpleLastNode));
+    }
 
     /**
      * Computes the distance between two nodes in the graph, provided their coordinates. If one of the two nodes is not
