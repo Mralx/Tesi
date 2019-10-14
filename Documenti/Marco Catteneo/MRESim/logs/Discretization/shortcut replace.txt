@@ -1,0 +1,5 @@
+seleziona gli elementi tipo [numeri, numeri]
+ \[\pd{2,},\pd{2,}\]
+ seleziona almeno uno spazio
+\h{1,}
+ 
