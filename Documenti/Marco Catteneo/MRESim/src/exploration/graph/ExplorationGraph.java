@@ -1,7 +1,9 @@
 package exploration.graph;
 
+import agents.RealAgent;
 import environment.Frontier;
 import environment.OccupancyGrid;
+import org.jfree.threads.ReaderWriterLock;
 
 import java.awt.*;
 import java.io.BufferedWriter;
@@ -15,14 +17,16 @@ import java.util.stream.Collectors;
 public class ExplorationGraph {
 
     Map<SimpleNode, Node> nodeMap;
-    Map<String, SimpleNode> lastAddedNodes;
+    private Map<String, SimpleNode> lastAddedNodes;
     private SimpleNode lastNode;
+    private boolean dirty;
     //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
 
-    public ExplorationGraph() {
+    ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
         this.lastAddedNodes = new HashMap<>();
         this.lastNode = null;
+        this.dirty = true;
     }
 
     Map<SimpleNode, Node> getNodeMap() {
@@ -33,14 +37,44 @@ public class ExplorationGraph {
         this.nodeMap = nodeMap;
     }
 
+    public boolean isDirty() {
+        return dirty;
+    }
+
+    public void setDirty(boolean dirty) {
+        this.dirty = dirty;
+    }
+
     /**
-     * Initializes the map with an entry for each agent
+     * Initializes the graph by creating a node for each initial location of the agents. All the node are then linked
+     * together otherwise the graph would likely be not connected. The communication station is not considered as an
+     * agent here, so should not be present in the array
      *
-     * @param agents the names of the agents in the team
+     * @param agents an array of RealAgent objects such that each element is an agent of the exploration process
      */
-    void initializeAgents(List<String> agents){
-        for(String a : agents)
-            this.lastAddedNodes.put(a,null);
+    void initialize(RealAgent[] agents){
+        Node node;
+        List<Node> nodes = new LinkedList<>();
+
+        for (RealAgent agent : agents) {
+            node = new Node(agent.getX(),agent.getY(),agent.getName(),agent.getTimeElapsed());
+            nodes.add(node);
+            this.lastAddedNodes.put(agent.getName(), new SimpleNode(node));
+        }
+
+        for(int i=0; i<nodes.size()-1; i++){
+            node = nodes.get(i);
+            for(int j=i+1; j<nodes.size(); j++){
+                Node node1;
+                node1 = nodes.get(j);
+                double distance = euclideanDistance(node, node1);
+                node.addAdjacent(node1,distance);
+                node1.addAdjacent(node,distance);
+            }
+            this.nodeMap.put(new SimpleNode(node),node);
+        }
+        //the previous loop doesn't adds the last node, it has to be added manually
+        this.nodeMap.put(new SimpleNode(nodes.get(nodes.size()-1)),nodes.get(nodes.size()-1));
     }
 
     /**
@@ -75,6 +109,7 @@ public class ExplorationGraph {
         else{
             node = new Node(simpleNode.x, simpleNode.y, agentName, time);
             node.setFrontier(isFrontier);
+            if(isFrontier) setDirty(true);
         }
 
         return node;
@@ -94,7 +129,7 @@ public class ExplorationGraph {
         );
     }
 
-    // <editor-fold defaultState="collapsed" desc="Old methods to add nodes">
+    // <editor-fold defaultstate="collapsed" desc="Old methods to add nodes">
     /**
      * Adds the node to the graph by linking it to the last added node. The distance is computed as the euclidean
      * distance from the node to which it is linked. Should be used only with non-frontier nodes
@@ -162,6 +197,8 @@ public class ExplorationGraph {
     void addNode(SimpleNode simpleNode, String agentName, Integer time){
         Node node = getNode(simpleNode, agentName, time, false);
         SimpleNode simpleLastNode = this.lastAddedNodes.get(agentName);
+        for(SimpleNode f : this.nodeMap.keySet().stream().filter(SimpleNode::isFrontier).collect(Collectors.toList()))
+            node = createEdge(node, f);
         this.nodeMap.put(simpleNode, createEdge(node, simpleLastNode));
         this.lastAddedNodes.put(agentName,simpleNode);
     }
@@ -181,17 +218,17 @@ public class ExplorationGraph {
     }
 
     /**
-     * Creates an edge between a node and a node of the graph. The first node in input doesn't need to be
-     * already in the graph, this only holds for the second one. After having linked the two nodes, returns
-     * the first node in input with the updated adjacency list. The distance between the two nodes is
-     * computed as the euclidean distance between them
+     * Creates an edge between a node and a node of the graph, if not already present. The first node in input doesn't
+     * need to be already in the graph, this only holds for the second one. After having linked the two nodes, returns
+     * the first node in input with the updated adjacency list. The distance between the two nodes is computed as the
+     * euclidean distance between them
      *
      * @param node the node to link, doesn't need to be in the graph
      * @param adjacentNode the node in the graph the first node links to
      * @return the first node in input with the updated adjacency list
      */
     Node createEdge(Node node, SimpleNode adjacentNode){
-        if(node.equals(adjacentNode))
+        if(node.equals(adjacentNode) || node.isAdjacent(adjacentNode))
             return node;
 
         double distance = euclideanDistance(node,adjacentNode);
@@ -206,11 +243,11 @@ public class ExplorationGraph {
      * the first time the frontier is known. This means that if a frontier node f_1 is created at time t, then it is
      * linked to all the nodes n_i visited between t and T, where T is the time at which f_1 is explored
      *
-     * @param node the Node object representing the frontier node
+     * @param node the frontier node
      */
     void linkFrontier(Node node){
         for(SimpleNode simpleLastNode : lastAddedNodes.values())
-            this.nodeMap.put(simpleLastNode, createEdge(node, simpleLastNode));
+            createEdge(node, simpleLastNode);
     }
 
     /**
@@ -389,6 +426,7 @@ public class ExplorationGraph {
         List<SimpleNode> matrixCell;
 
         //matrices of distances and counts initialization
+        System.out.println("Inizializzazione matrice distanze e conte");
         for(int i=0; i<nodes.size()-1;i++){
             for(int j=i; j<nodes.size();j++){
 
@@ -405,6 +443,7 @@ public class ExplorationGraph {
                 }
             }
         }
+        System.out.println("Inizializzazione completata, inizializzazione childMap");
 
         //childMap initialization
         for(SimpleNode n : nodes){
@@ -421,30 +460,38 @@ public class ExplorationGraph {
             }
             childMap.put(n,matrixRow);
         }
+        System.out.println("Inizializzazione childMap completata, calcolo distanze vero e proprio");
 
         //Floyd-Warshall
+        double n = nodes.size(); //TODO aggiunto per controllare avanzamento da console
         for(int k=0; k<nodes.size(); k++){
             for(int i=0; i<nodes.size(); i++){
                 matrixRow = childMap.get(nodes.get(i));
                 for(int j=i+1; j<nodes.size(); j++){
                     matrixCell = new LinkedList<>();
-                    if(distances[i][j] == distances[i][k] + distances[k][j]) {
-                        matrixCell = matrixRow.get(nodes.get(j));
-                        spCounts[i][j] +=1;
+                    if(!nodes.get(k).isFrontier()){
+                        if(distances[i][j] == distances[i][k] + distances[k][j]) {
+                            matrixCell = matrixRow.get(nodes.get(j));
+                            spCounts[i][j] +=1;
+                        }
+                        if(distances[i][j] > distances[i][k] + distances[k][j]) {
+                            distances[i][j] = distances[i][k] + distances[k][j];
+                            distances[j][i] = distances[i][j];
+                            spCounts[i][j] = 1;
+                        }
+                        if(matrixCell!=null){
+                            matrixCell.add(nodes.get(k));
+                            matrixRow.put(nodes.get(j),matrixCell);
+                            childMap.put(nodes.get(i),matrixRow);
+                        }
+                        spCounts[j][i] = spCounts[i][j];
                     }
-                    if(distances[i][j] > distances[i][k] + distances[k][j]) {
-                        distances[i][j] = distances[i][k] + distances[k][j];
-                        distances[j][i] = distances[i][j];
-                        spCounts[i][j] = 1;
-                    }
-                    if(matrixCell!=null){
-                        matrixCell.add(nodes.get(k));
-                        matrixRow.put(nodes.get(j),matrixCell);
-                        childMap.put(nodes.get(i),matrixRow);
-                    }
-                    spCounts[j][i] = spCounts[i][j];
                 }
             }
+            //TODO aggiunto per controllare avanzamento da console
+            double percentage = (k/n)*10000;
+            percentage = (percentage%10000)/100;
+            System.out.println("k "+percentage+"%");
         }
 
         fillSpCountMatrix(spCountMatrix, spCounts, nodes);
@@ -546,7 +593,10 @@ public class ExplorationGraph {
      * @param n the node to remove
      */
     void removeNode(SimpleNode n){
+        List<SimpleNode> adjacentnodes = new LinkedList<>();
         for (SimpleNode adjacent: getNode(n).getAdjacents())
+            adjacentnodes.add(new SimpleNode(adjacent));
+        for(SimpleNode adjacent : adjacentnodes)
             removeEdge(n,adjacent);
         this.nodeMap.remove(n);
     }

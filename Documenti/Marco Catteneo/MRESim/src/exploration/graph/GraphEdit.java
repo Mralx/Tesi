@@ -1,5 +1,7 @@
 package exploration.graph;
 
+import config.Constants;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,7 +16,11 @@ public class GraphEdit {
 
     public static void main(String args[]) {
 
-        int env = 1;
+        int env = 6;
+        //GraphHandler.test();
+        drawDiscretizedGraph(env);
+        drawDiscretizedGraphMetrics("Closeness", env);
+        drawDiscretizedGraphMetrics("Betweenness", env);
         String agents = "ABCDEFGHI";
         char agentName;
         int teamSize = 5;
@@ -23,6 +29,7 @@ public class GraphEdit {
         String dataFile, spgFile, spgStatsFile, graphFile, gStatsFile, statsImage;
         String vgFile, vgStatsFile, vgMergedFile = null, vgMergedStatsFile = null;
 
+        /*
         try {
             for (int n = 65; n<= 65 ; n++){
             //while (env <= 5) {
@@ -58,7 +65,7 @@ public class GraphEdit {
                         //        System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\1\\" + agentName + "_5 "+n+" graph.png");
                         //        editPng(env,System.getProperty("user.dir")+"\\logs\\ProactiveReserve\\spg\\"+env+"\\" + agentName + "_5 "+n+".txt",
                         //                System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\spg\\"+env+"\\" + agentName + "_5 "+n+" graph 0.png");
-                        /*
+
                         if(i==teamSize-2){
                             logTestGraph(vgFile,vgStatsFile,builder.getMergedGraph());
                             drawFrontiersPng(env,
@@ -66,7 +73,7 @@ public class GraphEdit {
                                     System.getProperty("user.dir") + "\\logs\\ProactiveReserve\\vg\\1\\graph.png");
                         }
 
-                         */
+
 
                     }
                         mergedPathG(vgMergedFile, vgMergedStatsFile, builder);
@@ -84,6 +91,7 @@ public class GraphEdit {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+        */
     }
 
     //disegna le metriche
@@ -209,6 +217,118 @@ public class GraphEdit {
                 line = line.substring(line.indexOf(")"));
             }
             */
+            File file = new File(imageFilename);
+            ImageIO.write(bi, "png",file);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void drawDiscretizedGraph(int n) {
+        BufferedImage bi;
+        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/"+n+" nodes test "+
+                Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".png";
+        try {
+            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/" + n + " stats test "+
+                    Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".txt";
+            bi = ImageIO.read(new File(System.getProperty("user.dir") + "/environments/Tesi/env_"+n+".png"));
+            BufferedReader br = new BufferedReader(new FileReader(statsFile));
+            String line;
+            int x, y;
+
+            line = br.readLine();
+            while(!line.contains("["))
+                line = br.readLine();
+
+            while(line.contains("[")) {
+                line = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
+                x = Integer.parseInt(line.substring(0, line.indexOf(',')));
+                y = Integer.parseInt(line.substring(line.indexOf(',') + 1));
+
+                for (int x_i = -1; x_i < 2; x_i++)
+                    for (int y_i = -1; y_i < 2; y_i++)
+                        bi.setRGB(x + x_i, y + y_i, Color.GREEN.getRGB());
+                line = br.readLine();
+            }
+            File file = new File(imageFilename);
+            ImageIO.write(bi, "png",file);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void drawDiscretizedGraphMetrics(String metric, int n) {
+        BufferedImage bi;
+        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/"+n+" "+metric+".png";
+        try {
+            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/" + n + " stats test "+
+                    Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".txt";
+            bi = ImageIO.read(new File(System.getProperty("user.dir") + "/environments/Tesi/env_"+n+".png"));
+            BufferedReader br = new BufferedReader(new FileReader(statsFile));
+            String line, line1;
+            int x, y;
+            Double val;
+
+            //print agent positions from time 1 to time n-1
+            line = br.readLine();
+            while(!line.equals(metric+" centrality:"))
+                line = br.readLine();
+            line = br.readLine();
+
+            while(line.contains("[")) {
+                System.out.println("Parsed "+line);
+                int color;
+                line1 = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
+                x = Integer.parseInt(line1.substring(0, line1.indexOf(',')));
+                y = Integer.parseInt(line1.substring(line1.indexOf(',') + 1));
+                line = line.substring(line.indexOf(']') + 4);
+                System.out.println("Parsed point "+x+","+y);
+                line = line.replace(',','.');
+                val = Double.parseDouble(line);
+                if(metric.equals("Closeness"))
+                    val = val*1000;           // use for closeness
+                else
+                    val = val*6/176827;
+                System.out.println("Parsed value "+val);
+
+                switch (val.intValue()){
+                    case 0:
+                        color = new Color(250,218,221).getRGB();
+                        break;
+                    case 1:
+                        color = new Color(255,192,203).getRGB();
+                        break;
+                    case 2:
+                        color = new Color(231,84,128).getRGB();
+                        break;
+                    case 3:
+                        color = new Color(255,0,0).getRGB();
+                        break;
+                    case 4:
+                        color = new Color(200,8,21).getRGB();
+                        break;
+                    case 5:
+                        color = new Color(199,21,255).getRGB();
+                        break;
+                    case 6:
+                        color = new Color(153,17,153).getRGB();
+                        break;
+                    default: color=Color.BLUE.getRGB();
+                }
+
+                int inf_limit=-1, sup_limit=2;
+                for(int x_i=inf_limit; x_i < sup_limit; x_i++){
+                    for(int y_i=inf_limit; y_i < sup_limit; y_i++){
+                        bi.setRGB(x+x_i, y+y_i,color);
+                    }
+                }
+
+                System.out.println("Image updated");
+                line = br.readLine();
+            }
+
             File file = new File(imageFilename);
             ImageIO.write(bi, "png",file);
         }

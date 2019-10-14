@@ -84,11 +84,11 @@ public class Node extends SimpleNode {
     }
 
     void addAdjacent(SimpleNode node, double distance){
-        if(distance>0)
+        if(distance>0 && !(this.isFrontier() && node.isFrontier()))
             adj.put(new SimpleNode(node), distance);
     }
 
-    public boolean isAdjacent(SimpleNode node){
+    boolean isAdjacent(SimpleNode node){
         return adj.containsKey(node);
     }
 

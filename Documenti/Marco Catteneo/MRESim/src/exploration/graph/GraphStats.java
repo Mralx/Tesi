@@ -1,5 +1,9 @@
 package exploration.graph;
 
+import exploration.SimulationFramework;
+import gui.MainGUI;
+import javafx.collections.transformation.SortedList;
+
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -9,10 +13,14 @@ class GraphStats {
 
     private Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix;
     private Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix;
+    private Map<SimpleNode, Double> closenessMap;
+    private Map<SimpleNode, Double> betweennessMap;
 
     GraphStats() {
         this.graphDistanceMatrix = new HashMap<>();
         this.spCountMatrix = new HashMap<>();
+        this.closenessMap = new HashMap<>();
+        this.betweennessMap = new HashMap<>();
     }
 
     /**
@@ -58,6 +66,8 @@ class GraphStats {
     }
 
     private Set<SimpleNode> restrictedNodeSet(ExplorationGraph graph){
+        //TODO modificata per testing
+        //return graph.getNodeMap().keySet();
 
         Set<SimpleNode> frontNodes = graph.getNodeMap().keySet().
                 stream().filter(SimpleNode::isFrontier).collect(Collectors.toSet());
@@ -88,13 +98,18 @@ class GraphStats {
         //computing restricted graph distance matrix
         System.out.println("Matrix computation");
         this.graphDistanceMatrix = graphDistanceMatrix(graph);
+        for(SimpleNode n : this.graphDistanceMatrix.keySet())
+            if(this.graphDistanceMatrix.get(n).values().stream().anyMatch(d-> Double.isInfinite(d)))
+                System.exit(-5);
 
         //closeness computation
         for(SimpleNode n : worthNodes){
             double avgDist = this.graphDistanceMatrix.get(n).values().stream().
-                    mapToDouble(Double::doubleValue).average().orElse(0);
+                    mapToDouble(Double::doubleValue).average().getAsDouble();
             closeness.put(n, 1/avgDist);
         }
+
+        this.closenessMap.putAll(closeness);
 
         //sorting by value
         return closeness
@@ -117,8 +132,10 @@ class GraphStats {
      * @param graph the graph to analyze
      */
     Map<SimpleNode, Double> betweennessCentrality(ExplorationGraph graph){
+        //this.graphDistanceMatrix = graphDistanceMatrix(graph);
 
         Map<SimpleNode, Double> betweenness = nodeBetweenness(graph,restrictedNodeSet(graph));
+        this.betweennessMap = new HashMap<>(betweenness);
 
         //sorting by values
         return betweenness
@@ -133,10 +150,15 @@ class GraphStats {
     private Map<SimpleNode, Integer> retrieveSigmaS(ExplorationGraph graph, SimpleNode s){
         Map<SimpleNode, Integer> sigmaS = new HashMap<>();
         for(SimpleNode n: graph.getNodeMap().keySet()){
-            if(!n.equals(s)){
-                if (spCountMatrix.containsKey(s) && spCountMatrix.get(s).containsKey(n))
-                    sigmaS.put(n, spCountMatrix.get(s).get(n));
-                else sigmaS.put(n, spCountMatrix.get(n).get(s));
+            try{
+                    if(!n.equals(s)){
+                        if (spCountMatrix.containsKey(s) && spCountMatrix.get(s).containsKey(n))
+                            sigmaS.put(n, spCountMatrix.get(s).get(n));
+                        else sigmaS.put(n, spCountMatrix.get(n).get(s));
+                    }
+            }catch (NullPointerException e){
+            e.printStackTrace();
+            System.out.println("s, n, sp get s, sp get n " + s.toString()+" | "+n.toString()+" | "+spCountMatrix.get(s).toString()+" | "+spCountMatrix.get(n).toString() );
             }
         }
         if(sigmaS.containsValue(null))
@@ -153,18 +175,24 @@ class GraphStats {
         for(SimpleNode node : worthNodes)
             betweenness.put(node, 0.0);
 
+        int size = graph.getNodeMap().keySet().size(); //TODO aggiunti solo per controllare che avanzi
+        int i = 0;
         for(SimpleNode s : graph.getNodeMap().keySet()){
             sigmaS = retrieveSigmaS(graph, s);
             for(SimpleNode t : graph.getNodeMap().keySet().stream().filter(node -> !node.equals(s)).collect(Collectors.toList())){
                 sigmaT = retrieveSigmaS(graph, t);
                 sigma_st = sigmaS.get(t);
-                for(SimpleNode v : worthNodes.stream().filter(node -> !node.equals(s) && !node.equals(t)).collect(Collectors.toList())){
+                for(SimpleNode v : worthNodes.stream()
+                        .filter(node -> !node.equals(s) && !node.equals(t) && !node.isFrontier())
+                        .collect(Collectors.toList())){
                     val = betweenness.get(v);
                     if(shortestPathLength(s,t)>= shortestPathLength(s,v)+ shortestPathLength(v,t))
                         val += (sigmaS.get(v)*sigmaT.get(v))/sigma_st;
                     betweenness.put(v,val);
                 }
             }
+            i++;
+            System.out.println("bet percentage = "+(double) i/size*100+"%");
         }
 
         for(SimpleNode n : worthNodes)
@@ -221,6 +249,32 @@ class GraphStats {
         return stats;
     }
 
+    Map<SimpleNode, Double> getHighestClosenessNodes(){
+        return getHighest(this.closenessMap);
+    }
+
+    Map<SimpleNode, Double> getHighestBetweennessNodes(){
+        return getHighest(this.betweennessMap);
+    }
+
+    private Map<SimpleNode, Double> getHighest(Map<SimpleNode,Double> metric){
+        Map<SimpleNode, Double> metricCopy = new HashMap<>();
+        for(SimpleNode n : metric.keySet())
+            if(!n.isFrontier()) metricCopy.put(n,metric.get(n));
+
+        HashMap<SimpleNode, Double> highest = new HashMap<>();
+        List<Double> val = new LinkedList<>(metricCopy.values());
+        int idx = Math.min(val.size(), 1);
+
+        val = val.stream().sorted(Collections.reverseOrder(Double::compareTo)).collect(Collectors.toList()).subList(0,idx);
+        for(SimpleNode n : metric.keySet())
+            if (!n.isFrontier() && val.contains(metric.get(n)))
+                highest.put(n, metric.get(n));
+
+        return highest;
+    }
+
+
     /**
      * Computes a new graph such that it is connected. It only deals with disconnected frontiers, no node can be
      * disconnected according to how graph is built. In particular, this is useful with intermediary visibility graphs
@@ -243,25 +297,34 @@ class GraphStats {
 
     }
 
+    void computeStats(ExplorationGraph graph){
+        graph = dropDisconnectedFrontiers(graph);
+        this.closenessMap = closenessCentrality(graph); //TODO nel grafo del 2 ci sono nodi disconnessi
+        this.betweennessMap = betweennessCentrality(graph);
+    }
+
     void logStats(ExplorationGraph graph, String statsFile){
         File file;
         FileWriter fw;
         long time;
+        int delta = graph.getNodeMap().keySet().size();
 
         System.out.println("Ensuring connectivity of the graph");
         graph = dropDisconnectedFrontiers(graph);
+        delta = delta - graph.getNodeMap().keySet().size();
         System.out.println("Done");
 
         System.out.println("Degree computation");
         try {
             file = new File(statsFile);
-            fw = new FileWriter(file, false);
+            fw = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(fw);
             DecimalFormat df = new DecimalFormat("#.#####");
 
             bw.write("Total nodes: "+this.nodeCount(graph)+
                     "   Frontiers: "+this.frontierNodeCount(graph)+
-                    "   Edges: "+this.edgeCount(graph));
+                    "   Edges: "+this.edgeCount(graph)+
+                    "   Delta: "+delta);
             bw.newLine();
 
             time = System.currentTimeMillis();
@@ -283,6 +346,7 @@ class GraphStats {
             bw.newLine();
             bw.flush();
 
+
             System.out.println("Closeness computation");
             time = System.currentTimeMillis();
             bw.write("Closeness centrality:");
@@ -297,7 +361,6 @@ class GraphStats {
             bw.newLine();
             bw.newLine();
             bw.flush();
-
 
             System.out.println("Bet computation");
             time = System.currentTimeMillis();

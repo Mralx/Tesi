@@ -2,6 +2,7 @@ package agents.sets;
 
 import agents.RealAgent;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -9,15 +10,15 @@ import java.util.LinkedList;
  */
 public class IdleSet {
     private static IdleSet is;
-    private static LinkedList<RealAgent> pool;
+    private static HashSet<RealAgent> pool;
 
     // <editor-fold defaultstate="collapsed" desc="Constructor and getInstance method">
     public IdleSet(){}
 
-    public synchronized  static IdleSet getInstance() {
+    public synchronized static IdleSet getInstance() {
         if(is == null){
             is = new IdleSet();
-            pool = new LinkedList<>();
+            pool = new HashSet<>();
         }
         return is;
     }
@@ -29,18 +30,19 @@ public class IdleSet {
         return pool.contains(a);
     }
 
-    public LinkedList<RealAgent> getPool(){ return pool; }
+    public HashSet<RealAgent> getPool(){ return pool; }
 
-    public void setPool(LinkedList<RealAgent> p){ pool = p; }
+    public void setPool(HashSet<RealAgent> p){ pool = p; }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Adders and removers">
-    public LinkedList<RealAgent> addPoolAgent(RealAgent a){
-        pool.add(a);
+    public HashSet<RealAgent> addPoolAgent(RealAgent a){
+        if(!pool.contains(a))
+            pool.add(a);
         return pool;
     }
 
-    public LinkedList<RealAgent> removePoolAgent(RealAgent a){
+    public HashSet<RealAgent> removePoolAgent(RealAgent a){
         pool.remove(a);
         return pool;
     }

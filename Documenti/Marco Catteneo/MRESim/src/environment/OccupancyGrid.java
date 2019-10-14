@@ -231,7 +231,7 @@ public class OccupancyGrid {
                 assert (this.getByteNoRelay(i,j) == partnerOccGrid.getByteNoRelay(i,j));
             }
         }
-        System.out.println("Cells transerred: " + totalCellsTransferred + ", set known at base: " + cellsSetKnownAtBase);
+        //System.out.println("Cells transferred: " + totalCellsTransferred + ", set known at base: " + cellsSetKnownAtBase);
         return cellsUpdated;
     }
     

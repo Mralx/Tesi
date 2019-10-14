@@ -1,18 +1,19 @@
 package exploration.graph;
 
+import config.Constants;
 import environment.OccupancyGrid;
+import exploration.SimulationFramework;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class VisibilityGraph extends ExplorationGraph {
+class VisibilityGraph extends ExplorationGraph {
 
+    //TODO modificati, risistemare a 200 e margin boh, usato 1.02 finora
     //il range dei sensori è 200, scritto da qualche parte nelle configurazioni. ottenibile runtime da ogni agente
     private int sensingRange = 200;
-    private double margin = 1.02; //margine giusto per non essere precisi con il range dei sensori, potrebbe essere inutile
+    private double margin = 1; //margine giusto per non essere precisi con il range dei sensori, potrebbe essere inutile
 
     /**
      * Converts the graph in input into a visibility graph. The occupancy grid of the environment has to be provided
@@ -45,7 +46,7 @@ public class VisibilityGraph extends ExplorationGraph {
     }
 
     //TODO il numero di ostacoli dovrebbe essere parametrico
-    private void connect(){
+    void connect(){
         List<SimpleNode> nodes = new LinkedList<>(nodeMap.keySet());
         for(int i=0;i<nodes.size()-1;i++){
             for(int j=i+1;j<nodes.size();j++){
@@ -84,8 +85,9 @@ public class VisibilityGraph extends ExplorationGraph {
      */
     @Override
     void linkFrontier(Node node) {
-        for(SimpleNode simpleNode : nodeMap.keySet())
-            if (inRange(node, simpleNode)) this.nodeMap.put(simpleNode, createEdge(node, simpleNode));
+        Set<SimpleNode> nodes = nodeMap.keySet().stream().filter(nf -> !nf.isFrontier()).collect(Collectors.toSet());
+        for(SimpleNode simpleNode : nodes)
+            if (inRange(node, simpleNode)) createEdge(node, simpleNode);
     }
 
     /**
@@ -98,10 +100,28 @@ public class VisibilityGraph extends ExplorationGraph {
      */
     @Override
     void addNode(SimpleNode simpleNode, String agentName, Integer time) {
+        //TODO rimuovere una volta risolto
+        /*
+        SimulationFramework.log("Adding node "+ simpleNode.toString()+"; present "+this.nodeMap.containsKey(simpleNode)+
+                "; time "+time,"Add log");
+
+         */
+
         Node node = getNode(simpleNode, agentName, time, false);
-        for(SimpleNode simpleVisibleNode : this.nodeMap.keySet())
-            if(inRange(simpleNode,simpleVisibleNode))
-                this.nodeMap.put(simpleNode, createEdge(node, simpleVisibleNode));
-        this.lastAddedNodes.put(agentName,simpleNode); //vaguely useless attribute for this kind of graph
+        Set<SimpleNode> visibleNodes = this.nodeMap.keySet().stream().
+                filter(n -> inRange(simpleNode,n)).collect(Collectors.toSet());
+        //if(visibleNodes.stream().anyMatch(SimpleNode::isFrontier))
+        for(SimpleNode simpleVisibleNode : visibleNodes)
+            node = createEdge(node,simpleVisibleNode);
+
+        //TODO rimuovere una volta risolto
+        /*
+        SimulationFramework.log("Added node "+ simpleNode.toString()+
+                "; with adjacent list"+ node.getAdjacents().toString(),"Add log");
+
+         */
+
+        //if(!node.getAdjacents().stream().allMatch(SimpleNode::isFrontier))
+        this.nodeMap.put(simpleNode, node);
     }
 }

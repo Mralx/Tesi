@@ -40,42 +40,48 @@
  */
 package exploration;
 
-import agents.*;
 import agents.BasicAgent.ExploreState;
+import agents.ComStation;
+import agents.RealAgent;
+import agents.TeammateAgent;
 import agents.sets.ActiveSet;
 import agents.sets.IdleSet;
-import environment.*;
-import config.*;
-import exploration.graph.SimpleNode;
+import communication.DataMessage;
+import communication.DirectLine;
+import communication.PropModel1;
+import communication.StaticCircle;
+import config.Constants;
+import config.RobotConfig.roletype;
+import config.RobotTeamConfig;
+import config.SimulatorConfig;
+import config.SimulatorConfig.exptype;
+import config.SimulatorConfig.frontiertype;
+import environment.Environment;
+import environment.Environment.Status;
+import environment.Frontier;
+import exploration.graph.GraphHandler;
+import exploration.rendezvous.IRendezvousStrategy;
+import exploration.rendezvous.RendezvousAgentData;
 import exploration.thesisControllers.BuddyController;
 import exploration.thesisControllers.ExplorationController;
 import exploration.thesisControllers.ReserveController;
 import exploration.thesisControllers.SideController;
-import exploration.thesisStrategies.Reserve;
-import gui.*;
-import communication.*;
-import config.RobotConfig.roletype;
-import config.SimulatorConfig.exptype;
-import config.SimulatorConfig.frontiertype;
-import environment.Environment.Status;
-import exploration.rendezvous.IRendezvousStrategy;
-import exploration.rendezvous.RendezvousAgentData;
+import gui.ExplorationImage;
+import gui.MainGUI;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import path.Path;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.*;
 import java.util.List;
-
-import path.Path;
-import org.json.*;
+import java.util.*;
 
 /**
  *
@@ -222,6 +228,9 @@ public class SimulationFramework implements ActionListener {
             for(int j=0; j<numRobots; j++)
                 if(j != i)
                     agent[i].addTeammate(teammate[j].copy());
+
+        GraphHandler.initializeVisGraph(this.agent);
+        //GraphHandler.initializeVisGraph(this.agent);
 
         //Strategies starting agents operations
         switch(simConfig.getExpAlgorithm()) {
@@ -682,15 +691,9 @@ public class SimulationFramework implements ActionListener {
                     "metricConsole"
             );
 
-            /*
-            //The following code was used to create and work on an offline version of the graph
-            LinkedList<Frontier> frontiersList = ExplorationController.calculateFrontiers(currAgent,env);
-            Double[] diss = new Double[frontiersList.size()];
-            for(Frontier f : frontiersList){
-                int iii = frontiersList.indexOf(f);
-                diss[iii] = currAgent.getLocation().distance(frontiersList.get(iii).getCentre());
-            }
 
+            //The following code was used to create and work on an offline version of the graph
+            /*
             String frontierLogFilename = "/"+simConfig.getExpAlgorithm().toString()+"/data/"+environmentCounter+
                     "/front"+currAgent.getName()+"_"+numRobots+" exp";
 
@@ -706,8 +709,9 @@ public class SimulationFramework implements ActionListener {
                             +"    d2"
                             + Arrays.toString(diss),
                             frontierLogFilename);
-                            
-             */
+
+            */
+
 
         }
 
@@ -754,7 +758,7 @@ public class SimulationFramework implements ActionListener {
 
         environmentCounter = n;
         //made parametric to start simulation with an arbitrary team size
-        writeToTeamConfig(Constants.MIN_AGENTS);
+        writeToTeamConfig(Constants.MIN_AGENTS+1);
 
         this.mainGUI.closeGUI();
         String [] par = new String[1];
@@ -1448,7 +1452,7 @@ public class SimulationFramework implements ActionListener {
     }
 
     public static void logIdleSet(){
-        LinkedList<RealAgent> pool = IdleSet.getInstance().getPool();
+        HashSet<RealAgent> pool = IdleSet.getInstance().getPool();
         for(RealAgent a: pool){
             log("["+a.getTimeElapsed()+"] "+a.getName()+" IN POOL","errConsole");
         }

@@ -51,14 +51,18 @@ public class Constants {
     public static final int DISTANCE_THRESHOLD = 0;
 
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
-    public static final int BATCH_RUNS = 1;     //max number of run per configuration
+    public static final int BATCH_RUNS = 2;     //max number of run per configuration
 
-    public static final int MIN_AGENTS = 3;     //starting team size, always >=3
+    public static final int MIN_AGENTS = 8 ;     //starting team size, always >=2
 
-    public static final int BATCH_AGENTS = 8;   //max team size
+    public static final int BATCH_AGENTS = 9;   //max team size
 
-    public static final int BATCH_ENVS = 6;     //max number of simulated environment
+    public static final int BATCH_ENVS = 2;     //max number of simulated environment
     // </editor-fold>
+
+    public static final int DISCRETIZATION_STEP = 15;
+
+    public static final int MIN_DISTANCE = 5;
 
     // <editor-fold defaultstate="collapsed" desc="Clustering constants">
     public static final int CLOSE_PARAM = 125;

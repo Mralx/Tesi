@@ -9,14 +9,15 @@ import environment.Environment;
 import environment.Frontier;
 import exploration.RandomWalk;
 import exploration.SimulationFramework;
-import exploration.graph.Builder;
-import exploration.graph.ExplorationGraph;
+import exploration.graph.GraphHandler;
+import gui.MainGUI;
 import path.Path;
 
 import java.awt.*;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 
 import static java.lang.System.exit;
 
@@ -27,8 +28,6 @@ public class ExplorationController {
 
     // <editor-fold defaultstate="collapsed" desc="Variables">
     public static boolean starterSelected = false;
-
-    private static ExplorationGraph graph = new ExplorationGraph();
 
     //Old variable, might be removed (Alex)
     public static ConcurrentHashMap<Integer, Set<Point>> frontiers = new ConcurrentHashMap<>();
@@ -60,6 +59,9 @@ public class ExplorationController {
         }
         agent.setFrontiers(frontiers);
 
+        //update of the occupancy grid for the graph
+        GraphHandler.setEnvironment(agent.getOccupancyGrid());
+
         return filterCleanFrontiers(agent,env);
     }
 
@@ -72,6 +74,15 @@ public class ExplorationController {
             if(!closeToObstacle(f.getCentre(),env)) {
                 clean.add(f);
             }
+        }
+
+        try{
+            GraphHandler.getSemaphore().acquire();
+            GraphHandler.updateFrontiers(clean, agent.getTimeElapsed());
+        }catch(InterruptedException ie){
+            ie.printStackTrace();
+        }finally {
+            GraphHandler.getSemaphore().release();
         }
 
         return clean;
@@ -103,6 +114,16 @@ public class ExplorationController {
             positioning.add(a.getLocation());
         }
 
+        Set<RealAgent> agents = new HashSet<>(aSet.getActive());
+
+        try{
+            GraphHandler.getSemaphore().acquire();
+            GraphHandler.updateNodes(agents);
+        }catch(InterruptedException ie){
+            ie.printStackTrace();
+        }finally {
+            GraphHandler.getSemaphore().release();
+        }
 
         return positioning;
     }
@@ -112,7 +133,7 @@ public class ExplorationController {
     // <editor-fold defaultstate="collapsed" desc="Calculate agents' goals">
 
     public static LinkedList<Point> calculateTeamGoals(){
-        LinkedList<RealAgent> pool = IdleSet.getInstance().getPool();
+        HashSet<RealAgent> pool = IdleSet.getInstance().getPool();
         LinkedList<RealAgent> active = ActiveSet.getInstance().getActive();
 
         LinkedList<Point> goals = new LinkedList<>();
@@ -139,7 +160,9 @@ public class ExplorationController {
         public AgentFrontierPair(RealAgent a,Frontier f){
             agent = a;
             frontier = f;
-            distance = agent.getLocation().distance(frontier.getCentre());
+            Point centre = frontier.getCentre();
+            Point location = agent.getLocation();
+            this.distance = location.distance(centre);
         }
 
         public RealAgent getAgent(){ return agent; }
@@ -157,11 +180,12 @@ public class ExplorationController {
     }
 
     public static void setStartingAgent(RealAgent agent,Environment env){
+
         ExplorationController.calculateFrontiers(agent,env);
         PriorityQueue<Frontier> frontiers = agent.getFrontiers();
-        LinkedList<RealAgent> team = IdleSet.getInstance().getPool();
-
+        HashSet<RealAgent> team = IdleSet.getInstance().getPool();
         LinkedList<AgentFrontierPair> pairs = new LinkedList<>();
+
         for(Frontier f: frontiers) {
             try {
                 for (RealAgent a : team) {
@@ -170,6 +194,7 @@ public class ExplorationController {
             }
             catch (NullPointerException e){
                 e.printStackTrace();
+
                 exit(-2);
             }
         }

@@ -9,7 +9,7 @@ public class SimpleNode extends Point {
     //Values used to mark frontier nodes. Default is false
     private boolean isFrontier = false;
 
-    SimpleNode(int x, int y) {
+    public SimpleNode(int x, int y) {
         super(x, y);
     }
 
@@ -39,6 +39,11 @@ public class SimpleNode extends Point {
         else
             return "("+this.x+","+this.y+")";
 
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     public boolean equals(SimpleNode node) {

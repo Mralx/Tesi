@@ -198,6 +198,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/agents/sets/IdleSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/sets/IdleSet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/communication/DataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/DataMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Constants.java" afterDir="false" />
@@ -299,7 +300,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GraphEdit">
+  <component name="RunManager" selected="Application.MainGUI">
     <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -763,7 +764,40 @@
       <workItem from="1569059408932" duration="4571000" />
       <workItem from="1569072442406" duration="24000" />
       <workItem from="1569145401720" duration="2544000" />
-      <workItem from="1569156964758" duration="5918000" />
+      <workItem from="1569156964758" duration="7811000" />
+      <workItem from="1569246083603" duration="13447000" />
+      <workItem from="1569270449307" duration="4079000" />
+      <workItem from="1569315649858" duration="645000" />
+      <workItem from="1569342898727" duration="5500000" />
+      <workItem from="1569360604590" duration="1726000" />
+      <workItem from="1569401834626" duration="10982000" />
+      <workItem from="1569445553835" duration="5551000" />
+      <workItem from="1569487490409" duration="1135000" />
+      <workItem from="1569504860140" duration="18114000" />
+      <workItem from="1569575007464" duration="1816000" />
+      <workItem from="1569588539463" duration="5924000" />
+      <workItem from="1569830098309" duration="7309000" />
+      <workItem from="1569849178801" duration="13840000" />
+      <workItem from="1569873836323" duration="6037000" />
+      <workItem from="1569883346547" duration="795000" />
+      <workItem from="1569918334908" duration="846000" />
+      <workItem from="1569919368323" duration="4009000" />
+      <workItem from="1569937291706" duration="1711000" />
+      <workItem from="1570007928415" duration="2065000" />
+      <workItem from="1570051231327" duration="886000" />
+      <workItem from="1570287343885" duration="52000" />
+      <workItem from="1570365793258" duration="8897000" />
+      <workItem from="1570445310628" duration="917000" />
+      <workItem from="1570459727277" duration="10620000" />
+      <workItem from="1570472621390" duration="65000" />
+      <workItem from="1570474859551" duration="5826000" />
+      <workItem from="1570523685953" duration="18020000" />
+      <workItem from="1570610590719" duration="378000" />
+      <workItem from="1570616743680" duration="6686000" />
+      <workItem from="1570781600102" duration="67000" />
+      <workItem from="1570870879878" duration="1727000" />
+      <workItem from="1570876753431" duration="609000" />
+      <workItem from="1571042332416" duration="2115000" />
     </task>
     <servers />
   </component>
@@ -773,6 +807,30 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -781,6 +839,11 @@
           </value>
         </entry>
       </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
     </option>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -804,13 +867,13 @@
           <line>154</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="val.get(0)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
