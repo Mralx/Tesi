@@ -1,5 +1,6 @@
 package exploration.graph;
 
+import config.Constants;
 import exploration.SimulationFramework;
 import gui.MainGUI;
 import javafx.collections.transformation.SortedList;
@@ -77,11 +78,11 @@ class GraphStats {
         }
 
         //transitive closure over the nodes adjacent to the nodes linked to a frontier
+
         frontNodes.addAll(worthNodes);
         for(SimpleNode node : frontNodes){
             worthNodes.addAll(graph.getNode(node).getAdjacents());
         }
-
         return worthNodes;
     }
 
@@ -95,13 +96,6 @@ class GraphStats {
         Map<SimpleNode, Double> closeness = new HashMap<>();
         Set<SimpleNode> worthNodes = restrictedNodeSet(graph);
 
-        //computing restricted graph distance matrix
-        System.out.println("Matrix computation");
-        this.graphDistanceMatrix = graphDistanceMatrix(graph);
-        for(SimpleNode n : this.graphDistanceMatrix.keySet())
-            if(this.graphDistanceMatrix.get(n).values().stream().anyMatch(d-> Double.isInfinite(d)))
-                System.exit(-5);
-
         //closeness computation
         for(SimpleNode n : worthNodes){
             double avgDist = this.graphDistanceMatrix.get(n).values().stream().
@@ -109,8 +103,12 @@ class GraphStats {
             closeness.put(n, 1/avgDist);
         }
 
-        this.closenessMap.putAll(closeness);
+        if(Constants.MAP_ERASE)
+            this.closenessMap = new HashMap<>(closeness);
+        else
+            this.closenessMap.putAll(closeness);
 
+        System.out.println("Dimensione map "+this.closenessMap.keySet().size()+" Worth nodes"+worthNodes.size());
         //sorting by value
         return closeness
                 .entrySet()
@@ -132,8 +130,6 @@ class GraphStats {
      * @param graph the graph to analyze
      */
     Map<SimpleNode, Double> betweennessCentrality(ExplorationGraph graph){
-        //this.graphDistanceMatrix = graphDistanceMatrix(graph);
-
         Map<SimpleNode, Double> betweenness = nodeBetweenness(graph,restrictedNodeSet(graph));
         this.betweennessMap = new HashMap<>(betweenness);
 
@@ -264,7 +260,7 @@ class GraphStats {
 
         HashMap<SimpleNode, Double> highest = new HashMap<>();
         List<Double> val = new LinkedList<>(metricCopy.values());
-        int idx = Math.min(val.size(), 1);
+        int idx = Math.min(val.size(), Constants.MAX_NODES);
 
         val = val.stream().sorted(Collections.reverseOrder(Double::compareTo)).collect(Collectors.toList()).subList(0,idx);
         for(SimpleNode n : metric.keySet())
@@ -273,7 +269,6 @@ class GraphStats {
 
         return highest;
     }
-
 
     /**
      * Computes a new graph such that it is connected. It only deals with disconnected frontiers, no node can be
@@ -299,8 +294,9 @@ class GraphStats {
 
     void computeStats(ExplorationGraph graph){
         graph = dropDisconnectedFrontiers(graph);
-        this.closenessMap = closenessCentrality(graph); //TODO nel grafo del 2 ci sono nodi disconnessi
-        this.betweennessMap = betweennessCentrality(graph);
+        this.graphDistanceMatrix = graphDistanceMatrix(graph);
+        this.closenessMap = closenessCentrality(graph); //TODO nel grafo del 1 e del 2 ci sono nodi disconnessi
+        //this.betweennessMap = betweennessCentrality(graph);
     }
 
     void logStats(ExplorationGraph graph, String statsFile){

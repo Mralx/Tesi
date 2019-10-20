@@ -46,5 +46,9 @@ public class IdleSet {
         pool.remove(a);
         return pool;
     }
+
+    public void reset(){
+        pool = new HashSet<>();
+    }
     // </editor-fold>
 }

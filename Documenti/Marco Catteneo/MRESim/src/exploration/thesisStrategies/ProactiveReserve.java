@@ -14,6 +14,7 @@ import exploration.thesisControllers.ExplorationController;
 import exploration.thesisControllers.ReserveController;
 
 import java.awt.*;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -106,18 +107,6 @@ public class ProactiveReserve {
 
         //Call appropriate goal function
         Point goal = leaderGoalFunction(agent,frontiers,teamPositioning,teamGoals);
-
-        /*
-        //Might be removed
-        try{
-            GraphHandler.getSemaphore().acquire();
-            GraphHandler.refreshStats();
-        }catch(InterruptedException ie){
-            ie.printStackTrace();
-        }finally {
-            GraphHandler.getSemaphore().release();
-        }
-        */
 
         try {
             ExplorationController.updateFrontiers(agent, env);
@@ -213,7 +202,7 @@ public class ProactiveReserve {
     private static Point proactivityFunction(RealAgent agent, Environment env){
 
         //Compute the barycenter of the polygon formed by all active agents
-        LinkedList<RealAgent> activeAgents = activeSet.getInstance().getActive();
+        HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
 
         //<editor-fold defaultstate="collapsed" desc="Original code">
         /*
@@ -246,12 +235,28 @@ public class ProactiveReserve {
 
         //Use barycenter as proactivity goal
         return barycenter;
-        */
+         */
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Test code with metrics">
 
-        Point barycenter = null;
+        Point barycenter = null; //used for logging and comparison
+        Point metricBarycenter = null;
+
+        //used for logging and comparison
+        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+            double xSum = 0;
+            double ySum = 0;
+            for (RealAgent activeAgent : activeAgents) {
+                xSum = xSum + activeAgent.getLocation().getX();
+                ySum = ySum + activeAgent.getLocation().getY();
+            }
+            barycenter = new Point(
+                    (int) (xSum / activeAgents.size()),
+                    (int) (ySum / activeAgents.size())
+            );
+
+        }
 
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
             double xSum = 0;
@@ -265,40 +270,42 @@ public class ProactiveReserve {
             }finally {
                 GraphHandler.getSemaphore().release();
             }
-            //SimulationFramework.log("Time "+agent.getTimeElapsed()+" agent "+agent.getName()+" nodes "+nodes.toString(),
-            //        "Closeness");
+
             double statSum = nodes.values().stream().mapToDouble(Double::doubleValue).sum();
             for (SimpleNode n : nodes.keySet()) {
                 xSum = xSum + n.x * nodes.get(n);
                 ySum = ySum + n.y * nodes.get(n);
             }
-            barycenter = new Point(
+            metricBarycenter = new Point(
                     (int) (xSum / statSum),
                     (int) (ySum / statSum)
             );
         }
-        if(barycenter!=null && !barycenter.equals(new Point(0, 0))) {
+        if(metricBarycenter!=null && !metricBarycenter.equals(new Point(0, 0))) {
             LinkedList<Point> barycenterList = new LinkedList<>();
-            barycenterList.add(barycenter);
+            barycenterList.add(metricBarycenter);
             Frontier barycenterFrontier = new Frontier(
                     agent.getX(),
                     agent.getY(),
                     barycenterList
             );
 
-            barycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
+            metricBarycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
         }else
-            barycenter = agent.getLocation();
-        /*
-        SimulationFramework.log("Time: "+agent.getTimeElapsed()+" Selected barycenter: "+barycenter.toString()+
-                " Obstacle: "+env.obstacleAt(barycenter.x,barycenter.y)+" Agent: "+agent.getLocation().toString()+
-                        "Idle Set size: "+idleSet.getPool().size(),
-                "Barycenter log");
-        */
+            metricBarycenter = agent.getLocation();
+
+        if(barycenter!=null && metricBarycenter!=null)
+            SimulationFramework.log(env +"    "+(idleSet.getPool().size()+activeAgents.size())+"    "+
+                            "Time: " + agent.getTimeElapsed() + " Barycenter: " + barycenter.toString() +
+                            " Metric barycenter: " + metricBarycenter.toString() + " Agent: " + agent.getLocation().toString() +
+                            "Idle Set size: " + idleSet.getPool().size(),
+                    "Barycenter log");
+
         //Use barycenter as proactivity goal
-        return barycenter;
+        return metricBarycenter;
 
         //</editor-fold>
+
     }
     // </editor-fold>
 

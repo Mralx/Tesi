@@ -134,7 +134,7 @@ public class ExplorationController {
 
     public static LinkedList<Point> calculateTeamGoals(){
         HashSet<RealAgent> pool = IdleSet.getInstance().getPool();
-        LinkedList<RealAgent> active = ActiveSet.getInstance().getActive();
+        HashSet<RealAgent> active = ActiveSet.getInstance().getActive();
 
         LinkedList<Point> goals = new LinkedList<>();
         for(RealAgent a: pool){

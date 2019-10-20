@@ -1,6 +1,7 @@
 package exploration.graph;
 
 import agents.RealAgent;
+import agents.sets.IdleSet;
 import config.Constants;
 import environment.Frontier;
 import environment.OccupancyGrid;
@@ -38,6 +39,10 @@ public class GraphHandler {
 
     public static ExplorationGraph getGraph(){
         return graph;
+    }
+
+    public static int getGraphSize(){
+        return graph.getNodeMap().size();
     }
 
     public static OccupancyGrid getEnvironment() {
@@ -176,7 +181,7 @@ public class GraphHandler {
         for(SimpleNode n : graph.getNodeMap().keySet()) {
             if (!n.equals(graph.getNode(n)))
                 return false;
-            if (graph.getNode(n).getAdjacents().isEmpty() && !n.isFrontier())
+            if (graph.getNode(n).getAdjacents().isEmpty() && !n.isFrontier() && !IdleSet.getInstance().getPool().isEmpty())
                 return false;
         }
         return true;
@@ -186,8 +191,15 @@ public class GraphHandler {
         for(SimpleNode n : graph.getNodeMap().keySet()) {
             if (!n.equals(graph.getNode(n)))
                 System.out.println("Mismatched "+n.isFrontier()+" node "+n.toString()+"; graph node "+graph.getNode(n).toString());
-            if (graph.getNode(n).getAdjacents().isEmpty())
-                System.out.println("Empty adjacent list node "+graph.getNode(n));
+            if (graph.getNode(n).getAdjacents().isEmpty() && !n.isFrontier()) {
+                System.out.println("Empty adjacent list node " + graph.getNode(n));
+                for(int i=-200;i<200;i++)
+                    for(int j=-200;j<200;j++)
+                        if(graph.getNodeMap().containsKey(new SimpleNode(n.x+i,n.y+j)) && (i!=0 || j!=0)){
+                            Node node = graph.getNode(new SimpleNode(n.x+i,n.y+j));
+                            System.out.println("Near node [" +node.x+","+node.y+"]");
+                        }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package agents.sets;
 
 import agents.RealAgent;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.LinkedList;
  */
 public class ActiveSet {
     private static ActiveSet as;
-    private static LinkedList<RealAgent> active;
+    private static HashSet<RealAgent> active;
 
     // <editor-fold defaultstate="collapsed" desc="Constructor and getInstance method">
     public ActiveSet(){}
@@ -17,7 +18,7 @@ public class ActiveSet {
     public synchronized  static ActiveSet getInstance() {
         if(as == null){
             as = new ActiveSet();
-            active = new LinkedList<>();
+            active = new HashSet<>();
         }
         return as;
     }
@@ -29,20 +30,24 @@ public class ActiveSet {
         return active.contains(a);
     }
 
-    public LinkedList<RealAgent> getActive(){ return active; }
+    public HashSet<RealAgent> getActive(){ return active; }
 
-    public void setActive(LinkedList<RealAgent> a){ active = a; }
+    public void setActive(HashSet<RealAgent> a){ active = a; }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Adders and removers">
-    public LinkedList<RealAgent> addActiveAgent(RealAgent a){
+    public HashSet<RealAgent> addActiveAgent(RealAgent a){
         active.add(a);
         return active;
     }
 
-    public LinkedList<RealAgent> removeActiveAgent(RealAgent a){
+    public HashSet<RealAgent> removeActiveAgent(RealAgent a){
         active.remove(a);
         return active;
+    }
+
+    public void reset(){
+        active = new HashSet<>();
     }
     // </editor-fold>
 }

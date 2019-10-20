@@ -13,7 +13,7 @@ class VisibilityGraph extends ExplorationGraph {
     //TODO modificati, risistemare a 200 e margin boh, usato 1.02 finora
     //il range dei sensori è 200, scritto da qualche parte nelle configurazioni. ottenibile runtime da ogni agente
     private int sensingRange = 200;
-    private double margin = 1; //margine giusto per non essere precisi con il range dei sensori, potrebbe essere inutile
+    private double margin = 1.02; //margine giusto per non essere precisi con il range dei sensori, potrebbe essere inutile
 
     /**
      * Converts the graph in input into a visibility graph. The occupancy grid of the environment has to be provided
@@ -100,28 +100,14 @@ class VisibilityGraph extends ExplorationGraph {
      */
     @Override
     void addNode(SimpleNode simpleNode, String agentName, Integer time) {
-        //TODO rimuovere una volta risolto
-        /*
-        SimulationFramework.log("Adding node "+ simpleNode.toString()+"; present "+this.nodeMap.containsKey(simpleNode)+
-                "; time "+time,"Add log");
-
-         */
-
         Node node = getNode(simpleNode, agentName, time, false);
         Set<SimpleNode> visibleNodes = this.nodeMap.keySet().stream().
                 filter(n -> inRange(simpleNode,n)).collect(Collectors.toSet());
-        //if(visibleNodes.stream().anyMatch(SimpleNode::isFrontier))
-        for(SimpleNode simpleVisibleNode : visibleNodes)
-            node = createEdge(node,simpleVisibleNode);
 
-        //TODO rimuovere una volta risolto
-        /*
-        SimulationFramework.log("Added node "+ simpleNode.toString()+
-                "; with adjacent list"+ node.getAdjacents().toString(),"Add log");
-
-         */
-
-        //if(!node.getAdjacents().stream().allMatch(SimpleNode::isFrontier))
-        this.nodeMap.put(simpleNode, node);
+        if(!visibleNodes.stream().allMatch(SimpleNode::isFrontier)){
+            for(SimpleNode simpleVisibleNode : visibleNodes)
+                node = createEdge(node,simpleVisibleNode);
+            this.nodeMap.put(simpleNode, node);
+        }
     }
 }

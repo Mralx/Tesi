@@ -198,6 +198,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ShowSettings/ShowSettingsAgent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/Path.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/path/TopologicalNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/agents/sets/ActiveSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/sets/ActiveSet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/agents/sets/IdleSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/sets/IdleSet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/communication/DataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/DataMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/communication/RendezvousDataMessage.java" afterDir="false" />
@@ -797,7 +798,16 @@
       <workItem from="1570781600102" duration="67000" />
       <workItem from="1570870879878" duration="1727000" />
       <workItem from="1570876753431" duration="609000" />
-      <workItem from="1571042332416" duration="2115000" />
+      <workItem from="1571042332416" duration="22249000" />
+      <workItem from="1571083925703" duration="2194000" />
+      <workItem from="1571127436018" duration="22030000" />
+      <workItem from="1571213540877" duration="6874000" />
+      <workItem from="1571220878905" duration="1610000" />
+      <workItem from="1571240421612" duration="834000" />
+      <workItem from="1571299179509" duration="3201000" />
+      <workItem from="1571306725332" duration="1952000" />
+      <workItem from="1571385740910" duration="11460000" />
+      <workItem from="1571475341905" duration="13590000" />
     </task>
     <servers />
   </component>
@@ -872,6 +882,7 @@
     <watches-manager>
       <configuration name="Application">
         <watch expression="val.get(0)" />
+        <watch expression="agent" />
       </configuration>
     </watches-manager>
   </component>

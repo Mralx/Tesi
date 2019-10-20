@@ -8,11 +8,16 @@ import agents.sets.LeaderSet;
 import config.Constants;
 import environment.Environment;
 import environment.Frontier;
+import exploration.SimulationFramework;
+import exploration.graph.GraphHandler;
+import exploration.graph.SimpleNode;
 import exploration.thesisControllers.BuddyController;
 import exploration.thesisControllers.ExplorationController;
 
 import java.awt.*;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by marco on 24/02/2018.
@@ -45,18 +50,16 @@ public class ProactiveBuddySystem {
 
         // <editor-fold defaultstate="collapsed" desc="TIME = 0: set strategy support sets">
         if(agent.getTimeElapsed() == 0){
-            /*
-            SimulationFramework.log(
-                    "["+agent.getName()+"] is buddy of "+agent.getBuddy().getName()+" (leader = "+agent.isLeader()+")",
-                    "personalConsole"
-            );
-            */
+
             idleSet.addPoolAgent(agent);
+            /*
             if(agent.isLeader()) {
                 leaderSet.addLeader(agent);
             }else{
                 followerSet.addFollower(agent);
             }
+
+             */
 
         }
         // </editor-fold>
@@ -135,16 +138,20 @@ public class ProactiveBuddySystem {
         Point goal = null;
         if(LeaderSet.getInstance().isLeader(agent)){
             goal = leaderGoalFunction(agent,frontiers,teamPositioning,teamGoals);
-        }else if(FollowerSet.getInstance().isFollower(agent)){
-            Point splittingGoal = splittingFunction(agent);
-            if(splittingGoal != null){
-                agent.setFirstCall(true);
-                goal = splittingGoal;
-            }else {
-                goal = followerGoalFunction(agent, frontiers, teamPositioning, teamGoals);
+        }else {
+            if (FollowerSet.getInstance().isFollower(agent)) {
+                Point splittingGoal = splittingFunction(agent);
+                if (splittingGoal != null) {
+                    agent.setFirstCall(true);
+                    goal = splittingGoal;
+                } else {
+                    goal = followerGoalFunction(agent, frontiers, teamPositioning, teamGoals);
+                }
+            } else if(SimulationFramework.timeElapsed > 5){
+                System.out.println(agent.toString()+" leader "+agent.isLeader()+" "+LeaderSet.getInstance().isLeader(agent)
+                        +" follower "+agent.isFollower()+" "+FollowerSet.getInstance().isFollower(agent));
             }
         }
-
         return goal;
     }
     // </editor-fold>
@@ -280,7 +287,9 @@ public class ProactiveBuddySystem {
     // <editor-fold defaultstate="collapsed" desc="LAMBDA: proactivity function">
     private static Point proactivityFunction(RealAgent agent, Environment env){
         //Compute the barycenter of the polygon formed by all active agents
-        LinkedList<RealAgent> activeAgents = activeSet.getInstance().getActive();
+        HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
+
+        //<editor-fold defaultstate="collapsed" desc="Original code">
         Point barycenter;
 
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
@@ -295,20 +304,6 @@ public class ProactiveBuddySystem {
                     (int) (ySum / activeAgents.size())
             );
 
-            /*
-            if(ExplorationController.closeToObstacle(barycenter,env)){
-                SimulationFramework.log(
-                        "["+agent.getName()+"] proactively assigned to an obstacle at time "+agent.getTimeElapsed(),
-                        "personalConsole"
-                );
-            }else{
-                SimulationFramework.log(
-                        "["+agent.getName()+"] proactively assigned to: "+barycenter.toString()+"at time "+agent.getTimeElapsed(),
-                        "personalConsole"
-                );
-            }
-            */
-
             LinkedList<Point> barycenterList = new LinkedList<>();
             barycenterList.add(barycenter);
             Frontier barycenterFrontier = new Frontier(
@@ -320,16 +315,82 @@ public class ProactiveBuddySystem {
 
         }else{
             barycenter = agent.getLocation();
-            /*
-            SimulationFramework.log(
-                    "["+agent.getName()+"] proactively assigned to its location at time "+agent.getTimeElapsed(),
-                    "personalConsole"
-            );
-            */
         }
 
         //Use barycenter as proactivity goal
         return barycenter;
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="Test code with metrics">
+        /*
+        Point barycenter = null; //used for logging and comparison
+        Point metricBarycenter = null;
+
+        //used for logging and comparison
+        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+            double xSum = 0;
+            double ySum = 0;
+            for (RealAgent activeAgent : activeAgents) {
+                xSum = xSum + activeAgent.getLocation().getX();
+                ySum = ySum + activeAgent.getLocation().getY();
+            }
+            barycenter = new Point(
+                    (int) (xSum / activeAgents.size()),
+                    (int) (ySum / activeAgents.size())
+            );
+
+        }
+
+        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+            double xSum = 0;
+            double ySum = 0;
+            Map<SimpleNode, Double> nodes = null;
+            try{
+                GraphHandler.getSemaphore().acquire();
+                nodes = GraphHandler.highestCNodes();
+                SimulationFramework.log(SimulationFramework.timeElapsed+"   " +nodes.keySet().toString()+"   "+nodes.values().toString(),"Closeness.txt");
+            }catch(InterruptedException ie){
+                ie.printStackTrace();
+            }finally {
+                GraphHandler.getSemaphore().release();
+            }
+
+            //double statSum = nodes.values().stream().mapToDouble(Double::doubleValue).sum();
+            int statSum = nodes.size();
+            for (SimpleNode n : nodes.keySet()) {
+                xSum = xSum + n.x;
+                ySum = ySum + n.y;
+            }
+            metricBarycenter = new Point(
+                    (int) (xSum / statSum),
+                    (int) (ySum / statSum)
+            );
+        }
+        if(metricBarycenter!=null && !metricBarycenter.equals(new Point(0, 0))) {
+            LinkedList<Point> barycenterList = new LinkedList<>();
+            barycenterList.add(metricBarycenter);
+            Frontier barycenterFrontier = new Frontier(
+                    agent.getX(),
+                    agent.getY(),
+                    barycenterList
+            );
+
+            metricBarycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
+        }else
+            metricBarycenter = agent.getLocation();
+
+        if(barycenter!=null && metricBarycenter!=null)
+            SimulationFramework.log((idleSet.getPool().size()+activeAgents.size())+"    "+
+                            "Time: " + agent.getTimeElapsed() + " Barycenter: " + barycenter.toString() +
+                            " Metric barycenter: " + metricBarycenter.toString() + " Agent: " + agent.getLocation().toString() +
+                            "Idle Set size: " + idleSet.getPool().size() +" Graph size: "+GraphHandler.getGraphSize(),
+                    "Barycenter log");
+
+        //Use barycenter as proactivity goal
+        return metricBarycenter;
+         */
+        //</editor-fold>
+
     }
     // </editor-fold>
 

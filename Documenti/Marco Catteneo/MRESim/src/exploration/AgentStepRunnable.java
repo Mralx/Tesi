@@ -96,7 +96,6 @@ public class AgentStepRunnable implements Runnable{
         {
 
             //<editor-fold defaultstate="collapsed" desc="Get next step">
-
             if(simConfig.getExpAlgorithm() == SimulatorConfig.exptype.valueOf("Reserve") ||
                     simConfig.getExpAlgorithm() == SimulatorConfig.exptype.valueOf("BuddySystem") ||
                     simConfig.getExpAlgorithm() == SimulatorConfig.exptype.valueOf("DivideAndConquer") ||
@@ -123,9 +122,9 @@ public class AgentStepRunnable implements Runnable{
                 else if (agent.getPath().found && agent.getPath().getPoints().size() >= 2) {
                    if (agent.getStats().getTimeSinceLastPlan() < Constants.REPLAN_INTERVAL || agent.getFirstCall()) {
                         nextStep = agent.getNextPathPoint();
-                    } else {
+                   } else {
                         nextStep = agent.takeStep(timeElapsed,env);
-                    }
+                   }
                 }
                 // </editor-fold>
 

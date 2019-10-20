@@ -443,8 +443,8 @@ public class ExplorationGraph {
                 }
             }
         }
-        System.out.println("Inizializzazione completata, inizializzazione childMap");
 
+        System.out.println("Inizializzazione completata, inizializzazione childMap");
         //childMap initialization
         for(SimpleNode n : nodes){
             matrixRow = new HashMap<>();
@@ -583,7 +583,7 @@ public class ExplorationGraph {
     boolean removeEdge(SimpleNode n1, SimpleNode n2){
         boolean result;
         result = nodeMap.get(n1).removeAdjacent(n2);
-        if(!result)
+        if (!result)
             result = nodeMap.get(n2).removeAdjacent(n1);
         return !result;
     }

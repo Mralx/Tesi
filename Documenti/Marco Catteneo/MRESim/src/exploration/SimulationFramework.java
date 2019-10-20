@@ -45,7 +45,9 @@ import agents.ComStation;
 import agents.RealAgent;
 import agents.TeammateAgent;
 import agents.sets.ActiveSet;
+import agents.sets.FollowerSet;
 import agents.sets.IdleSet;
+import agents.sets.LeaderSet;
 import communication.DataMessage;
 import communication.DirectLine;
 import communication.PropModel1;
@@ -119,7 +121,7 @@ public class SimulationFramework implements ActionListener {
     int[][] multihopCommTable;
 
     // Interesting data
-    int timeElapsed;
+    public static int timeElapsed;
     int jointAreaKnown;
     double pctAreaKnownTeam;
     int avgCycleTime;
@@ -201,6 +203,8 @@ public class SimulationFramework implements ActionListener {
             SideController.getInstance().getLeftFrontiers().clear();
             SideController.getInstance().getRightFrontiers().clear();
         }
+        ActiveSet.getInstance().reset();
+        IdleSet.getInstance().reset();
     }
             
     private void createAgents(RobotTeamConfig robotTeamConfig) {
@@ -257,12 +261,16 @@ public class SimulationFramework implements ActionListener {
     }
 
     private void createCouples(){
+        LeaderSet leaderSet = LeaderSet.getInstance();
+        FollowerSet followerSet = FollowerSet.getInstance();
         for(int i=1;i<numRobots;i++){
             if(i%2 == 0) {
                 agent[i].setFollower(true);
+                followerSet.addFollower(agent[i]);
                 agent[i].setBuddy(agent[i-1]);
             }else {
                 agent[i].setLeader(true);
+                leaderSet.addLeader(agent[i]);
                 if((i+1) < numRobots){
                     agent[i].setBuddy(agent[i+1]);
                 }else{
@@ -756,6 +764,8 @@ public class SimulationFramework implements ActionListener {
             return;
         }
 
+        //TODO aggiunto per il log del baricentro
+        log("Environment "+n,"Barycenter log");
         environmentCounter = n;
         //made parametric to start simulation with an arbitrary team size
         writeToTeamConfig(Constants.MIN_AGENTS+1);
@@ -1017,10 +1027,13 @@ public class SimulationFramework implements ActionListener {
                     agent[i].receiveMessage(msgFromSecond);
                     agent[j].receiveMessage(msgFromFirst);
 
+                    //TODO output soppresso
+                    /*
                     System.out.println(Constants.INDENT + "Communication between " +
                                         agent[i].getName() + " and " +
                                         agent[j].getName() + " took " + 
                             (System.currentTimeMillis()-realtimeStart2) + "ms.");
+                     */
                     // For periodic return frontier exp
                     if(simConfig.getExpAlgorithm() == SimulatorConfig.exptype.FrontierExploration &&
                        simConfig.getFrontierAlgorithm() == SimulatorConfig.frontiertype.PeriodicReturn &&
@@ -1459,7 +1472,7 @@ public class SimulationFramework implements ActionListener {
     }
 
     public static void logActiveSet(){
-        LinkedList<RealAgent> active = ActiveSet.getInstance().getActive();
+        HashSet<RealAgent> active = ActiveSet.getInstance().getActive();
         for(RealAgent a: active){
             log("["+a.getTimeElapsed()+"] "+a.getName()+" ACTIVE","errConsole");
         }
