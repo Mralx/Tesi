@@ -35,6 +35,7 @@ public class ExplorationGraph {
 
     void setNodeMap(Map<SimpleNode, Node> nodeMap) {
         this.nodeMap = nodeMap;
+        this.dirty = true;
     }
 
     public boolean isDirty() {

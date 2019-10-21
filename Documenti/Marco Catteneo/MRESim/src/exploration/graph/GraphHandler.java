@@ -5,17 +5,17 @@ import agents.sets.IdleSet;
 import config.Constants;
 import environment.Frontier;
 import environment.OccupancyGrid;
+import environment.TopologicalMap;
 import exploration.SimulationFramework;
+import path.TopologicalNode;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 public class GraphHandler {
@@ -159,6 +159,25 @@ public class GraphHandler {
             GraphHandler.graphUncorrectnessPrint();
             System.exit(-3);
         }
+    }
+
+    public static void createTopologicalGraph(TopologicalMap tMap){
+        Map<SimpleNode, Node> graphMap = new LinkedHashMap<>();
+        SimpleNode simpleNode, adjNode;
+        Node node;
+
+        for(TopologicalNode tNode : tMap.getTopologicalNodes().values()){
+            simpleNode = new SimpleNode(tNode.getPosition().x,tNode.getPosition().y);
+            node = new Node(tNode.getPosition().x,tNode.getPosition().y);
+            for(TopologicalNode adjTopNode : tNode.getListOfNeighbours()){
+                double distance = tNode.getPathToNeighbour(adjTopNode).getLength();
+                adjNode = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
+                node.addAdjacent(adjNode,distance);
+            }
+            graphMap.put(simpleNode,node);
+        }
+        graph = new ExplorationGraph();
+        graph.setNodeMap(graphMap);
     }
 
     private static void refreshStats(){

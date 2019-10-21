@@ -67523,3 +67523,15 @@ Out. point: java.awt.Point[x=388,y=354]
 [D] Env error
 [D] Env error
 [D] Env error
+Path problems
+Path problems
+Out. point: java.awt.Point[x=105,y=238]
+Out. point: java.awt.Point[x=105,y=238]
+Path problems
+Out. point: java.awt.Point[x=105,y=242]
+[D] Env error
+[H] Env error
+[D] Env error
+[H] Env error
+[D] Env error
+[H] Env error
