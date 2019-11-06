@@ -319,6 +319,7 @@ class GraphStats {
         System.out.println("Ensuring connectivity of the graph");
         graph = dropDisconnectedFrontiers(graph);
         delta = delta - graph.getNodeMap().keySet().size();
+        this.graphDistanceMatrix = graphDistanceMatrix(graph);
         System.out.println("Done");
 
         System.out.println("Degree computation");
@@ -356,6 +357,7 @@ class GraphStats {
 
             System.out.println("Closeness computation");
             time = System.currentTimeMillis();
+            this.closenessMap = closenessCentrality(graph);
             bw.write("Closeness centrality:");
             Map<SimpleNode,Double> centralities = this.closenessMap;
             for(SimpleNode node: centralities.keySet()){
@@ -371,6 +373,7 @@ class GraphStats {
 
             System.out.println("Bet computation");
             time = System.currentTimeMillis();
+            this.betweennessMap = betweennessCentrality(graph);
             bw.write("Betweenness centrality:");
             centralities = this.betweennessMap;
             for(SimpleNode node: centralities.keySet()){

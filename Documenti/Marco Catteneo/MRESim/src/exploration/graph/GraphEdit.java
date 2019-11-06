@@ -1,6 +1,7 @@
 package exploration.graph;
 
 import config.Constants;
+import environment.OccupancyGrid;
 import exploration.SimulationFramework;
 import gui.MainGUI;
 
@@ -17,12 +18,13 @@ import java.util.List;
 public class GraphEdit {
 
     public static void main(String args[]) {
-        /*
+
         int env = 6;
         //GraphHandler.test();
         drawDiscretizedGraph(env);
         drawDiscretizedGraphMetrics("Closeness", env);
         drawDiscretizedGraphMetrics("Betweenness", env);
+        /*
         String agents = "ABCDEFGHI";
         char agentName;
         int teamSize = 5;
@@ -94,6 +96,9 @@ public class GraphEdit {
             e.printStackTrace();
         }
         */
+        //GraphHandler.getInstance();
+        //for(int n=2;n<7;n++)
+        //    GraphHandler.test(n);
     }
 
     //disegna le metriche
@@ -229,11 +234,9 @@ public class GraphEdit {
 
     private static void drawDiscretizedGraph(int n) {
         BufferedImage bi;
-        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/"+n+" nodes test "+
-                Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".png";
+        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/Topo/"+n+" nodes test.png";
         try {
-            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/" + n + " stats test "+
-                    Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".txt";
+            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/Topo/" + n + " stats test.txt";
             bi = ImageIO.read(new File(System.getProperty("user.dir") + "/environments/Tesi/env_"+n+".png"));
             BufferedReader br = new BufferedReader(new FileReader(statsFile));
             String line;
@@ -263,10 +266,9 @@ public class GraphEdit {
 
     private static void drawDiscretizedGraphMetrics(String metric, int n) {
         BufferedImage bi;
-        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/"+n+" "+metric+".png";
+        String imageFilename = System.getProperty("user.dir") + "/logs/Discretization/Topo/"+n+" "+metric+".png";
         try {
-            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/" + n + " stats test "+
-                    Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".txt";
+            String statsFile = System.getProperty("user.dir") + "/logs/Discretization/Topo/" + n + " stats test.txt";
             bi = ImageIO.read(new File(System.getProperty("user.dir") + "/environments/Tesi/env_"+n+".png"));
             BufferedReader br = new BufferedReader(new FileReader(statsFile));
             String line, line1;
@@ -292,7 +294,7 @@ public class GraphEdit {
                 if(metric.equals("Closeness"))
                     val = val*1000;           // use for closeness
                 else
-                    val = val*6/176827;
+                    val = val*6/5367;
                 System.out.println("Parsed value "+val);
 
                 switch (val.intValue()){

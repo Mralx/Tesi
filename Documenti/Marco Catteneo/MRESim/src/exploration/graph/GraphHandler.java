@@ -115,21 +115,18 @@ public class GraphHandler {
                     GraphHandler.graph.addNode(new SimpleNode(i, j), null, 0);
     }
 
-    static void test(){
-        int n = 6;
-        String statsFile = System.getProperty("user.dir") + "/logs/Discretization/" + n + " stats test "+
-                Constants.MIN_DISTANCE+" d"+Constants.DISCRETIZATION_STEP+".txt";
+    static void test(int n){
+        String statsFile = System.getProperty("user.dir") + "/logs/Discretization/Topo/" + n + " stats test.txt";
         GraphHandler.getInstance();
         System.out.println("Computing occupancy grid");
         GraphHandler.setEnvironment(computeOccupancyGrid(n));
         System.out.println("Occupancy grid computed");
-        GraphHandler.graph = new VisibilityGraph();
-        System.out.println("Graph discretization");
-        GraphHandler.discretize();
-        System.out.println("Graph discretized");
-
-        //((VisibilityGraph) GraphHandler.graph).connect();
-        //System.out.println("Graph connected");
+        TopologicalMap tMap = new TopologicalMap(environment);
+        tMap.generateSkeleton();
+        tMap.findKeyPoints();
+        tMap.generateKeyAreas();
+        createTopologicalGraph(null, tMap);
+        System.out.println("Topological graph created");
         GraphHandler.stats.logStats(GraphHandler.graph,statsFile);
     }
 
@@ -174,7 +171,10 @@ public class GraphHandler {
                 for(TopologicalNode adjTopNode : tNode.getListOfNeighbours()){
                     adjNode = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
                     if(adjNode.x>-1 && adjNode.y>-1){
-                        double distance = agent.calculatePath(tNode.getPosition(),adjTopNode.getPosition()).getLength();
+                        //double distance = agent.calculatePath(tNode.getPosition(),adjTopNode.getPosition()).getLength(); //TODO sistemare post testing
+                        SimpleNode n1 = new SimpleNode(tNode.getPosition().x,tNode.getPosition().y);
+                        SimpleNode n2 = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
+                        double distance = graph.euclideanDistance(n1,n2);
                         node.addAdjacent(adjNode,distance);
                     }
                 }

@@ -99,7 +99,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainGUI">
+  <component name="RunManager" selected="Application.GraphEdit">
     <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -628,6 +628,7 @@
       <workItem from="1572892729421" duration="2526000" />
       <workItem from="1572902879586" duration="6371000" />
       <workItem from="1572952854560" duration="437000" />
+      <workItem from="1573029903430" duration="3474000" />
     </task>
     <servers />
   </component>
