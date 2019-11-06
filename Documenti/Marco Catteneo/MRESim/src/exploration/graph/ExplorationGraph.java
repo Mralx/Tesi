@@ -38,6 +38,14 @@ public class ExplorationGraph {
         this.dirty = true;
     }
 
+    public Map<String, SimpleNode> getLastAddedNodes() {
+        return lastAddedNodes;
+    }
+
+    public void setLastAddedNodes(Map<String, SimpleNode> lastAddedNodes) {
+        this.lastAddedNodes = lastAddedNodes;
+    }
+
     public boolean isDirty() {
         return dirty;
     }
@@ -620,6 +628,7 @@ public class ExplorationGraph {
         ExplorationGraph copy = new ExplorationGraph();
         copy.setNodeMap(this.nodeMap);
         copy.setLastNode(this.lastNode);
+        copy.setLastAddedNodes(this.lastAddedNodes);
         return copy;
     }
 

@@ -1,11 +1,11 @@
 package exploration.graph;
 
 import config.Constants;
-import exploration.SimulationFramework;
-import gui.MainGUI;
-import javafx.collections.transformation.SortedList;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -67,9 +67,8 @@ class GraphStats {
     }
 
     private Set<SimpleNode> restrictedNodeSet(ExplorationGraph graph){
-        //TODO modificata per testing
-        //return graph.getNodeMap().keySet();
-
+        if(Constants.TOPOLOGICAL)
+            return graph.getNodeMap().keySet();
         Set<SimpleNode> frontNodes = graph.getNodeMap().keySet().
                 stream().filter(SimpleNode::isFrontier).collect(Collectors.toSet());
         Set<SimpleNode> worthNodes = new HashSet<>(frontNodes);
@@ -78,12 +77,12 @@ class GraphStats {
         }
 
         //transitive closure over the nodes adjacent to the nodes linked to a frontier
-
         frontNodes.addAll(worthNodes);
         for(SimpleNode node : frontNodes){
             worthNodes.addAll(graph.getNode(node).getAdjacents());
         }
         return worthNodes;
+
     }
 
     /**
@@ -108,8 +107,9 @@ class GraphStats {
         else
             this.closenessMap.putAll(closeness);
 
-        System.out.println("Dimensione map "+this.closenessMap.keySet().size()+" Worth nodes"+worthNodes.size());
+        System.out.println("Worth nodes "+worthNodes.size());
         //sorting by value
+        /*
         return closeness
                 .entrySet()
                 .stream()
@@ -117,6 +117,9 @@ class GraphStats {
                 .collect(
                         Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                                 LinkedHashMap::new));
+
+         */
+        return closeness;
     }
 
     /**
@@ -134,6 +137,7 @@ class GraphStats {
         this.betweennessMap = new HashMap<>(betweenness);
 
         //sorting by values
+        /*
         return betweenness
                 .entrySet()
                 .stream()
@@ -141,6 +145,9 @@ class GraphStats {
                 .collect(
                         Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                                 LinkedHashMap::new));
+         */
+
+        return betweenness;
     }
 
     private Map<SimpleNode, Integer> retrieveSigmaS(ExplorationGraph graph, SimpleNode s){
@@ -193,6 +200,7 @@ class GraphStats {
 
         for(SimpleNode n : worthNodes)
             betweenness.put(n,betweenness.get(n)/2);
+        System.out.println("Worth nodes "+worthNodes.size());
         return betweenness;
     }
 
@@ -295,8 +303,11 @@ class GraphStats {
     void computeStats(ExplorationGraph graph){
         graph = dropDisconnectedFrontiers(graph);
         this.graphDistanceMatrix = graphDistanceMatrix(graph);
-        this.closenessMap = closenessCentrality(graph); //TODO nel grafo del 1 e del 2 ci sono nodi disconnessi
-        //this.betweennessMap = betweennessCentrality(graph);
+        if(Constants.METRIC=='C')
+            this.closenessMap = closenessCentrality(graph);
+        else
+            this.betweennessMap = betweennessCentrality(graph);
+        //logStats(graph, "Topological graph test.txt");
     }
 
     void logStats(ExplorationGraph graph, String statsFile){
@@ -346,7 +357,7 @@ class GraphStats {
             System.out.println("Closeness computation");
             time = System.currentTimeMillis();
             bw.write("Closeness centrality:");
-            Map<SimpleNode,Double> centralities = this.closenessCentrality(graph);
+            Map<SimpleNode,Double> centralities = this.closenessMap;
             for(SimpleNode node: centralities.keySet()){
                 bw.newLine();
                 bw.write("   "+node.toString()+"    "+df.format(centralities.get(node)));
@@ -361,7 +372,7 @@ class GraphStats {
             System.out.println("Bet computation");
             time = System.currentTimeMillis();
             bw.write("Betweenness centrality:");
-            centralities = this.betweennessCentrality(graph);
+            centralities = this.betweennessMap;
             for(SimpleNode node: centralities.keySet()){
                 bw.newLine();
                 bw.write("   "+node.toString()+"    "+df.format(centralities.get(node)));

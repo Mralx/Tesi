@@ -1,6 +1,7 @@
 package exploration.graph;
 
 import agents.RealAgent;
+import agents.sets.ActiveSet;
 import agents.sets.IdleSet;
 import config.Constants;
 import environment.Frontier;
@@ -161,20 +162,24 @@ public class GraphHandler {
         }
     }
 
-    public static void createTopologicalGraph(TopologicalMap tMap){
+    public static void createTopologicalGraph(RealAgent agent, TopologicalMap tMap){
         Map<SimpleNode, Node> graphMap = new LinkedHashMap<>();
         SimpleNode simpleNode, adjNode;
         Node node;
 
         for(TopologicalNode tNode : tMap.getTopologicalNodes().values()){
             simpleNode = new SimpleNode(tNode.getPosition().x,tNode.getPosition().y);
-            node = new Node(tNode.getPosition().x,tNode.getPosition().y);
-            for(TopologicalNode adjTopNode : tNode.getListOfNeighbours()){
-                double distance = tNode.getPathToNeighbour(adjTopNode).getLength();
-                adjNode = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
-                node.addAdjacent(adjNode,distance);
+            if(simpleNode.x>-1 && simpleNode.y>-1){
+                node = new Node(tNode.getPosition().x,tNode.getPosition().y);
+                for(TopologicalNode adjTopNode : tNode.getListOfNeighbours()){
+                    adjNode = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
+                    if(adjNode.x>-1 && adjNode.y>-1){
+                        double distance = agent.calculatePath(tNode.getPosition(),adjTopNode.getPosition()).getLength();
+                        node.addAdjacent(adjNode,distance);
+                    }
+                }
+                graphMap.put(simpleNode,node);
             }
-            graphMap.put(simpleNode,node);
         }
         graph = new ExplorationGraph();
         graph.setNodeMap(graphMap);

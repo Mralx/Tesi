@@ -134,6 +134,16 @@ public class ProactiveBuddySystem {
         //G set
         LinkedList<Point> teamGoals = ExplorationController.calculateTeamGoals();
 
+        if(Constants.TOPOLOGICAL && agent.getTopologicalMap().getTopologicalNodes().size()>0){
+            try{
+                GraphHandler.getSemaphore().acquire();
+                GraphHandler.createTopologicalGraph(agent, agent.getTopologicalMap());
+            }catch(InterruptedException ie){
+                ie.printStackTrace();
+            }finally {
+                GraphHandler.getSemaphore().release();
+            }
+        }
         //Call goal function
         Point goal = null;
         if(LeaderSet.getInstance().isLeader(agent)){
@@ -290,39 +300,41 @@ public class ProactiveBuddySystem {
         HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
 
         //<editor-fold defaultstate="collapsed" desc="Original code">
-        Point barycenter;
+        if(Constants.ORIGINAL) {
+            Point barycenter;
 
-        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
-            double xSum = 0;
-            double ySum = 0;
-            for (RealAgent activeAgent : activeAgents) {
-                xSum = xSum + activeAgent.getLocation().getX();
-                ySum = ySum + activeAgent.getLocation().getY();
+            if (activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+                double xSum = 0;
+                double ySum = 0;
+                for (RealAgent activeAgent : activeAgents) {
+                    xSum = xSum + activeAgent.getLocation().getX();
+                    ySum = ySum + activeAgent.getLocation().getY();
+                }
+                barycenter = new Point(
+                        (int) (xSum / activeAgents.size()),
+                        (int) (ySum / activeAgents.size())
+                );
+
+                LinkedList<Point> barycenterList = new LinkedList<>();
+                barycenterList.add(barycenter);
+                Frontier barycenterFrontier = new Frontier(
+                        agent.getX(),
+                        agent.getY(),
+                        barycenterList
+                );
+                barycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
+
+            } else {
+                barycenter = agent.getLocation();
             }
-            barycenter = new Point(
-                    (int) (xSum / activeAgents.size()),
-                    (int) (ySum / activeAgents.size())
-            );
 
-            LinkedList<Point> barycenterList = new LinkedList<>();
-            barycenterList.add(barycenter);
-            Frontier barycenterFrontier = new Frontier(
-                    agent.getX(),
-                    agent.getY(),
-                    barycenterList
-            );
-            barycenter = ExplorationController.moveAgent(agent,barycenterFrontier);
-
-        }else{
-            barycenter = agent.getLocation();
+            //Use barycenter as proactivity goal
+            return barycenter;
         }
-
-        //Use barycenter as proactivity goal
-        return barycenter;
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Test code with metrics">
-        /*
+
         Point barycenter = null; //used for logging and comparison
         Point metricBarycenter = null;
 
@@ -341,25 +353,28 @@ public class ProactiveBuddySystem {
 
         }
 
-        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
             double xSum = 0;
             double ySum = 0;
             Map<SimpleNode, Double> nodes = null;
             try{
                 GraphHandler.getSemaphore().acquire();
-                nodes = GraphHandler.highestCNodes();
-                SimulationFramework.log(SimulationFramework.timeElapsed+"   " +nodes.keySet().toString()+"   "+nodes.values().toString(),"Closeness.txt");
+                //if(Constants.TOPOLOGICAL)
+                //    GraphHandler.createTopologicalGraph(agent, agent.getTopologicalMap());
+                if(Constants.METRIC=='C')
+                    nodes = GraphHandler.highestCNodes();
+                else
+                    nodes = GraphHandler.highestBNodes();
             }catch(InterruptedException ie){
                 ie.printStackTrace();
             }finally {
                 GraphHandler.getSemaphore().release();
             }
 
-            //double statSum = nodes.values().stream().mapToDouble(Double::doubleValue).sum();
-            int statSum = nodes.size();
+            double statSum = nodes.values().stream().mapToDouble(Double::doubleValue).sum();
             for (SimpleNode n : nodes.keySet()) {
-                xSum = xSum + n.x;
-                ySum = ySum + n.y;
+                xSum = xSum + n.x * nodes.get(n);
+                ySum = ySum + n.y * nodes.get(n);
             }
             metricBarycenter = new Point(
                     (int) (xSum / statSum),
@@ -388,7 +403,7 @@ public class ProactiveBuddySystem {
 
         //Use barycenter as proactivity goal
         return metricBarycenter;
-         */
+
         //</editor-fold>
 
     }

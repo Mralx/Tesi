@@ -1,6 +1,8 @@
 package exploration.graph;
 
 import config.Constants;
+import exploration.SimulationFramework;
+import gui.MainGUI;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +17,7 @@ import java.util.List;
 public class GraphEdit {
 
     public static void main(String args[]) {
-
+        /*
         int env = 6;
         //GraphHandler.test();
         drawDiscretizedGraph(env);

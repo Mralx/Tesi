@@ -3,9 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="1af4ec83-2cb6-438c-a042-35fb095a1534" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastteamconfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastteamconfig.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/errConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/errConsole.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/metricConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/metricConsole.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/gui/ExplorationImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/personalConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/personalConsole.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/Constants$MapColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/Constants$MapColor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/config/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/config/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/SimulationFramework.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisControllers/ExplorationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveBuddySystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveBuddySystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveReserve.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MRESim/exploration/thesisStrategies/ProactiveReserve.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/graph/VisibilityGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/graph/VisibilityGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisControllers/ExplorationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveBuddySystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exploration/thesisStrategies/ProactiveReserve.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -595,7 +608,26 @@
       <workItem from="1571475341905" duration="13590000" />
       <workItem from="1571564892861" duration="588000" />
       <workItem from="1571652096210" duration="1913000" />
-      <workItem from="1571665215320" duration="4313000" />
+      <workItem from="1571665215320" duration="10205000" />
+      <workItem from="1571693806796" duration="4331000" />
+      <workItem from="1571731569610" duration="1837000" />
+      <workItem from="1571904768021" duration="1538000" />
+      <workItem from="1571913048320" duration="1736000" />
+      <workItem from="1572013822785" duration="847000" />
+      <workItem from="1572025282284" duration="2947000" />
+      <workItem from="1572101557321" duration="1606000" />
+      <workItem from="1572279493905" duration="9147000" />
+      <workItem from="1572304748093" duration="5528000" />
+      <workItem from="1572336647091" duration="10974000" />
+      <workItem from="1572364312229" duration="5890000" />
+      <workItem from="1572388293499" duration="672000" />
+      <workItem from="1572426081096" duration="24511000" />
+      <workItem from="1572509266744" duration="4243000" />
+      <workItem from="1572859039738" duration="9361000" />
+      <workItem from="1572880887540" duration="7737000" />
+      <workItem from="1572892729421" duration="2526000" />
+      <workItem from="1572902879586" duration="6371000" />
+      <workItem from="1572952854560" duration="437000" />
     </task>
     <servers />
   </component>

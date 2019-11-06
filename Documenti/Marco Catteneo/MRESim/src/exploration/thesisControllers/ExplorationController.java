@@ -10,14 +10,12 @@ import environment.Frontier;
 import exploration.RandomWalk;
 import exploration.SimulationFramework;
 import exploration.graph.GraphHandler;
-import gui.MainGUI;
 import path.Path;
 
 import java.awt.*;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Semaphore;
 
 import static java.lang.System.exit;
 
@@ -78,7 +76,8 @@ public class ExplorationController {
 
         try{
             GraphHandler.getSemaphore().acquire();
-            GraphHandler.updateFrontiers(clean, agent.getTimeElapsed());
+            if(!Constants.TOPOLOGICAL)
+                GraphHandler.updateFrontiers(clean, agent.getTimeElapsed());
         }catch(InterruptedException ie){
             ie.printStackTrace();
         }finally {
@@ -118,7 +117,8 @@ public class ExplorationController {
 
         try{
             GraphHandler.getSemaphore().acquire();
-            GraphHandler.updateNodes(agents);
+            if(!Constants.TOPOLOGICAL)
+                GraphHandler.updateNodes(agents);
         }catch(InterruptedException ie){
             ie.printStackTrace();
         }finally {

@@ -73,7 +73,11 @@ class VisibilityGraph extends ExplorationGraph {
      * @return true if they satisfy the visibility conditions, false otherwise
      */
     private boolean inRange(SimpleNode n1, SimpleNode n2){
-        return euclideanDistance(n1,n2)<=sensingRange*margin &&
+        //if(!n1.isFrontier() && !n2.isFrontier())
+        //    return euclideanDistance(n1,n2)<=sensingRange*0.5 &&
+        //            GraphHandler.getEnvironment().numObstaclesOnLine(n1.x,n1.y,n2.x, n2.y)<3;
+        //else
+            return euclideanDistance(n1,n2)<=sensingRange*margin &&
                 GraphHandler.getEnvironment().numObstaclesOnLine(n1.x,n1.y,n2.x, n2.y)<3;
     }
 

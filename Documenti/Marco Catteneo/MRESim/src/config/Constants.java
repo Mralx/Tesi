@@ -51,19 +51,21 @@ public class Constants {
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
     public static final int BATCH_RUNS = 2;     //max number of run per configuration
 
-    public static final int MIN_AGENTS = 9;     //starting team size, always >=2
+    public static final int MIN_AGENTS = 10;     //starting team size, always >=2
 
-    public static final int BATCH_AGENTS = 7;   //max team size
+    public static final int BATCH_AGENTS = 11;   //max team size
 
-    public static final int BATCH_ENVS = 6;     //max number of simulated environment
+    public static final int BATCH_ENVS = 5;     //max number of simulated environment
     // </editor-fold>
 
     public static final int DISCRETIZATION_STEP = 15;
     public static final int MIN_DISTANCE = 5;
     public static final int DISTANCE_THRESHOLD = 0;
     public static final int MAX_NODES = 1;      //max number of considered values for the metric of the graph
+    public static final boolean TOPOLOGICAL = true;
     public static final boolean MAP_ERASE = false;
-
+    public static final boolean ORIGINAL = false;
+    public static final char METRIC = 'C';      //closeness or betweenness
 
     // <editor-fold defaultstate="collapsed" desc="Clustering constants">
     public static final int CLOSE_PARAM = 125;

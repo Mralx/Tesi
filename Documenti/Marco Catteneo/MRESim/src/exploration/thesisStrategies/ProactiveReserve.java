@@ -105,6 +105,17 @@ public class ProactiveReserve {
         //G set
         LinkedList<Point> teamGoals = ExplorationController.calculateTeamGoals();
 
+        if(Constants.TOPOLOGICAL && agent.getTopologicalMap().getTopologicalNodes().size()>0){
+            try{
+                GraphHandler.getSemaphore().acquire();
+                GraphHandler.createTopologicalGraph(agent, agent.getTopologicalMap());
+            }catch(InterruptedException ie){
+                ie.printStackTrace();
+            }finally {
+                GraphHandler.getSemaphore().release();
+            }
+        }
+
         //Call appropriate goal function
         Point goal = leaderGoalFunction(agent,frontiers,teamPositioning,teamGoals);
 
@@ -205,37 +216,37 @@ public class ProactiveReserve {
         HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
 
         //<editor-fold defaultstate="collapsed" desc="Original code">
-        /*
-        Point barycenter;
+        if(Constants.ORIGINAL) {
+            Point barycenter;
 
-        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
-            double xSum = 0;
-            double ySum = 0;
-            for (RealAgent activeAgent : activeAgents) {
-                xSum = xSum + activeAgent.getLocation().getX();
-                ySum = ySum + activeAgent.getLocation().getY();
+            if (activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+                double xSum = 0;
+                double ySum = 0;
+                for (RealAgent activeAgent : activeAgents) {
+                    xSum = xSum + activeAgent.getLocation().getX();
+                    ySum = ySum + activeAgent.getLocation().getY();
+                }
+                barycenter = new Point(
+                        (int) (xSum / activeAgents.size()),
+                        (int) (ySum / activeAgents.size())
+                );
+
+                LinkedList<Point> barycenterList = new LinkedList<>();
+                barycenterList.add(barycenter);
+                Frontier barycenterFrontier = new Frontier(
+                        agent.getX(),
+                        agent.getY(),
+                        barycenterList
+                );
+                barycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
+
+            } else {
+                barycenter = agent.getLocation();
             }
-            barycenter = new Point(
-                    (int) (xSum / activeAgents.size()),
-                    (int) (ySum / activeAgents.size())
-            );
 
-            LinkedList<Point> barycenterList = new LinkedList<>();
-            barycenterList.add(barycenter);
-            Frontier barycenterFrontier = new Frontier(
-                    agent.getX(),
-                    agent.getY(),
-                    barycenterList
-            );
-            barycenter = ExplorationController.moveAgent(agent,barycenterFrontier);
-
-        }else{
-            barycenter = agent.getLocation();
+            //Use barycenter as proactivity goal
+            return barycenter;
         }
-
-        //Use barycenter as proactivity goal
-        return barycenter;
-         */
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Test code with metrics">
@@ -258,13 +269,17 @@ public class ProactiveReserve {
 
         }
 
-        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
+        if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
             double xSum = 0;
             double ySum = 0;
             Map<SimpleNode, Double> nodes = null;
             try{
                 GraphHandler.getSemaphore().acquire();
-                nodes = GraphHandler.highestCNodes();
+                //if(Constants.TOPOLOGICAL)
+                //    GraphHandler.createTopologicalGraph(agent, agent.getTopologicalMap());
+                if(Constants.METRIC=='C')
+                    nodes = GraphHandler.highestCNodes();
+                else nodes = GraphHandler.highestBNodes();
             }catch(InterruptedException ie){
                 ie.printStackTrace();
             }finally {
@@ -293,7 +308,6 @@ public class ProactiveReserve {
             metricBarycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
         }else
             metricBarycenter = agent.getLocation();
-
         if(barycenter!=null && metricBarycenter!=null)
             SimulationFramework.log(env +"    "+(idleSet.getPool().size()+activeAgents.size())+"    "+
                             "Time: " + agent.getTimeElapsed() + " Barycenter: " + barycenter.toString() +
