@@ -454,18 +454,7 @@ public class ExplorationGraph {
         System.out.println("Inizializzazione completata, inizializzazione childMap");
         //childMap initialization
         for (SimpleNode n : nodes) {
-            matrixRow = new HashMap<>();
-            //child(n,n) = n;
-            matrixCell = new LinkedList<>();
-            matrixCell.add(n);
-            matrixRow.put(n, matrixCell);
-            //child(n,adj) = adj;
-            for (SimpleNode adj : getNode(n).getAdjacents()) {
-                matrixCell = new LinkedList<>();
-                matrixCell.add(adj);
-                matrixRow.put(adj, matrixCell);
-            }
-            childMap.put(n, matrixRow);
+            addChildMapRow(childMap,n);
         }
         System.out.println("Inizializzazione childMap completata, calcolo distanze vero e proprio");
 
@@ -508,6 +497,16 @@ public class ExplorationGraph {
 
     /*
     REF https://www.mpi-inf.mpg.de/fileadmin/inf/d1/teaching/summer16/polycomp/polycomp09.pdf
+     */
+    /**
+     * Dynamic version of the Floyd-Warshall algorithm. In particular, it works only if there are only insertions and
+     * no deletions from the graph. Updates the data structures used by the FW algorithm, plus the matrix counting the
+     * number of shortest paths between each pair of nodes. The update is done based on the list of new nodes given in
+     * input, assuming they have already been added to the graph but not to the three data structures 
+     * @param childMap the old childMap computed in the previous iterations of the FW algorithm
+     * @param graphDistanceMatrix the old graph distance matrix computed in the previous iterations of the FW algorithm
+     * @param spCountMatrix the old spCountsMatrix computed in the previous iterations of the FW algorithm
+     * @param newNodes the list of new nodes added to the graph
      */
     void incrementalFW(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
                        Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
@@ -576,6 +575,19 @@ public class ExplorationGraph {
         }
     }
 
+    /**
+     * Wrapper method to factorize the iterations over two data sets, after fixing the intermediate node. It loops over
+     * the two data sets by taking the starting node in the first one, and the arrival node in the second one. Then,
+     * applies the update rule of the Floyd-Warshall algorithm to update the three data structures used, that are the
+     * childMap, the graph distance matrix and the shortest paths count matrix
+     * @param dataset1 the dataset containing the possible starting nodes
+     * @param dataset2 the dataset containing the possible arrival nodes
+     * @param nodes the list of nodes, used to fix an ordering over the nodes
+     * @param childMap the childMap for the FW algorithm
+     * @param distances the matrix containing the distances between each pair of nodes
+     * @param spCounts the matrix containing the number of shortest paths between each pair of nodes
+     * @param v the fixed intermediate node
+     */
     private void updateDataStructures(List<SimpleNode> dataset1, List<SimpleNode> dataset2, List<SimpleNode> nodes,
                                       Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
                                       double[][] distances, int[][] spCounts, SimpleNode v){
@@ -605,6 +617,19 @@ public class ExplorationGraph {
         }
     }
 
+    /**
+     * Factorization of the update rule on which the Floyd-Warshall algorithm is based. Considering three nodes s,t and
+     * k, the update rule checks the ordering relation between dist(s,t) and dist(s,k)+dist(k,t). In this case, being
+     * the FW algorithm implemented here a variation of the original one, also the number of shortest paths between two
+     * nodes is stored. The maintaining of its matrix and of the one of the distances is done here. The return value is
+     * used to discriminate among the three possible cases
+     * @param s the starting node
+     * @param t the arrival node
+     * @param k the node checked as an intermediate node
+     * @param distances the matrix containing the distances between each pair of nodes
+     * @param spCounts the matrix containing the number of shortest paths between each pair of nodes
+     * @return 1 if the path from s to t going through the intermediate k is shorter, 0 if it is equal, -1 otherwise
+     */
     private int updateRule(int s, int t, int k, double[][] distances, int[][] spCounts){
         if (distances[s][t] > distances[s][k] + distances[k][t]) {
             distances[s][t] = distances[s][k] + distances[k][t];
@@ -621,11 +646,94 @@ public class ExplorationGraph {
         return -1;
     }
 
+    /**
+     * Takes the list of new nodes added to the graph and extends the three matrices used to apply the Floyd-Warshall
+     * algorithm. The childMap is extended using the appropriate method addChildMapRow. The other two are updated
+     * simply considering the same as above definitions for the graph distance matrix and for the shortest paths matrix.
+     * This method also exploits the symmetry of the undirected graph to update the corresponding cells for the old
+     * nodes in the graph
+     * @param newNodes list of new nodes added to the graph
+     * @param childMap the childMap to update
+     * @param graphDistanceMatrix the graphDistanceMatrix of the graph
+     * @param spCountMatrix the matrix of the number of shortest paths between any two given nodes
+     */
     private void extendMatrices(List<SimpleNode> newNodes,
                                 Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
                                 Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
-                                Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix){}
+                                Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix){
+        Node node;
+        for(SimpleNode n : newNodes){
+            node = getNode(n);
+            //add row to the childMap
+            addChildMapRow(childMap,n);
 
+            //extend graphDistanceMatrix and spCountMatrix
+            Map<SimpleNode, Double> distanceRow = new HashMap<>();
+            Map<SimpleNode, Integer> spRow = new HashMap<>();
+            double distance;
+            int spVal;
+            for(SimpleNode n1 : nodeMap.keySet()){
+                distance = node.getDistance(n1);
+                distanceRow.put(n1, distance);
+                spVal = (distance == Double.MAX_VALUE ? 0 : 1);
+                if(!n.equals(n1)) {
+                    spRow.put(n1, spVal);
+                }
+
+                //exploiting symmetry if n1 is not a new node, otherwise is redundant
+                if(!newNodes.contains(n1)) {
+                    Map<SimpleNode, Double> distanceRow1 = graphDistanceMatrix.get(n1);
+                    if (distanceRow1 == null) distanceRow1 = new HashMap<>();
+                    distanceRow1.put(n,distance);
+                    graphDistanceMatrix.put(n1,distanceRow1);
+
+                    Map<SimpleNode, Integer> spRow1 = spCountMatrix.get(n1);
+                    if (spRow1 == null) spRow1 = new HashMap<>();
+                    spRow1.put(n, spVal);
+                    spCountMatrix.put(n1,spRow1);
+                }
+            }
+
+            graphDistanceMatrix.put(n, distanceRow);
+            spCountMatrix.put(n, spRow);
+        }
+    }
+
+    /**
+     * Adds a new node to the childMap, doesn't check if the node is already there. The row is filled considering that,
+     * being n the added node, child(n,n) = n and child(n,adj) = adj, being the child relation such that child(x,y) is
+     * the next node (or nodes) on the shortest paths from x to y
+     * @param childMap the childMap being updated, assumed to be non null
+     * @param n the node to add to the childMap
+     */
+    private void addChildMapRow(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap, SimpleNode n){
+        Map<SimpleNode, List<SimpleNode>> matrixRow;
+        List<SimpleNode> matrixCell;
+
+        matrixRow = new HashMap<>();
+        //child(n,n) = n;
+        matrixCell = new LinkedList<>();
+        matrixCell.add(n);
+        matrixRow.put(n, matrixCell);
+        //child(n,adj) = adj;
+        for (SimpleNode adj : getNode(n).getAdjacents()) {
+            matrixCell = new LinkedList<>();
+            matrixCell.add(adj);
+            matrixRow.put(adj, matrixCell);
+        }
+        childMap.put(n, matrixRow);
+    }
+
+    /**
+     * Provided the matrix containing the count of all the shortest paths computed by the Floyd-Warshall algorithm,
+     * fills the same matrix with a representation based on the Map interface. This is necessary because to simplify the
+     * implementation for the FW algorithm, both the distance matrix and the shortest paths count matrix used are based
+     * on a ordering over the nodes, applied through the mapping from the set of keys into a list of nodes. Thus, this
+     * method is useful to overcome this ordering and make the matrix more versatile
+     * @param spCountMatrix the matrix representation based on the Map interface
+     * @param spCounts the matrix representation based simply on their int value
+     * @param nodes the list used as a reference for the ordering among the nodes
+     */
     private void fillSpCountMatrix(Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix, int[][] spCounts, List<SimpleNode> nodes) {
         Map<SimpleNode, Integer> matrixCell1, matrixCell2;
         SimpleNode iNode, jNode;
@@ -646,6 +754,16 @@ public class ExplorationGraph {
         }
     }
 
+    /**
+     * Provided the matrix containing the distances between each pair of nodes computed by the Floyd-Warshall algorithm,
+     * fills the same matrix with a representation based on the Map interface. This is necessary because to simplify the
+     * implementation for the FW algorithm, both the distance matrix and the shortest paths count matrix used are based
+     * on a ordering over the nodes, applied through the mapping from the set of keys into a list of nodes. Thus, this
+     * method is useful to overcome this ordering and make the matrix more versatile
+     * @param graphDistanceMatrix the matrix representation based on the Map interface
+     * @param distances the matrix representation based simply on their double value
+     * @param nodes the list used as a reference for the ordering among the nodes
+     */
     private void fillGraphDistanceMatrix(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,
                                          double[][] distances, List<SimpleNode> nodes ){
         Map<SimpleNode, Double> matrixRow, matrixCell;
