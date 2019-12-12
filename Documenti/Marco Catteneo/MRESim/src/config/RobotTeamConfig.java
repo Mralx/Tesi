@@ -138,7 +138,7 @@ public class RobotTeamConfig {
     }
     
     private boolean loadOldConfig() {
-        String oldConfigFilename = System.getProperty("user.dir") + "/config/lastTeamConfig.txt";
+        String oldConfigFilename = System.getProperty("user.dir") + "/config/lastteamconfig.txt";
         File file = new File(oldConfigFilename);
         if (file.exists())
             return loadConfig(oldConfigFilename);

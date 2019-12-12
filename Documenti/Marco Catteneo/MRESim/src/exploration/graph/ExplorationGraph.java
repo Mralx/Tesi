@@ -1,11 +1,8 @@
 package exploration.graph;
 
 import agents.RealAgent;
-import environment.Frontier;
 import environment.OccupancyGrid;
-import org.jfree.threads.ReaderWriterLock;
 
-import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -425,8 +422,10 @@ public class ExplorationGraph {
         path.removeNode(startNode, delta);
     }
 
-    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,
-                                                                             Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix){
+    // <editor-fold defaultstate="collapsed" desc="Incremental Floyd-Warshall">
+    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
+                                                                             Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix) {
+
         List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
         double[][] distances = new double[nodes.size()][nodes.size()];
         int[][] spCounts = new int[nodes.size()][nodes.size()];
@@ -436,14 +435,13 @@ public class ExplorationGraph {
 
         //matrices of distances and counts initialization
         System.out.println("Inizializzazione matrice distanze e conte");
-        for(int i=0; i<nodes.size()-1;i++){
-            for(int j=i; j<nodes.size();j++){
+        for (int i = 0; i < nodes.size() - 1; i++) {
+            for (int j = i; j < nodes.size(); j++) {
 
-                if(i==j) {
+                if (i == j) {
                     distances[i][j] = 0.0;
                     spCounts[i][j] = 0;
-                }
-                else {
+                } else {
                     //works because the returned distance is infinite, if the two nodes are not adjacent
                     distances[i][j] = getNode(nodes.get(i)).getDistance(nodes.get(j));
                     distances[j][i] = distances[i][j]; //undirected graph
@@ -455,82 +453,222 @@ public class ExplorationGraph {
 
         System.out.println("Inizializzazione completata, inizializzazione childMap");
         //childMap initialization
-        for(SimpleNode n : nodes){
+        for (SimpleNode n : nodes) {
             matrixRow = new HashMap<>();
             //child(n,n) = n;
             matrixCell = new LinkedList<>();
             matrixCell.add(n);
-            matrixRow.put(n,matrixCell);
+            matrixRow.put(n, matrixCell);
             //child(n,adj) = adj;
-            for(SimpleNode adj : getNode(n).getAdjacents()){
+            for (SimpleNode adj : getNode(n).getAdjacents()) {
                 matrixCell = new LinkedList<>();
                 matrixCell.add(adj);
-                matrixRow.put(adj,matrixCell);
+                matrixRow.put(adj, matrixCell);
             }
-            childMap.put(n,matrixRow);
+            childMap.put(n, matrixRow);
         }
         System.out.println("Inizializzazione childMap completata, calcolo distanze vero e proprio");
 
         //Floyd-Warshall
         double n = nodes.size(); //TODO aggiunto per controllare avanzamento da console
-        for(int k=0; k<nodes.size(); k++){
-            for(int i=0; i<nodes.size(); i++){
+        for (int k = 0; k < nodes.size(); k++) {
+            for (int i = 0; i < nodes.size(); i++) {
                 matrixRow = childMap.get(nodes.get(i));
-                for(int j=i+1; j<nodes.size(); j++){
+                for (int j = i + 1; j < nodes.size(); j++) {
                     matrixCell = new LinkedList<>();
-                    if(!nodes.get(k).isFrontier()){
-                        if(distances[i][j] == distances[i][k] + distances[k][j]) {
+                    if (!nodes.get(k).isFrontier()) {
+                        if (distances[i][j] == distances[i][k] + distances[k][j]) {
                             matrixCell = matrixRow.get(nodes.get(j));
-                            spCounts[i][j] +=1;
+                            spCounts[i][j] += 1;
                         }
-                        if(distances[i][j] > distances[i][k] + distances[k][j]) {
+                        if (distances[i][j] > distances[i][k] + distances[k][j]) {
                             distances[i][j] = distances[i][k] + distances[k][j];
                             distances[j][i] = distances[i][j];
                             spCounts[i][j] = 1;
                         }
-                        if(matrixCell!=null){
+                        if (matrixCell != null) {
                             matrixCell.add(nodes.get(k));
-                            matrixRow.put(nodes.get(j),matrixCell);
-                            childMap.put(nodes.get(i),matrixRow);
+                            matrixRow.put(nodes.get(j), matrixCell);
+                            childMap.put(nodes.get(i), matrixRow);
                         }
                         spCounts[j][i] = spCounts[i][j];
                     }
                 }
             }
             //TODO aggiunto per controllare avanzamento da console
-            double percentage = (k/n)*10000;
-            percentage = (percentage%10000)/100;
-            System.out.println("k "+percentage+"%");
+            double percentage = (k / n) * 10000;
+            percentage = (percentage % 10000) / 100;
+            System.out.println("k " + percentage + "%");
         }
 
         fillSpCountMatrix(spCountMatrix, spCounts, nodes);
-        fillGraphDistanceMatrix(graphDistanceMatrix,distances,nodes);
+        fillGraphDistanceMatrix(graphDistanceMatrix, distances, nodes);
         return childMap;
     }
 
-    private void fillSpCountMatrix(Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix, int[][] spCounts, List<SimpleNode> nodes) {
-        Map<SimpleNode, Integer> matrixCell = new HashMap<>();
-        for(int i=0;i<nodes.size()-1;i++){
-            for(int j=i+1;j<nodes.size();j++){
-                matrixCell.put(nodes.get(j),spCounts[i][j]);
+    /*
+    REF https://www.mpi-inf.mpg.de/fileadmin/inf/d1/teaching/summer16/polycomp/polycomp09.pdf
+     */
+    void incrementalFW(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
+                       Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
+                       Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix,
+                       List<SimpleNode> newNodes){
+
+        List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
+        LinkedList<SimpleNode> neighbors, nonNeighbors;
+        extendMatrices(newNodes, childMap, graphDistanceMatrix, spCountMatrix);
+
+        double[][] distances = new double[nodes.size()][nodes.size()];
+        int[][] spCounts = new int[nodes.size()][nodes.size()];
+
+        for(int i=0; i<nodes.size()-1; i++)
+            for(int j=i; j<nodes.size(); j++){
+                distances[i][j] = graphDistanceMatrix.get(nodes.get(i)).get(nodes.get(j));
+                distances[j][i] = distances[i][j];
+                spCounts[i][j] = spCountMatrix.get(nodes.get(i)).get(nodes.get(j));
+                spCounts[j][i] = spCounts[i][j];
             }
-            spCountMatrix.put(nodes.get(i),matrixCell);
-            matrixCell = new HashMap<>();
+
+        for(SimpleNode v : newNodes){
+
+            neighbors = new LinkedList<>(this.nodeMap.get(v).getAdjacents());
+            nonNeighbors = new LinkedList<>();
+            for(SimpleNode node : this.nodeMap.keySet())
+                if(!getNode(v).isAdjacent(node)) nonNeighbors.add(node);
+
+            updateDataStructures(neighbors,nodes,nodes,childMap,distances,spCounts,v);
+            updateDataStructures(nonNeighbors,nonNeighbors,nodes,childMap,distances,spCounts,v);
+            /*
+            //Versione probabilmente ottimizzabile, ma non ne sono sicuro
+            for(SimpleNode n : neighbors){
+                idx1 = nodes.indexOf(n);
+                Map<SimpleNode, List<SimpleNode>> matrixRow = childMap.get(n);
+                if(matrixRow == null) matrixRow = new HashMap<>();
+
+                for(SimpleNode t : nodes) {
+                    idx2 = nodes.indexOf(t);
+                    update = updateRule(idx1, idx2, idx3, distances,spCounts);
+
+                    List<SimpleNode> matrixCell = matrixRow.get(t);
+
+                    if(matrixCell == null || update == 1)
+                        matrixCell = new LinkedList<>();
+
+                    if(update != -1) {
+                        matrixCell.add(v);
+                        matrixRow.put(t,matrixCell);
+                        childMap.put(n,matrixRow);
+                    };
+                }
+            }
+
+            for(SimpleNode s : nonNeighbors){
+                idx1 = nodes.indexOf(s);
+                for(SimpleNode t : nonNeighbors){
+                    idx2 = nodes.indexOf(t);
+                    update = updateRule(idx1, idx2, idx3, distances,spCounts);
+                    if(update == 1) ;
+                    if(update == 0) ;
+                    if(update != -1) ;
+                }
+            }
+            */
+        }
+    }
+
+    private void updateDataStructures(List<SimpleNode> dataset1, List<SimpleNode> dataset2, List<SimpleNode> nodes,
+                                      Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
+                                      double[][] distances, int[][] spCounts, SimpleNode v){
+        int update, idx1, idx2, idx3;
+        idx3 = nodes.indexOf(v);
+
+        for(SimpleNode n : dataset1){
+            idx1 = nodes.indexOf(n);
+            Map<SimpleNode, List<SimpleNode>> matrixRow = childMap.get(n);
+            if(matrixRow == null) matrixRow = new HashMap<>();
+
+            for(SimpleNode t : dataset2) {
+                idx2 = nodes.indexOf(t);
+                update = updateRule(idx1, idx2, idx3, distances,spCounts);
+
+                List<SimpleNode> matrixCell = matrixRow.get(t);
+
+                if(matrixCell == null || update == 1)
+                    matrixCell = new LinkedList<>();
+
+                if(update != -1) {
+                    matrixCell.add(v);
+                    matrixRow.put(t,matrixCell);
+                    childMap.put(n,matrixRow);
+                };
+            }
+        }
+    }
+
+    private int updateRule(int s, int t, int k, double[][] distances, int[][] spCounts){
+        if (distances[s][t] > distances[s][k] + distances[k][t]) {
+            distances[s][t] = distances[s][k] + distances[k][t];
+            distances[t][s] = distances[s][t];
+            spCounts[s][t] = 1;
+            spCounts[t][s] = 1;
+            return 1;
+        }
+        if (distances[s][t] == distances[s][k] + distances[k][t]) {
+            spCounts[s][t] += 1;
+            spCounts[t][s] = spCounts[s][t];
+            return 0;
+        }
+        return -1;
+    }
+
+    private void extendMatrices(List<SimpleNode> newNodes,
+                                Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
+                                Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
+                                Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix){}
+
+    private void fillSpCountMatrix(Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix, int[][] spCounts, List<SimpleNode> nodes) {
+        Map<SimpleNode, Integer> matrixCell1, matrixCell2;
+        SimpleNode iNode, jNode;
+
+        for(int i=0;i<nodes.size()-1;i++){
+            iNode = nodes.get(i);
+            matrixCell1 = spCountMatrix.get(iNode);
+            if(matrixCell1 == null) matrixCell1 = new HashMap<>();
+            for(int j=i+1;j<nodes.size();j++){
+                jNode = nodes.get(j);
+                matrixCell1.put(jNode,spCounts[i][j]);
+                matrixCell2 = spCountMatrix.get(jNode);
+                if(matrixCell2 == null) matrixCell2 = new HashMap<>();
+                matrixCell2.put(iNode,spCounts[i][j]);
+                spCountMatrix.put(jNode,matrixCell2);
+            }
+            spCountMatrix.put(iNode,matrixCell1);
         }
     }
 
     private void fillGraphDistanceMatrix(Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix,
                                          double[][] distances, List<SimpleNode> nodes ){
-        Map<SimpleNode, Double> matrixRow;
-        for(SimpleNode n : nodes){
-            int idx = nodes.indexOf(n);
-            matrixRow = new HashMap<>();
-            for(int j=0;j<nodes.size();j++){
-                matrixRow.put(nodes.get(j),distances[idx][j]);
+        Map<SimpleNode, Double> matrixRow, matrixCell;
+        SimpleNode iNode, jNode;
+
+        for(int i=0; i<nodes.size()-1;i++){
+            iNode = nodes.get(i);
+            matrixRow = graphDistanceMatrix.get(iNode);
+            if(matrixRow == null) matrixRow = new HashMap<>();
+            for(int j=i;j<nodes.size();j++) {
+                jNode = nodes.get(j);
+                matrixCell = graphDistanceMatrix.get(jNode);
+                if(matrixCell == null) matrixCell = new HashMap<>();
+                matrixCell.put(iNode, distances[i][j]);
+                graphDistanceMatrix.put(jNode, matrixCell);
+
+                matrixRow.put(jNode, distances[i][j]);
             }
-            graphDistanceMatrix.put(n,matrixRow);
+            graphDistanceMatrix.put(iNode, matrixRow);
         }
     }
+
+    // </editor-fold>
 
     //si potrebbe fare anche nel Builder ma lo implemento qua perché almeno può essere chiamata da chiunque abbia accesso al grafo
     /**

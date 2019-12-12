@@ -14,6 +14,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GraphEdit {
 
@@ -21,9 +23,9 @@ public class GraphEdit {
 
         int env = 6;
         //GraphHandler.test();
-        drawDiscretizedGraph(env);
-        drawDiscretizedGraphMetrics("Closeness", env);
-        drawDiscretizedGraphMetrics("Betweenness", env);
+        //drawDiscretizedGraph(env);
+        //drawDiscretizedGraphMetrics("Closeness", env);
+        //drawDiscretizedGraphMetrics("Betweenness", env);
         /*
         String agents = "ABCDEFGHI";
         char agentName;

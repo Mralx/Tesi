@@ -1,0 +1,562 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Report analisi dati discretizzazione
+\end_layout
+
+\begin_layout Standard
+Questo è un piccolo report in cui confronto sistematicamente le performance
+ del team di robot, al variare del metodo per la scelta del punto di proattività
+, e delle statistiche relative alle metriche di due diversi tipi di grafo.
+ In particolare, le metriche di centralità utilizzate sono Closeness e Betweenne
+ss e il metodo per la scelta del punto di proattività, ovvero il punto verso
+ cui viene indirizzato il team di robot ancora Idle, consiste nel selezionare
+ il punto coincidente con il nodo del grafo massimizzante tali metriche.
+ Nel caso limite in cui due o più nodi abbiano lo stesso valore per la metrica,
+ viene scelto il punto ottenuto mediando il valore dei nodi; tale caso è
+ comunque estrememamente raro e capita al più con due nodi.
+ 
+\end_layout
+
+\begin_layout Standard
+Per quanto riguarda i tipi di grafo utilizzato, come detto sopra, sono due.
+ Il primo è un grafo di visibilità, il secondo è il grafo topologico utilizzato
+ dal simulatore per il calcolo dei percorsi.
+ C'è una seconda distinzione da fare e riguarda come sono ottenuti i nodi
+ di ciascun grafo utilizzati in questa analisi.
+ Infatti, le performance dei vari team sfruttano un grafo costruito a run-time,
+ sulla base della mappa conosciuta in quel momento.
+ Le statistiche delle metriche, invece, sono calcolate su dei grafi costruti
+ offline utilizzando le mappe complete dei vari ambienti.
+ L'idea alla base di questo approccio era di vedere se è possibile individuare
+ delle caratteristiche che mi possano caratterizzare l'ambiente, indipendentemen
+te da come poi l'esplorazione venga portata avanti, e confrontarle direttamente
+ con i risultati delle performance.
+\end_layout
+
+\begin_layout Standard
+Il grafo di visibilità utilizzato per l'esplorazione è costruito in modo
+ tale che ogni nodo rappresenta una posizione assunta da un robot del team
+ (si tratta pertanto di un grafo storico).
+ D'altro canto, il grafo utilizzato per ottenere le statistiche delle metriche
+ è un grafo costruito senza l'utilizzo di robot, bensì creato discretizzando
+ a passo costante la mappa completa dell'ambiente.
+ In entrambi i casi, un arco tra i nodi indica una relazione di visibilità
+ tra i due nodi, ma nel grafo per le statistiche, la visibilità è limitata
+ a poche unità, per evitare che il numero di archi sia eccessivo.
+ Ogni discretizzazione è stata effettuata utilizzando un valore del passo
+ scelto appositamente, ciò per evitare che i tempi di calcolo fossero eccessivi.
+ Inoltre, nella fase di discretizzazione ogni nodo doveva trovarsi ad una
+ distanza minima da un ostacolo.
+ 
+\end_layout
+
+\begin_layout Standard
+Il grafo topologico sia in fase di esplorazione che nella fase di raccolta
+ delle statistiche è stato costruito utilizzando la procedura già implementata
+ nel simulatore.
+ Esso viene infatti utilizzato per il calcolo dei percorsi da far seguire
+ ai robot.
+ Come fatto anche per il grafo di visibilità, in fase di esplorazione il
+ grafo è relativo alla mappa scoperta fino a quel momento, mentre nella
+ seconda fase, quella delle statistiche, il grafo viene calcolato sulla
+ mappa completa dell'ambiente.
+\end_layout
+
+\begin_layout Section*
+Visualizzazione grafi
+\end_layout
+
+\begin_layout Standard
+Ometto le immagini degli ambienti senza i grafi per brevità e riporto direttamen
+te le immagini dei due grafi utilizzati per il calcolo delle statistiche.
+ In ogni caso, metterò prima il grafo di visibilità e poi quello topologico.
+ I pallini verdi rappresentano i nodi sulla mappa.
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 1 nodes test 3 d10.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 1 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come si può vedere fin da subito, la tecnica di discretizzazione applicata
+ crea un numero di nodi molto maggiore rispetto al grafo topologico.
+ Se da un lato il grafo topologico possiede 63 nodi, quello di visibilità
+ ne ha 1279.
+ Questo pattern si ripeterà per tutti gli ambienti, infatti il grafo topologico
+ ha sempre un numero di nodi dell'ordine del centinaio, mentre quello di
+ visibilità nell'ordine del migliaio.
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 2 nodes test 10 d15.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 2 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qui si hanno 716 nodi per il grafo di visibilità contro i 66 del grafo topologic
+o.
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 3 nodes test 5 d10.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 3 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In questo ambiente, si hanno 1187 nodi per il grafo di visibilità e 61 per
+ quello topologico.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 4 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 4 nodes test 5 d20.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 4 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qui il grafo di visibilità presenta 659 nodi, mentre il grafo topologico
+ 80.
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 5 nodes test 3 d12.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 5 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per questo ambiente si hanno rispettivamente 1390 nodi nel primo caso e
+ 122 nel secondo.
+\end_layout
+
+\begin_layout Subsection*
+Ambiente 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 6 nodes test 5 d15.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename 6 nodes test.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qua il numero di nodi è di 1086 nel primo grafo e 127 nel secondo.
+\end_layout
+
+\begin_layout Section*
+Analisi dei dati e confronto
+\end_layout
+
+\begin_layout Subsection*
+Closeness
+\end_layout
+
+\begin_layout Standard
+Inizio il confronto utilizzando come metrica la Closeness.
+ Riporto ora due grafici che rappresentano visivamente i valori di media,
+ minimo e massimo del valore di Closeness nei vari ambienti.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MMM vis clos.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MMM top clos.emf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I grafici riportano sull'asse delle ascisse il numero dell'ambiente, mentre
+ sull'asse delle ordinate il valore della statistica.
+ Come si può vedere a primo impatto, nonostante i grafi siano molto diversi
+ tra loro, sia per struttura che per numero di nodi, i valori di media,
+ minimo e massimo presentano andamenti simili.
+ Vi sono però alcune differenze.
+ La prima, come era prevedibile, è relativa ai valori assoluti della closeness.
+ Questo però è intuitivamente spiegabile tenendo conto del diverso numero
+ di nodi.
+ La seconda, invece, la si può notare confrontando i valori di media e massimo
+ per gli ambienti numero 1, 3, 4 e 6.
+ Infatti, per il grafo di visibilità, se ordinassimo gli ambienti in ordine
+ decrescente di valore massimo per la Closeness, otterremmo: 3, 1, 4 e infine
+ 6.
+ Facendo lo stesso ordinamento per il grafo topologico otterremmo: 6, 1,
+ 3 e infine 4.
+ Estendendo questo discorso alla media, abbiamo che il grafo di visibilità
+ è ordinabile allo stesso modo, mentre quello topologico come 6, 4, 1 e
+ infine 3.
+ 
+\end_layout
+
+\begin_layout Standard
+Nei seguenti due grafici viene confrontata la media della Closeness, rispetto
+ alla deviazione standard della stessa metrica.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MD vis clos.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MD top clos.emf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+I grafici hanno, allo stesso modo di quelli sopra, sull'asse delle ascisse
+ il numero dell'ambiente, mentre sull'asse delle ordinate, il valore della
+ statistica.
+ L'unica differenza che si nota in relazione alla deviazione standard è
+ per gli ambienti 3 e 4.
+ Nel primo caso infatti, la differenza tra le due è molto più marcata che
+ nel secondo, dove sono praticamente identiche.
+\end_layout
+
+\begin_layout Standard
+Una volta notate queste differenze, si può passare ad analizzare eventuali
+ differenze significative in termini di velocità di esplorazione.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Betweenness
+\end_layout
+
+\begin_layout Standard
+Si può a questo punto ripetere l'analisi, ma utilizzando come metrica di
+ riferimento la Betweenness.
+ Come prima, riporto i grafici rappresentanti i valori medi e di massimo
+ del valore della Betweenness nei vari ambienti.
+ Il valore di minimo non è riportato, in quanto esso corrisponde sempre
+ a 0.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MMM vis bet.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MMM top bet.emf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A differenza dei dati sulla Closeness, qui l'andamento tra i due grafici
+ è piuttosto diverso.
+ Per prima cosa bisogna notare le diverse scale tra i due grafici, infatti
+ quello del grafo di visibilità presenta valori molto maggiori rispetto
+ all'altro.
+ Questo è dovuto alla grande differenza nel numero di nodi tra i due grafi.
+ Si può procedere ad effettuare una normalizzazione della Betweenness, divedendo
+ il valore di ciascun nodo per 
+\begin_inset Formula $(N-1)(N-2)*2$
+\end_inset
+
+ trattandosi di un grafo non orientato.
+ Con questa normalizzazione, il valore della Betweenness sarà compreso tra
+ 0 ed 1, ma il valore 1 viene assegnato solamente al nodo per il quale passano
+ tutti i percorsi più brevi tra ogni altra coppia di nodi, se esiste.
+ I grafici che si ottengono utilizzando i valori normalizzati sono i seguenti:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MMM vis bet norm.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MMM top bet norm.emf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Gli andamenti sono qui molto diversi tra i due tipi di grafo ed anche molto
+ diversi rispetto ai precedenti.
+ In ogni caso si può notare che la media è sempre un valore molto più piccolo
+ rispetto al massimo.
+ Inoltre, nel grafo di visibilità il valore massimo per l'ambiente 3 è più
+ alto rispetto agli altri.
+ Ciò non è vero nel caso del grafo topologico, dove nel primo caso (valori
+ non normalizzati) lo si ha nell'ambiente 5, mentre nel caso dei valori
+ normalizzati lo si ha per l'1.
+\end_layout
+
+\begin_layout Standard
+Guardando anche ai grafici della media rispetto alla deviazione standard,
+ si può vedere come l'andamento sia parecchio diverso tra i due tipi di
+ grafi e utilizzando valori normalizzati e non.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MD vis bet.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MD top bet.emf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Nel caso del grafo di visibilità, i valori delle deviazioni standard sono
+ in 4 casi maggiori della media e in particolare, nell'ambiente 5, il valore
+ di deviazione standard è estremamente più alto della media.
+ Per il grafo topologico, i valori assoluti delle due statistiche sono sempre
+ piuttosto simili tra loro.
+\end_layout
+
+\begin_layout Standard
+Anche qui si può analizzare come variano i grafici considerando la normalizzazio
+ne considerata sopra e si ottengono i grafici seguenti.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename MD vis bet norm.emf
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename MD top bet norm.emf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per quanto riguarda il grafo di visibilità, l'applicazione edlla normalizzazione
+ tende a smussare le differenze del grafico precedente, mantenendo le stesse
+ relazioni.
+ Al contrario, il grafico relativo al grafo topologico presenta un diverso
+ andamento per quanto riguarda gli ambienti con media più alta e conseguentement
+e anche di deviazione standard.
+ 
+\end_layout
+
+\begin_layout Standard
+A questo punto si può guardare se e come questo si ripercuote anche sulle
+ performance in fase di esplorazione.
+ 
+\end_layout
+
+\end_body
+\end_document

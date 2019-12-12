@@ -398,7 +398,7 @@ public class MainGUI extends javax.swing.JFrame {
         int envCount;
 
         if(args.length == 0){
-            envCount = 5;
+            envCount = 1;
         }else{
             envCount = Integer.parseInt(args[0]);
         }
