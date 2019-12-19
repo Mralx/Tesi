@@ -19,10 +19,10 @@ import java.util.concurrent.Executors;
 
 public class GraphEdit {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
-        int env = 6;
-        //GraphHandler.test();
+        //int env = 6;
+        //GraphHandler.test(env);
         //drawDiscretizedGraph(env);
         //drawDiscretizedGraphMetrics("Closeness", env);
         //drawDiscretizedGraphMetrics("Betweenness", env);

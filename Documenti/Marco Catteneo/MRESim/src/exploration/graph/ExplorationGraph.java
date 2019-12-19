@@ -427,11 +427,13 @@ public class ExplorationGraph {
                                                                              Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix) {
 
         List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
+        boolean update = false;
         double[][] distances = new double[nodes.size()][nodes.size()];
         int[][] spCounts = new int[nodes.size()][nodes.size()];
         Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap = new HashMap<>();
         Map<SimpleNode, List<SimpleNode>> matrixRow;
         List<SimpleNode> matrixCell;
+        SimpleNode iNode, jNode, kNode;
 
         //matrices of distances and counts initialization
         System.out.println("Inizializzazione matrice distanze e conte");
@@ -461,26 +463,45 @@ public class ExplorationGraph {
         //Floyd-Warshall
         double n = nodes.size(); //TODO aggiunto per controllare avanzamento da console
         for (int k = 0; k < nodes.size(); k++) {
+            kNode = nodes.get(k);
             for (int i = 0; i < nodes.size(); i++) {
-                matrixRow = childMap.get(nodes.get(i));
+                iNode = nodes.get(i);
+                matrixRow = childMap.get(iNode);
                 for (int j = i + 1; j < nodes.size(); j++) {
+                    jNode = nodes.get(j);
                     matrixCell = new LinkedList<>();
-                    if (!nodes.get(k).isFrontier()) {
-                        if (distances[i][j] == distances[i][k] + distances[k][j]) {
-                            matrixCell = matrixRow.get(nodes.get(j));
+                    if (!kNode.isFrontier() && k!=i && k!=j) {
+                        if (distances[i][j] == distances[i][k] + distances[k][j] && distances[i][j] != Double.MAX_VALUE) {
+                            update = true;
+                            matrixCell = matrixRow.get(jNode);
+                            if(matrixCell == null) matrixCell = new LinkedList<>();
                             spCounts[i][j] += 1;
+                            System.out.println("sp+1 i "+nodes.get(i)+", j "+nodes.get(j)+", k "+nodes.get(k));
+                            System.out.println("distances ij "+distances[i][j]+", ik "+distances[i][k]+", kj "+distances[k][j]);
                         }
                         if (distances[i][j] > distances[i][k] + distances[k][j]) {
+                            update = true;
                             distances[i][j] = distances[i][k] + distances[k][j];
                             distances[j][i] = distances[i][j];
                             spCounts[i][j] = 1;
                         }
-                        if (matrixCell != null) {
-                            matrixCell.add(nodes.get(k));
-                            matrixRow.put(nodes.get(j), matrixCell);
-                            childMap.put(nodes.get(i), matrixRow);
+                        if (update) {
+                            matrixCell.add(kNode);
+                            matrixRow.put(jNode, matrixCell);
+                            childMap.put(iNode, matrixRow);
+
+
+                            Map<SimpleNode, List<SimpleNode>> jRow = childMap.get(jNode);
+                            List<SimpleNode> jChildren = jRow.get(iNode); //sbagliato, ma meno che sostituendolo con kNode, per quanto dovrebbe essere più giusto
+                            if(jChildren == null) jChildren = new LinkedList<>();
+                            jChildren.add(kNode);
+                            jRow.put(iNode, jChildren);
+                            childMap.put(jNode, jRow);
+
+
                         }
                         spCounts[j][i] = spCounts[i][j];
+                        update = false;
                     }
                 }
             }
@@ -502,7 +523,8 @@ public class ExplorationGraph {
      * Dynamic version of the Floyd-Warshall algorithm. In particular, it works only if there are only insertions and
      * no deletions from the graph. Updates the data structures used by the FW algorithm, plus the matrix counting the
      * number of shortest paths between each pair of nodes. The update is done based on the list of new nodes given in
-     * input, assuming they have already been added to the graph but not to the three data structures 
+     * input, assuming they have already been added to the graph but not to the three data structures
+     *
      * @param childMap the old childMap computed in the previous iterations of the FW algorithm
      * @param graphDistanceMatrix the old graph distance matrix computed in the previous iterations of the FW algorithm
      * @param spCountMatrix the old spCountsMatrix computed in the previous iterations of the FW algorithm
@@ -524,8 +546,12 @@ public class ExplorationGraph {
             for(int j=i; j<nodes.size(); j++){
                 distances[i][j] = graphDistanceMatrix.get(nodes.get(i)).get(nodes.get(j));
                 distances[j][i] = distances[i][j];
-                spCounts[i][j] = spCountMatrix.get(nodes.get(i)).get(nodes.get(j));
-                spCounts[j][i] = spCounts[i][j];
+                if(i==j)
+                    spCounts[i][i] = 0;
+                else{
+                    spCounts[i][j] = spCountMatrix.get(nodes.get(i)).get(nodes.get(j));
+                    spCounts[j][i] = spCounts[i][j];
+                }
             }
 
         for(SimpleNode v : newNodes){
@@ -534,11 +560,21 @@ public class ExplorationGraph {
             nonNeighbors = new LinkedList<>();
             for(SimpleNode node : this.nodeMap.keySet())
                 if(!getNode(v).isAdjacent(node)) nonNeighbors.add(node);
+            nonNeighbors.remove(v);
 
+            for(SimpleNode adj : getNode(v).getAdjacents()){
+                List<SimpleNode> fakeList = new LinkedList<>();
+                fakeList.add(v);
+                updateDataStructures(nonNeighbors,fakeList,nodes,childMap,distances,spCounts,adj);
+                updateDataStructures(fakeList,nonNeighbors,nodes,childMap,distances,spCounts,adj);
+            }
             updateDataStructures(neighbors,nodes,nodes,childMap,distances,spCounts,v);
             updateDataStructures(nonNeighbors,nonNeighbors,nodes,childMap,distances,spCounts,v);
+            fillGraphDistanceMatrix(graphDistanceMatrix,distances,nodes);
+            fillSpCountMatrix(spCountMatrix,spCounts,nodes);
+
+            // <editor-fold defaultstate="collapsed" desc="Versione probabilmente ottimizzabile, ma non ne sono sicuro">
             /*
-            //Versione probabilmente ottimizzabile, ma non ne sono sicuro
             for(SimpleNode n : neighbors){
                 idx1 = nodes.indexOf(n);
                 Map<SimpleNode, List<SimpleNode>> matrixRow = childMap.get(n);
@@ -572,6 +608,7 @@ public class ExplorationGraph {
                 }
             }
             */
+            // </editor-fold>
         }
     }
 
@@ -580,6 +617,7 @@ public class ExplorationGraph {
      * the two data sets by taking the starting node in the first one, and the arrival node in the second one. Then,
      * applies the update rule of the Floyd-Warshall algorithm to update the three data structures used, that are the
      * childMap, the graph distance matrix and the shortest paths count matrix
+     *
      * @param dataset1 the dataset containing the possible starting nodes
      * @param dataset2 the dataset containing the possible arrival nodes
      * @param nodes the list of nodes, used to fix an ordering over the nodes
@@ -609,6 +647,10 @@ public class ExplorationGraph {
                     matrixCell = new LinkedList<>();
 
                 if(update != -1) {
+                    if(update == 0 && alreadyFoundPath(matrixRow, childMap.get(t), n, t, v)){
+                        spCounts[idx1][idx2] -= 1;
+                        spCounts[idx2][idx1] = spCounts[idx1][idx2];
+                    }
                     matrixCell.add(v);
                     matrixRow.put(t,matrixCell);
                     childMap.put(n,matrixRow);
@@ -617,12 +659,19 @@ public class ExplorationGraph {
         }
     }
 
+    private boolean alreadyFoundPath(Map<SimpleNode, List<SimpleNode>> row1, Map<SimpleNode, List<SimpleNode>> row2,
+                              SimpleNode node1, SimpleNode node2, SimpleNode intN){
+        return  ((row1.get(node2)!=null && row1.get(node2).contains(intN)) ||
+                (row2.get(node1)!=null && row2.get(node1).contains(intN)));
+    }
+
     /**
      * Factorization of the update rule on which the Floyd-Warshall algorithm is based. Considering three nodes s,t and
      * k, the update rule checks the ordering relation between dist(s,t) and dist(s,k)+dist(k,t). In this case, being
      * the FW algorithm implemented here a variation of the original one, also the number of shortest paths between two
      * nodes is stored. The maintaining of its matrix and of the one of the distances is done here. The return value is
      * used to discriminate among the three possible cases
+     *
      * @param s the starting node
      * @param t the arrival node
      * @param k the node checked as an intermediate node
@@ -631,6 +680,9 @@ public class ExplorationGraph {
      * @return 1 if the path from s to t going through the intermediate k is shorter, 0 if it is equal, -1 otherwise
      */
     private int updateRule(int s, int t, int k, double[][] distances, int[][] spCounts){
+        if (k==s || k==t)
+            return -1;
+
         if (distances[s][t] > distances[s][k] + distances[k][t]) {
             distances[s][t] = distances[s][k] + distances[k][t];
             distances[t][s] = distances[s][t];
@@ -638,11 +690,13 @@ public class ExplorationGraph {
             spCounts[t][s] = 1;
             return 1;
         }
-        if (distances[s][t] == distances[s][k] + distances[k][t]) {
+
+        if (distances[s][t] == distances[s][k] + distances[k][t] && distances[s][t]!=Double.MAX_VALUE) {
             spCounts[s][t] += 1;
             spCounts[t][s] = spCounts[s][t];
             return 0;
         }
+
         return -1;
     }
 
@@ -652,6 +706,7 @@ public class ExplorationGraph {
      * simply considering the same as above definitions for the graph distance matrix and for the shortest paths matrix.
      * This method also exploits the symmetry of the undirected graph to update the corresponding cells for the old
      * nodes in the graph
+     *
      * @param newNodes list of new nodes added to the graph
      * @param childMap the childMap to update
      * @param graphDistanceMatrix the graphDistanceMatrix of the graph
@@ -703,23 +758,39 @@ public class ExplorationGraph {
      * Adds a new node to the childMap, doesn't check if the node is already there. The row is filled considering that,
      * being n the added node, child(n,n) = n and child(n,adj) = adj, being the child relation such that child(x,y) is
      * the next node (or nodes) on the shortest paths from x to y
+     *
      * @param childMap the childMap being updated, assumed to be non null
      * @param n the node to add to the childMap
      */
     private void addChildMapRow(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap, SimpleNode n){
-        Map<SimpleNode, List<SimpleNode>> matrixRow;
-        List<SimpleNode> matrixCell;
+        Map<SimpleNode, List<SimpleNode>> matrixRow, nodeRow;
+        List<SimpleNode> matrixCell, nodeCell;
 
         matrixRow = new HashMap<>();
         //child(n,n) = n;
         matrixCell = new LinkedList<>();
         matrixCell.add(n);
         matrixRow.put(n, matrixCell);
-        //child(n,adj) = adj;
-        for (SimpleNode adj : getNode(n).getAdjacents()) {
-            matrixCell = new LinkedList<>();
-            matrixCell.add(adj);
-            matrixRow.put(adj, matrixCell);
+        //child(n,node) = predecessor of node on the path from n to node
+        matrixRow = new HashMap<>();
+        for(SimpleNode node : childMap.keySet()){
+            if(!getNode(n).isAdjacent(node)){
+                matrixCell = null;
+                nodeCell = null;
+            }
+            else {
+                matrixCell = new LinkedList<>();
+                nodeCell = new LinkedList<>();
+                matrixCell.add(node);
+                nodeCell.add(n);
+            }
+            matrixRow.put(node, matrixCell);
+
+            nodeRow = childMap.get(node);
+            if(nodeRow == null) nodeRow = new HashMap<>();
+            nodeRow.put(n, nodeCell);
+            childMap.put(node, nodeRow);
+
         }
         childMap.put(n, matrixRow);
     }

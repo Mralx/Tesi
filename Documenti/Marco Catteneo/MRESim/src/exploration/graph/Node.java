@@ -97,6 +97,8 @@ public class Node extends SimpleNode {
     }
 
     double getDistance(SimpleNode node){
+        if(this.equals(node))
+            return 0;
         if(adj.containsKey(node))
             return adj.get(node);
         return java.lang.Double.MAX_VALUE;

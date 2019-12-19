@@ -52,6 +52,10 @@ public class GraphHandler {
 
     public static Semaphore getSemaphore(){ return semaphore;}
 
+    public static void setGraph(ExplorationGraph graph) {
+        GraphHandler.graph = graph;
+    }
+
     public static void setEnvironment(OccupancyGrid environment) {
         GraphHandler.environment = environment;
     }
