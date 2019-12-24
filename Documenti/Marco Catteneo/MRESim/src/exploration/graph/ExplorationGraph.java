@@ -1,6 +1,7 @@
 package exploration.graph;
 
 import agents.RealAgent;
+import config.Constants;
 import environment.OccupancyGrid;
 
 import java.io.BufferedWriter;
@@ -17,7 +18,7 @@ public class ExplorationGraph {
     private Map<String, SimpleNode> lastAddedNodes;
     private SimpleNode lastNode;
     private boolean dirty;
-    //lastNode could be dropped if the edges are generated not in an historical way, i.e. in the visibility graph
+    //lastNode could be dropped if the edges are generated not in an historical way, e.g. in the visibility graph
 
     ExplorationGraph() {
         this.nodeMap = new LinkedHashMap<>();
@@ -224,6 +225,20 @@ public class ExplorationGraph {
     }
 
     /**
+     * Checks if the node in input is within a certain distance from any other node already in the graph
+     *
+     * @param node1 the node to check
+     * @return true if there is another node in the graph within a certain distance, false otherwise
+     */
+    boolean nearAnotherNode(SimpleNode node1){
+        for(SimpleNode node2 : nodeMap.keySet()){
+            if(euclideanDistance(node1,node2) < Constants.DISTANCE_THRESHOLD)
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * Creates an edge between a node and a node of the graph, if not already present. The first node in input doesn't
      * need to be already in the graph, this only holds for the second one. After having linked the two nodes, returns
      * the first node in input with the updated adjacency list. The distance between the two nodes is computed as the
@@ -423,11 +438,11 @@ public class ExplorationGraph {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Incremental Floyd-Warshall">
-    Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> allPairsShortestPaths(Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
-                                                                             Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix) {
+    void allPairsShortestPaths(GraphStats stats) {
+        System.out.println("Distances computation through complete FW");
 
         List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
-        boolean update = false;
+        int update = -1;
         double[][] distances = new double[nodes.size()][nodes.size()];
         int[][] spCounts = new int[nodes.size()][nodes.size()];
         Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap = new HashMap<>();
@@ -436,7 +451,6 @@ public class ExplorationGraph {
         SimpleNode iNode, jNode, kNode;
 
         //matrices of distances and counts initialization
-        System.out.println("Inizializzazione matrice distanze e conte");
         for (int i = 0; i < nodes.size() - 1; i++) {
             for (int j = i; j < nodes.size(); j++) {
 
@@ -453,15 +467,13 @@ public class ExplorationGraph {
             }
         }
 
-        System.out.println("Inizializzazione completata, inizializzazione childMap");
         //childMap initialization
         for (SimpleNode n : nodes) {
             addChildMapRow(childMap,n);
         }
-        System.out.println("Inizializzazione childMap completata, calcolo distanze vero e proprio");
 
         //Floyd-Warshall
-        double n = nodes.size(); //TODO aggiunto per controllare avanzamento da console
+        //double n = nodes.size(); //TODO aggiunto per controllare avanzamento da console
         for (int k = 0; k < nodes.size(); k++) {
             kNode = nodes.get(k);
             for (int i = 0; i < nodes.size(); i++) {
@@ -472,48 +484,37 @@ public class ExplorationGraph {
                     matrixCell = new LinkedList<>();
                     if (!kNode.isFrontier() && k!=i && k!=j) {
                         if (distances[i][j] == distances[i][k] + distances[k][j] && distances[i][j] != Double.MAX_VALUE) {
-                            update = true;
+                            update = 0;
                             matrixCell = matrixRow.get(jNode);
                             if(matrixCell == null) matrixCell = new LinkedList<>();
                             spCounts[i][j] += 1;
-                            System.out.println("sp+1 i "+nodes.get(i)+", j "+nodes.get(j)+", k "+nodes.get(k));
-                            System.out.println("distances ij "+distances[i][j]+", ik "+distances[i][k]+", kj "+distances[k][j]);
                         }
                         if (distances[i][j] > distances[i][k] + distances[k][j]) {
-                            update = true;
+                            update = 1;
                             distances[i][j] = distances[i][k] + distances[k][j];
                             distances[j][i] = distances[i][j];
-                            spCounts[i][j] = 1;
+                            spCounts[i][j] = spCounts[i][k]*spCounts[k][j];
                         }
-                        if (update) {
-                            matrixCell.add(kNode);
-                            matrixRow.put(jNode, matrixCell);
-                            childMap.put(iNode, matrixRow);
-
-
-                            Map<SimpleNode, List<SimpleNode>> jRow = childMap.get(jNode);
-                            List<SimpleNode> jChildren = jRow.get(iNode); //sbagliato, ma meno che sostituendolo con kNode, per quanto dovrebbe essere più giusto
-                            if(jChildren == null) jChildren = new LinkedList<>();
-                            jChildren.add(kNode);
-                            jRow.put(iNode, jChildren);
-                            childMap.put(jNode, jRow);
-
-
-                        }
+                        if (update!=-1) symmetricChildAdd(childMap, matrixRow, matrixCell, iNode, jNode, kNode,update==1);
                         spCounts[j][i] = spCounts[i][j];
-                        update = false;
+                        update = -1;
                     }
                 }
             }
             //TODO aggiunto per controllare avanzamento da console
-            double percentage = (k / n) * 10000;
-            percentage = (percentage % 10000) / 100;
-            System.out.println("k " + percentage + "%");
+            //double percentage = (k / n) * 10000;
+            //percentage = (percentage % 10000) / 100;
+            //System.out.println("k " + percentage + "%");
         }
+        Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix = new HashMap<>();
+        Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix = new HashMap<>();
 
         fillSpCountMatrix(spCountMatrix, spCounts, nodes);
         fillGraphDistanceMatrix(graphDistanceMatrix, distances, nodes);
-        return childMap;
+
+        stats.setGraphDistanceMatrix(graphDistanceMatrix);
+        stats.setSpCountMatrix(spCountMatrix);
+        stats.setChildMap(childMap);
     }
 
     /*
@@ -534,6 +535,7 @@ public class ExplorationGraph {
                        Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix,
                        Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix,
                        List<SimpleNode> newNodes){
+        System.out.println("Distances computation through incremental FW");
 
         List<SimpleNode> nodes = new LinkedList<>(this.nodeMap.keySet());
         LinkedList<SimpleNode> neighbors, nonNeighbors;
@@ -544,11 +546,13 @@ public class ExplorationGraph {
 
         for(int i=0; i<nodes.size()-1; i++)
             for(int j=i; j<nodes.size(); j++){
-                distances[i][j] = graphDistanceMatrix.get(nodes.get(i)).get(nodes.get(j));
-                distances[j][i] = distances[i][j];
-                if(i==j)
+                if(i==j) {
+                    distances[i][i] = 0;
                     spCounts[i][i] = 0;
+                }
                 else{
+                    distances[i][j] = graphDistanceMatrix.get(nodes.get(i)).get(nodes.get(j));
+                    distances[j][i] = distances[i][j];
                     spCounts[i][j] = spCountMatrix.get(nodes.get(i)).get(nodes.get(j));
                     spCounts[j][i] = spCounts[i][j];
                 }
@@ -568,8 +572,11 @@ public class ExplorationGraph {
                 updateDataStructures(nonNeighbors,fakeList,nodes,childMap,distances,spCounts,adj);
                 updateDataStructures(fakeList,nonNeighbors,nodes,childMap,distances,spCounts,adj);
             }
-            updateDataStructures(neighbors,nodes,nodes,childMap,distances,spCounts,v);
-            updateDataStructures(nonNeighbors,nonNeighbors,nodes,childMap,distances,spCounts,v);
+            if(!v.isFrontier()) {
+                updateDataStructures(neighbors, nodes, nodes, childMap, distances, spCounts, v);
+                updateDataStructures(nonNeighbors, nonNeighbors, nodes, childMap, distances, spCounts, v);
+            }
+
             fillGraphDistanceMatrix(graphDistanceMatrix,distances,nodes);
             fillSpCountMatrix(spCountMatrix,spCounts,nodes);
 
@@ -651,9 +658,8 @@ public class ExplorationGraph {
                         spCounts[idx1][idx2] -= 1;
                         spCounts[idx2][idx1] = spCounts[idx1][idx2];
                     }
-                    matrixCell.add(v);
-                    matrixRow.put(t,matrixCell);
-                    childMap.put(n,matrixRow);
+
+                    symmetricChildAdd(childMap,matrixRow,matrixCell,n,t,v,update==1);
                 };
             }
         }
@@ -663,6 +669,26 @@ public class ExplorationGraph {
                               SimpleNode node1, SimpleNode node2, SimpleNode intN){
         return  ((row1.get(node2)!=null && row1.get(node2).contains(intN)) ||
                 (row2.get(node1)!=null && row2.get(node1).contains(intN)));
+    }
+
+    private void symmetricChildAdd(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap,
+                                   Map<SimpleNode, List<SimpleNode>> matrixRow, List<SimpleNode> matrixCell,
+                                   SimpleNode n1, SimpleNode n2, SimpleNode n3, boolean clear){
+
+        for(SimpleNode child13 : childMap.get(n1).get(n3))
+            if(!matrixCell.contains(child13))
+                matrixCell.add(child13);
+        matrixRow.put(n2, matrixCell);
+        childMap.put(n1, matrixRow);
+
+        Map<SimpleNode, List<SimpleNode>> tRow = childMap.get(n2);
+        List<SimpleNode> tChildren = tRow.get(n1);
+        if(tChildren == null || clear) tChildren = new LinkedList<>();
+        for(SimpleNode child23 : childMap.get(n2).get(n3))
+            if(!tChildren.contains(child23))
+                tChildren.add(child23);
+        tRow.put(n1, tChildren);
+        childMap.put(n2, tRow);
     }
 
     /**
@@ -686,8 +712,8 @@ public class ExplorationGraph {
         if (distances[s][t] > distances[s][k] + distances[k][t]) {
             distances[s][t] = distances[s][k] + distances[k][t];
             distances[t][s] = distances[s][t];
-            spCounts[s][t] = 1;
-            spCounts[t][s] = 1;
+            spCounts[s][t] = spCounts[s][k]*spCounts[k][t];
+            spCounts[t][s] = spCounts[s][t];
             return 1;
         }
 

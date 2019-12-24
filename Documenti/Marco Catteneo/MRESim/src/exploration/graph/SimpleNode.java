@@ -46,9 +46,4 @@ public class SimpleNode extends Point {
         return super.hashCode();
     }
 
-    public boolean equals(SimpleNode node) {
-        if(node.x-DISTANCE_THRESHOLD <= this.x && this.x <= node.x+DISTANCE_THRESHOLD)
-            return node.y-DISTANCE_THRESHOLD <= this.y && this.y <= node.y+DISTANCE_THRESHOLD;
-        return false;
-    }
 }

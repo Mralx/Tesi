@@ -50,19 +50,21 @@ public class Testing {
         VisibilityGraph graph = new VisibilityGraph();
         graph.setNodeMap(nodeMap);
         GraphHandler.setGraph(graph);
+        GraphStats stats = new GraphStats();
 
         Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap;
         Map<SimpleNode, Map<SimpleNode, Double>> distanceMatrix = new HashMap<>();
         Map<SimpleNode, Map<SimpleNode, Integer>> spMatrix = new HashMap<>();
 
-        childMap = graph.allPairsShortestPaths(distanceMatrix, spMatrix);
-        for(SimpleNode n : childMap.keySet()){
-            System.out.println("Node ["+n.x+","+n.y+"] -> "+childMap.get(n).toString());
-            //System.out.println("Node ["+n.x+","+n.y+"] -> "+distanceMatrix.get(n).toString());
-            System.out.println("Node ["+n.x+","+n.y+"] -> "+spMatrix.get(n).toString());
+        graph.allPairsShortestPaths(stats);
+        for(SimpleNode n : stats.getChildMap().keySet()){
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getChildMap().get(n).toString());
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getGraphDistanceMatrix().get(n).toString());
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getSpCountMatrix().get(n).toString());
         }
         System.out.println("\n\n");
 
+        /*
         node5.addAdjacent(n2,2);
         node5.addAdjacent(n4,2);
         node2.addAdjacent(n5,2);
@@ -75,15 +77,41 @@ public class Testing {
         List<SimpleNode> newNodes = new LinkedList<>();
         newNodes.add(n5);
         graph.incrementalFW(childMap,distanceMatrix,spMatrix,newNodes);
-        //TODO rivedere definizione childMap, poi correggere gli errori riguardo spcounts e i risultati non sono coerenti
-        //TODO tra i due metodi
-
         //childMap = graph.allPairsShortestPaths(distanceMatrix,spMatrix);
         for(SimpleNode n : childMap.keySet()){
             System.out.println("Node ["+n.x+","+n.y+"] -> "+childMap.get(n).toString());
             //System.out.println("Node ["+n.x+","+n.y+"] -> "+distanceMatrix.get(n).toString());
             System.out.println("Node ["+n.x+","+n.y+"] -> "+spMatrix.get(n).toString());
         }
+        */
+        node5.addAdjacent(n2,2);
+        node5.addAdjacent(n4,2);
+        node2.addAdjacent(n5,2);
+        node4.addAdjacent(n5,2);
+        node6.addAdjacent(n2, 1.414);
+        node6.addAdjacent(n3, 1.414);
+        node6.addAdjacent(n4, 1.414);
+        node6.addAdjacent(n5, 1.414);
+        node2.addAdjacent(n6, 1.414);
+        node3.addAdjacent(n6, 1.414);
+        node4.addAdjacent(n6, 1.414);
+        node5.addAdjacent(n6, 1.414);
 
+        nodeMap.put(n2,node2);
+        nodeMap.put(n4,node4);
+        nodeMap.put(n5,node5);
+        nodeMap.put(n6,node6);
+        graph.setNodeMap(nodeMap);
+        GraphHandler.setGraph(graph);
+        List<SimpleNode> newNodes = new LinkedList<>();
+        newNodes.add(n5);
+        newNodes.add(n6);
+        //graph.incrementalFW(childMap,distanceMatrix,spMatrix,newNodes);
+        graph.allPairsShortestPaths(stats);
+        for(SimpleNode n : stats.getChildMap().keySet()){
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getChildMap().get(n).toString());
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getGraphDistanceMatrix().get(n).toString());
+            System.out.println("Node ["+n.x+","+n.y+"] -> "+stats.getSpCountMatrix().get(n).toString());
+        }
     }
 }

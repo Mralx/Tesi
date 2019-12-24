@@ -155,7 +155,9 @@ public class GraphHandler {
 
     public static void updateNodes(Set<RealAgent> agents ){
         for(RealAgent agent : agents){
-            graph.addNode(new SimpleNode(agent.getX(), agent.getY()),agent.getName(), agent.getTimeElapsed());
+            SimpleNode node = new SimpleNode(agent.getX(), agent.getY());
+            if(!graph.nearAnotherNode(node))
+                graph.addNode(node, agent.getName(), agent.getTimeElapsed());
         }
         if(!GraphHandler.graphCorrectness()){
             GraphHandler.graphUncorrectnessPrint();

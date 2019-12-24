@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 class GraphStats {
@@ -16,12 +17,38 @@ class GraphStats {
     private Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix;
     private Map<SimpleNode, Double> closenessMap;
     private Map<SimpleNode, Double> betweennessMap;
+    private Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap;
 
     GraphStats() {
         this.graphDistanceMatrix = new HashMap<>();
         this.spCountMatrix = new HashMap<>();
         this.closenessMap = new HashMap<>();
         this.betweennessMap = new HashMap<>();
+        this.childMap = new HashMap<>();
+    }
+
+    public Map<SimpleNode, Map<SimpleNode, Integer>> getSpCountMatrix() {
+        return spCountMatrix;
+    }
+
+    public void setSpCountMatrix(Map<SimpleNode, Map<SimpleNode, Integer>> spCountMatrix) {
+        this.spCountMatrix = spCountMatrix;
+    }
+
+    public Map<SimpleNode, Map<SimpleNode, Double>> getGraphDistanceMatrix() {
+        return graphDistanceMatrix;
+    }
+
+    public void setGraphDistanceMatrix(Map<SimpleNode, Map<SimpleNode, Double>> graphDistanceMatrix) {
+        this.graphDistanceMatrix = graphDistanceMatrix;
+    }
+
+    public Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> getChildMap() {
+        return childMap;
+    }
+
+    public void setChildMap(Map<SimpleNode, Map<SimpleNode, List<SimpleNode>>> childMap) {
+        this.childMap = childMap;
     }
 
     /**
@@ -61,8 +88,34 @@ class GraphStats {
      * the graph and as value, the distance between the key of the first map and the key of this one
      */
     private Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix(ExplorationGraph graph){
-        Map<SimpleNode, Map<SimpleNode,Double>> graphDistanceMatrix = new HashMap<>();
-        graph.allPairsShortestPaths(graphDistanceMatrix,spCountMatrix);
+
+        if(!this.childMap.isEmpty()){
+            //nodes to add to the childMap
+            List<SimpleNode> newNodes = graph.getNodeMap().keySet().stream()
+                    .filter(n -> !this.childMap.containsKey(n))
+                    .collect(Collectors.toList());
+            //nodes to remove from the childMap
+            List<SimpleNode> oldNodes = childMap.keySet().stream()
+                    .filter(n -> !graph.getNodeMap().containsKey(n))
+                    .collect(Collectors.toList());
+
+            if (!newNodes.isEmpty() && oldNodes.stream().allMatch(SimpleNode::isFrontier)){
+                for(SimpleNode n1 : oldNodes){
+                    this.childMap.remove(n1);
+                    this.graphDistanceMatrix.remove(n1);
+                    this.spCountMatrix.remove(n1);
+                    for(SimpleNode n2 : childMap.keySet()){
+                        this.childMap.get(n2).remove(n1);
+                        this.graphDistanceMatrix.get(n2).remove(n1);
+                        this.spCountMatrix.get(n2).remove(n1);
+                    }
+                }
+                graph.incrementalFW(this.childMap,this.graphDistanceMatrix,this.spCountMatrix,newNodes);
+                return graphDistanceMatrix;
+            }
+        }
+
+        graph.allPairsShortestPaths(this);
         return graphDistanceMatrix;
     }
 
