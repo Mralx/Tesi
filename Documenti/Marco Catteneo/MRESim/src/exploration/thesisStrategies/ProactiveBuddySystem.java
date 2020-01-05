@@ -353,6 +353,7 @@ public class ProactiveBuddySystem {
 
         }
 
+        //if (activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
             double xSum = 0;
             double ySum = 0;

@@ -53,7 +53,7 @@ public class Constants {
 
     public static final int MIN_AGENTS = 6;     //starting team size, always >=2
 
-    public static final int BATCH_AGENTS = 6;   //max team size
+    public static final int BATCH_AGENTS = 11;   //max team size
 
     public static final int BATCH_ENVS = 1;     //max number of simulated environment
     // </editor-fold>
@@ -65,7 +65,7 @@ public class Constants {
     public static final boolean TOPOLOGICAL = false;
     public static final boolean MAP_ERASE = true;
     public static final boolean ORIGINAL = false;
-    public static final char METRIC = 'C';      //closeness or betweenness
+    public static final char METRIC = 'B';      //closeness or betweenness
 
     // <editor-fold defaultstate="collapsed" desc="Clustering constants">
     public static final int CLOSE_PARAM = 125;

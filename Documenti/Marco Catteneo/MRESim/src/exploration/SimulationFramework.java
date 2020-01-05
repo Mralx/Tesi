@@ -234,7 +234,6 @@ public class SimulationFramework implements ActionListener {
                     agent[i].addTeammate(teammate[j].copy());
 
         GraphHandler.initializeVisGraph(this.agent);
-        //GraphHandler.initializeVisGraph(this.agent);
 
         //Strategies starting agents operations
         switch(simConfig.getExpAlgorithm()) {
@@ -753,6 +752,7 @@ public class SimulationFramework implements ActionListener {
         writeToTeamConfig(dim);
 
         this.mainGUI.closeGUI();
+        this.clearAll(); //togliere se va comunque in dump
         String [] par = new String[1];
         par[0] = String.valueOf(environmentCounter);
         MainGUI.main(par);
@@ -771,6 +771,8 @@ public class SimulationFramework implements ActionListener {
         writeToTeamConfig(Constants.MIN_AGENTS+1);
 
         this.mainGUI.closeGUI();
+        this.clearAll(); //togliere se va comunque in dump
+
         String [] par = new String[1];
         par[0] = String.valueOf(n);
         MainGUI.main(par);

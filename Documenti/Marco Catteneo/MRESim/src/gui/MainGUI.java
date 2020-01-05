@@ -83,7 +83,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     //Added
     private int envCount; //Environment counter for batch runs
-    
+
     /** Creates new form MainGUI */
     public MainGUI(int envCount) {
         RUNMODE = runMode.stopped;
@@ -98,18 +98,18 @@ public class MainGUI extends javax.swing.JFrame {
         simConfig = new SimulatorConfig(envCount);
         this.envCount = envCount;
         updateFromRobotTeamConfig();
-        updateFromEnvConfig();   
+        updateFromEnvConfig();
         //simulation = new SimulationFramework(this, robotTeamConfig, simConfig, explorationImage);
-        
-        
+
+
 
         showConnex = true;
-        
+
         initGraphFrame();
 
         buttonStartActionPerformed(null);
     }
-    
+
     private void initGraphFrame()
     {
         graphFrame = new JFrame("Agent knowledge graph");
@@ -122,25 +122,25 @@ public class MainGUI extends javax.swing.JFrame {
         graphPanel.setSize(graphFrame.getSize());
         graphFrame.setVisible(false);
     }
-    
+
 // <editor-fold defaultstate="collapsed" desc="Get and Set">
 
     public javax.swing.JPanel getPanelConfiguration() {
         return null;
     }
-    
+
     public javax.swing.JPanel getPanelRobotInfo() {
         return panelRobotInfo;
     }
-    
+
     public javax.swing.JPanel getPanelExploration() {
         return panelExploration;
     }
-    
+
     public javax.swing.JScrollPane getScrollpaneImage() {
         return scrollPaneImage;
     }
-    
+
     public javax.swing.JLabel getLabelImageHolder() {
         return labelImageHolder;
     }
@@ -148,11 +148,11 @@ public class MainGUI extends javax.swing.JFrame {
     public SimulationFramework getExploration() {
         return simulation;
     }
-    
+
     public String getExplorationType() {
         return (null);
     }
-    
+
     public boolean showEnv() {
         return toggleEnv.isSelected();
     }
@@ -160,7 +160,7 @@ public class MainGUI extends javax.swing.JFrame {
     public void setShowHierarchy(boolean show) {
         toggleHierarchy.setSelected(show);
     }
-    
+
     public boolean showHierarchy() {
         return toggleHierarchy.isSelected();
     }
@@ -169,11 +169,11 @@ public class MainGUI extends javax.swing.JFrame {
         showConnex = show;
 
     }
-    
+
     public boolean showConnections() {
         return showConnex;
     }
-    
+
     public RobotPanel getRobotPanel(int i) {
         //System.out.println(i);
         return (RobotPanel)panelRobotInfo.getComponent(i);
@@ -183,18 +183,18 @@ public class MainGUI extends javax.swing.JFrame {
     {
         return showSettings;
     }
-    
+
     public ShowSettingsAgent[] getShowSettingsAgents()
     {
         return showSettingsAgents;
     }
     // </editor-fold>
-    
+
 // <editor-fold defaultstate="collapsed" desc="GUI changes">
 
 
     public void updateFromRobotTeamConfig() {
-        try {        
+        try {
             RobotConfig currRobot;
             RobotPanel currRobotPanel;
 
@@ -209,7 +209,7 @@ public class MainGUI extends javax.swing.JFrame {
             panelRobotInfo.add(Box.createVerticalGlue());
 
             panelRobotInfo.repaint();
-            
+
             panelRobotInfo.revalidate();
             //panelRobotInfo.getTopLevelAncestor().validate();
             explorationImage = new ExplorationImage(simConfig.getEnv());
@@ -218,7 +218,7 @@ public class MainGUI extends javax.swing.JFrame {
             validate();
             updateShowSettings();
             updateShowSettingsAgents();
-            
+
        }
        catch (NullPointerException e) {
            System.out.println("Updating from robotTeamConfig: null pointer exception.");
@@ -236,26 +236,26 @@ public class MainGUI extends javax.swing.JFrame {
            System.out.println("Updating from envConfig: null pointer exception.");
        }
    }
-   
+
    public void updateFromData(RealAgent agent[], int timeElapsed, double pctAreaKnown, int avgCycleTime) {
-       
+
        RobotPanel currRobotPanel;
        DecimalFormat oneDigit = new DecimalFormat("#,###,##0.00");
-       
+
        for(int i=0; i<agent.length; i++) {
            currRobotPanel = (RobotPanel)panelRobotInfo.getComponent(i);
            currRobotPanel.getLabelRole().setText(agent[i].getRole().toString());
            currRobotPanel.getLabelState().setText(agent[i].getState().toString());
            currRobotPanel.getLabelPower().setText(Integer.toString(agent[i].getBatteryPower()));
        }
-       
+
        labelCycleUpdate.setText(Integer.toString(timeElapsed));
        //labelExploredUpdate.setText(Integer.toString(pctAreaKnown));
        labelExploredUpdate.setText(oneDigit.format(pctAreaKnown));
        labelAvgCycleUpdate.setText(avgCycleTime + " ms");
        //if (timeElapsed % Constants.UPDATE_GRAPH_INTERVAL == 0) updateKnowledgeGraph(agent);
    }
-   
+
    public void updateShowSettings()
    {
        showSettings = new ShowSettings();
@@ -263,7 +263,7 @@ public class MainGUI extends javax.swing.JFrame {
        showSettings.showConnections = showConnections();
        showSettings.showHierarchy = showHierarchy();
    }
-   
+
    public void updateShowSettingsAgents()
    {
        int numRobots = robotTeamConfig.getNumRobots();
@@ -286,7 +286,7 @@ public class MainGUI extends javax.swing.JFrame {
            }
        }
    }
-   
+
     private JFreeChart createKnowledgeChart(RealAgent agent[])
     {
         XYSeriesCollection xyDataset = new XYSeriesCollection();
@@ -309,11 +309,11 @@ public class MainGUI extends javax.swing.JFrame {
             Iterator it = agent[i].knowledgeData.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<Integer, Double> pairs = (Map.Entry) it.next();
-                
+
                 series.add(pairs.getKey(), pairs.getValue());
             }
-            xyDataset.addSeries(series); 
-        }        
+            xyDataset.addSeries(series);
+        }
         jointKnowledge.put(simulation.getTimeElapsed(), (double) simulation.getTrueJointAreaKnown() / (double) simulation.getTotalArea());
         XYSeries series = new XYSeries("Joint agent knowledge");
         Iterator it = jointKnowledge.entrySet().iterator();
@@ -336,7 +336,7 @@ public class MainGUI extends javax.swing.JFrame {
         chart.getXYPlot().getRenderer().setSeriesStroke(agent.length, new BasicStroke(3));
         return chart;
     }
-   
+
    public void updateKnowledgeGraph(RealAgent agent[])
    {
        graphPanel.removeAll();
@@ -347,15 +347,15 @@ public class MainGUI extends javax.swing.JFrame {
        graphPanel.getParent().validate();
        chartPanel.updateUI();
    }
-   
+
    public void runComplete() {
         buttonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/buttonPlay.png")));
         RUNMODE = runMode.stopped;
         simulation.kill();
         simulation = null;
-        JOptionPane.showMessageDialog(new JFrame(), 
-                         "The run has finished.  There are no new position for the robots to move to.", 
-                         "Run complete", 
+        JOptionPane.showMessageDialog(new JFrame(),
+                         "The run has finished.  There are no new position for the robots to move to.",
+                         "Run complete",
                          JOptionPane.PLAIN_MESSAGE);
    }
 
@@ -383,7 +383,7 @@ public class MainGUI extends javax.swing.JFrame {
             simConfig.saveSimulatorConfig();
             simConfig.saveWallConfig();
             System.exit(0);
-        } 
+        }
     };
     */
 
@@ -398,7 +398,7 @@ public class MainGUI extends javax.swing.JFrame {
         int envCount;
 
         if(args.length == 0){
-            envCount = 2;
+            envCount = 1;
         }else{
             envCount = Integer.parseInt(args[0]);
         }

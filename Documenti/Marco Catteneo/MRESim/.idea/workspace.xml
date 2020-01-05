@@ -64,6 +64,7 @@
       <change beforePath="$PROJECT_DIR$/config/lairTeam/7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lairTeam/7.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lairTeam/8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lairTeam/8.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lairTeam/9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lairTeam/9.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastSimulatorConfig.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lastteamconfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config/lastteamconfig.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lgrid_8r" beforeDir="false" afterPath="$PROJECT_DIR$/config/lgrid_8r" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lgrid_start_4r" beforeDir="false" afterPath="$PROJECT_DIR$/config/lgrid_start_4r" afterDir="false" />
@@ -443,7 +444,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -561,10 +562,9 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphEdit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="GraphEdit" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="exploration.graph.GraphEdit" />
       <module name="MRESim" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="exploration.graph.*" />
@@ -631,6 +631,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="GraphEdit" type="Application" />
+      <toRun name="MainGUI" type="Application" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
       <setting name="vmparams" value="" />
       <setting name="cmdLine" value="run-app" />
@@ -647,6 +652,20 @@
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Multirun " type="Multirun" factoryName="Multirun" separateTabs="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
+      <runConfiguration name="MainGUI" type="Application" />
+      <runConfiguration name="GraphEdit" type="Application" />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="MainGUI" run_configuration_type="Application" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Multirun" factoryName="Multirun" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
+      <runConfiguration name="GraphEdit" type="Application" />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="MainGUI" run_configuration_type="Application" />
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="MainGUI" run_configuration_type="Application" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
@@ -671,12 +690,8 @@
       <item itemvalue="Application.MainGUI" />
       <item itemvalue="Application.Testing" />
       <item itemvalue="Application.GraphEdit" />
+      <item itemvalue="Multirun.Multirun " />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.GraphEdit" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -1051,6 +1066,18 @@
       <workItem from="1576835121583" duration="13349000" />
       <workItem from="1577023877120" duration="4365000" />
       <workItem from="1577090456333" duration="11828000" />
+      <workItem from="1577179337553" duration="11201000" />
+      <workItem from="1577209363856" duration="1937000" />
+      <workItem from="1577264342067" duration="8319000" />
+      <workItem from="1577292199083" duration="5768000" />
+      <workItem from="1577443164004" duration="19533000" />
+      <workItem from="1577544066735" duration="6563000" />
+      <workItem from="1577614339694" duration="35467000" />
+      <workItem from="1577696390198" duration="11970000" />
+      <workItem from="1577783488892" duration="178000" />
+      <workItem from="1577783686616" duration="18289000" />
+      <workItem from="1578047631271" duration="14667000" />
+      <workItem from="1578129649986" duration="3482000" />
     </task>
     <servers />
   </component>
@@ -1108,10 +1135,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="169" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576237068314">
+    <state x="169" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577785516663">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state x="169" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/56.27.1310.741@56.27.1310.741" timestamp="1576237068314" />
+    <state x="169" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/56.27.1310.741@56.27.1310.741" timestamp="1577785516663" />
     <state x="519" y="101" width="374" height="599" key="#com.intellij.ide.util.MemberChooser" timestamp="1576926427653">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
@@ -1124,50 +1151,62 @@
       <screen x="56" y="27" width="1310" height="741" />
     </state>
     <state x="195" y="27" width="1022" height="741" key="CommitChangelistDialog2/56.27.1310.741@56.27.1310.741" timestamp="1576141761901" />
-    <state width="1264" height="551" key="GridCell.Tab.0.bottom" timestamp="1577178775669">
+    <state x="494" y="143" width="424" height="520" key="FileChooserDialogImpl" timestamp="1577783663634">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="551" key="GridCell.Tab.0.bottom/56.27.1310.741@56.27.1310.741" timestamp="1577178775669" />
-    <state width="1264" height="551" key="GridCell.Tab.0.center" timestamp="1577178775669">
+    <state x="494" y="143" width="424" height="520" key="FileChooserDialogImpl/56.27.1310.741@56.27.1310.741" timestamp="1577783663634" />
+    <state width="1264" height="551" key="GridCell.Tab.0.bottom" timestamp="1578139682802">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="551" key="GridCell.Tab.0.center/56.27.1310.741@56.27.1310.741" timestamp="1577178775669" />
-    <state width="1264" height="551" key="GridCell.Tab.0.left" timestamp="1577178775669">
+    <state width="1264" height="551" key="GridCell.Tab.0.bottom/56.27.1310.741@56.27.1310.741" timestamp="1578139682802" />
+    <state width="1264" height="551" key="GridCell.Tab.0.center" timestamp="1578139682801">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="551" key="GridCell.Tab.0.left/56.27.1310.741@56.27.1310.741" timestamp="1577178775669" />
-    <state width="1264" height="551" key="GridCell.Tab.0.right" timestamp="1577178775669">
+    <state width="1264" height="551" key="GridCell.Tab.0.center/56.27.1310.741@56.27.1310.741" timestamp="1578139682801" />
+    <state width="1264" height="551" key="GridCell.Tab.0.left" timestamp="1578139682801">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="551" key="GridCell.Tab.0.right/56.27.1310.741@56.27.1310.741" timestamp="1577178775669" />
-    <state width="1264" height="191" key="GridCell.Tab.1.bottom" timestamp="1577041586468">
+    <state width="1264" height="551" key="GridCell.Tab.0.left/56.27.1310.741@56.27.1310.741" timestamp="1578139682801" />
+    <state width="1264" height="551" key="GridCell.Tab.0.right" timestamp="1578139682802">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="191" key="GridCell.Tab.1.bottom/56.27.1310.741@56.27.1310.741" timestamp="1577041586468" />
-    <state width="1264" height="191" key="GridCell.Tab.1.center" timestamp="1577041586467">
+    <state width="1264" height="551" key="GridCell.Tab.0.right/56.27.1310.741@56.27.1310.741" timestamp="1578139682802" />
+    <state width="1264" height="191" key="GridCell.Tab.1.bottom" timestamp="1577808906436">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="191" key="GridCell.Tab.1.center/56.27.1310.741@56.27.1310.741" timestamp="1577041586467" />
-    <state width="1264" height="191" key="GridCell.Tab.1.left" timestamp="1577041586467">
+    <state width="1264" height="191" key="GridCell.Tab.1.bottom/56.27.1310.741@56.27.1310.741" timestamp="1577808906436" />
+    <state width="1264" height="191" key="GridCell.Tab.1.center" timestamp="1577808906436">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="191" key="GridCell.Tab.1.left/56.27.1310.741@56.27.1310.741" timestamp="1577041586467" />
-    <state width="1264" height="191" key="GridCell.Tab.1.right" timestamp="1577041586468">
+    <state width="1264" height="191" key="GridCell.Tab.1.center/56.27.1310.741@56.27.1310.741" timestamp="1577808906436" />
+    <state width="1264" height="191" key="GridCell.Tab.1.left" timestamp="1577808906436">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state width="1264" height="191" key="GridCell.Tab.1.right/56.27.1310.741@56.27.1310.741" timestamp="1577041586468" />
-    <state x="479" y="317" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577025889540">
+    <state width="1264" height="191" key="GridCell.Tab.1.left/56.27.1310.741@56.27.1310.741" timestamp="1577808906436" />
+    <state width="1264" height="191" key="GridCell.Tab.1.right" timestamp="1577808906436">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state x="479" y="317" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/56.27.1310.741@56.27.1310.741" timestamp="1577025889540" />
-    <state x="375" y="174" key="run.anything.popup" timestamp="1576923675364">
+    <state width="1264" height="191" key="GridCell.Tab.1.right/56.27.1310.741@56.27.1310.741" timestamp="1577808906436" />
+    <state x="200" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1577783671437">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state x="375" y="174" key="run.anything.popup/56.27.1310.741@56.27.1310.741" timestamp="1576923675364" />
-    <state x="374" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577178745599">
+    <state x="200" y="31" width="1022" height="737" key="SettingsEditor/56.27.1310.741@56.27.1310.741" timestamp="1577783671437" />
+    <state x="156" y="127" width="1110" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1577788894458">
       <screen x="56" y="27" width="1310" height="741" />
     </state>
-    <state x="374" y="89" width="672" height="678" key="search.everywhere.popup/56.27.1310.741@56.27.1310.741" timestamp="1577178745599" />
+    <state x="156" y="127" width="1110" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/56.27.1310.741@56.27.1310.741" timestamp="1577788894458" />
+    <state x="479" y="317" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578051532615">
+      <screen x="56" y="27" width="1310" height="741" />
+    </state>
+    <state x="479" y="317" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/56.27.1310.741@56.27.1310.741" timestamp="1578051532615" />
+    <state x="375" y="174" key="run.anything.popup" timestamp="1577785342987">
+      <screen x="56" y="27" width="1310" height="741" />
+    </state>
+    <state x="375" y="174" key="run.anything.popup/56.27.1310.741@56.27.1310.741" timestamp="1577785342987" />
+    <state x="374" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1578129918947">
+      <screen x="56" y="27" width="1310" height="741" />
+    </state>
+    <state x="374" y="89" width="672" height="678" key="search.everywhere.popup/56.27.1310.741@56.27.1310.741" timestamp="1578129918947" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

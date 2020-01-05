@@ -16,10 +16,11 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class GraphEdit {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         //int env = 6;
         //GraphHandler.test(env);
