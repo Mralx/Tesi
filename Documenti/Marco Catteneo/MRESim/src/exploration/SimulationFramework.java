@@ -682,6 +682,12 @@ public class SimulationFramework implements ActionListener {
             //Compute decision time
             long decisionTime = this.decisionEndTime - this.decisionStartTime;
 
+            String metricFile;
+            if(simConfig.getExpAlgorithm()==exptype.ProactiveBuddySystem)
+                metricFile = "ProactiveBuddySystem";
+            else metricFile = "ProactiveReserve";
+            metricFile = metricFile.concat("/stats/metric_"+environmentCounter);
+
             //Print
             SimulationFramework.log(
                     environmentCounter
@@ -695,7 +701,8 @@ public class SimulationFramework implements ActionListener {
                     +df.format(availability)
                     +"          "
                     +decisionTime,
-                    "metricConsole"
+//                    "metricConsole"
+                    metricFile
             );
 
 
