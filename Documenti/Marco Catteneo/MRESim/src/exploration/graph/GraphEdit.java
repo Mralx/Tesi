@@ -22,6 +22,8 @@ public class GraphEdit {
 
     public static void main(String[] args) throws InterruptedException {
 
+        interfAvailab();
+
         //int env = 6;
         //GraphHandler.test(env);
         //drawDiscretizedGraph(env);
@@ -102,6 +104,82 @@ public class GraphEdit {
         //GraphHandler.getInstance();
         //for(int n=2;n<7;n++)
         //    GraphHandler.test(n);
+    }
+
+    private static void interfAvailab(){
+        List<String> expMethods = new LinkedList<>();
+        expMethods.add("ProactiveBuddySystem");
+        expMethods.add("ProactiveReserve");
+
+        for(String method : expMethods){
+            for(int i=1; i<7; i++){
+                String filename = System.getProperty("user.dir") + "/logs/"+method+"/stats/metric_"+i+".txt";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(filename));
+                    String line = br.readLine();
+                    double interferenceC = 0;
+                    double interferenceB = 0;
+                    double availabilityC = 0;
+                    double availabilityB = 0;
+                    int intNC = 0;
+                    int intNB = 0;
+                    int avNC = 0;
+                    int avNB = 0;
+                    int tot = 0;
+
+                    while (line!=null){
+                        if(line.startsWith(String.valueOf(i))){
+                            String[] split = line.split(" {10}");
+                            Double interfC,avC;
+                            Double interfB,avB;
+                            if(tot<=60){
+                                interfC = Double.parseDouble(split[3].replace(",","."));
+                                avC = Double.parseDouble(split[4].replace(",","."));
+
+                                if(interfC!=0){
+                                    interferenceC += interfC;
+                                    intNC++;
+                                }
+                                if(avC!=0){
+                                    availabilityC += avC;
+                                    avNC++;
+                                }
+                                if(split[1].equals("A")) tot++;
+                            }
+                            else{
+                                interfB = Double.parseDouble(split[3].replace(",","."));
+                                avB = Double.parseDouble(split[4].replace(",","."));
+
+                                if(interfB!=0){
+                                    interferenceB += interfB;
+                                    intNB++;
+                                }
+                                if(avB!=0){
+                                    availabilityB += avB;
+                                    avNB++;
+                                }
+                                if(split[1].equals("A")) tot++;
+                            }
+                        }
+                        line = br.readLine();
+                    }
+                    File summaryFile = new File(System.getProperty("user.dir") + "/logs/"+method+"/stats/summary.txt");
+                    FileWriter fw = new FileWriter(summaryFile,true);
+                    interferenceC = interferenceC/intNC;
+                    interferenceB = interferenceB/intNB;
+                    availabilityC = availabilityC/avNC;
+                    availabilityB = availabilityB/avNB;
+                    double eps = interferenceC - availabilityC;
+                    fw.write("env "+i+" int C "+interferenceC+" av C "+availabilityC+" eps C "+eps+"\n");
+                    eps = interferenceB - availabilityB;
+                    fw.write("env "+i+" int B "+interferenceB+" av B "+availabilityB+" eps B "+eps+"\n");
+                    fw.flush();
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     //disegna le metriche

@@ -55,7 +55,7 @@ public class Constants {
 
     public static final int BATCH_AGENTS = 11;   //max team size
 
-    public static final int BATCH_ENVS = 1;     //max number of simulated environment
+    public static final int BATCH_ENVS = 6;     //max number of simulated environment
     // </editor-fold>
 
     public static final int DISCRETIZATION_STEP = 15;
