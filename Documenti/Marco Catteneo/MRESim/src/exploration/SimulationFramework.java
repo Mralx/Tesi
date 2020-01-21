@@ -686,8 +686,16 @@ public class SimulationFramework implements ActionListener {
             if(simConfig.getExpAlgorithm()==exptype.ProactiveBuddySystem)
                 metricFile = "ProactiveBuddySystem";
             else metricFile = "ProactiveReserve";
-            metricFile = metricFile.concat("/stats/metric_"+environmentCounter);
+            if(Constants.METRIC=='B')
+                metricFile = metricFile.concat("/stats/metrics/Betweenness/metric_"+environmentCounter+" test");
+            else metricFile = metricFile.concat("/stats/metrics/Closeness/metric_"+environmentCounter+" test");
+            if(Constants.ORIGINAL){
+                metricFile = "metricConsole";
+                if(simConfig.getExpAlgorithm()==exptype.ProactiveBuddySystem)
+                    metricFile = metricFile.concat(" PB OR");
+                else metricFile = metricFile.concat(" PR OR");
 
+            }
             //Print
             SimulationFramework.log(
                     environmentCounter
@@ -1458,6 +1466,15 @@ public class SimulationFramework implements ActionListener {
         double area_ex = ((double) agent[0].getStats().getAreaKnown() / (double) totalArea) * 100;
         DecimalFormat df = new DecimalFormat("#.#");
 
+        String consoleFilename = "personalConsole";
+        if(simConfig.getExpAlgorithm()==exptype.ProactiveReserve)
+            consoleFilename = consoleFilename.concat(" PR ");
+        else consoleFilename = consoleFilename.concat(" PB ");
+        if(Constants.TOPOLOGICAL && !Constants.ORIGINAL)
+            consoleFilename = consoleFilename.concat(" T "+Constants.METRIC);
+        else consoleFilename = consoleFilename.concat(" V "+Constants.METRIC);
+        if(Constants.ORIGINAL) consoleFilename = consoleFilename.concat(" OR ");
+
         log(environmentCounter
                 +"          "
                 +(numRobots-1)
@@ -1469,7 +1486,7 @@ public class SimulationFramework implements ActionListener {
                 +df.format(area_ex)
                 +"          "
                 +df.format(av_dist),
-                "personalConsole"
+                consoleFilename
         );
     }
 

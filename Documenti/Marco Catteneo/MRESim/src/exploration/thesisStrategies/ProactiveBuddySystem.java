@@ -298,6 +298,7 @@ public class ProactiveBuddySystem {
     private static Point proactivityFunction(RealAgent agent, Environment env){
         //Compute the barycenter of the polygon formed by all active agents
         HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
+        System.out.println("Proactivity for agent "+agent.getName() + " Idle set "+IdleSet.getInstance().getPool().toString());
 
         //<editor-fold defaultstate="collapsed" desc="Original code">
         if(Constants.ORIGINAL) {
@@ -339,6 +340,7 @@ public class ProactiveBuddySystem {
         Point metricBarycenter = null;
 
         //used for logging and comparison
+        /*
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
             double xSum = 0;
             double ySum = 0;
@@ -352,6 +354,7 @@ public class ProactiveBuddySystem {
             );
 
         }
+         */
 
         //if (activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
@@ -395,12 +398,14 @@ public class ProactiveBuddySystem {
         }else
             metricBarycenter = agent.getLocation();
 
+        /*
         if(barycenter!=null && metricBarycenter!=null)
             SimulationFramework.log((idleSet.getPool().size()+activeAgents.size())+"    "+
                             "Time: " + agent.getTimeElapsed() + " Barycenter: " + barycenter.toString() +
                             " Metric barycenter: " + metricBarycenter.toString() + " Agent: " + agent.getLocation().toString() +
                             "Idle Set size: " + idleSet.getPool().size() +" Graph size: "+GraphHandler.getGraphSize(),
                     "Barycenter log");
+         */
 
         //Use barycenter as proactivity goal
         return metricBarycenter;

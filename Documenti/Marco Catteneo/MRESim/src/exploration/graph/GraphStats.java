@@ -134,6 +134,7 @@ class GraphStats {
         for(SimpleNode node : frontNodes){
             worthNodes.addAll(graph.getNode(node).getAdjacents());
         }
+
         return worthNodes;
 
     }

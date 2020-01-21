@@ -255,6 +255,7 @@ public class ProactiveReserve {
         Point metricBarycenter = null;
 
         //used for logging and comparison
+        /*
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
             double xSum = 0;
             double ySum = 0;
@@ -269,6 +270,9 @@ public class ProactiveReserve {
 
         }
 
+         */
+
+        //if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
             double xSum = 0;
             double ySum = 0;
@@ -308,12 +312,14 @@ public class ProactiveReserve {
             metricBarycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
         }else
             metricBarycenter = agent.getLocation();
+        /*
         if(barycenter!=null && metricBarycenter!=null)
             SimulationFramework.log(env +"    "+(idleSet.getPool().size()+activeAgents.size())+"    "+
                             "Time: " + agent.getTimeElapsed() + " Barycenter: " + barycenter.toString() +
                             " Metric barycenter: " + metricBarycenter.toString() + " Agent: " + agent.getLocation().toString() +
                             "Idle Set size: " + idleSet.getPool().size(),
                     "Barycenter log");
+         */
 
         //Use barycenter as proactivity goal
         return metricBarycenter;
