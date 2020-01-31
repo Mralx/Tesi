@@ -60,6 +60,12 @@ public class GraphHandler {
         GraphHandler.environment = environment;
     }
 
+    public static int getNodeDegree(SimpleNode node){ return graph.getNode(node).getAdjacents().size();}
+
+    public static Double getNodeCloseness(SimpleNode node){ return stats.getNodeCloseness(node); }
+
+    public static Double getNodeBetweenness(SimpleNode node){ return stats.getNodeBetweenness(node); }
+
     /**
      * Initializes the graph through the array of agents. It is assumed the array contains the communication station
      * as first agent and drops it before using the array
@@ -163,6 +169,7 @@ public class GraphHandler {
             GraphHandler.graphUncorrectnessPrint();
             System.exit(-3);
         }
+        SimulationFramework.logGraph();
     }
 
     public static void createTopologicalGraph(RealAgent agent, TopologicalMap tMap){

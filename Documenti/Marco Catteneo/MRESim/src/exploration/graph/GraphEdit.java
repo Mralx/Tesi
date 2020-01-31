@@ -22,7 +22,9 @@ public class GraphEdit {
 
     public static void main(String[] args) throws InterruptedException {
 
-        parser();
+        //splitFiles();
+        for(int i=1;i<7;i++)
+            parser(i);
         //interfAvailab();
 
         //int env = 6;
@@ -107,21 +109,40 @@ public class GraphEdit {
         //    GraphHandler.test(n);
     }
 
-    private static void parser(){
-        String method = "ProactiveBuddySystem";
+    private static void splitFiles(){
+        String commonPart = "ProactiveBuddyMetrics";
+        String rFile = System.getProperty("user.dir")+"/logs/"+commonPart+".txt";
+        String baseFile = System.getProperty("user.dir")+"/logs/FinalData/Old/"+commonPart;
+        String wFile;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(rFile));
+            String line = br.readLine();
+            while (line!=null){
+                int envNum = Integer.parseInt(line.split("\\s+")[0]);
+                wFile = baseFile.concat(" "+envNum+".txt");
+                FileWriter fw = new FileWriter(new File(wFile),true);
+                fw.write(line+"\n");
+                fw.flush();
+                fw.close();
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void parser(int j){
+        String method = "PR";
         String metr = "Betweenness";
-        int j = 2;
-        String filename = System.getProperty("user.dir") + "/logs/"+method+"/stats/metrics/"+metr+"/metric_"+j+" test.txt";
-        HashMap<Integer,double[][]> envValMap = new HashMap<>();
+        //String filename = System.getProperty("user.dir") + "/logs/FinalData/"+method+"/metricConsole "+method+" OR "+j+".txt";
+        String filename = System.getProperty("user.dir") + "/logs/FinalData/Old/ProactiveReserveMetrics "+j+".txt";
+
         double[][] values = new double[10][4];
         for(int n=0;n<10;n++) {
             values[n][0] = 0;
             values[n][1] = 0;
             values[n][2] = 0;
             values[n][3] = 0;
-        }
-        for(int i = 1; i<7; i++){
-            envValMap.put(i,values);
         }
 
         try{
@@ -138,12 +159,10 @@ public class GraphEdit {
                 line = line.replace(",",".");
                 String[] split = line.split("\\s+");
                 if(Integer.parseInt(split[2])<oldTime){
-                    values = envValMap.get(Integer.parseInt(split[0]));
                     values[nAgents-2][0] += interference;
                     values[nAgents-2][1] += intN;
                     values[nAgents-2][2] += availability;
                     values[nAgents-2][3] += avN;
-                    envValMap.put(Integer.parseInt(split[0]),values);
                     interference = 0;
                     availability = 0;
                     intN = 0;
@@ -156,11 +175,9 @@ public class GraphEdit {
                 double i,a;
                 i = Double.parseDouble(split[3]);
                 a = Double.parseDouble(split[4]);
-                if(i!=0){
+                if(i!=0 && a!=0){
                     interference += i;
                     intN++;
-                }
-                if(a!=0){
                     availability += a;
                     avN++;
                 }
@@ -168,11 +185,6 @@ public class GraphEdit {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        values = envValMap.get(2);
-        for(int n1 = 0; n1<10;n1++){
-            System.out.println((n1+2)+"\t"+"int"+"\t"+(values[n1][0]/values[n1][1]));
-            System.out.println((n1+2)+"\t"+"av"+"\t"+(values[n1][2]/values[n1][3]));
         }
 
         double mean1 = 0;
@@ -190,7 +202,14 @@ public class GraphEdit {
                 c2++;
             }
         }
-        System.out.println(mean1+"\t"+mean2);
+        try {
+            FileWriter fw = new FileWriter(new File(filename.replace(j+".","s.")),true);
+            fw.write(j+"\t"+mean1+"\t"+mean2+"\n");
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void interfAvailab(){

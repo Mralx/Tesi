@@ -51,6 +51,14 @@ class GraphStats {
         this.childMap = childMap;
     }
 
+    public Double getNodeCloseness(SimpleNode node){
+        return this.closenessMap.getOrDefault(node,null);
+    }
+
+    public Double getNodeBetweenness(SimpleNode node){
+        return this.betweennessMap.getOrDefault(node, null);
+    }
+
     /**
      * Computes the number of nodes of the graph, including frontier nodes
      * @param graph the graph to analyze
@@ -156,10 +164,12 @@ class GraphStats {
             closeness.put(n, 1/avgDist);
         }
 
+        /*
         if(Constants.MAP_ERASE)
             this.closenessMap = new HashMap<>(closeness);
         else
             this.closenessMap.putAll(closeness);
+         */
 
         System.out.println("Worth nodes "+worthNodes.size());
         //sorting by value
@@ -187,8 +197,8 @@ class GraphStats {
      * @param graph the graph to analyze
      */
     Map<SimpleNode, Double> betweennessCentrality(ExplorationGraph graph){
-        Map<SimpleNode, Double> betweenness = nodeBetweenness(graph,restrictedNodeSet(graph));
-        this.betweennessMap = new HashMap<>(betweenness);
+        return nodeBetweenness(graph,restrictedNodeSet(graph));
+        //this.betweennessMap = new HashMap<>(betweenness);
 
         //sorting by values
         /*
@@ -200,8 +210,6 @@ class GraphStats {
                         Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                                 LinkedHashMap::new));
          */
-
-        return betweenness;
     }
 
     private Map<SimpleNode, Integer> retrieveSigmaS(ExplorationGraph graph, SimpleNode s){
@@ -244,7 +252,7 @@ class GraphStats {
                         .collect(Collectors.toList())){
                     val = betweenness.get(v);
                     if(shortestPathLength(s,t)>= shortestPathLength(s,v)+ shortestPathLength(v,t))
-                        val += (sigmaS.get(v)*sigmaT.get(v))/sigma_st;
+                        val += ((double) sigmaS.get(v)*sigmaT.get(v))/sigma_st;
                     betweenness.put(v,val);
                 }
             }
@@ -370,18 +378,18 @@ class GraphStats {
         long time;
         int delta = graph.getNodeMap().keySet().size();
 
-        System.out.println("Ensuring connectivity of the graph");
+        //System.out.println("Ensuring connectivity of the graph");
         graph = dropDisconnectedFrontiers(graph);
-        delta = delta - graph.getNodeMap().keySet().size();
-        this.graphDistanceMatrix = graphDistanceMatrix(graph);
-        System.out.println("Done");
+        //delta = delta - graph.getNodeMap().keySet().size();
+        //this.graphDistanceMatrix = graphDistanceMatrix(graph);
+        //System.out.println("Done");
 
-        System.out.println("Degree computation");
+        //System.out.println("Degree computation");
         try {
             file = new File(statsFile);
             fw = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            DecimalFormat df = new DecimalFormat("#.#####");
+            DecimalFormat df = new DecimalFormat("#.####");
 
             bw.write("Total nodes: "+this.nodeCount(graph)+
                     "   Frontiers: "+this.frontierNodeCount(graph)+

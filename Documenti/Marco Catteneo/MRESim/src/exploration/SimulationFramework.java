@@ -62,6 +62,7 @@ import environment.Environment;
 import environment.Environment.Status;
 import environment.Frontier;
 import exploration.graph.GraphHandler;
+import exploration.graph.SimpleNode;
 import exploration.rendezvous.IRendezvousStrategy;
 import exploration.rendezvous.RendezvousAgentData;
 import exploration.thesisControllers.BuddyController;
@@ -682,13 +683,13 @@ public class SimulationFramework implements ActionListener {
             //Compute decision time
             long decisionTime = this.decisionEndTime - this.decisionStartTime;
 
-            String metricFile;
+            String metricFile = "FinalData/";
             if(simConfig.getExpAlgorithm()==exptype.ProactiveBuddySystem)
-                metricFile = "ProactiveBuddySystem";
-            else metricFile = "ProactiveReserve";
-            if(Constants.METRIC=='B')
-                metricFile = metricFile.concat("/stats/metrics/Betweenness/metric_"+environmentCounter+" test");
-            else metricFile = metricFile.concat("/stats/metrics/Closeness/metric_"+environmentCounter+" test");
+                metricFile = metricFile.concat("PB/");
+            else metricFile = metricFile.concat("PR/");
+            if(Constants.TOPOLOGICAL) metricFile = metricFile.concat("T ");
+            else metricFile = metricFile.concat("V ");
+            metricFile = metricFile.concat(Constants.METRIC+" metric_"+environmentCounter);
             if(Constants.ORIGINAL){
                 metricFile = "metricConsole";
                 if(simConfig.getExpAlgorithm()==exptype.ProactiveBuddySystem)
@@ -712,29 +713,6 @@ public class SimulationFramework implements ActionListener {
 //                    "metricConsole"
                     metricFile
             );
-
-
-            //The following code was used to create and work on an offline version of the graph
-            /*
-            String frontierLogFilename = "/"+simConfig.getExpAlgorithm().toString()+"/data/"+environmentCounter+
-                    "/front"+currAgent.getName()+"_"+numRobots+" exp";
-
-            SimulationFramework.log(environmentCounter
-                            +"    "
-                            +timeElapsed
-                            +"    l"
-                            +(new SimpleNode(currAgent.getLocation().x,currAgent.getLocation().y)).toString()
-                            +"    f"
-                            +frontiersList.toString()
-                            +"    d"
-                            +ExplorationController.computeDistances(frontiersList, currAgent).toString()
-                            +"    d2"
-                            + Arrays.toString(diss),
-                            frontierLogFilename);
-
-            */
-
-
         }
 
 
@@ -779,8 +757,6 @@ public class SimulationFramework implements ActionListener {
             return;
         }
 
-        //TODO aggiunto per il log del baricentro
-        log("Environment "+n,"Barycenter log");
         environmentCounter = n;
         //made parametric to start simulation with an arbitrary team size
         writeToTeamConfig(Constants.MIN_AGENTS+1);
@@ -1570,6 +1546,58 @@ public class SimulationFramework implements ActionListener {
     private void logScreenshot() {
         image.fullUpdate(mainGUI.getShowSettings(), mainGUI.getShowSettingsAgents(), env, agent, agentRange);
         image.saveScreenshot(simConfig.getLogScreenshotsDirname(), timeElapsed);
+    }
+
+    public static void logBarycenter(Point barycenter, Point metricBarycenter){
+        String data;
+        String filename;
+
+        data = timeElapsed +"\t[";
+        for(RealAgent activeAgent : ActiveSet.getInstance().getActive())
+            data = data.concat("(" + activeAgent.getX() + "," + activeAgent.getY() + ")");
+        data = data.concat("] [");
+        for(RealAgent idleAgent : IdleSet.getInstance().getPool())
+            data = data.concat("(" + idleAgent.getX() + "," + idleAgent.getY() + ")");
+        data = data.concat("]\t");
+        if(barycenter!=null)
+            data = data.concat("("+barycenter.getX()+","+barycenter.getY()+") ");
+        else data = data.concat("null ");
+        if(metricBarycenter!=null)
+            data = data.concat("("+metricBarycenter.getX()+","+metricBarycenter.getY()+")");
+        else data = data.concat("null");
+
+        filename = "FinalData/BaryLog/BarycenterLog ";
+        if(Constants.TOPOLOGICAL) filename = filename.concat("T ");
+        else filename = filename.concat("V ");
+        filename = filename.concat(String.valueOf(environmentCounter));
+
+
+        log(data,filename);
+    }
+
+    public static void logGraph(){
+
+        StringBuilder data;
+        String filename;
+
+        data = new StringBuilder("PB\n"); //TODO cambiare per PB
+        for(SimpleNode node : GraphHandler.getGraph().getNodeMap().keySet()){
+            data.append(timeElapsed).append(";[").append(node.x).append(",").append(node.y).append("];").append(GraphHandler.getNodeDegree(node)).append(";");
+            Double val;
+            if(Constants.METRIC=='B') val = GraphHandler.getNodeBetweenness(node);
+            else val = GraphHandler.getNodeCloseness(node);
+            if(val!=null) data = new StringBuilder(data.toString().concat(val + ";"));
+            data = new StringBuilder(data.toString().concat("\n"));
+        }
+
+        filename = "FinalData/GraphLog/GraphLog ";
+        if(Constants.TOPOLOGICAL) filename = filename.concat("T ");
+        else filename = filename.concat("V ");
+        filename = filename.concat(Constants.METRIC+" ");
+        filename = filename.concat(String.valueOf(environmentCounter));
+
+        log(data.toString(),filename);
+
     }
 // </editor-fold>     
     

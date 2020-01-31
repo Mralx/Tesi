@@ -27,7 +27,7 @@ public class ExplorationGraph {
         this.dirty = true;
     }
 
-    Map<SimpleNode, Node> getNodeMap() {
+    public Map<SimpleNode, Node> getNodeMap() {
         return nodeMap;
     }
 

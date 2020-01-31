@@ -117,7 +117,7 @@ public class ExplorationController {
 
         try{
             GraphHandler.getSemaphore().acquire();
-            if(!Constants.TOPOLOGICAL)
+            if(!Constants.TOPOLOGICAL && !iSet.getPool().isEmpty())
                 GraphHandler.updateNodes(agents);
         }catch(InterruptedException ie){
             ie.printStackTrace();

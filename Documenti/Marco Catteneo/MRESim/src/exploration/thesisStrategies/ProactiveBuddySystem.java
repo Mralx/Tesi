@@ -340,7 +340,6 @@ public class ProactiveBuddySystem {
         Point metricBarycenter = null;
 
         //used for logging and comparison
-        /*
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
             double xSum = 0;
             double ySum = 0;
@@ -354,7 +353,7 @@ public class ProactiveBuddySystem {
             );
 
         }
-         */
+
 
         //if (activeAgents.size() > Constants.MIN_CLUSTER_SIZE) {
         if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4) {
@@ -385,6 +384,10 @@ public class ProactiveBuddySystem {
                     (int) (ySum / statSum)
             );
         }
+
+        SimulationFramework.logBarycenter(barycenter,metricBarycenter);
+        SimulationFramework.logGraph();
+
         if(metricBarycenter!=null && !metricBarycenter.equals(new Point(0, 0))) {
             LinkedList<Point> barycenterList = new LinkedList<>();
             barycenterList.add(metricBarycenter);
@@ -395,8 +398,12 @@ public class ProactiveBuddySystem {
             );
 
             metricBarycenter = ExplorationController.moveAgent(agent, barycenterFrontier);
-        }else
+        }else{
+            if(activeAgents.size() > Constants.MIN_CLUSTER_SIZE && agent.getTimeElapsed()>4)
+                SimulationFramework.log(agent.getTimeElapsed()+"\t["+agent.getX()+","+agent.getY()+"]\t"+metricBarycenter,
+                        "NullBarycenterConsole");
             metricBarycenter = agent.getLocation();
+        }
 
         /*
         if(barycenter!=null && metricBarycenter!=null)
