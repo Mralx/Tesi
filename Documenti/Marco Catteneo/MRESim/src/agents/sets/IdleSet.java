@@ -37,8 +37,7 @@ public class IdleSet {
 
     // <editor-fold defaultstate="collapsed" desc="Adders and removers">
     public HashSet<RealAgent> addPoolAgent(RealAgent a){
-        if(!pool.contains(a))
-            pool.add(a);
+        pool.add(a);
         return pool;
     }
 
