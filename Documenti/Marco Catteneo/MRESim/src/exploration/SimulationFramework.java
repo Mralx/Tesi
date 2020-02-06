@@ -1569,6 +1569,7 @@ public class SimulationFramework implements ActionListener {
         filename = "FinalData/BaryLog/BarycenterLog ";
         if(Constants.TOPOLOGICAL) filename = filename.concat("T ");
         else filename = filename.concat("V ");
+        filename = filename.concat(Constants.METRIC+" ");
         filename = filename.concat(String.valueOf(environmentCounter));
 
 
@@ -1580,7 +1581,7 @@ public class SimulationFramework implements ActionListener {
         StringBuilder data;
         String filename;
 
-        data = new StringBuilder("PB\n"); //TODO cambiare per PB
+        data = new StringBuilder("PR\n"); //TODO cambiare per PB
         for(SimpleNode node : GraphHandler.getGraph().getNodeMap().keySet()){
             data.append(timeElapsed).append(";[").append(node.x).append(",").append(node.y).append("];").append(GraphHandler.getNodeDegree(node)).append(";");
             Double val;
