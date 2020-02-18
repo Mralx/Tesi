@@ -26,6 +26,7 @@ public class GraphEdit {
         for(int i=1;i<7;i++)
             parser(i);
         //interfAvailab();
+        //    check();
 
         //int env = 6;
         //GraphHandler.test(env);
@@ -132,101 +133,126 @@ public class GraphEdit {
     }
 
     private static void parser(int j){
-        String method = "PR";
-        String metr = "Betweenness";
-        //String filename = System.getProperty("user.dir") + "/logs/FinalData/"+method+"/metricConsole "+method+" OR "+j+".txt";
-        String filename = System.getProperty("user.dir") + "/logs/FinalData/Old/ProactiveReserveMetrics "+j+".txt";
+        List<String> expMethods = new LinkedList<>();
+        expMethods.add("PB");
+        expMethods.add("PR");
 
-        double[][] values = new double[10][4];
-        for(int n=0;n<10;n++) {
-            values[n][0] = 0;
-            values[n][1] = 0;
-            values[n][2] = 0;
-            values[n][3] = 0;
-        }
+        List<String> metric = new LinkedList<>();
+        metric.add("V B");
+        metric.add("V C");
+        metric.add("T B");
+        metric.add("T C");
+        metric.add("OR");
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(filename));
-            String line = br.readLine();
-            int nAgents = 0;
-            double interference = 0;
-            double availability = 0;
-            int intN = 0;
-            int avN = 0;
-            int oldTime = 1;
+        for(String method : expMethods){
+            for(String metr : metric){
+                String filename = System.getProperty("user.dir")+"/logs/FinalData/completi/"+method+"/"+metr+"/metric_"+j+".txt";
 
-            while(line!=null){
-                line = line.replace(",",".");
-                String[] split = line.split("\\s+");
-                if(Integer.parseInt(split[2])<oldTime){
-                    values[nAgents-2][0] += interference;
-                    values[nAgents-2][1] += intN;
-                    values[nAgents-2][2] += availability;
-                    values[nAgents-2][3] += avN;
-                    interference = 0;
-                    availability = 0;
-                    intN = 0;
-                    avN = 0;
+                double[][] values = new double[10][4];
+                for(int n=0;n<10;n++) {
+                    values[n][0] = 0;
+                    values[n][1] = 0;
+                    values[n][2] = 0;
+                    values[n][3] = 0;
                 }
-                if(split[1].equals("A"))
-                    nAgents = 0;
-                nAgents++;
-                oldTime = Integer.parseInt(split[2]);
-                double i,a;
-                i = Double.parseDouble(split[3]);
-                a = Double.parseDouble(split[4]);
-                if(i!=0 && a!=0){
-                    interference += i;
-                    intN++;
-                    availability += a;
-                    avN++;
+
+                try{
+                    BufferedReader br = new BufferedReader(new FileReader(filename));
+                    String line = br.readLine();
+                    int nAgents = 0;
+                    double interference = 0;
+                    double availability = 0;
+                    int intN = 0;
+                    int avN = 0;
+                    int oldTime = 1;
+
+                    while(line!=null){
+                        line = line.replace(",",".");
+                        String[] split = line.split("\\s+");
+                        if(Integer.parseInt(split[2])<oldTime){
+                            values[nAgents-2][0] += interference;
+                            values[nAgents-2][1] += intN;
+                            values[nAgents-2][2] += availability;
+                            values[nAgents-2][3] += avN;
+                            interference = 0;
+                            availability = 0;
+                            intN = 0;
+                            avN = 0;
+                        }
+                        if(split[1].equals("A"))
+                            nAgents = 0;
+                        nAgents++;
+                        oldTime = Integer.parseInt(split[2]);
+                        double i,a;
+                        i = Double.parseDouble(split[3]);
+                        a = Double.parseDouble(split[4]);
+                        if(i!=0 && a!=0){
+                            interference += i;
+                            intN++;
+                            availability += a;
+                            avN++;
+                        }
+                        line = br.readLine();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                line = br.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        double mean1 = 0;
-        double mean2 = 0;
-        int c1 = 0;
-        int c2 = 0;
+                try {
+                    //FileWriter fw = new FileWriter(new File(filename.replace(j+"."," summary.")),true);
+                    FileWriter fw = new FileWriter(new File(
+                            System.getProperty("user.dir")+"/logs/FinalData/completi/Metrics summary.txt"
+                    ),true);
+                    fw.write(method+" "+metr+"\n");
+                    double mean1 = 0;
+                    double mean2 = 0;
+                    int c1 = 0;
+                    int c2 = 0;
 
-        for(int n1 = 0; n1<10; n1++){
-            if(values[n1][0]!=0){
-                mean1 = (mean1*c1+values[n1][0]/values[n1][1])/(c1+1);
-                c1++;
+                    for(int n1 = 0; n1<10; n1++){
+                        fw.write("Team size " +(n1+2)+"\t");
+                        if(values[n1][0]!=0){
+                            mean1 = (mean1*c1+values[n1][0]/values[n1][1])/(c1+1);
+                            c1++;
+                            fw.write(values[n1][0]/values[n1][1]+"\t");
+                        }
+                        if(values[n1][2]!=0){
+                            mean2 = (mean2*c2+values[n1][2]/values[n1][3])/(c2+1);
+                            c2++;
+                            fw.write(values[n1][2]/values[n1][3]+"\n");
+                        }
+                    }
+                    fw.write("\nEnvironment " +j+"\t"+mean1+"\t"+mean2+"\n\n");
+                    fw.flush();
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            if(values[n1][2]!=0){
-                mean2 = (mean2*c2+values[n1][2]/values[n1][3])/(c2+1);
-                c2++;
-            }
-        }
-        try {
-            FileWriter fw = new FileWriter(new File(filename.replace(j+".","s.")),true);
-            fw.write(j+"\t"+mean1+"\t"+mean2+"\n");
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     private static void interfAvailab(){
         List<String> expMethods = new LinkedList<>();
-        expMethods.add("ProactiveBuddySystem");
-        expMethods.add("ProactiveReserve");
+        expMethods.add("PB");
+        expMethods.add("PR");
 
         List<String> metric = new LinkedList<>();
-        metric.add("Closeness");
-        metric.add("Betweenness");
+        metric.add("V B");
+        metric.add("V C");
+        metric.add("T B");
+        metric.add("T C");
+        metric.add("OR");
 
         for(String method : expMethods){
             for(String metr : metric){
                 for(int i=1; i<7; i++){
-                    String filename = System.getProperty("user.dir") + "/logs/"+method+"/stats/metrics/"+metr+"/metric_"+i+" test.txt";
-                    if(method.equals("ProactiveBuddySystem") && metr.equals("Betweenness") && i==1) continue;
+                    String filename = System.getProperty("user.dir")+"/logs/FinalData/completi/"+method+"/"+metr+"/metric_"+i+".txt";
+                    //if(method.equals("ProactiveBuddySystem") && metr.equals("Betweenness") && i==1) continue;
                     try {
+                        File summaryFile = new File(System.getProperty("user.dir") + "/logs/summary test.txt");
+                        FileWriter fw = new FileWriter(summaryFile,true);
+                        fw.write(method+" "+metr+";");
                         BufferedReader br = new BufferedReader(new FileReader(filename));
                         String line = br.readLine();
 
@@ -243,25 +269,67 @@ public class GraphEdit {
                                 interf = Double.parseDouble(split[3].replace(",","."));
                                 av = Double.parseDouble(split[4].replace(",","."));
 
-                                if(interf!=0){
+                                if(interf!=0 && av!=0){
                                     interference += interf;
                                     intN++;
-                                }
-                                if(av!=0){
                                     availability += av;
                                     avN++;
                                 }
                             }
                             line = br.readLine();
                         }
-                        File summaryFile = new File(System.getProperty("user.dir") + "/logs/"+method+"/stats/"+metr+"summary test.txt");
-                        FileWriter fw = new FileWriter(summaryFile,true);
+
                         interference = interference/intN;
                         availability = availability/avN;
                         double eps = interference - availability;
-                        fw.write("env "+i+" int "+interference+" av "+availability+" eps "+eps+"\n");
+                        //fw.write("env "+i+" int "+interference+" av "+availability+" eps "+eps+"\n");
+                        fw.write(i+";"+interference+";"+availability+";"+eps+"\n");
                         fw.flush();
                         fw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    private static void check(){
+        List<String> expMethods = new LinkedList<>();
+        expMethods.add("PB");
+        expMethods.add("PR");
+
+        List<String> metric = new LinkedList<>();
+        metric.add("V B");
+        metric.add("V C");
+        metric.add("T B");
+        metric.add("T C");
+        metric.add("OR");
+
+        String oldf = "gg";
+
+        for(String method : expMethods){
+            for(String metr : metric){
+                for(int i=1; i<7; i++){
+                    String filename = System.getProperty("user.dir")+"/logs/FinalData/completi/"+method+"/"+metr+"/metric_"+i+".txt";
+                    int c = 0;
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(filename));
+                        String line = br.readLine();
+                        c++;
+
+                        int oldTime = 1;
+
+                        while(line!=null){
+                            String[] split = line.split("\\s+");
+                            if(Integer.parseInt(split[2])>oldTime+1 && (!(method + " " + metr + " " + i).equals(oldf))){
+                                oldf = method + " " + metr + " " + i;
+                                System.out.println(oldf+" "+c);
+                            }
+                            oldTime = Integer.parseInt(split[2]);
+                            line = br.readLine();
+                            c++;
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
