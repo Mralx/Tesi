@@ -191,7 +191,8 @@ public class GraphHandler {
                         node.addAdjacent(adjNode,distance);
                     }
                 }
-                graphMap.put(simpleNode,node);
+                if(!node.getAdjacents().isEmpty())
+                    graphMap.put(simpleNode,node);
             }
         }
         graph = new ExplorationGraph();
