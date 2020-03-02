@@ -1,0 +1,14 @@
+Argomenti da trattare 
+
+Problema dell'esplorazione multi robot
+Localizzazione dei robot nell'ambiente e mapping -> SLAM
+Strategia di esplorazione -> topologiche, information gain, frontier-based
+Strategia di coordinazione -> online e offline -> reserve, buddy, proactive reserve e proactive buddy
+
+Bisogna dare un inquadramento del problema e di come sia stato risolto finora. 
+La panoramica sullo SLAM  e sulle strategie di esplorazione dovrebbe essere un po' più generica rispetto a quella sulla coordinazione. Per lo SLAM  basterà spiegare come funziona e la logica che c'è alla base, oltre che un piccolo accenno sull'implementazione. 
+Per quanto riguarda le strategie di esplorazione, quello che serve dire è più relativo alla differenza tra i vari metodi. Inoltre, bisogna parlare del perché la frontier-based strategy sia quella adotta in questo studio e ciò dipende prevalentemente da una maggior facilità di implementazione rispetto agli altri metodi. 
+In conclusione, riguardo le strategie di coordinazione, quello che preme sottolineare è perché sia importante la coordinazione in un'esplorazione multi robot, poi come questa possa essere messa in atto. Si inizia dapprima sottolineando la differenza tra i metodi online e quelli offline, presentando esempi per ciascun tipo. Una volta fatto ciò, si parla dei metodi introdotti nel paper "Coordination strategies for multi-robot exploration and mapping" di Christensen e di come si siano evoluti nella tesi di Cattaneo.  
+
+Strutturando così il documento si avrebbero le prime due sezioni molto simili a quelle di Cattaneo, però non sembra possibile escluderle dall'analisi dello stato dell'arte. Quei due argomenti sono infatti fondamentali per fornire una visione completa di come l'esplorazione venga attuata all'atto pratico. D'altro canto, la sezione sullo SLAM potrebbe apparire superflua se si dà un taglio più volto a sottolineare la parte più ad alto livello del problema, ovvero le strategie di esplorazione che di coordinazione, essendo lo SLAM più legato a problemi di basso livello, quale la localizzazione ed il mapping. 
+Un argomento che potrebbe essere interessante aggiungere è a che livello vengano utilizzati i grafi per risolvere questo problema. Un esempio di ciò è "Autonomous Topological Place Detection Using the Extended Voronoi Graph" di Wurm, dove viene costruito un grafo di Voronoi ed utilizzato per individuare i luoghi all'interno di un ambiente sconosciuto. Non si trovano tracce dell'utilizzo della closeness 
