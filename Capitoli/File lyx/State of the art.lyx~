@@ -147,36 +147,380 @@ ad hoc
 \end_layout
 
 \begin_layout Standard
-In the following, some exploration strategies are presented, classified
- according to the representation of the world used, giving a particular
- emphasis to the 
+In the following, some exploration strategies are presented, distincted
+ into three categories: 
 \emph on
-frontier-based 
+information gain-based, frontier-based 
 \emph default
-approach being the one used in this work.
+and 
+\emph on
+topological strategies
+\emph default
+.
+ Giving particular attention to the second one, being the one used in this
+ work.
 \end_layout
 
 \begin_layout Subsection
-Metric representation
+Information gain-based strategies
 \end_layout
 
 \begin_layout Standard
-Dealing with a metric representation of the environment usually means dealing
- with an occupancy-grid representation.
- The map is represented as a grid where each cell can be free, occupied
- or an obstacle.
+Prior to the definition of this kind of strategies, it is useful to define
+ occupancy grids and coverage maps.
+ Occupancy grids model the environment as a grid where each cell can be
+ marked as 
+\emph on
+free 
+\emph default
+or 
+\emph on
+obstacle
+\emph default
+, if already scanned through sensors, or 
+\emph on
+unknown
+\emph default
+, if it has not been scanned yet.
+ Also coverage maps are a grid-based representation of the environment,
+ where each cell contains the posterior probability of being covered by
+ an object.
+ This provides different advantages compared to occupancy grids, like for
+ example the possibility to finely model a wall not parallel to 
+\emph on
+x- 
+\emph default
+or 
+\emph on
+y-
+\emph default
+axis of the grid, without the need of enlarging it to match the discretization.
  
 \end_layout
 
 \begin_layout Standard
-One of the most important is the 
+Information gain-based strategies as presented in [Robotic Mapping and Explorati
+on] are probabilistic strategies usually employed on coverage maps, and
+ consequently extensible to occupancy grids.
+ Candidate locations are chosen among the cells of the grid, according to
+ the expected change in the entropy obtainable by moving a robot there.
+ Given a posterior probability distribution 
 \emph on
-frontier-based 
+p(x) 
 \emph default
-approach [60].
- A frontier is defined as the region on the boundary between open space
- and unknown space.
- By moving toward them, is possible to keep building the map of the environment.
+of a cell 
+\emph on
+x
+\emph default
+, its entropy 
+\emph on
+H(p(x)) 
+\emph default
+is defined as 
+\begin_inset Formula 
+\[
+H\left(p\left(x\right)\right)=-\int_{x}p\left(x\right)\log p\left(x\right)dx.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While, the information gain for a given cell 
+\emph on
+c 
+\emph default
+and measurement 
+\emph on
+z 
+\emph default
+taken from the pose 
+\emph on
+x 
+\emph default
+is 
+\begin_inset Formula 
+\[
+I\left(c,x,z\right)=H\left(p\left(c\right)\right)-H\left(p\left(c|x,z\right)\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, each cell in the grid is considered as a possible candidate location
+ and the one selected is the one providing the highest expected entropy
+ reduction, i.e.
+ information gain.
+ This method provides suitable locations because the information gain for
+ a completely known cell is near zero, thus the approach tends to assign
+ candidate locations in proximity of uncertain cells, increasing the knowledge
+ of the environment.
+ 
+\end_layout
+
+\begin_layout Standard
+In [Robotic Mapping and Exploration], besides the basic strategy presented
+ so far, are also introduced two modifications.
+ The first one reduces the number of candidate locations from the whole
+ map, to the ones in a local window, which has to be completely explored
+ before moving on.
+ Rather than reducing the set of candidate locations, the second one modifies
+ the way in which the next one to explore.
+ This is done by introducing the cost to reach that location from the robot
+ pose.
+ 
+\end_layout
+
+\begin_layout Standard
+In [3/21], is presented the 
+\emph on
+A-C-G strategy 
+\emph default
+which defines a conceptually similar approach but takes explicitly into
+ account the contribution to entropy of the points sensed from the candidate
+ location, discriminating between already sensed points and the ones sensed
+ for the first time.
+ It also includes a factor proportional to the distance from the robot location
+ and the candidate one.
+ 
+\end_layout
+
+\begin_layout Standard
+In [Information gain-based Rao-Blackwellized ...], an information gain strategy
+ is integrated into the localization and mapping phase.
+ This allows to decide which action to perform at each step of the exploration,
+ by taking into account the trajectory and map uncertainty.
+ 
+\end_layout
+
+\begin_layout Subsection
+Frontier-based strategies
+\end_layout
+
+\begin_layout Standard
+As presented above, information gain-based strategies mainly focus on the
+ process of deciding the next location to explore, giving less attention
+ to the definition of the set of candidate locations.
+ This is extremely clear by considering the base method, in fact in that
+ case all the cells in the grid are possible candidate locations and the
+ method implicitly cuts out the one not providing new knowledge.
+ In frontier-based strategies, the focus is completely shifted to the creation
+ of a good set of candidate locations.
+ 
+\end_layout
+
+\begin_layout Standard
+As defined in [60], the paper originally introducing this strategy for single
+ robot exploration, a frontier is the boundary region between explored and
+ unexplored space.
+ The idea is that by assigning a robot to its closest frontier as location
+ to explore, the line between explored and unexplored space is pushed continuous
+ly, until the whole environment is mapped.
+ In that case, the model used to represent the environment was occupancy
+ grid.
+ With that representation, it is pretty straightforward to find out a frontier,
+ in fact it is the cluster of 
+\emph on
+free
+\emph default
+ cells which neighbors are 
+\emph on
+unknown
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This simple idea works extremely well in practice and for this reason it
+ has been used widely in the literature, producing a lot of extensions and
+ adaptations to the various cases.
+ In [61], the strategy has been extended to multi-robot scenarios.
+ In [Exploration strategies ...
+ a comparative study/9], the Leader-Follower exploration algorithm is presented.
+ It focuses on the roles assumed by the robots during the exploration, which
+ can be dynamically changed, according to the distance from the assigned
+ location.
+ Candidate locations detection is done by identifying frontiers and, differently
+ from the original strategy, the next to explore is not chosen as the nearest
+ one.
+ In fact, it looks for the pair of frontiers maximizing the sum of the rewards
+ for the leader and the follower, where the reward function is composed
+ by a utility term and the cost to reach the frontier.
+ [Topological frontier-based ...] provides an extension of this exploration
+ strategy to the topological map, rather than occupancy grids.
+ 
+\end_layout
+
+\begin_layout Subsection
+Topological strategies
+\end_layout
+
+\begin_layout Standard
+Topological strategies rely on a graph-based representation of the world.
+ This is useful to neglect the geometrical features of the environment and
+ to focus on its structure.
+ As showed in [Topological frontier-based/5], the complexity of using geometric
+ maps grows exponentially as the environment becomes larger and this justifies
+ the use of topological maps.
+ Moreover, the use of a directed graph can also simulate the case of a one-way
+ street, where the robot is allowed to go in one direction and not in the
+ opposite one [10], which would be impossible to describe just relying on
+ geometric maps.
+ 
+\end_layout
+
+\begin_layout Standard
+In this kind of strategies, candidate locations are nodes of the graph and
+ the next one to explore is decided in various ways, strongly depending
+ on the type of graph used.
+ In fact, in the literature are used both undirected, with a further distinction
+ whether or not the vertices are identifiable, and directed graphs.
+ A vertex is identifiable if a robot can be recognized when revisited.
+ This is not always guaranteed because the robot may have limited sensor
+ capabilities or the appearance of vertices may change.
+ 
+\end_layout
+
+\begin_layout Standard
+Undirected graphs with distinguishable vertices are the most straightforward
+ case.
+ Each vertex is labeled in a unique way and the robot is allowed to traverse
+ the edges in both ways [17,43].
+ In [42] is presented an extension of the Depth-First Search algorithm to
+ the multi-robot scenario both for graphs and trees.
+ A particular aspect of the model used is that edges are considered as opaque,
+ this means that from either end, it is not clear where the edge goes.
+ In [6] is analyzed the problem of piecemeal exploration, this states that
+ the robot can traverse a limited number of edges before going back to the
+ source vertex.
+ It is a realistic context in which the robot has a limited amount of fuel
+ and needs to refill it after a while.
+ The algorithm proposed here is based on Breadth-First Search and another
+ important aspect is the use of the concept of 
+\emph on
+frontier vertex
+\emph default
+, defined as a vertex incident to unexplored edges.
+\end_layout
+
+\begin_layout Standard
+Undirected graphs with anonymous vertices introduce some difficulties and
+ to get over them, markers are needed to distinguish between explored and
+ unexplored area [24,31,33].
+ In [24] is shown that one marker is sufficient to allow the robot to build
+ a graph isomorphic to the environment in low-order polynomial time and
+ the use of multiple markers may improve the performance.
+ In [33] are presented two enhancements both to single-robot and multi-robot
+ exploration in such environments, provided by the use of a Breadth-First
+ Search and the exploitation of local neighbors information.
+\end_layout
+
+\begin_layout Standard
+In the case of directed graphs, the robot movement is strongly limited with
+ respect to undirected graphs.
+ Clearly, Depth-First Search is not always possible due to the impossibility
+ of backtracking.
+ Different algorithms have been proposed to deal with these models [1,10,59].
+ In [1] is proposed an algorithm to visit all nodes and edges with a sub-exponen
+tial upper bound on the number of edge traversals.
+ In [10] is defined an algorithm able to explore a directed graph with anonymous
+ vertices by using two robots through the simultaneous learning of the graph
+ and an homing sequence.
+ This is done by keeping multiple possible maps, updating them through a
+ sequence of movements, then checking their correctness.
+ It also states that it is not possible to efficiently learn the same kind
+ of graph through a single robot with a constant number of pebbles without
+ prior knowledge on the number of vertices.
+ 
+\end_layout
+
+\begin_layout Section
+Coordination mechanisms
+\end_layout
+
+\begin_layout Standard
+In a multi-robot scenario, once candidate locations are detected on the
+ map, it comes out the problem of how the robots in the team have to be
+ assigned to them in order to maximize the knowledge about the environment.
+ The answer to this is provided by the coordination mechanism, which is
+ the algorithm that assigns robots to candidate locations according to some
+ criteria and on the base of these, coordination mechanisms are distinguished
+ into online and offline.
+ Online mechanisms assigns robots to candidate locations by taking into
+ account the actions done by the other members of the team [49,57,58].
+ In offline mechanisms, in contrast, roles are assigned to robots before
+ the exploration starts and they act according to it [12,18,29,48].
+\end_layout
+
+\begin_layout Standard
+A coordination based on an online mechanism is weighted by the need of more
+ communication among the agents.
+ Before an allocation is made, an agent has to know other agents pose and
+ target locations.
+ On one hand, this implies a lot of communication to make proper assignments;
+ on the other hand, this allows to perform choices aimed at maximizing the
+ performances of the system.
+ Through the use of roles, offline mechanisms require little to no communication
+ once the exploration is started, making the robots and the whole system
+ easier.
+ The other aspect of this is that robots move almost freely, with the possibilit
+y of interference among them and the redundancy of assignments to the same
+ target location.
+\end_layout
+
+\begin_layout Standard
+The relation between exploration strategy and coordination mechanisms is
+ quite tight and the relative impact each one has on the performances is
+ hard to establish.
+ A work in this sense is [20], where different exploration strategies and
+ coordination mechanisms are compared on two different environments.
+ What comes out is that on structured environment, like an office one with
+ a lot of rooms and corridors, the detection of good candidate locations
+ is preferable over a good assignment of robots to them.
+ In an open environment, the contrary holds, being the coordination mechanism
+ able to increase the amount of area explored in the same amount of time,
+ while the impact of the exploration strategy is less relevant.
+ 
+\end_layout
+
+\begin_layout Subsection
+Online mechanisms
+\end_layout
+
+\begin_layout Standard
+Online coordination mechanisms allocate robots to target locations exploiting
+ information about other robots actions.
+ To achieve this, robots need to communicate each other.
+\end_layout
+
+\begin_layout Standard
+This has been done in different ways across literature, using different
+ techniques [49,57,58].
+ In [49] the communication is performed through the use of 
+\emph on
+bids
+\emph default
+.
+ Every time a robot receives a map update from the central mapper, it sends
+ to the central executive a bid with a list of costs and information gains
+ for each frontier.
+ As the central executive gets all the bids, computes the assignment maximizing
+ the difference between information gain and cost for each robot and assigns
+ the frontier to the it.
+ Once an assignment is fixed, the other bids are discounted by a certain
+ value to take into account the current assigned task.
+ This procedure is iterated as long as there are no remaining robots or
+ tasks.
+ The discount factor is fundamental being the main factor introducing the
+ online coordination aspect of this algorithm, in fact if the bid was not
+ discounted, each robot would go towards the frontier with its highest estimated
+ utility, not taking into account other robots assignments.
 \end_layout
 
 \end_body

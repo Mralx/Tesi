@@ -49,11 +49,11 @@ import java.awt.Color;
 public class Constants {
 
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
-    public static final int BATCH_RUNS = 5;     //max number of run per configuration
+    public static final int BATCH_RUNS = 1;     //max number of run per configuration
 
-    public static final int MIN_AGENTS = 6;     //starting team size, always >=2
+    public static final int MIN_AGENTS = 4;     //starting team size, always >=2
 
-    public static final int BATCH_AGENTS = 2;   //max team size
+    public static final int BATCH_AGENTS = 1;   //max team size
 
     public static final int BATCH_ENVS = 1;     //max number of simulated environment
     // </editor-fold>
