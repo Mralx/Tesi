@@ -5,6 +5,11 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{lmodern}
+\usepackage{microtype}
+\frenchspacing
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -29,6 +34,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -44,6 +50,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -121,18 +128,32 @@ How a candidate location is defined depends strongly on the representation
  of the environment.
  This can be divided into two categories, topological or metric, which turns
  into graph-based or grid-based representations, even if other data structures
- are possible, like in [2] where the map is stored as two lists of line
- segments.
+ are possible, like in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "2"
+literal "false"
+
+\end_inset
+
+ where the map is stored as two lists of line segments.
  
 \end_layout
 
 \begin_layout Standard
 The choice of the next location to explore among the set of candidate ones
  is done in different ways across literature.
- An example of this in a metric representation is in [2], where a comparative
- review of four strategies for single robot exploration is performed, distinguis
-hing among a random approach (used as benchmark), a greedy one and two complex
- 
+ An example of this in a metric representation is in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "2"
+literal "false"
+
+\end_inset
+
+, where a comparative review of four strategies for single robot exploration
+ is performed, distinguishing among a random approach (used as benchmark),
+ a greedy one and two complex 
 \emph on
 ad hoc
 \emph default
@@ -140,10 +161,32 @@ ad hoc
  Therefore, the choice can be done according to different metrics and the
  two main factors affecting it are the expected utility provided by the
  location and the cost of reaching it.
- In a topological representation, strategies like a Depth First Search [17]
- and Breadth First Search [33] are naturally possible algorithms on undirected
- graphs, while [1] proposes an interesting approach to solve the exploration
- problem on directed graphs.
+ In a topological representation, strategies like a Depth First Search 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "17"
+literal "false"
+
+\end_inset
+
+ and Breadth First Search 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "33"
+literal "false"
+
+\end_inset
+
+ are naturally possible algorithms on undirected graphs, while 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "1"
+literal "false"
+
+\end_inset
+
+ proposes an interesting approach to solve the exploration problem on directed
+ graphs.
 \end_layout
 
 \begin_layout Standard
@@ -168,8 +211,11 @@ Information gain-based strategies
 \begin_layout Standard
 Prior to the definition of this kind of strategies, it is useful to define
  occupancy grids and coverage maps.
- Occupancy grids model the environment as a grid where each cell can be
- marked as 
+ 
+\emph on
+Occupancy grids
+\emph default
+ model the environment as a grid where each cell can be marked as 
 \emph on
 free 
 \emph default
@@ -182,9 +228,12 @@ obstacle
 unknown
 \emph default
 , if it has not been scanned yet.
- Also coverage maps are a grid-based representation of the environment,
- where each cell contains the posterior probability of being covered by
- an object.
+ Also 
+\emph on
+coverage maps
+\emph default
+ are a grid-based representation of the environment, where each cell contains
+ the posterior probability of being covered by an object.
  This provides different advantages compared to occupancy grids, like for
  example the possibility to finely model a wall not parallel to 
 \emph on
@@ -199,9 +248,16 @@ axis of the grid, without the need of enlarging it to match the discretization.
 \end_layout
 
 \begin_layout Standard
-Information gain-based strategies as presented in [Robotic Mapping and Explorati
-on] are probabilistic strategies usually employed on coverage maps, and
- consequently extensible to occupancy grids.
+Information gain-based strategies as presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Robotic Mapping and Exploration"
+literal "false"
+
+\end_inset
+
+ are probabilistic strategies usually employed on coverage maps, and consequentl
+y extensible to occupancy grids.
  Candidate locations are chosen among the cells of the grid, according to
  the expected change in the entropy obtainable by moving a robot there.
  Given a posterior probability distribution 
@@ -253,9 +309,8 @@ I\left(c,x,z\right)=H\left(p\left(c\right)\right)-H\left(p\left(c|x,z\right)\rig
 
 \begin_layout Standard
 Then, each cell in the grid is considered as a possible candidate location
- and the one selected is the one providing the highest expected entropy
- reduction, i.e.
- information gain.
+ and the one providing the highest expected entropy reduction, i.e.
+ information gain, is selected.
  This method provides suitable locations because the information gain for
  a completely known cell is near zero, thus the approach tends to assign
  candidate locations in proximity of uncertain cells, increasing the knowledge
@@ -264,20 +319,35 @@ Then, each cell in the grid is considered as a possible candidate location
 \end_layout
 
 \begin_layout Standard
-In [Robotic Mapping and Exploration], besides the basic strategy presented
- so far, are also introduced two modifications.
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Robotic Mapping and Exploration"
+literal "false"
+
+\end_inset
+
+, besides the basic strategy presented so far, are also introduced two modificat
+ions.
  The first one reduces the number of candidate locations from the whole
- map, to the ones in a local window, which has to be completely explored
+ map to the ones in a local window, which has to be completely explored
  before moving on.
  Rather than reducing the set of candidate locations, the second one modifies
- the way in which the next one to explore.
- This is done by introducing the cost to reach that location from the robot
- pose.
+ the way in which the next one to explore is chosen by introducing the cost
+ to reach that location from the robot pose.
  
 \end_layout
 
 \begin_layout Standard
-In [3/21], is presented the 
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "2/21"
+literal "false"
+
+\end_inset
+
+, is presented the 
 \emph on
 A-C-G strategy 
 \emph default
@@ -291,8 +361,16 @@ which defines a conceptually similar approach but takes explicitly into
 \end_layout
 
 \begin_layout Standard
-In [Information gain-based Rao-Blackwellized ...], an information gain strategy
- is integrated into the localization and mapping phase.
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rao-Blackwellized"
+literal "false"
+
+\end_inset
+
+, an information gain strategy is integrated into the localization and mapping
+ phase.
  This allows to decide which action to perform at each step of the exploration,
  by taking into account the trajectory and map uncertainty.
  
@@ -306,54 +384,98 @@ Frontier-based strategies
 As presented above, information gain-based strategies mainly focus on the
  process of deciding the next location to explore, giving less attention
  to the definition of the set of candidate locations.
- This is extremely clear by considering the base method, in fact in that
- case all the cells in the grid are possible candidate locations and the
- method implicitly cuts out the one not providing new knowledge.
+ This is extremely clear by considering the base method, where all the cells
+ in the grid are possible candidate locations and the method implicitly
+ cuts out the ones not providing new knowledge.
  In frontier-based strategies, the focus is completely shifted to the creation
  of a good set of candidate locations.
  
 \end_layout
 
 \begin_layout Standard
-As defined in [60], the paper originally introducing this strategy for single
- robot exploration, a frontier is the boundary region between explored and
- unexplored space.
+As defined in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "60"
+literal "false"
+
+\end_inset
+
+, the paper originally introducing this strategy for single robot exploration,
+ a 
+\emph on
+frontier
+\emph default
+ is the boundary region between explored and unexplored space.
  The idea is that by assigning a robot to its closest frontier as location
  to explore, the line between explored and unexplored space is pushed continuous
 ly, until the whole environment is mapped.
- In that case, the model used to represent the environment was occupancy
- grid.
- With that representation, it is pretty straightforward to find out a frontier,
- in fact it is the cluster of 
-\emph on
-free
-\emph default
- cells which neighbors are 
-\emph on
-unknown
-\emph default
-.
+ In that case, occupancy grids are used to model the environment and with
+ that representation, it is pretty straightforward to find out a frontier,
+ identifiable with the cluster of free cells which neighbors are unknown.
  
 \end_layout
 
 \begin_layout Standard
 This simple idea works extremely well in practice and for this reason it
  has been used widely in the literature, producing a lot of extensions and
- adaptations to the various cases.
- In [61], the strategy has been extended to multi-robot scenarios.
- In [Exploration strategies ...
- a comparative study/9], the Leader-Follower exploration algorithm is presented.
+ adaptations to the various cases, like 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "61"
+literal "false"
+
+\end_inset
+
+ where the strategy is extended to multi-robot scenarios.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Exploration strategies ... a comparative study/9"
+literal "false"
+
+\end_inset
+
+, the Leader-Follower exploration algorithm is presented.
  It focuses on the roles assumed by the robots during the exploration, which
  can be dynamically changed, according to the distance from the assigned
  location.
  Candidate locations detection is done by identifying frontiers and, differently
  from the original strategy, the next to explore is not chosen as the nearest
  one.
- In fact, it looks for the pair of frontiers maximizing the sum of the rewards
+ Indeed, it looks for the pair of frontiers maximizing the sum of the rewards
  for the leader and the follower, where the reward function is composed
  by a utility term and the cost to reach the frontier.
- [Topological frontier-based ...] provides an extension of this exploration
- strategy to the topological map, rather than occupancy grids.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Topological"
+literal "false"
+
+\end_inset
+
+ provides an extension of this exploration strategy to the topological map,
+ rather than occupancy grids.
+ An interesting aspect of this is in the definition of 
+\emph on
+frontier nodes.
+ 
+\emph default
+They are classified according to geometric information about the environment
+ into free area or a transit area, defined as the area where the robot transits
+ between two spaces (rooms, corridors, and so on).
+ As the environment is progressively mapped, frontiers are detected, classified
+ in one of the two categories stated above, then the next frontier to explore
+ is selected and the topological map is updated.
+ The algorithm proposed is shown to have good performances both in terms
+ of exploration time and traveled distance against some benchmark algorithms.
  
 \end_layout
 
@@ -365,13 +487,27 @@ Topological strategies
 Topological strategies rely on a graph-based representation of the world.
  This is useful to neglect the geometrical features of the environment and
  to focus on its structure.
- As showed in [Topological frontier-based/5], the complexity of using geometric
- maps grows exponentially as the environment becomes larger and this justifies
- the use of topological maps.
+ As showed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Topological/5"
+literal "false"
+
+\end_inset
+
+, the complexity of using geometric maps grows exponentially as the environment
+ becomes larger and this justifies the use of topological maps.
  Moreover, the use of a directed graph can also simulate the case of a one-way
  street, where the robot is allowed to go in one direction and not in the
- opposite one [10], which would be impossible to describe just relying on
- geometric maps.
+ opposite one 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10"
+literal "false"
+
+\end_inset
+
+, which would be impossible to describe just relying on geometric maps.
  
 \end_layout
 
@@ -379,9 +515,9 @@ Topological strategies rely on a graph-based representation of the world.
 In this kind of strategies, candidate locations are nodes of the graph and
  the next one to explore is decided in various ways, strongly depending
  on the type of graph used.
- In fact, in the literature are used both undirected, with a further distinction
- whether or not the vertices are identifiable, and directed graphs.
- A vertex is identifiable if a robot can be recognized when revisited.
+ In fact, in the literature are used both undirected and directed graphs,
+ with a further distinction whether or not the vertices are identifiable.
+ A vertex is identifiable if it can be recognized by a robot when revisited.
  This is not always guaranteed because the robot may have limited sensor
  capabilities or the appearance of vertices may change.
  
@@ -391,18 +527,42 @@ In this kind of strategies, candidate locations are nodes of the graph and
 Undirected graphs with distinguishable vertices are the most straightforward
  case.
  Each vertex is labeled in a unique way and the robot is allowed to traverse
- the edges in both ways [17,43].
- In [42] is presented an extension of the Depth-First Search algorithm to
- the multi-robot scenario both for graphs and trees.
+ the edges in both ways 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "17,43"
+literal "false"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "42"
+literal "false"
+
+\end_inset
+
+ is presented an extension of the Depth-First Search algorithm to the multi-robo
+t scenario both for graphs and trees.
  A particular aspect of the model used is that edges are considered as opaque,
  this means that from either end, it is not clear where the edge goes.
- In [6] is analyzed the problem of piecemeal exploration, this states that
- the robot can traverse a limited number of edges before going back to the
- source vertex.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "6"
+literal "false"
+
+\end_inset
+
+ is analyzed the problem of piecemeal exploration, this states that the
+ robot can traverse a limited number of edges before going back to the source
+ vertex.
  It is a realistic context in which the robot has a limited amount of fuel
- and needs to refill it after a while.
- The algorithm proposed here is based on Breadth-First Search and another
- important aspect is the use of the concept of 
+ and needs to refill it after a fixed number of steps or traveled distance.
+ The algorithm proposed for this problem is based on Breadth-First Search
+ and another important aspect is the use of the concept of 
 \emph on
 frontier vertex
 \emph default
@@ -411,32 +571,90 @@ frontier vertex
 
 \begin_layout Standard
 Undirected graphs with anonymous vertices introduce some difficulties and
- to get over them, markers are needed to distinguish between explored and
- unexplored area [24,31,33].
- In [24] is shown that one marker is sufficient to allow the robot to build
- a graph isomorphic to the environment in low-order polynomial time and
- the use of multiple markers may improve the performance.
- In [33] are presented two enhancements both to single-robot and multi-robot
- exploration in such environments, provided by the use of a Breadth-First
- Search and the exploitation of local neighbors information.
+ to get rid of them, markers are needed to distinguish between explored
+ and unexplored area 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "33,24,31"
+literal "false"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "24"
+literal "false"
+
+\end_inset
+
+ is shown that one marker is sufficient to allow the robot to build a graph
+ isomorphic to the environment in low-order polynomial time and the use
+ of multiple markers may improve the performance.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "33"
+literal "false"
+
+\end_inset
+
+ are presented two enhancements both to single-robot and multi-robot exploration
+ in such environments, provided by the use of a Breadth-First Search and
+ the exploitation of local neighbors information.
 \end_layout
 
 \begin_layout Standard
 In the case of directed graphs, the robot movement is strongly limited with
  respect to undirected graphs.
- Clearly, Depth-First Search is not always possible due to the impossibility
- of backtracking.
- Different algorithms have been proposed to deal with these models [1,10,59].
- In [1] is proposed an algorithm to visit all nodes and edges with a sub-exponen
-tial upper bound on the number of edge traversals.
- In [10] is defined an algorithm able to explore a directed graph with anonymous
+ Clearly, Depth-First Search is not always possible because backtracking
+ is not guaranteed to be applicable.
+ Different algorithms have been proposed to deal with these models 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "1,10,59"
+literal "false"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "1"
+literal "false"
+
+\end_inset
+
+ is proposed an algorithm to visit all nodes and edges with a sub-exponential
+ upper bound on the number of edge traversals.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10"
+literal "false"
+
+\end_inset
+
+ is defined an algorithm able to explore a directed graph with anonymous
  vertices by using two robots through the simultaneous learning of the graph
  and an homing sequence.
  This is done by keeping multiple possible maps, updating them through a
  sequence of movements, then checking their correctness.
  It also states that it is not possible to efficiently learn the same kind
- of graph through a single robot with a constant number of pebbles without
+ of graph by means of a single robot with a constant number of pebbles without
  prior knowledge on the number of vertices.
+ Problem which, as stated above, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "24"
+literal "false"
+
+\end_inset
+
+ shows to be solvable with one marker in low-order polynomial time in the
+ case of an undirected graph.
  
 \end_layout
 
@@ -453,14 +671,39 @@ In a multi-robot scenario, once candidate locations are detected on the
  criteria and on the base of these, coordination mechanisms are distinguished
  into online and offline.
  Online mechanisms assigns robots to candidate locations by taking into
- account the actions done by the other members of the team [49,57,58].
+ account the actions done by the other members of the team 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "49,57,58"
+literal "false"
+
+\end_inset
+
+.
  In offline mechanisms, in contrast, roles are assigned to robots before
- the exploration starts and they act according to it [12,18,29,48].
+ the exploration starts, they act according to them 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "12,18,29,48"
+literal "false"
+
+\end_inset
+
+ and eventually they can change them dynamically as the exploration goes
+ on 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Exploration strategies ... a comparative study/9"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-A coordination based on an online mechanism is weighted by the need of more
- communication among the agents.
+A coordination based on an online mechanism is weighed down by the need
+ of more communication among the agents.
  Before an allocation is made, an agent has to know other agents pose and
  target locations.
  On one hand, this implies a lot of communication to make proper assignments;
@@ -469,23 +712,31 @@ A coordination based on an online mechanism is weighted by the need of more
  Through the use of roles, offline mechanisms require little to no communication
  once the exploration is started, making the robots and the whole system
  easier.
- The other aspect of this is that robots move almost freely, with the possibilit
-y of interference among them and the redundancy of assignments to the same
- target location.
+ The other side of the coin is that robots move almost freely, with the
+ possibility of interference among them and the redundancy of assignments
+ to the same target location.
 \end_layout
 
 \begin_layout Standard
-The relation between exploration strategy and coordination mechanisms is
+The relation between exploration strategy and coordination mechanism is
  quite tight and the relative impact each one has on the performances is
  hard to establish.
- A work in this sense is [20], where different exploration strategies and
- coordination mechanisms are compared on two different environments.
+ A work in this sense is 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "20"
+literal "false"
+
+\end_inset
+
+, where different exploration strategies and coordination mechanisms are
+ compared on two different environments.
  What comes out is that on structured environment, like an office one with
  a lot of rooms and corridors, the detection of good candidate locations
  is preferable over a good assignment of robots to them.
  In an open environment, the contrary holds, being the coordination mechanism
  able to increase the amount of area explored in the same amount of time,
- while the impact of the exploration strategy is less relevant.
+ making the impact of the exploration strategy less relevant.
  
 \end_layout
 
@@ -497,30 +748,741 @@ Online mechanisms
 Online coordination mechanisms allocate robots to target locations exploiting
  information about other robots actions.
  To achieve this, robots need to communicate each other.
+ This has been done in different ways across literature, using different
+ techniques 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "49,57,58"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-This has been done in different ways across literature, using different
- techniques [49,57,58].
- In [49] the communication is performed through the use of 
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "49"
+literal "false"
+
+\end_inset
+
+ the communication is performed through the use of 
 \emph on
 bids
 \emph default
 .
  Every time a robot receives a map update from the central mapper, it sends
- to the central executive a bid with a list of costs and information gains
- for each frontier.
+ a bid with a list of costs and information gains for each frontier to the
+ central executive.
  As the central executive gets all the bids, computes the assignment maximizing
  the difference between information gain and cost for each robot and assigns
- the frontier to the it.
+ the frontier to it.
  Once an assignment is fixed, the other bids are discounted by a certain
- value to take into account the current assigned task.
+ value to take it into account.
  This procedure is iterated as long as there are no remaining robots or
  tasks.
  The discount factor is fundamental being the main factor introducing the
  online coordination aspect of this algorithm, in fact if the bid was not
  discounted, each robot would go towards the frontier with its highest estimated
  utility, not taking into account other robots assignments.
+ Also 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "57"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "58"
+literal "false"
+
+\end_inset
+
+ perform coordination by considering the utility of each frontier computed
+ as the difference between the information gain it can provide and the cost
+ to reach it.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "57"
+literal "false"
+
+\end_inset
+
+ every time a robot is assigned to a certain frontier, the utility of the
+ other target points is discounted by a value proportional to the probability
+ of being in the visibility area from the assigned one.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "58"
+literal "false"
+
+\end_inset
+
+ this approach is extended to limited communication scenarios.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Coordinated segmentation"
+literal "false"
+
+\end_inset
+
+ provides an algorithm where the Voronoi Graph of the partial map is computed,
+ then it is segmented and frontiers are detected for each segment.
+ After this step, robots are assigned to the frontiers in a way to minimize
+ the total cost of the assignments.
+\end_layout
+
+\begin_layout Subsection
+Offline mechanisms
+\end_layout
+
+\begin_layout Standard
+Offline coordination mechanisms provide a definition of roles prior to the
+ beginning of the exploration.
+ By sticking to these roles, the coordination among robots needs little
+ to no communication, which is one of the main advantages of this approach.
+ Roles definition may also be modified run-time, like how is done in the
+ Leader-Follower algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Exploration strategies ... a comparative study/9"
+literal "false"
+
+\end_inset
+
+ presented above, where the role depends on the distance from the assigned
+ frontier.
+ 
+\end_layout
+
+\begin_layout Standard
+Two major works in this sense for this thesis are represented by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "29"
+literal "false"
+
+\end_inset
+
+ and the further extension provided by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cattaneo"
+literal "false"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "29"
+literal "false"
+
+\end_inset
+
+ are presented three coordination mechanisms, namely 
+\emph on
+reserve, buddy system 
+\emph default
+and 
+\emph on
+divide and conquer.
+ 
+\emph default
+The 
+\emph on
+reserve 
+\emph default
+mechanism splits the team into two smaller teams where one is left idle
+ in the initial position, the second one is sent to explore frontiers.
+ As new frontiers are found, idle robots are progressively turned into active
+ agents and assigned to them.
+ Once all the initially idle robots are active agents, the exploration is
+ carried out without further coordination.
+ 
+\emph on
+Buddy system 
+\emph default
+works in a similar way, with the difference that rather than considering
+ single robots, couples of robots are considered.
+ At the start of the exploration, some couples are sent to explore frontiers,
+ while the others remain idle in the starting position.
+ Once a branching point is found, the couple is split and each robot explores
+ a different branch.
+ If another branching point is found, one branch is explored by the single
+ robot which discovered it, and the other one is assigned to a couple from
+ the idle set, that then turns into active.
+ In 
+\emph on
+divide and conquer
+\emph default
+,
+\emph on
+ 
+\emph default
+at the beginning of the exploration, all the robots move together following
+ a leader, then as a branching point is found, the team splits in a half.
+ A new leader for the second team is decided and each team is assigned to
+ a branch.
+ This splitting approach goes on until a team is composed by more than one
+ robot and after that, they proceed in an uncoordinated way.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cattaneo"
+literal "false"
+
+\end_inset
+
+ modified these mechanisms proposing respectively 
+\emph on
+proactive reserve, proactive buddy system 
+\emph default
+and 
+\emph on
+side follower.
+ 
+\emph default
+The idea behind the first two is to move the idle set from the starting
+ position, towards a better position, nearer to the possible branching points.
+ This would allow the robots turned into active to reach the target position
+ in less time, once they are called.
+ The waiting position for the idle team is computed as the barycenter of
+ the locations of the active agents.
+ This thesis expands this approach modifying the way in which this waiting
+ position is computed by introducing the topology of the environment into
+ account.
+ Differently from 
+\emph on
+divide and conquer, 
+\emph default
+the 
+\emph on
+side follower 
+\emph default
+mechanism organizes the agents into groups of three, rather than a single
+ group.
+ The idea is that each robot in the group has a preferred direction for
+ the frontier to explore: the left robot tends to explore frontiers on the
+ left, the right robot prefers the ones on the right and the robot in the
+ center explores the ones in front of it.
+ This modification are shown to have very good performances when compared
+ with the benchmark ones, particularly 
+\emph on
+proactive reserve 
+\emph default
+which is usually better than all the other considered strategies
+\emph on
+.
+
+\emph default
+ While 
+\emph on
+proactive buddy system 
+\emph default
+outperforms the simple 
+\emph on
+buddy system 
+\emph default
+mostly on open environments, resulting in even or worst performances on
+ the others.
+ 
+\emph on
+Side follower 
+\emph default
+also performs generally better than 
+\emph on
+divide and conquer
+\emph default
+, particularly on the environments reflecting the structure for which it
+ is designed, that is a central corridor with spaces on the sides.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "2"
+literal "false"
+
+\end_inset
+
+F.
+ Amigoni.
+ Experimental Evaluation of Some Exploration Strategies for Mobile robots.
+ In Proceedings of the IEEE International Conference on Robotics and Automation,
+ pages 2818–2823, 2008.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "17"
+literal "false"
+
+\end_inset
+
+A.
+ Dessmark and A.
+ Pelc.
+ Optimal graph exploration without good maps.
+ In Proceedings of the European Symposium on Algorithms (ESA), pages 374–386,
+ 2002.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "33"
+literal "false"
+
+\end_inset
+
+H.Wang and P.
+ Dymond.
+ Enhancing exploration in graphlike worlds.
+ In Proceedings of the Canadian Conference on Computer and Robot Vision,
+ pages 53–60, 2008.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "1"
+literal "false"
+
+\end_inset
+
+S.
+ Albers and M.
+ R.
+ Henzinger.
+ Exploring unknown environments.
+ SIAM Journal on Computing, 29(4):1164–1188, 2000.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Robotic Mapping and Exploration"
+literal "false"
+
+\end_inset
+
+C.
+ Stachniss.
+ Robotic Mapping and Exploration.
+ Springer, 2009.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "2/21"
+literal "false"
+
+\end_inset
+
+F.
+ Amigoni, V.
+ Caglioti, and U.
+ Galtarossa.
+ A mobile robot mapping system with an information-based exploration strategy.
+ In Proceedings of the International Conference on Informatics in Control,
+ Automation and Robotics, pages 71-78, 2004.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Rao-Blackwellized"
+literal "false"
+
+\end_inset
+
+C.
+ Stachniss, G.
+ Grisetti, W.
+ Burgard.
+ Information Gain-based Exploration Using Rao-Blackwellized Particle Filters.
+ In Proceedings of the Robotics Science and Systems I, pages 65-72, 2005.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "60"
+literal "false"
+
+\end_inset
+
+B.
+ Yamauchi.
+ A frontier-based approach for autonomous exploration.
+ In Proceedings of the IEEE International Symposium on Computational Intel-
+ ligence in Robotics and Automation, 1997.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "61"
+literal "false"
+
+\end_inset
+
+B.
+ Yamauchi.
+ Frontier-based exploration using multiple robots.
+ In Proceedings of the Second International conference on autonomous agents
+ (Minneapolis 1998), pages 47–53, 1998.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Exploration strategies ... a comparative study/9"
+literal "false"
+
+\end_inset
+
+B.
+ Wang and S.
+ Qin, Multi-robot Environment Exploration Based on Label Maps Building via
+ Recognition of Frontiers.
+ In proceedings of IEEE International Conference on Multisensor Fusion and
+ Information Integration for Intelligent Systems (MFI), 2014.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Topological"
+literal "false"
+
+\end_inset
+
+C.
+ Gomez, AC.
+ Hernandez, R.
+ Barber.
+ Topological Frontier-Based Exploration and Map-Building Using Semantic
+ Information.
+ Sensors.
+ 19(20):4595, 2019.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Topological/5"
+literal "false"
+
+\end_inset
+
+R.
+ Chatila, J.P.
+ Laumond.
+ Position referencing and consistent world modeling for mobile robots.
+ In Proceedings of the IEEE International Conference on Robotics and Automation,
+ Volume 2, pp.
+ 138–145, 1985.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "10"
+literal "false"
+
+\end_inset
+
+M.
+ A.
+ Bender and D.
+ K.
+ Slonim.
+ The power of team exploration: Two robots can learn unlabeled directed
+ graphs.
+ pages 75–85, 1994.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "43"
+literal "false"
+
+\end_inset
+
+L.
+ Gasieniec P.
+ Fraigniaud and D.
+ Kowalski.
+ Collective tree exploration.
+ Networks, vol.
+ 48:166–177, 2006.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "42"
+literal "false"
+
+\end_inset
+
+J.
+ Xiao P.
+ Brass, A.
+ Gasparri.
+ Multirobot Tree and Graph Exploration.
+ IEEE Transactions on Robotics, 27(4):707–716, 2011.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "6"
+literal "false"
+
+\end_inset
+
+M.
+ Betke B.
+ Awerbuch and R.
+ Rivest.
+ Piecemeal graph exploration by a mobile robot.
+ In Proceedings of the 8th Annual ACM Conference on Computational Learning
+ Theory (COLT), pages 374–386, 1995.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "24"
+literal "false"
+
+\end_inset
+
+E.
+ Milos G.
+ Dudek, M.
+ Jenkin.
+ Robotic Exploration as Graph Construction.
+ IEEE Transactions on Robotics, vol.
+ 7(6):859–865, 1991.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "31"
+literal "false"
+
+\end_inset
+
+F.
+ Hoffmann.
+ One pebble does not suffice to search plane labyrinths.
+ Fun- damentals of Computation Theory, 117:433–444, 1981.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "59"
+literal "false"
+
+\end_inset
+
+C.
+ Papadimitriou X.
+ Deng.
+ Exploring an Unknown Graph.
+ In Proceedings of the IEEE 33th Annual Symposium on Foundations of Computer
+ Science, pages 355–361, 1990.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "49"
+literal "false"
+
+\end_inset
+
+W.
+ Burgard, R.
+ Simmons.
+ Coordination for multi-robot exploration and mapping.
+ In Proceedings of the National Conference on Artificial In- telligence
+ (2000), volume 4, pages 7–27, 2000
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "57"
+literal "false"
+
+\end_inset
+
+M.
+ Moors W.
+ Burgard and D.
+ Fox.
+ Collaborative multi-robot exploration.
+ In Proceedings of the IEEE International Conference on Robotics and Au-
+ tomation (2000), pages 476–481, 2000.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "58"
+literal "false"
+
+\end_inset
+
+M.
+ Moors W.
+ Burgard and M.
+ Schneider.
+ Coordinated multi-robot explo- ration.
+ IEEE Transactions on Robotics, 21(3):376–378, 2005.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "12"
+literal "false"
+
+\end_inset
+
+J.
+ Ko D.
+ Fox and K.
+ Konolige.
+ Distributed multirobot exploration and map- ping.
+ IEEE special issue on multi-robot systems, 94(7):1325–1339, 2006.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "18"
+literal "false"
+
+\end_inset
+
+J.
+ Stromand R.
+ Morton E.
+ Olson.
+ Progress towards multi-robot recon- naissance and the magic 2010 competition.
+ Journal of Field Robotics, 29(5):762–792, 2012.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "29"
+literal "false"
+
+\end_inset
+
+C.
+ Nieto-Granda H.
+ Christensesn and J.G.
+ Rogers III.
+ Coordination strate- gies for multi-robot exploration and mapping.
+ The International Journal of Robotics Research, 33(4):519–533, 2014.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "48"
+literal "false"
+
+\end_inset
+
+D.
+ Fox R.
+ Vincent and J.
+ Kol.
+ Distributed multirobot exploration, map- ping, and task allocation.
+ Annals of Mathematics and Artificial Intelligence, 52(2):229–255, 2008.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "20"
+literal "false"
+
+\end_inset
+
+N.
+ Basilico F.
+ Amigoni and A.Q.
+ Li.
+ How much worth is coordination of mobile robots for exploration in search
+ and rescue? RoboCup 2012: Robot Soccer World Cup XVI, 2013.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Coordinated segmentation"
+literal "false"
+
+\end_inset
+
+K.
+ Wurm, C.
+ Stacniss, W.
+ Burgard.
+ Coordinated Multi-Robot Exploration using a Segmentation of the Environment.
+ In Proceedings of IEEE/RSJ International Conference on Intelligent Robots
+ and Systems, pages 1160-1165, 2008.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Cattaneo"
+literal "false"
+
+\end_inset
+
+M.
+ Cattaneo.
+ An Analysis of Coordination Mechanisms for Multi-Robot Exploration of Indoor
+ Environments.
+ 2017.
 \end_layout
 
 \end_body
