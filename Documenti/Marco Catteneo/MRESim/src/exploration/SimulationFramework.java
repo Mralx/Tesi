@@ -616,7 +616,7 @@ public class SimulationFramework implements ActionListener {
         
         if (isBatch) {
             //updateRunConfig(); //this should set runNumMax;
-            reset();
+            //reset();
         }
         //simConfig.TARGET_INFO_RATIO = 0.90;
         RandomWalk.generator.setSeed(Constants.RANDOM_SEED);
@@ -710,9 +710,11 @@ public class SimulationFramework implements ActionListener {
                     +df.format(availability)
                     +"          "
                     +decisionTime,
-//                    "metricConsole"
-                    metricFile
+                    "metricConsole"
+//                    metricFile
             );
+
+            //logGraph();
         }
 
 
@@ -1434,6 +1436,7 @@ public class SimulationFramework implements ActionListener {
   
 // <editor-fold defaultstate="collapsed" desc="Logging">
     private void finalLog(){
+
         double cum_dist = 0;
         for (int i = 1; i < agent.length; i++) {
             cum_dist = cum_dist + agent[i].getStats().getDistanceTraveled();
@@ -1464,6 +1467,10 @@ public class SimulationFramework implements ActionListener {
                 +df.format(av_dist),
                 consoleFilename
         );
+
+        GraphHandler.logStats();
+
+
     }
 
     public static void logIdleSet(){
@@ -1580,7 +1587,7 @@ public class SimulationFramework implements ActionListener {
 
         StringBuilder data;
         String filename;
-
+        /*
         data = new StringBuilder("PR\n"); //TODO cambiare per PB
         for(SimpleNode node : GraphHandler.getGraph().getNodeMap().keySet()){
             data.append(timeElapsed).append(";[").append(node.x).append(",").append(node.y).append("];").append(GraphHandler.getNodeDegree(node)).append(";");
@@ -1589,6 +1596,18 @@ public class SimulationFramework implements ActionListener {
             else val = GraphHandler.getNodeCloseness(node);
             if(val!=null) data = new StringBuilder(data.toString().concat(val + ";"));
             data = new StringBuilder(data.toString().concat("\n"));
+        }
+
+         */
+        data = new StringBuilder(timeElapsed+"\n");
+        for(SimpleNode node : GraphHandler.getGraph().getNodeMap().keySet()) {
+            if(node.isFrontier())
+                data.append("f ");
+            data.append("[").append(node.x).append(",").append(node.y).append("];");
+            for (SimpleNode adj : GraphHandler.getGraph().getNodeMap().get(node).getAdjacentMap().keySet()) {
+                data.append("[").append(adj.x).append(",").append(adj.y).append("] ");
+            }
+            data.append(";\n");
         }
 
         filename = "FinalData/GraphLog/GraphLog ";

@@ -126,7 +126,7 @@ public class GraphHandler {
     }
 
     static void test(int n){
-        String statsFile = System.getProperty("user.dir") + "/logs/Discretization/Topo/" + n + " stats test.txt";
+        String statsFile = System.getProperty("user.dir") + "/logs/disegni/" + n + " stats test.txt";
         GraphHandler.getInstance();
         System.out.println("Computing occupancy grid");
         GraphHandler.setEnvironment(computeOccupancyGrid(n));
@@ -157,6 +157,17 @@ public class GraphHandler {
         }
 
         return envGrid;
+    }
+
+    public static void updateNodes(RealAgent agent ){
+        SimpleNode node = new SimpleNode(agent.getX(), agent.getY());
+        if(!graph.nearAnotherNode(node))
+            graph.addNode(node, agent.getName(), agent.getTimeElapsed());
+        if(!GraphHandler.graphCorrectness()){
+            GraphHandler.graphUncorrectnessPrint();
+            System.exit(-3);
+        }
+        SimulationFramework.logGraph();
     }
 
     public static void updateNodes(Set<RealAgent> agents ){
@@ -239,6 +250,11 @@ public class GraphHandler {
                         }
             }
         }
+    }
+
+    public static void logStats(){
+        String statsFile = System.getProperty("user.dir") + "/logs/disegni/stats test.txt";
+        GraphHandler.stats.logStats(GraphHandler.graph,statsFile);
     }
 }
 

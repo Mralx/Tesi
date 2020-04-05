@@ -130,7 +130,10 @@ public class OccupancyGrid {
             for (int i = 0; i < 800; i++) {
                 for (int j = 0; j < 600; j++) {
                     if (freeSpaceAt(i, j)) bi.setRGB(i, j, Color.WHITE.getRGB());
-                    else bi.setRGB(i, j, Color.BLACK.getRGB());
+                    else{
+                        if (obstacleAt(i,j)) bi.setRGB(i,j,Color.BLACK.getRGB());
+                        else bi.setRGB(i, j, Color.BLUE.getRGB());
+                    }
                 }
             }
             File outputfile = new File(filename);
@@ -557,7 +560,7 @@ public class OccupancyGrid {
     public boolean directLinePossible(int sourceX, int sourceY, int destX, int destY) {
         for(int i=Math.min(sourceX, destX)+1; i<=Math.max(sourceX, destX)-1; i++)
             for(int j=Math.min(sourceY, destY)+1; j<=Math.max(sourceY, destY)-1; j++)
-                if ((distPointToLine(sourceX, sourceY, destX, destY, i, j) <= 0.5) && obstacleAt(i, j))
+                if ((distPointToLine(sourceX, sourceY, destX, destY, i, j) <= 0.5) && !freeSpaceAt(i, j))
                     return false;
 
         return true;

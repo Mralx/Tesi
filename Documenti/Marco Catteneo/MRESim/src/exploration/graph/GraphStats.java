@@ -402,7 +402,7 @@ class GraphStats {
             Map<SimpleNode,Integer> degrees = this.degree(graph);
             for(SimpleNode node : degrees.keySet()){
                 bw.newLine();
-                bw.write("   "+node.toString()+"    "+degrees.get(node));
+                bw.write("   "+node.toString()+"    "+degrees.get(node)+"    "+graph.getNode(node).getAdjacents().toString());
             }
             bw.newLine();
             List<Integer> maxMinAvg = this.degMaxMinAvg(degrees);
@@ -419,6 +419,7 @@ class GraphStats {
 
             System.out.println("Closeness computation");
             time = System.currentTimeMillis();
+            this.graphDistanceMatrix = graphDistanceMatrix(graph);
             this.closenessMap = closenessCentrality(graph);
             bw.write("Closeness centrality:");
             Map<SimpleNode,Double> centralities = this.closenessMap;

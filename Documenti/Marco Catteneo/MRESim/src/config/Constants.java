@@ -51,11 +51,11 @@ public class Constants {
     // <editor-fold defaultstate="collapsed" desc="Batch constants">
     public static final int BATCH_RUNS = 1;     //max number of run per configuration
 
-    public static final int MIN_AGENTS = 4;     //starting team size, always >=2
+    public static final int MIN_AGENTS = 8;     //starting team size, always >=2
 
     public static final int BATCH_AGENTS = 1;   //max team size
 
-    public static final int BATCH_ENVS = 1;     //max number of simulated environment
+    public static final int BATCH_ENVS = 6;     //max number of simulated environment
     // </editor-fold>
 
     public static final int DISCRETIZATION_STEP = 15;

@@ -1,30 +1,20 @@
 package exploration.graph;
 
-import config.Constants;
-import environment.OccupancyGrid;
-import exploration.SimulationFramework;
-import gui.MainGUI;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class GraphEdit {
 
     public static void main(String[] args) throws InterruptedException {
 
+        environmentCharacterization();
         //splitFiles();
-        for(int i=1;i<7;i++)
-            parser(i);
+        //for(int i=1;i<7;i++)
+        //    parser(i);
         //interfAvailab();
         //    check();
 
@@ -872,7 +862,28 @@ public class GraphEdit {
         System.out.println(bet.toString());
     }
 
+    public static void environmentCharacterization(){
+        int free = 0;
+        int obs = 0;
+        for(int n=1;n<7;n++){
+        try{
+            BufferedImage bi = ImageIO.read(new File(System.getProperty("user.dir") + "/env "+n+".png"));
+            for(int i=0;i<bi.getWidth();i++){
+                for (int j = 0; j < bi.getHeight(); j++) {
+                    if (bi.getRGB(i,j) == Color.white.getRGB()) free++;
+                    if (bi.getRGB(i,j) == Color.black.getRGB()) obs++;
+                }
+            }
+            float freePercentageW = (float) free/(free+obs);
+            float obstaclesPercentageW = 1 - freePercentageW;
 
+            System.out.println(free+" "+obs+" "+freePercentageW+" "+obstaclesPercentageW);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        }
+    }
 }
 
 
