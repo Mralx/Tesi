@@ -164,13 +164,6 @@ class GraphStats {
             closeness.put(n, 1/avgDist);
         }
 
-        /*
-        if(Constants.MAP_ERASE)
-            this.closenessMap = new HashMap<>(closeness);
-        else
-            this.closenessMap.putAll(closeness);
-         */
-
         System.out.println("Worth nodes "+worthNodes.size());
         //sorting by value
         /*

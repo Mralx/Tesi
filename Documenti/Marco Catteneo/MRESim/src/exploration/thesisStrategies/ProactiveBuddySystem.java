@@ -385,8 +385,8 @@ public class ProactiveBuddySystem {
             );
         }
 
-        SimulationFramework.logBarycenter(barycenter,metricBarycenter);
-        SimulationFramework.logGraph();
+        //SimulationFramework.logBarycenter(barycenter,metricBarycenter);
+        //SimulationFramework.logGraph();
 
         if(metricBarycenter!=null && !metricBarycenter.equals(new Point(0, 0))) {
             LinkedList<Point> barycenterList = new LinkedList<>();

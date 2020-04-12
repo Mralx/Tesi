@@ -214,6 +214,7 @@ public class ProactiveReserve {
 
         //Compute the barycenter of the polygon formed by all active agents
         HashSet<RealAgent> activeAgents = activeSet.getInstance().getActive();
+        System.out.println("Idle set: "+IdleSet.getInstance().getPool().toString());
 
         //<editor-fold defaultstate="collapsed" desc="Original code">
         if(Constants.ORIGINAL) {

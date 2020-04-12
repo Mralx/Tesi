@@ -167,7 +167,7 @@ public class GraphHandler {
             GraphHandler.graphUncorrectnessPrint();
             System.exit(-3);
         }
-        SimulationFramework.logGraph();
+        //SimulationFramework.logGraph();
     }
 
     public static void updateNodes(Set<RealAgent> agents ){
@@ -180,7 +180,7 @@ public class GraphHandler {
             GraphHandler.graphUncorrectnessPrint();
             System.exit(-3);
         }
-        SimulationFramework.logGraph();
+        //SimulationFramework.logGraph();
     }
 
     public static void createTopologicalGraph(RealAgent agent, TopologicalMap tMap){
@@ -195,7 +195,6 @@ public class GraphHandler {
                 for(TopologicalNode adjTopNode : tNode.getListOfNeighbours()){
                     adjNode = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
                     if(adjNode.x>-1 && adjNode.y>-1){
-                        //double distance = agent.calculatePath(tNode.getPosition(),adjTopNode.getPosition()).getLength(); //TODO sistemare post testing
                         SimpleNode n1 = new SimpleNode(tNode.getPosition().x,tNode.getPosition().y);
                         SimpleNode n2 = new SimpleNode(adjTopNode.getPosition().x,adjTopNode.getPosition().y);
                         double distance = graph.euclideanDistance(n1,n2);

@@ -210,6 +210,7 @@ public class ExplorationController {
 
         if(!starterSelected) {
             currPair.getAgent().setStarter(true);
+            starterSelected = true;
         }
     }
 

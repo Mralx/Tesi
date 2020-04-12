@@ -554,9 +554,9 @@ public class OccupancyGrid {
     }
     
     // Checks if there is a line from source to dest that doesn't go through obstacles.
-    // Note:  by current implementation lines are possible through unknown space.  To change this
+    // Note:  by current implementation lines are not possible through unknown space.  To change this
     // only a slight tweak in second part of if statement needed, i.e. change to:
-    // && !freeSpaceAt(i,j)
+    // && obstacleAt(i,j)
     public boolean directLinePossible(int sourceX, int sourceY, int destX, int destY) {
         for(int i=Math.min(sourceX, destX)+1; i<=Math.max(sourceX, destX)-1; i++)
             for(int j=Math.min(sourceY, destY)+1; j<=Math.max(sourceY, destY)-1; j++)

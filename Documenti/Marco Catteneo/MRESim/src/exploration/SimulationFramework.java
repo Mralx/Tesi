@@ -710,8 +710,8 @@ public class SimulationFramework implements ActionListener {
                     +df.format(availability)
                     +"          "
                     +decisionTime,
-                    "metricConsole"
-//                    metricFile
+//                    "metricConsole"
+                    metricFile
             );
 
             //logGraph();
@@ -778,7 +778,7 @@ public class SimulationFramework implements ActionListener {
         FileReader fr = null;
         String rFolder;
         String rFilename = String.valueOf(n-1);
-        switch(this.environmentCounter){
+        switch(environmentCounter){
             case 1:
                 rFolder = "roomsTeam";
                 break;
@@ -1468,8 +1468,7 @@ public class SimulationFramework implements ActionListener {
                 consoleFilename
         );
 
-        GraphHandler.logStats();
-
+        //GraphHandler.logStats();
 
     }
 

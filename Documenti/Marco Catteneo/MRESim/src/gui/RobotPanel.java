@@ -372,7 +372,7 @@ public class RobotPanel extends javax.swing.JPanel {
 
         toggleRendezvous.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         toggleRendezvous.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/rvpointOn.png"))); // NOI18N
-        toggleRendezvous.setSelected(true);
+        toggleRendezvous.setSelected(false);
         toggleRendezvous.setToolTipText("Rendezvous Points");
         toggleRendezvous.setBorderPainted(false);
         toggleRendezvous.setContentAreaFilled(false);
