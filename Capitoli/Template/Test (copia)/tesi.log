@@ -1,0 +1,1424 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.2.19)  30 MAR 2020 00:21
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**tesi.tex
+(./tesi.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
+\col@sep=\dimen105
+\ar@mcellbox=\box27
+\extrarowheight=\dimen106
+\NC@list=\toks15
+\extratabsurround=\skip43
+\backup@length=\skip44
+\ar@cellbox=\box28
+)
+\TX@col@width=\dimen107
+\TX@old@table=\dimen108
+\TX@old@col=\dimen109
+\TX@target=\dimen110
+\TX@delta=\dimen111
+\TX@cols=\count89
+\TX@ftn=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen112
+\captionmargin@=\dimen113
+\captionwidth=\dimen114
+\caption@tempdima=\dimen115
+\caption@indent=\dimen116
+\caption@parindent=\dimen117
+\caption@hangindent=\dimen118
+)
+\c@caption@flags=\count90
+\c@ContinuedFloat=\count91
+)
+\c@KVtest=\count92
+\sf@farskip=\skip45
+\sf@captopadj=\dimen119
+\sf@capskip=\skip46
+\sf@nearskip=\skip47
+\c@subfigure=\count93
+\c@subfigure@save=\count94
+\c@lofdepth=\count95
+\c@subtable=\count96
+\c@subtable@save=\count97
+\c@lotdepth=\count98
+\sf@top=\skip48
+\sf@bottom=\skip49
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks17
+\AP@partial=\box29
+\AP@footins=\box30
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2018/12/01 v2.17b AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen120
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen121
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count99
+LaTeX Info: Redefining \frac on input line 223.
+\uproot@=\count100
+\leftroot@=\count101
+LaTeX Info: Redefining \overline on input line 385.
+\classnum@=\count102
+\DOTSCASE@=\count103
+LaTeX Info: Redefining \ldots on input line 482.
+LaTeX Info: Redefining \dots on input line 485.
+LaTeX Info: Redefining \cdots on input line 606.
+\Mathstrutbox@=\box31
+\strutbox@=\box32
+\big@size=\dimen122
+LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
+\macc@depth=\count104
+\c@MaxMatrixCols=\count105
+\dotsspace@=\muskip10
+\c@parentequation=\count106
+\dspbrk@lvl=\count107
+\tag@help=\toks19
+\row@=\count108
+\column@=\count109
+\maxfields@=\count110
+\andhelp@=\toks20
+\eqnshift@=\dimen123
+\alignsep@=\dimen124
+\tagshift@=\dimen125
+\tagwidth@=\dimen126
+\totwidth@=\dimen127
+\lineht@=\dimen128
+\@envbody=\toks21
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2844.
+LaTeX Info: Redefining \] on input line 2845.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count111
+\rotFPtop=\skip53
+\rotFPbot=\skip54
+\rot@float@box=\box33
+\rot@mess@toks=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip55
+\f@nch@O@elh=\skip56
+\f@nch@O@erh=\skip57
+\f@nch@O@olh=\skip58
+\f@nch@O@orh=\skip59
+\f@nch@O@elf=\skip60
+\f@nch@O@erf=\skip61
+\f@nch@O@olf=\skip62
+\f@nch@O@orf=\skip63
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2019/06/03 3.32 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2019/06/03 3.32 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2019/06/03 3.32 Babel common definitions
+\babel@savecnt=\count112
+\U@D=\dimen129
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count113
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks24
+\inpenc@posthook=\toks25
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def
+File: latin1.def 2018/08/11 v1.3c Input encoding file
+)) (./tesi.aux
+(./frontespizio.aux) (./dedica.aux) (./sommario.aux) (./ringraziamenti.aux)
+(./capitolo1.aux) (./capitolo2.aux) (./capitolo3.aux))
+\openout1 = `tesi.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: rotating package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\openout2 = `frontespizio.aux'.
+
+ (./frontespizio.tex
+File: ./pictures/logopm.eps Graphic file (type eps)
+
+<./pictures/logopm.eps> [1
+
+
+]) [2
+
+
+
+]
+\openout2 = `dedica.aux'.
+
+ (./dedica.tex) [3
+
+] [4
+
+
+]
+\openout2 = `sommario.aux'.
+
+ (./sommario.tex)
+[1
+
+
+] [2
+
+]
+\openout2 = `ringraziamenti.aux'.
+
+ (./ringraziamenti.tex) [3
+
+
+
+] [4
+
+]
+\openout2 = `capitolo1.aux'.
+
+ (./capitolo1.tex
+Chapter 1.
+
+Overfull \hbox (2.0804pt too wide) in paragraph at lines 21--22
+\OT1/cmr/m/n/10.95 L'introduzione deve es-sere atom-ica, quindi non deve con-te
+nere n^^Re sot-tosezioni
+ []
+
+
+Underfull \vbox (badness 1661) has occurred while \output is active []
+
+ [5
+
+
+
+])
+[6]
+\openout2 = `capitolo2.aux'.
+
+ (./capitolo2.tex
+Chapter 2.
+
+LaTeX Warning: Citation `Burgard2005' on page VII undefined on input line 26.
+
+
+LaTeX Warning: Citation `Gomez2019' on page VII undefined on input line 26.
+
+
+LaTeX Warning: Citation `Guzzoni1997' on page VII undefined on input line 26.
+
+
+LaTeX Warning: Citation `Yamauchi' on page VII undefined on input line 27.
+
+
+LaTeX Warning: Citation `Yamauchi1998' on page VII undefined on input line 27.
+
+
+LaTeX Warning: Citation `Rogers2013' on page VII undefined on input line 28.
+
+[7
+
+
+
+]
+
+LaTeX Warning: Citation `Amigoni2008' on page VIII undefined on input line 57.
+
+
+LaTeX Warning: Citation `Yamauchi' on page VIII undefined on input line 63.
+
+
+LaTeX Warning: Citation `Yamauchi1998' on page VIII undefined on input line 63.
+
+
+
+LaTeX Warning: Citation `Wang2014' on page VIII undefined on input line 63.
+
+
+LaTeX Warning: Citation `Gomez2019' on page VIII undefined on input line 63.
+
+
+LaTeX Warning: Citation `Stachniss2009' on page VIII undefined on input line 69
+.
+
+
+LaTeX Warning: Citation `Amigoni2008' on page VIII undefined on input line 73.
+
+
+LaTeX Warning: Citation `Dessmark2002' on page VIII undefined on input line 81.
+
+
+
+LaTeX Warning: Citation `Wang2008' on page VIII undefined on input line 81.
+
+
+LaTeX Warning: Citation `Albers2000' on page VIII undefined on input line 82.
+
+[8]
+
+LaTeX Warning: Citation `Stachniss2009' on page IX undefined on input line 93.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 100.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 100.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+LaTeX Warning: Citation `Stachniss2009' on page IX undefined on input line 122.
+
+
+
+LaTeX Warning: Citation `Amigoni2004' on page IX undefined on input line 131.
+
+[9]
+
+LaTeX Warning: Citation `Stachniss2005' on page X undefined on input line 138.
+
+
+LaTeX Warning: Citation `Yamauchi' on page X undefined on input line 153.
+
+
+LaTeX Warning: Citation `Yamauchi1998' on page X undefined on input line 165.
+
+
+LaTeX Warning: Citation `Wang2014' on page X undefined on input line 168.
+
+
+LaTeX Warning: Citation `Yamauchi' on page X undefined on input line 173.
+
+
+LaTeX Warning: Citation `Yamauchi1998' on page X undefined on input line 173.
+
+
+LaTeX Warning: Citation `Gomez2019' on page X undefined on input line 179.
+
+[10]
+
+LaTeX Warning: Citation `Chatila' on page XI undefined on input line 208.
+
+
+LaTeX Warning: Citation `Bender' on page XI undefined on input line 213.
+
+
+LaTeX Warning: Citation `Dessmark2002' on page XI undefined on input line 227.
+
+
+LaTeX Warning: Citation `Fraigniaud2006' on page XI undefined on input line 227
+.
+
+
+LaTeX Warning: Citation `Brass2011' on page XI undefined on input line 227.
+
+
+LaTeX Warning: Citation `Awerbuch1999' on page XI undefined on input line 231.
+
+[11]
+
+LaTeX Warning: Citation `Wang2008' on page XII undefined on input line 243.
+
+
+LaTeX Warning: Citation `Dudek1991' on page XII undefined on input line 243.
+
+
+LaTeX Warning: Citation `Hoffmann1981' on page XII undefined on input line 243.
+
+
+
+LaTeX Warning: Citation `Dudek1991' on page XII undefined on input line 243.
+
+
+LaTeX Warning: Citation `Wang2008' on page XII undefined on input line 246.
+
+
+LaTeX Warning: Citation `Albers2000' on page XII undefined on input line 255.
+
+
+LaTeX Warning: Citation `Bender' on page XII undefined on input line 255.
+
+
+LaTeX Warning: Citation `Deng1999' on page XII undefined on input line 255.
+
+
+LaTeX Warning: Citation `Albers2000' on page XII undefined on input line 255.
+
+
+LaTeX Warning: Citation `Bender' on page XII undefined on input line 257.
+
+
+LaTeX Warning: Citation `Dudek1991' on page XII undefined on input line 268.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12]
+
+LaTeX Warning: Citation `Simmons2000' on page XIII undefined on input line 287.
+
+
+
+LaTeX Warning: Citation `Burgard' on page XIII undefined on input line 287.
+
+
+LaTeX Warning: Citation `Burgard2005' on page XIII undefined on input line 287.
+
+
+
+LaTeX Warning: Citation `Guzzoni1997' on page XIII undefined on input line 290.
+
+
+
+LaTeX Warning: Citation `Fox2006' on page XIII undefined on input line 292.
+
+
+LaTeX Warning: Citation `Olson2012' on page XIII undefined on input line 292.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XIII undefined on input line 292.
+
+
+LaTeX Warning: Citation `Vincent2008' on page XIII undefined on input line 292.
+
+
+
+LaTeX Warning: Citation `Wang2014' on page XIII undefined on input line 294.
+
+
+LaTeX Warning: Citation `Simmons2000' on page XIII undefined on input line 302.
+
+
+
+LaTeX Warning: Citation `Amigoni2013' on page XIII undefined on input line 318.
+
+
+[13]
+
+LaTeX Warning: Citation `Simmons2000' on page XIV undefined on input line 333.
+
+
+LaTeX Warning: Citation `Burgard' on page XIV undefined on input line 333.
+
+
+LaTeX Warning: Citation `Burgard2005' on page XIV undefined on input line 333.
+
+
+LaTeX Warning: Citation `Simmons2000' on page XIV undefined on input line 335.
+
+
+LaTeX Warning: Citation `Burgard' on page XIV undefined on input line 347.
+
+
+LaTeX Warning: Citation `Burgard2005' on page XIV undefined on input line 348.
+
+
+LaTeX Warning: Citation `Burgard' on page XIV undefined on input line 352.
+
+
+LaTeX Warning: Citation `Burgard2005' on page XIV undefined on input line 355.
+
+
+LaTeX Warning: Citation `Wurm2008' on page XIV undefined on input line 358.
+
+[14]
+
+LaTeX Warning: Citation `Wang2014' on page XV undefined on input line 377.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XV undefined on input line 382.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XV undefined on input line 382.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XV undefined on input line 383.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XV undefined on input line 408.
+
+) [15] [16]
+\openout2 = `capitolo3.aux'.
+
+ (./capitolo3.tex
+Chapter 3.
+
+LaTeX Warning: Citation `Burgard2005' on page XVII undefined on input line 15.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XVII undefined on input line 15.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XVII undefined on input line 15.
+
+
+
+LaTeX Warning: Citation `Amigoni2008' on page XVII undefined on input line 17.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 23.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+ [17
+
+
+
+]
+
+LaTeX Warning: Citation `Spirin2015' on page XVIII undefined on input line 41.
+
+
+LaTeX Warning: Citation `Thrun2008' on page XVIII undefined on input line 65.
+
+[18]
+
+LaTeX Warning: Citation `Grisetti2010' on page XIX undefined on input line 88.
+
+
+LaTeX Warning: Citation `Montemerlo2002' on page XIX undefined on input line 89
+.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XIX undefined on input line 96.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XIX undefined on input line 110.
+
+
+[19]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_3".eps' not found on input line 146.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.146 }
+       \quad{}\quad{}\subfloat[L-C-HP environment]{\includegraphics[width=6c...
+
+? 
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_3".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.146 }
+       \quad{}\quad{}\subfloat[L-C-HP environment]{\includegraphics[width=6c...
+
+? H
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_3".eps (no Boundin
+gBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.146 }
+       \quad{}\quad{}\subfloat[L-C-HP environment]{\includegraphics[width=6c...
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.146 }
+       \quad{}\quad{}\subfloat[L-C-HP environment]{\includegraphics[width=6c...
+
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/enviro
+nments/Tesi/env_3".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environment
+s/Tesi/env_3".eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_5".eps' not found on input line 148.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.148 }
+       \caption{Example of two different environments}
+? 
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_5".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.148 }
+       \caption{Example of two different environments}
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_5".eps (no Boundin
+gBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.148 }
+       \caption{Example of two different environments}
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.148 }
+       \caption{Example of two different environments}
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/enviro
+nments/Tesi/env_5".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environment
+s/Tesi/env_5".eps>
+Overfull \hbox (57.0512pt too wide) in paragraph at lines 146--148
+[][]
+ []
+
+
+Overfull \hbox (57.0512pt too wide) in paragraph at lines 146--148
+[] 
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 148.
+
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 148.
+
+
+
+LaTeX Warning: Citation `Awerbuch1999' on page XX undefined on input line 186.
+
+
+LaTeX Warning: Citation `Burgard2005' on page XX undefined on input line 186.
+
+[20] [21]
+
+LaTeX Warning: Citation `Benedettelli2012' on page XXII undefined on input line
+ 202.
+
+
+LaTeX Warning: Citation `Yamauchi1998' on page XXII undefined on input line 219
+.
+
+[22]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 12-50-36".eps' not found on input line 247.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 12-50-36".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.247 ...rmata da 2020-03-29 12-50-36\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 12-50-36".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.247 ...rmata da 2020-03-29 12-50-36\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50
+-36".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50-36".
+eps>
+Overfull \hbox (6.99132pt too wide) in paragraph at lines 247--248
+[]\OT1/cmr/m/n/10.95 da 2020-03-29 12-50-36".eps" [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23]
+
+LaTeX Warning: Citation `Rogers2013' on page XXIV undefined on input line 271.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XXIV undefined on input line 272
+.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XXIV undefined on input line 276.
+
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 12-50-54".eps' not found on input line 295.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 12-50-54".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.295 ...rmata da 2020-03-29 12-50-54\string".eps}
+                                                  \caption{Separation into a...
+
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 12-50-54".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.295 ...rmata da 2020-03-29 12-50-54\string".eps}
+                                                  \caption{Separation into a...
+
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50
+-54".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50-54".
+eps>
+Overfull \hbox (6.99132pt too wide) in paragraph at lines 295--298
+[]\OT1/cmr/m/n/10.95 da 2020-03-29 12-50-54".eps" [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XXIV undefined on input line 306.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XXIV undefined on input line 306
+.
+
+[24] [25]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-47-53".eps' not found on input line 372.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-47-53".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.372 }
+       \quad{}\subfloat[The pair reaches the assigned frontier]{\includegrap...
+
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 14-47-53".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.372 }
+       \quad{}\subfloat[The pair reaches the assigned frontier]{\includegrap...
+
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-47
+-53".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-47-53".
+eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-09".eps' not found on input line 374.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-09".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.374 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 14-48-09".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.374 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48
+-09".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-09".
+eps>
+Underfull \hbox (badness 10000) in paragraph at lines 372--375
+[][]
+ []
+
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-20".eps' not found on input line 379.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-20".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.379 }
+       \quad{}\subfloat[The two robots move each one towards its own assigne...
+
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 14-48-20".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.379 }
+       \quad{}\subfloat[The two robots move each one towards its own assigne...
+
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48
+-20".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-20".
+eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-28".eps' not found on input line 381.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2
+020-03-29 14-48-28".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.381 }
+       \caption{Buddy split}
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Capitoli/Schermata da 2020-03-29 14-48-28".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.381 }
+       \caption{Buddy split}
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48
+-28".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-28".
+eps>
+Underfull \hbox (badness 10000) in paragraph at lines 379--381
+[][]
+ []
+
+
+LaTeX Warning: Float too large for page by 208.32048pt on input line 382.
+
+[26]
+
+LaTeX Warning: Citation `Cattaneo2017' on page XXVII undefined on input line 39
+8.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XXVII undefined on input line 399.
+
+
+) [27] [28]
+\openout2 = `capitolo4.aux'.
+
+ (./capitolo4.tex
+Chapter 4.
+
+LaTeX Warning: Citation `Cattaneo2017' on page XXIX undefined on input line 6.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29
+
+
+
+]
+
+LaTeX Warning: Citation `Spirin2015' on page XXX undefined on input line 72.
+
+[30] [31]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t".eps' not found on input line 165.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.165 }
+       \quad{}\subfloat[Visibility graph. Green dots represent pose nodes, r...
+
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.165 }
+       \quad{}\subfloat[Visibility graph. Green dots represent pose nodes, r...
+
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t".eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v".eps' not found on input line 168.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.168 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.168 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v".eps>
+Overfull \hbox (23.20761pt too wide) in paragraph at lines 165--169
+[][]
+ []
+
+
+Overfull \hbox (24.72845pt too wide) in paragraph at lines 165--169
+[] 
+ []
+
+
+LaTeX Warning: Citation `Freeman1978' on page XXXII undefined on input line 178
+.
+
+
+LaTeX Warning: Citation `Nasiruzzaman2011' on page XXXII undefined on input lin
+e 179.
+
+
+LaTeX Warning: Citation `Dekker2013' on page XXXII undefined on input line 179.
+
+
+
+LaTeX Warning: Citation `Wang2018' on page XXXII undefined on input line 180.
+
+
+LaTeX Warning: Citation `Krackhardt1990' on page XXXII undefined on input line 
+185.
+
+
+! LaTeX Error: File `/home/alex/Scrivania/desktop/Tesi/Capitoli/kite' not found
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.192 ...lex/Scrivania/desktop/Tesi/Capitoli/kite}
+                                                  
+? 
+[32] [33]
+
+LaTeX Warning: Citation `Freeman1978' on page XXXIV undefined on input line 211
+.
+
+
+LaTeX Warning: Citation `Newman2001' on page XXXIV undefined on input line 235.
+
+
+
+Overfull \hbox (0.5262pt too wide) in paragraph at lines 228--240
+[]\OT1/cmr/m/n/10.95 The orig-i-nal for-mu-la-tion of close-ness cen-tral-ity c
+on-sid-ers only un-weighted
+ []
+
+[34]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t c".eps' not found on input line 265.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t c".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.265 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t c".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.265 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t c".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t c".eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v c".eps' not found on input line 270.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v c".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.270 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v c".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.270 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v c".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v c".eps>
+
+LaTeX Warning: Citation `Freeman1978' on page XXXV undefined on input line 285.
+
+
+[35]
+
+LaTeX Warning: Citation `Freeman1978' on page XXXVI undefined on input line 301
+.
+
+
+LaTeX Warning: Citation `Newman2001' on page XXXVI undefined on input line 302.
+
+
+
+LaTeX Warning: Citation `Freeman1978' on page XXXVI undefined on input line 312
+.
+
+[36]
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t b".eps' not found on input line 346.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t b".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.346 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t b".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.346 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t b".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t b".eps>
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v b".eps' not found on input line 351.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v b".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.351 }
+       
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v b".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.351 }
+       
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v b".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v b".eps> [37]
+
+LaTeX Warning: Citation `Rogers2013' on page XXXVIII undefined on input line 39
+3.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XXXVIII undefined on input line 
+393.
+
+[38] [39]
+
+LaTeX Warning: Citation `Cattaneo2017' on page XL undefined on input line 503.
+
+) [40]
+\openout2 = `capitolo5.aux'.
+
+ (./capitolo5.tex
+Chapter 5.
+
+LaTeX Warning: Citation `Rogers2013' on page XLI undefined on input line 7.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XLI undefined on input line 8.
+
+
+LaTeX Warning: Citation `Rogers2013' on page XLI undefined on input line 16.
+
+
+LaTeX Warning: Citation `Cattaneo2017' on page XLI undefined on input line 18.
+
+[41
+
+
+
+] [42] [43]
+
+LaTeX Warning: Citation `Cattaneo2017' on page XLIV undefined on input line 156
+.
+
+[44] [45]
+
+LaTeX Warning: Citation `Cormen2010' on page XLVI undefined on input line 236.
+
+
+LaTeX Warning: Citation `Spirin2015' on page XLVI undefined on input line 254.
+
+[46] [47] [48]
+
+LaTeX Warning: Citation `Cormen2010' on page XLIX undefined on input line 366.
+
+[49]
+
+LaTeX Warning: Citation `Brandes2001' on page L undefined on input line 440.
+
+[50] [51]) [52]
+\openout2 = `capitolo6.aux'.
+
+ (./capitolo6.tex
+Chapter 6.
+) [53
+
+
+
+]
+\openout2 = `capitolo7.aux'.
+
+ (./capitolo7.tex [54
+
+
+
+]
+Chapter 7.
+) [55] [56
+
+
+]
+No file tesi.bbl.
+\openout2 = `appendiceA.aux'.
+
+(./appendiceA.tex
+Appendix A.
+) [57
+
+
+]
+\openout2 = `appendiceB.aux'.
+
+ (./appendiceB.tex
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+Make it at least 13.59999pt.
+We now make it that large for the rest of the document.
+This may cause the page layout to be inconsistent, however.
+
+[58
+
+
+
+]
+Appendix B.
+) [59]
+\openout2 = `appendiceC.aux'.
+
+ (./appendiceC.tex [60
+
+
+
+]
+Appendix C.
+) [61]
+\openout2 = `appendiceD.aux'.
+
+ (./appendiceD.tex [62
+
+
+
+]
+Appendix D.
+) [63]
+\openout2 = `appendiceE.aux'.
+
+ (./appendiceE.tex [64
+
+
+
+]
+Appendix E.
+) [65]
+\openout2 = `appendiceF.aux'.
+
+ (./appendiceF.tex [66
+
+
+
+]
+Appendix F.
+) [67] (./tesi.aux (./frontespizio.aux) (./dedica.aux) (./sommario.aux)
+(./ringraziamenti.aux) (./capitolo1.aux) (./capitolo2.aux) (./capitolo3.aux)
+(./capitolo4.aux) (./capitolo5.aux) (./capitolo6.aux) (./capitolo7.aux)
+(./appendiceA.aux) (./appendiceB.aux) (./appendiceC.aux) (./appendiceD.aux)
+(./appendiceE.aux) (./appendiceF.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 3886 strings out of 494478
+ 56133 string characters out of 6175741
+ 131832 words of memory out of 5000000
+ 7392 multiletter control sequences out of 15000+600000
+ 13332 words of font info for 48 fonts, out of 8000000 for 9000
+ 60 hyphenation exceptions out of 8191
+ 44i,11n,51p,743b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on tesi.dvi (71 pages, 161232 bytes).

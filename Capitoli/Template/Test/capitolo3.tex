@@ -1,0 +1,462 @@
+%% LyX 2.3.4.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,a4paper,twoside,openright]{report}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+\frenchspacing
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{Problem setting and definition}
+\maketitle
+
+\section{Exploration problem}
+
+The exploration problem can be defined as the problem of mapping an
+unknown environment by means of a team of robots. Thus, the objective
+is the construction of a map of the environment but this introduces
+further problems, concerning for example the localization of each
+robot dealing with the various sources of uncertainty, how to distribute
+the team, and how to coordinate them. These are three of the main
+aspects considered in the development of a solution to this problem,
+providing the major impact on performance. To compare different approaches
+the main metric used is the time taken by the exploration \cite{Burgard2005,Rogers2013,Cattaneo2017},
+but also the distance traveled by the robots is sometimes considered
+\cite{Amigoni2008}.
+
+A formal definition of the \emph{exploration problem}, in the following
+abbreviated as \emph{EP},\emph{ }can be provided through a 4-ple $\left\langle A,E,P_{0},T\right\rangle $
+where: 
+\begin{itemize}
+\item $A$ is the set of robots used for the exploration;
+\item $E$ is the environment to explore;
+\item $P_{0}$ is a vector of the initial poses of the robots of the team;
+\item $T$ is the termination criterion.
+\end{itemize}
+This four elements characterize the instance of EP addressed, while
+the solution of the same consists in producing a map $M$ of the environment
+$E$. To do this, each robot is able to perceive the environment through
+one or more sensors, characterized by the size of the spanned area.
+The map $M$ consists in a 2D occupancy grid representing the areas
+of $E$. The center of each cell $c$ is characterized by its coordinates
+in a global coordinate system, provided as a vector $(x_{c},y_{c})$.
+Each cell contains a value which tells if that cell is free, occupied
+by an obstacle, or still unknown. Clearly, the first two values refer
+only to already explored cells, while the third value refers to those
+cells which are still not scanned by any robot of the team. 
+
+The experiments presented in this work are run on MRESim, a 2D simulator
+aimed at testing multi-robot exploration scenarios \cite{Spirin2015}.
+In particular, it allows to create an instance of \emph{EP }through
+a configuration file which provides the robots in the team, their
+initial poses and a PNG image representing the environment to explore.
+The vectors $P_{0}$ employed have in common the disposition of the
+robots along a straight line suitably spaced to make them start from
+the same initial location. The termination criterion used is the percentage
+of explored area and it can be modified by varying a variable in the
+code.
+
+The following sections describe the system used for the experiments,
+focusing at first on the environment and the agents, then moving the
+attention to the exploration strategy and the coordination mechanisms
+considered in this thesis. 
+
+\section{Localization and mapping}
+
+The problem of mapping an unknown environment and simultaneously localize
+a single robot on the partial map built is one of the fundamental
+problems of robotics, called \emph{SLAM problem,} from \emph{Simultaneous
+Localization And Mapping. }The robot knows its initial pose and, as
+it moves, the uncertainty about its pose increases, due to uncertainty
+in the odometry. For this reason it becomes necessary to localize
+the robot on the map, even a partial one. A formal description of
+it, as provided in \cite{Thrun2008}, is suitably done
+in a probabilistic framework and distinguishes two versions, the \emph{online
+}and the \emph{full} \emph{SLAM problem}. Let $X_{T},U_{T}$, and
+$Z_{T}$ be three statistical variables representing respectively
+the sequence of poses assumed by the robot, i.e., the \emph{path},
+the sequence of odometry measurements, and the sequence of measurements
+provided by the sensors. Let also $m$ be the true map of the environment.
+The \emph{full SLAM problem }is then defined as the problem of estimating
+the posterior probability of the map together with the whole path
+traveled by the robot, that is $p\left(X_{T},m|Z_{T},U_{T}\right)$.
+The \emph{online SLAM problem }aims at estimating the posterior of
+the actual location of the robot, rather than the whole path, together
+with the map. Thus, $p\left(x_{T},m|Z_{T},U_{T}\right)$.
+
+What happens in practice is that as the robot moves in an unknown
+environment, it perceives the surroundings through its sensors, has
+an estimate of its pose from its odometry measures and these are used
+to reduce the uncertainty both about the map built and the location
+of, or the path followed by, the robot, depending on the version of
+the SLAM algorithm implemented. As the exploration goes on, the partial
+map approaches to a complete map of the environment and it is also
+possible to get rid of the noise in the measurements. 
+
+The model used for the map can be both topological \cite{Grisetti2010}
+or metric \cite{Montemerlo2002}. In particular in this thesis, the representation
+provided as output by the SLAM algorithm is metric, consisting of
+an occupancy grid. 
+
+\subsection{Environments}
+
+This work considers only indoor environments. Reasons behind this
+restriction are related to the work of \cite{Cattaneo2017}, of which
+this thesis is an extension, in order to provide a comparison in the
+same type of environments. Moreover, this focus is justified by the
+application contexts, being the exploration of indoor environments
+more common with respect to outdoor ones.
+
+The representation of the map provided by the SLAM algorithm used
+in this work is a two-dimensional occupancy grid. Moreover, being
+applied to a multi-robot scenario, it comes out the difficulty of
+merging the maps computed by solving the SLAM problem for each agent.
+The solution to this is a centralized approach by means of a base
+station, which collects all the individual local maps and combines
+them into a single global map.
+
+Similarly to \cite{Cattaneo2017}, the environments are classified according
+to some features characterizing them. In particular, the aspects considered
+are the size, the openness, and the parallelizability. The first two
+are easy to formally define. For the third one, a formal definition
+can hardly be provided being influenced by many factors. To make the
+definitions more readable, recalling that $M$ denotes the map of
+the environment modeled as an occupancy grid, let $S:M\rightarrow\mathbb{R}$
+be an auxiliary function which takes as input a cell of the map and
+provides its area. The features considered can be defined in the following
+way.
+\begin{itemize}
+\item Size: the amount of free area in the map. Thus, $D(M)=\sum_{i}S(f_{i})$
+with $f_{i}$ being a free cell. The size of the environment clearly
+affects the average time taken by robots to explore it. The smaller
+the environment, the lower the amount of resources needed to map it.
+From this, the distinction into small (S) and large (L) environments.
+\item Openness: the property of an environment to be composed of large open
+spaces (O) rather than cluttered ones (C). It is related to obstacle
+density, so to the probability of a randomly picked cell to be occupied
+by an obstacle. This is formally defined in a probabilistic framework
+as $O\left(M\right)=\frac{\sum_{i}S(o_{i})}{\sum_{j}S(c_{j})}$where
+$o_{i}$ is an occupied cell and $c_{j}$ is a generic cell.
+\item Parallelizability: the property of an environment to enforce the spreading
+of the robots during the exploration. A formal definition to this
+is hard to provide, but it can be informally presented considering
+that if the environment allows the team to spread, it is highly parallelizable
+(HP). Otherwise, if the robots are forced to stick together, it is
+lightly parallelizable (LP). 
+\end{itemize}
+To make these distinctions clearer, it is worth looking at some of
+the environments used in this work and at how they are classified
+according to these features. In Figure 1, two very different environments
+are presented. 
+\begin{figure}
+\subfloat[S-O-LP environment]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_3\string".eps}
+
+}\quad{}\quad{}\subfloat[L-C-HP environment]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_5\string".eps}
+
+}\caption{Example of two different environments}
+
+\end{figure}
+
+The environment in Figure 1.a is composed of a series of large corridors,
+ending in some rooms. This is classified as S-O-LP, because its dimension
+is small and the areas of which it is composed are mainly open ones,
+not cluttered rooms. The lightly parallelizability comes out from
+its configuration, where the robots follow almost similar paths, forced
+by the long corridors and they are not allowed to spread into it. 
+
+The second one (Figure 1.b) is likely to be the map of an office.
+It is composed of a lot of rooms, corridors and spaces with different
+sizes. It is classified as L-C-HP because the amount of free area
+is really large and is mainly composed of rooms and limited spaces.
+For the configuration of the corridors, the robots tend to spread
+in different directions, without sticking close to each other. For
+this reason, the environment is classified as highly parallelizable.
+
+\subsection{Agents}
+
+In MRESim, an agent is characterized through:
+\begin{itemize}
+\item a number and an ID to uniquely identify it;
+\item its pose, expressed by a vector $p=\left[x,y,\phi\right]$, where
+$\left(x,y\right)$ are the coordinates of the grid cells occupied
+by the robot and $\phi$ is its orientation;
+\item the sensing range, set to the default value;
+\item the communication range, assumed to be infinite;
+\item the battery life, assumed to be infinite as well;
+\item its type, it can be the base station, a relay, or an explorer.
+\end{itemize}
+The communication range and the battery life are assumed to be infinite
+because the focus of this work is on the results provided by the use
+of different coordination mechanisms. In this way, it is possible
+to simplify the mechanisms not to consider scenarios in which the
+robots run out of fuel or they are unable to communicate, even if
+these situations are of particular interest in a more realistic context
+and object of study as in \cite{Awerbuch1999} and \cite{Burgard2005}, respectively. 
+
+As stated above, the type of the robot, not to be confused with its
+role, can be: base station, relay, or explorer. The \emph{relay} type
+is never used in the simulations performed for this work, being useful
+in cases in which communication between a robot and the base station
+is not possible using a direct link. Indeed, each team used is composed
+of one base station and from two to eleven explorers. 
+
+The \emph{base station} is the central coordinator of the team and
+stores the global map computed by merging the partial maps provided
+by the agents. It is configured similarly to other agents but its
+pose is fixed to the initial one. It is important for the purpose
+of exploration because allows agents to coordinate by means of a centralized
+unit, rather than a decentralized approach, which would make the merging
+of the map way more difficult. An example of a decentralized approach
+is in \cite{Benedettelli2012}, where only as soon as two robots meet, they are
+able to merge their maps and then proceed with the exploration based
+on this updated map.
+
+The \emph{explorer }is the main kind of agents employed, being the
+one which moves in the environment to map it. Apart from the configuration
+parameters presented above, it is also characterized by a finite speed.
+Explorer are equipped with a laser range sensor allowing them to scan
+a semicircle of radius equal to the sensing range in front of them.
+The value for the sensing range is specified in the configuration
+file. As an explorer perceives previously unknown cells with its laser
+sensor, it communicates the measurements to the base station which
+merges them with the current map and updates it. The updated map is
+then sent to each agent. 
+
+\section{Exploration strategy}
+
+The frontier-based exploration presented in \cite{Yamauchi1998} is applied
+to identify the candidate locations to explore. A frontier is the
+boundary region between known and unknown space and by moving towards
+frontiers, this boundary is pushed forward accordingly.
+
+As highlighted in the previous section, the model for the map is an
+occupancy grid. Each robot has its own local map, updated through
+the sensor measurements, and merged at the base station to provide
+a global map, which is the one used in the frontiers identification
+phase.
+
+Frontiers are identified by at first drawing the contour of the known
+space. The contour, represented by the pink line in Figure 2, depicts
+a clear distinction between the known space, the yellow one, and unknown
+space, the gray one. Then, the contour is split into smaller segments
+such that each segment is included within two obstacles. Due to the
+representation based on occupancy grids, segments are composed of
+a series of cells, whose centers are used as vertices of a polygon.
+If the area of this polygon is higher than a certain threshold, then
+the cell located at its barycenter is a frontier. In the figure, the
+three identified frontiers are indicated with the little squares.
+The presence of two frontiers in the room on the right is due to the
+obstacle in the middle of that room, which splits the contour into
+two segments. Another aspect to notice is that the lower frontier
+on the right is located in the middle of the known space, not on the
+border, and this is due to the shape of the polygon, being it convex. 
+
+\begin{figure}
+\includegraphics[width=8cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50-36\string".eps}
+
+\caption{Frontiers detected on the map}
+
+\end{figure}
+
+
+\section{Coordination mechanisms}
+
+A coordination mechanism is the algorithm providing the allocation
+of robots to the possible frontiers computed by the exploration strategy.
+Together with the SLAM algorithm and the exploration strategy, this
+completes the view on the system needed for the exploration. In fact,
+the process of exploring an unknown environment starts with the robots
+scanning an area through their sensors and these data, together with
+the initial locations, are used as input to the SLAM algorithm, which
+provides a partial map as output. This is given to the exploration
+strategy that, as stated above, performs a discretization of the polygon
+enclosing the known area and computes the frontiers, excluding the
+ones too small. At this point, the coordination mechanism is applied
+to find out an allocation of robots to frontiers. 
+
+The coordination mechanisms are the main focus of this work. In the
+following, the coordination mechanisms we consider are presented both
+as the base mechanisms from \cite{Rogers2013} and their extensions provided
+by \cite{Cattaneo2017}.
+
+\subsection{Base mechanisms}
+
+In \cite{Rogers2013}, three mechanisms are presented, namely \emph{reserve,
+buddy system, }and \emph{divide and conquer.} They are all focused
+on how \emph{proactive }the team members not strictly needed for the
+exploration are. The team can be separated in two sub-teams, the \emph{active
+}and the \emph{idle set},\emph{ }with the first one composed of the
+robots whose goal is to explore one of the frontiers detected, while
+the second one is made up by the remaining robots. An example is useful
+to clarify this distinction and it is provided by Figure 3. 
+
+This is a snapshot of the exploration just after the one of Figure
+2. Five frontiers are detected: one located between the robots G and
+H, one in the central corridor and three on the right. To each one
+is assigned a robot, except for the three on the right. Being the
+distance among them within a certain clustering threshold, only a
+robot is turned into active and assigned to the nearest one. Thus,
+a total of three robots is turned into active, depicted in purple
+in the figure, and assigned to a frontier, while the remaining five
+robots compose the idle set, depicted in blue. 
+\begin{figure}[h]
+\includegraphics[width=8cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 12-50-54\string".eps}\caption{Separation into active set and idle set. Purple triangles are the
+robots of the active set. Each one is assigned to a different frontier
+and the red line is the path from the robot to it. Blue triangles
+are the robots composing the idle set. }
+\end{figure}
+
+The policy for the active set is the same for all the mechanisms,
+to explore the closest frontier. The differences come out dealing
+with the idle set, in fact the way in which robots are proactively
+moved allows to distinguish among each method. Moreover, this theme
+of a proactive use of the idle set is the leitmotiv linking the work
+started in \cite{Rogers2013} and extended both by \cite{Cattaneo2017} and this
+thesis.
+
+Reserve is the less proactive mechanism because as the name implies,
+each robot composing the idle set is left as a reserve at its initial
+location. As the exploration starts and the first frontiers are detected,
+the robots are split into the active set and the idle set, in a similar
+way to the example provided before. Then, the robots in the active
+set move towards their assigned frontiers and the ones in the idle
+set remain still in their initial positions. As the exploration goes
+on and new frontiers are found, their number may be higher than the
+size of the active set, making some or all the robots from the idle
+set needed, which are then turned into active and assigned to a frontier.
+Once the idle set is empty and all the robots are active, the exploration
+proceeds in an uncoordinated way. This means that each robot is assigned
+to the closest frontier, without taking into account whether another
+robot has been already assigned to it.
+
+Divide and conquer is the most proactive mechanism presented in that
+work because the idle set moves together with the active set. At the
+beginning of the exploration, active agents are assigned to the frontiers
+and the idle set is split in several subsets, one for each active
+agent. For example, assume that at the beginning, only a frontier
+is found. Then, an agent is marked as \emph{leader }and assigned to
+explore it. The other robots follow it as it moves towards its frontier,
+until at least another frontier is detected. For the sake of the example,
+assume that at this point there are two frontiers. In this case, a
+robot from the idle set is turned into active and marked as leader.
+The idle set is split in two: one half follows the first leader, the
+other half follows the other one. This goes on until the idle set
+is empty, after which the exploration proceeds in an uncoordinated
+way. Differently from the reserve mechanism, this approach allows
+to have robots from the idle set nearer to the frontier to which they
+are going to be assigned. In this sense, the idle team members are
+considered to be more proactive with respect to reserve, where waiting
+at the initial location makes the distance between the robot turned
+into active and the assigned frontier higher. 
+
+Buddy system is considered to be halfway between the two previous
+mechanisms for what concerns proactivity of the agents. This comes
+clearer by looking at how the mechanism handles the idle set. As soon
+as robots are deployed on the environment, pairs are formed, composed
+of a robot marked as \emph{leader} and another marked as \emph{follower},
+each one is the \emph{buddy} of the other. Once frontiers are identified,
+the minimum number of leader agents is turned into active and assigned
+to them. Each follower follows its own leader towards the assigned
+frontier. The other pairs remain still at the initial location, similarly
+to the idle set in the reserve mechanism. When a branching point is
+met, that is a point where there are two or more frontiers, the pair
+is split and the leader is assigned to a frontier, while the follower
+to the other one. Here, the analogy with the divide and conquer mechanism
+can be seen. 
+
+An example of this situation is shown in Figure 3. The orange pair
+is going towards the assigned frontier highlighted by the red dot
+in Figure 3.a. As this is reached (Figure 3.b), being the number of
+frontiers high, the orange pair is split, assigning to each robot
+the closest frontier. These are represented as a green dot for the
+robot which previously was the follower, and as a pink one for the
+leader (Figure 3.c). At this point, each robot goes towards its own
+frontier (Figure 3.d). 
+
+\begin{figure}[t]
+\subfloat[The orange pair is moving towards the frontier, depicted as a red
+dot]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-47-53\string".eps}
+
+}\quad{}\subfloat[The pair reaches the assigned frontier]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-09\string".eps}
+
+}
+
+\subfloat[The pair is split assigning the follower to the green dot and the
+leader to the pink one]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-20\string".eps}
+
+}\quad{}\subfloat[The two robots move each one towards its own assigned frontier]{\includegraphics[width=6cm]{\string"/home/alex/Scrivania/desktop/Tesi/Capitoli/Schermata da 2020-03-29 14-48-28\string".eps}
+
+}\caption{Buddy split}
+\end{figure}
+
+If a robot split from its buddy finds another branching point, a couple
+from the idle set is called and assigned to one of the two frontiers,
+while the single robot goes towards the other. This clarifies why
+the buddy system can be seen as a mix of the reserve mechanism and
+the divide and conquer mechanism. It both keeps the idle set waiting
+at the initial location until the moment at which it is needed, as
+reserve, and each leader goes with a follower from which splits when
+a branching point is met, similarly to divide and conquer. In this
+way, when a follower is turned into active, it is already pretty near
+to its frontier, providing a similar advantage of divide and conquer,
+without the disadvantage of having the whole team moving close. 
+
+\subsection{Proactive mechanisms}
+
+In \cite{Cattaneo2017}, three modifications for the mechanisms presented
+in \cite{Rogers2013} are introduced. As stated previously, they focus on
+enhancing the proactivity of the idle set. The way in which this is
+done is pretty straightforward for what concerns reserve and buddy
+system, while it is a little more tricky for divide and conquer. The
+mechanisms proposed are named \emph{proactive reserve, proactive buddy
+system, }and \emph{side follower. }
+
+The main problem with reserve mechanism is that, once a robot from
+the idle set is turned into active, it has to move from the initial
+location to its assigned frontier. The distance it has to travel may
+be lower if the robot is moved to a nearer position while it is still
+idle. This is exactly what this modified mechanism tries to do by
+moving the idle robots to the barycenter of the polygon whose vertices
+are active robots positions. In this way, they are likely to be nearer
+to the newly detected frontiers which have to be explored. 
+
+The buddy system faces a similar problem as the reserve mechanism:
+the robots in the idle set wait to be turned into active at the initial
+location. Thus, the proactive version of the buddy system moves the
+idle pairs at the barycenter of the polygon formed by the active agents
+locations, for the same reason explained above concerning the proactive
+reserve.
+
+The problem of divide and conquer is different, being related to the
+interference caused by moving the whole team of robots together. Therefore,
+the team of robots is split into groups of three at the beginning
+of the exploration and roles are assigned to them. The central robot
+is the leader, the right one is the right follower and the left one
+is the left follower. These roles are statically determined and never
+modified. Moreover, they affect the assignment of frontiers to the
+group members, being the frontiers along the direction of the movement
+assigned to the leader, the ones on its right assigned to the right
+follower and the ones on the left to the left follower symmetrically.
+In this way, there is a trade-off between the interference caused
+by the number of robots moving together and the distance from the
+frontiers, reducing the first one without affecting too much the second
+one. 
+\begin{thebibliography}{10}
+\bibliographystyle{plain}
+\bibliography{/home/alex/Scrivania/desktop/Tesi/Capitoli/Bibtex}
+\end{thebibliography}
+
+\end{document}

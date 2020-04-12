@@ -1,0 +1,827 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Experimental results from 10 runs for each configuration are presented in
+ the following.
+ The legend used is the following:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Bar
+\begin_inset Quotes erd
+\end_inset
+
+ indicates the proactivity method of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Cattaneo2017}
+\end_layout
+
+\end_inset
+
+, where the proactivity goal is computed as the barycenter of the polygon,
+ whose vertices are the positions of the active agents.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+V 
+\emph default
+and 
+\emph on
+T 
+\emph default
+stand for the type of graph employed, whether it is the visibility graph
+ or the topological one, respectively.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+B 
+\emph default
+and 
+\emph on
+C
+\emph default
+ point out the centrality measure used, betweenness in the first case, closeness
+ in the second.
+\end_layout
+
+\begin_layout Standard
+Thus, by titling 
+\begin_inset Quotes eld
+\end_inset
+
+Proactive Buddy V B
+\begin_inset Quotes erd
+\end_inset
+
+ a plot, it refers to the use of the proactive buddy mechanism where the
+ proactivity goal is computed through the computation of betweenness on
+ the visibility graph.
+\end_layout
+
+\begin_layout Subsection
+Proactive Buddy
+\end_layout
+
+\begin_layout Standard
+The number of steps needed by the proactive buddy mechanism for each configurati
+on of graphs and centrality measures for the first environment are depicted
+ in Figure x.
+ This is a low parallelizable environment and this can be noticed by looking
+ that even increasing the number of robots deployed, the exploration steps
+ reach a plateau, remaining almost equal for a team composed from seven
+ robots to ten.
+ In general, no mechanism seems to constantly outperform the others, but
+ except for two cases, the benchmark mechanism exploiting the barycenter
+ requires more steps to complete the exploration.
+ Moreover, the number of steps required by the mechanism based on the betweennes
+s of the topological graph tends to monotonically decrease, while the others
+ have alternating trend.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 1.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second environment is the simple maze.
+ Due to its structure, robots are forced to follow a single path and all
+ the runs provide similar result (Figure 2).
+ It is interesting to notice how the methods using the visibility graph
+ perform almost the same for each team configuration.
+ In this case, the proactivity based on the barycenter seems to provide
+ the best results in general.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 2.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The third environment is characterized by a central corridor with rooms
+ on the sides and it is the first open environment considered up to this
+ point.
+ Looking at Figure 3, there can be found two groups of team sizes performing
+ almost the same.
+ In fact, teams composed of five, seven and eight robots have almost the
+ same performance.
+ The same holds for the teams composed of nine to eleven robots.
+ This is a peculiar pattern which is probably caused by the structure of
+ the environment.
+ In general, mechanisms based on closeness seem to perform better than the
+ others, even if the mechanism exploiting the barycenter provides almost
+ the best performance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 3.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The forth environment is the most open one, being composed of a large room
+ and a smaller one.
+ In this one, the steps needed by each mechanism have varying trends according
+ to the team size.
+ Similarly to the first environment, the proactive buddy using the barycenter
+ performs worse than at least another mechanism, except for two team sizes.
+ In particular, with teams composed from eight to eleven robots, the mechanism
+ computing betweenness for the topological graph takes less to explore.
+ Another interesting pattern is that for small teams of four and five robots,
+ mechanisms based on closeness perform better than the one based on the
+ betweenness of the same graph.
+ This trend holds up to teams of eight robots for the visibility graph.
+ Then, as the size of the team increases, the trend inverts, making the
+ mechanisms based on betweenness outperform the ones utilizing closeness,
+ for both the graphs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 4.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The fifth environment is the most complex one.
+ The proactive buddy is characterized by an alternated trend with odd teams
+ providing in general better performance, except when composed of five members.
+ The explanation to this can be provided by considering that with odd teams,
+ at least a robot is assigned to explore the corridor located under the
+ initial location.
+ While, when the team is even, all the robots are assigned to frontiers
+ on the left, making them take the long way to reach the lower section of
+ the environment.
+ Patterns can hardly be found and no mechanism outperforms the other constantly.
+ The mechanism based on the barycenter performs well in general, but, except
+ for the team composed of ten robots, there is always another mechanism
+ which takes less time.
+ Mechanisms employing closeness provide very good performance in general,
+ particularly the one on the topological graph.
+ As the team size increases, methods based on betweenness tend to perform
+ better.
+ This trend reminds the one on the previous environment.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 5.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sixth environment is the largest environment.
+ Even in this case, no mechanism outperforms the other in all the cases
+ and similarly to the first and the forth, the mechanism based on the barycenter
+ performs worse than at least another mechanism.
+ Except for the team composed of eight robots, with teams of at least six
+ robots, the mechanism computing the closeness for the topological graph
+ provides consistently good performance, reaching the best with teams of
+ more than nine members.
+ In this environment, it is shown the opposite trend shown of the two previous
+ environments.
+ Mechanisms based on closeness tend to outperform the ones based on betweenness
+ on the same type of graph for small teams.
+ Once the team size reaches a certain value, this trend inverts, making
+ mechanisms based on betweenness preferable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PB steps 6.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive buddy: number of steps on environment 6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As pointed out, this inversion in the trend is recurrent in the last three
+ environments.
+ They have in common the classification both as large and highly parallelizable
+ environments.
+ While they differ for the openness, being the environment 4 classified
+ as open, and the environments 5 and 6 as cluttered.
+ Thus, mechanisms based on closeness being preferable with small teams and
+ the ones based on betweenness providing better performance with big teams
+ is a trend that might be related to some features of the environment.
+ To confirm this, it holds both for the visibility graph and the topological
+ graph.
+\end_layout
+
+\begin_layout Standard
+A first conclusion which can be get from these plots is that each implemented
+ mechanism seems to provide almost similar performance with respect to all
+ the others.
+ The mechanism based on barycenter, which is the benchmark one, is usually
+ one of the best, in particular in the second environment.
+ 
+\end_layout
+
+\begin_layout Subsection
+Proactive reserve
+\end_layout
+
+\begin_layout Standard
+Same as what done for the proactive buddy, the performance of the different
+ version of the proactive reserve are here shown, starting at first, with
+ the number of steps taken to complete the exploration.
+\end_layout
+
+\begin_layout Standard
+The first environment is the small office-like.
+ The plateau noticed before is present also there, being even more evident
+ for the team with more than nine robots.
+ The benchmark mechanism tend to be one of the best for almost every team
+ size, with the only exception for the team with six agents.
+ The monotonically decreasing trend identified previously for the proactive
+ buddy based on the betweenness of the topological graph is here verifiable
+ for the mechanism based on the closeness of the same kind of graph.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 1.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second environment seems to be affected more than previously by the
+ variations in the proactivity function.
+ Both the mechanisms based on the visibility graph seem to reach a plateau
+ after the team is composed of more than eight robots.
+ It is also interesting to notice the high variability shown by the mechanism
+ based on the closeness of the topological graph.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 2.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The third environment is explored faster as the team size increases, and
+ this is true for almost all the mechanisms.
+ The mechanism based on the barycenter is the fastest with big teams of
+ ten and eleven robots.
+ From teams of medium size, from six to nine agents, the mechanism exploiting
+ the betweenness of the topological graph performs generally better.
+ Moreover, topological graph-based mechanisms tend to outperform constantly
+ the mechanism based on the betweenness of the visibility graph.
+ Same holds with the one based on the closeness of the visibility graph,
+ while in some cases topological graph-based mechanisms go even with it.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 3.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The forth environment is characterized by all the mechanisms showing little
+ variations one from another.
+ There are some exceptions where, for a certain team size, a mechanism performs
+ a lot worse than all the others.
+ An example of this is for the team of eleven robots, where the number of
+ steps taken by the two topological graph-based mechanisms differ of the
+ 25%.
+ Another pattern which can be highlighted is that mechanisms based on betweennes
+s tend to perform even or better than the ones based on the closeness for
+ the same kind of graph.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 4.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the fifth environment, the mechanism based on the barycenter tend not
+ to be a good choice for almost every team size.
+ Even in the cases where the number of steps is the lowest, there is another
+ mechanism performing similarly.
+ Another factor to point out is that differently from the proactive buddy,
+ there is no difference whether the team is composed of an even or odd number
+ of agents.
+ Another thing to notice is that for the visibility graph-based mechanisms,
+ the one exploiting betweenness usually performs better than the one using
+ closeness.
+ This holds except for the team of eight robots, where the closeness one
+ performs a lot better, and for teams of six and nine robots, where the
+ difference is negligible.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 5.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the sixth environment, similarly to the fourth, the trend for all the
+ mechanisms tend to be monotonically decreasing, as more robots compose
+ the team.
+ The mechanism based on barycenter provides very good results, even if these
+ are almost always equal to or worse than the ones obtained by the exploitation
+ of the closeness for the topological graph.
+ This holds always except for the case of the team with eleven robots, where
+ the steps taken to explore by all the graph-based mechanisms increase with
+ respect to the team of ten robots, while they decrease a little in the
+ case of the mechanism based on the barycenter.
+ From teams to six robots to eleven, topological graph-based mechanisms
+ outperform the visibility graph-based ones.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/alex/Scrivania/desktop/Tesi/Capitoli/Pictures/PR steps 6.png
+	lyxscale 10
+	width 12cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proactive reserve: number of steps on environment 6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

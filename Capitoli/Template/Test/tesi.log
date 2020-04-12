@@ -1,0 +1,889 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.2.19)  28 MAR 2020 16:46
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**tesi
+(./tesi.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
+\col@sep=\dimen105
+\ar@mcellbox=\box27
+\extrarowheight=\dimen106
+\NC@list=\toks15
+\extratabsurround=\skip43
+\backup@length=\skip44
+\ar@cellbox=\box28
+)
+\TX@col@width=\dimen107
+\TX@old@table=\dimen108
+\TX@old@col=\dimen109
+\TX@target=\dimen110
+\TX@delta=\dimen111
+\TX@cols=\count89
+\TX@ftn=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip45
+\subfigcapskip=\skip46
+\subfigcaptopadj=\dimen112
+\subfigbottomskip=\skip47
+\subfigcapmargin=\dimen113
+\subfiglabelskip=\skip48
+\c@subfigure=\count90
+\c@lofdepth=\count91
+\c@subtable=\count92
+\c@lotdepth=\count93
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip49
+\subfig@bottom=\skip50
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks17
+\AP@partial=\box29
+\AP@footins=\box30
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2018/12/01 v2.17b AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen114
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen115
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count94
+LaTeX Info: Redefining \frac on input line 223.
+\uproot@=\count95
+\leftroot@=\count96
+LaTeX Info: Redefining \overline on input line 385.
+\classnum@=\count97
+\DOTSCASE@=\count98
+LaTeX Info: Redefining \ldots on input line 482.
+LaTeX Info: Redefining \dots on input line 485.
+LaTeX Info: Redefining \cdots on input line 606.
+\Mathstrutbox@=\box31
+\strutbox@=\box32
+\big@size=\dimen116
+LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
+\macc@depth=\count99
+\c@MaxMatrixCols=\count100
+\dotsspace@=\muskip10
+\c@parentequation=\count101
+\dspbrk@lvl=\count102
+\tag@help=\toks19
+\row@=\count103
+\column@=\count104
+\maxfields@=\count105
+\andhelp@=\toks20
+\eqnshift@=\dimen117
+\alignsep@=\dimen118
+\tagshift@=\dimen119
+\tagwidth@=\dimen120
+\totwidth@=\dimen121
+\lineht@=\dimen122
+\@envbody=\toks21
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2844.
+LaTeX Info: Redefining \] on input line 2845.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count106
+\rotFPtop=\skip54
+\rotFPbot=\skip55
+\rot@float@box=\box33
+\rot@mess@toks=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip56
+\f@nch@O@elh=\skip57
+\f@nch@O@erh=\skip58
+\f@nch@O@olh=\skip59
+\f@nch@O@orh=\skip60
+\f@nch@O@elf=\skip61
+\f@nch@O@erf=\skip62
+\f@nch@O@olf=\skip63
+\f@nch@O@orf=\skip64
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen123
+\captionmargin@=\dimen124
+\captionwidth=\dimen125
+\caption@tempdima=\dimen126
+\caption@indent=\dimen127
+\caption@parindent=\dimen128
+\caption@hangindent=\dimen129
+)
+\c@caption@flags=\count107
+\c@ContinuedFloat=\count108
+Package caption Info: rotating package is loaded.
+Package caption Info: subfigure package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2019/06/03 3.32 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2019/06/03 3.32 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2019/06/03 3.32 Babel common definitions
+\babel@savecnt=\count109
+\U@D=\dimen130
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count110
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks24
+\inpenc@posthook=\toks25
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def
+File: latin1.def 2018/08/11 v1.3c Input encoding file
+)) (./tesi.aux
+(./frontespizio.aux) (./dedica.aux) (./sommario.aux) (./ringraziamenti.aux)
+(./capitolo1.aux) (./capitolo3.aux))
+\openout1 = `tesi.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\openout2 = `frontespizio.aux'.
+
+ (./frontespizio.tex
+File: ./pictures/logopm.eps Graphic file (type eps)
+
+<./pictures/logopm.eps> [1
+
+
+]) [2
+
+
+
+]
+\openout2 = `dedica.aux'.
+
+ (./dedica.tex) [3
+
+] [4
+
+
+]
+\openout2 = `sommario.aux'.
+
+ (./sommario.tex)
+[1
+
+
+] [2
+
+]
+\openout2 = `ringraziamenti.aux'.
+
+ (./ringraziamenti.tex) [3
+
+
+
+] [4
+
+]
+\openout2 = `capitolo1.aux'.
+
+ (./capitolo1.tex
+Chapter 1.
+
+Overfull \hbox (2.0804pt too wide) in paragraph at lines 21--22
+\OT1/cmr/m/n/10.95 L'introduzione deve es-sere atom-ica, quindi non deve con-te
+nere n^^Re sot-tosezioni
+ []
+
+
+Underfull \vbox (badness 1661) has occurred while \output is active []
+
+ [5
+
+
+
+])
+[6]
+\openout2 = `capitolo3.aux'.
+
+ (./capitolo3.tex
+Chapter 2.
+LaTeX Font Info:    Try loading font information for U+msa on input line 20.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 23.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+ [7
+
+
+
+] [8] [9]
+! Undefined control sequence.
+<recently read> \subfloat 
+                          
+l.137 \subfloat
+               [S-O-LP environment]{\includegraphics[width=6cm]{\string"/hom...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_3".eps' not found on input line 137.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.137 ...ESim/environments/Tesi/env_3\string".eps}
+                                                  
+? 
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_3".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.137 ...ESim/environments/Tesi/env_3\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_3".eps (no Boundin
+gBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.137 ...ESim/environments/Tesi/env_3\string".eps}
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.137 ...ESim/environments/Tesi/env_3\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/enviro
+nments/Tesi/env_3".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environment
+s/Tesi/env_3".eps>
+Overfull \hbox (157.45554pt too wide) in paragraph at lines 137--138
+[]\OT1/cmr/m/n/10.95 [S-O-LP environment]Catteneo/MRESim/environments/Tesi/env$
+[]"\OML/cmm/m/it/10.95 :eps\OT1/cmr/m/n/10.95 "$[] 
+ []
+
+! Undefined control sequence.
+l.139 }\quad{}\quad{}\subfloat
+                              [L-C-HP environment]{\includegraphics[width=6c...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_5".eps' not found on input line 139.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.139 ...ESim/environments/Tesi/env_5\string".eps}
+                                                  
+? 
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/environments/Tesi/env_5".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.139 ...ESim/environments/Tesi/env_5\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/environments/Tesi/env_5".eps (no Boundin
+gBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.139 ...ESim/environments/Tesi/env_5\string".eps}
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.139 ...ESim/environments/Tesi/env_5\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/enviro
+nments/Tesi/env_5".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/environment
+s/Tesi/env_5".eps>
+Overfull \hbox (180.8764pt too wide) in paragraph at lines 139--140
+[]  \OT1/cmr/m/n/10.95 [L-C-HP environment]Catteneo/MRESim/environments/Tesi/en
+v$[]"\OML/cmm/m/it/10.95 :eps\OT1/cmr/m/n/10.95 "$[] 
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 141.
+
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 141.
+
+
+[10] [11] [12] [13] [14] [15] [16
+
+] [17]) [18]
+\openout2 = `capitolo4.aux'.
+
+ (./capitolo4.tex
+Chapter 3.
+
+LaTeX Warning: Citation `cattaneo' on page XIX undefined on input line 6.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19
+
+
+
+]
+[20] [21]
+! Undefined control sequence.
+<recently read> \subfloat 
+                          
+l.163 \subfloat
+               [Topological graph. Green dots represent the nodes]{\includeg...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t".eps' not found on input line 163.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.163 ...eneo/MRESim/logs/disegni/d3t\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.163 ...eneo/MRESim/logs/disegni/d3t\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t".eps>
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
+[]\OT1/cmr/m/n/10.95 [Topological graph. Green dots rep-re-sent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
+\OT1/cmr/m/n/10.95 the nodes]Catteneo/MRESim/logs/disegni/d3t".eps"
+ []
+
+! Undefined control sequence.
+l.165 }\quad{}\subfloat
+                       [Visibility graph. Green dots represent pose nodes, r...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v".eps' not found on input line 166.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.166 ...eneo/MRESim/logs/disegni/d3v\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v".eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.166 ...eneo/MRESim/logs/disegni/d3v\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v".eps>
+Underfull \hbox (badness 3623) in paragraph at lines 165--167
+[] \OT1/cmr/m/n/10.95 [Vis-i-bil-ity graph. Green dots rep-re-sent pose nodes, 
+red ones
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--167
+\OT1/cmr/m/n/10.95 are the fron-tier nodes ]Cat-te-neo/MRESim/logs/disegni/d3v"
+.eps"
+ []
+
+
+LaTeX Warning: Citation `closeness originale' on page XXII undefined on input l
+ine 178.
+
+
+LaTeX Warning: Citation `power grid' on page XXII undefined on input line 179.
+
+
+LaTeX Warning: Citation `disease' on page XXII undefined on input line 179.
+
+
+LaTeX Warning: Citation `virus' on page XXII undefined on input line 180.
+
+
+LaTeX Warning: Citation `kite graph' on page XXII undefined on input line 185.
+
+
+! LaTeX Error: File `/home/alex/Scrivania/desktop/Tesi/Capitoli/kite' not found
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.192 ...lex/Scrivania/desktop/Tesi/Capitoli/kite}
+                                                  
+? 
+[22] [23]
+
+LaTeX Warning: Citation `closeness originale' on page XXIV undefined on input l
+ine 211.
+
+
+LaTeX Warning: Citation `weighted closeness' on page XXIV undefined on input li
+ne 235.
+
+
+Overfull \hbox (0.5262pt too wide) in paragraph at lines 228--240
+[]\OT1/cmr/m/n/10.95 The orig-i-nal for-mu-la-tion of close-ness cen-tral-ity c
+on-sid-ers only un-weighted
+ []
+
+[24]
+! Undefined control sequence.
+<recently read> \subfloat 
+                          
+l.262 \subfloat
+               [Topological graph. Green dots are the nodes with a value of ...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t c".eps' not found on input line 263.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t c".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 ...eo/MRESim/logs/disegni/d3t c\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t c".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 ...eo/MRESim/logs/disegni/d3t c\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t c".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t c".eps>
+Underfull \hbox (badness 10000) in paragraph at lines 262--264
+[]\OT1/cmr/m/n/10.95 [Topological graph. Green dots are the nodes with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--264
+\OT1/cmr/m/n/10.95 a value of close-ness lower than the 75% of the max
+ []
+
+! Undefined control sequence.
+l.267 \subfloat
+               [Visibility graph. Green dots are the remaining pose nodes an...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v c".eps' not found on input line 268.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v c".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.268 ...eo/MRESim/logs/disegni/d3v c\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v c".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.268 ...eo/MRESim/logs/disegni/d3v c\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v c".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v c".eps>
+
+LaTeX Warning: Citation `closeness originale' on page XXV undefined on input li
+ne 285.
+
+[25]
+
+LaTeX Warning: Citation `closeness originale' on page XXVI undefined on input l
+ine 301.
+
+
+LaTeX Warning: Citation `weighted closeness' on page XXVI undefined on input li
+ne 302.
+
+
+LaTeX Warning: Citation `closeness originale' on page XXVI undefined on input l
+ine 312.
+
+[26]
+! Undefined control sequence.
+<recently read> \subfloat 
+                          
+l.343 \subfloat
+               [Topological graph. Green dots are the nodes with a value of ...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t b".eps' not found on input line 344.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3t b".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.344 ...eo/MRESim/logs/disegni/d3t b\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3t b".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.344 ...eo/MRESim/logs/disegni/d3t b\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3t b".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3t b".eps>
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
+[]\OT1/cmr/m/n/10.95 [Topological graph. Green dots are the nodes with a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
+\OT1/cmr/m/n/10.95 value of be-tween-ness lower than the 50% of the max
+ []
+
+! Undefined control sequence.
+l.348 \subfloat
+               [Visibility graph. Green dots are the remaining pose nodes an...
+
+? 
+
+LaTeX Warning: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v b".eps' not found on input line 349.
+
+
+! LaTeX Error: File `"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Cattene
+o/MRESim/logs/disegni/d3v b".eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.349 ...eo/MRESim/logs/disegni/d3v b\string".eps}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "/home/alex/Scrivania/deskto
+p/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegni/d3v b".eps (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.349 ...eo/MRESim/logs/disegni/d3v b\string".eps}
+                                                  
+? 
+File: "/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/d
+isegni/d3v b".eps Graphic file (type eps)
+
+<"/home/alex/Scrivania/desktop/Tesi/Documenti/Marco Catteneo/MRESim/logs/disegn
+i/d3v b".eps> [27]
+
+LaTeX Warning: Citation `christensen' on page XXVIII undefined on input line 39
+3.
+
+
+LaTeX Warning: Citation `cattaneo' on page XXVIII undefined on input line 393.
+
+[28] [29]
+
+LaTeX Warning: Citation `cattaneo' on page XXX undefined on input line 503.
+
+[30]) [31
+
+]
+\openout2 = `capitolo5.aux'.
+
+ (./capitolo5.tex [32
+
+
+
+]
+Chapter 4.
+[33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43]) [44]
+\openout2 = `capitolo6.aux'.
+
+ (./capitolo6.tex
+Chapter 5.
+) [45
+
+
+
+]
+\openout2 = `capitolo7.aux'.
+
+ (./capitolo7.tex [46
+
+
+
+]
+Chapter 6.
+) [47] [48
+
+
+]
+\openout2 = `appendiceA.aux'.
+
+
+No file appendiceA.tex.
+\openout2 = `appendiceB.aux'.
+
+No file appendiceB.tex.
+\openout2 = `appendiceC.aux'.
+
+No file appendiceC.tex.
+\openout2 = `appendiceD.aux'.
+
+No file appendiceD.tex.
+\openout2 = `appendiceE.aux'.
+
+No file appendiceE.tex.
+\openout2 = `appendiceF.aux'.
+
+No file appendiceF.tex.
+(./tesi.aux (./frontespizio.aux) (./dedica.aux) (./sommario.aux)
+(./ringraziamenti.aux) (./capitolo1.aux) (./capitolo3.aux) (./capitolo4.aux)
+(./capitolo5.aux) (./capitolo6.aux) (./capitolo7.aux) (./appendiceA.aux)
+(./appendiceB.aux) (./appendiceC.aux) (./appendiceD.aux) (./appendiceE.aux)
+(./appendiceF.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 3869 strings out of 494478
+ 54951 string characters out of 6175741
+ 128778 words of memory out of 5000000
+ 7400 multiletter control sequences out of 15000+600000
+ 13332 words of font info for 48 fonts, out of 8000000 for 9000
+ 60 hyphenation exceptions out of 8191
+ 36i,7n,43p,739b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on tesi.dvi (52 pages, 123348 bytes).

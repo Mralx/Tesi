@@ -1,0 +1,458 @@
+#LyX file created by tex2lyx 2.3
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin /home/alex/Scrivania/desktop/Tesi/Capitoli/Template/SchemaTesi/
+\textclass report
+\options openright
+\use_default_options false
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding iso8859-1
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 2
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+
+\lang italian
+Introduzione
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Introduzione"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+
+\lang italian
+
+\size footnotesize
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\emph on
+
+\begin_inset Quotes fls
+\end_inset
+
+Terence: Rotta a nord con circospezione 
+\begin_inset Newline newline
+\end_inset
+
+ Bud: Ehi, gli ordini li do io qui!
+\begin_inset Newline newline
+\end_inset
+
+ Terence: Ok, comante
+\begin_inset Newline newline
+\end_inset
+
+ Bud: Rotta a nord
+\begin_inset Newline newline
+\end_inset
+
+ Terence: Soltanto?
+\begin_inset Newline newline
+\end_inset
+
+ Bud: Con circospezione!
+\begin_inset Quotes frs
+\end_inset
+
+
+\emph default
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Quotation
+\align right
+\noindent
+
+\size footnotesize
+
+\lang italian
+Chi Trova un Amico Trova un Tesoro 
+\end_layout
+
+\begin_layout Quotation
+
+\lang italian
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+
+\begin_inset VSpace 0.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\lang italian
+L'introduzione deve essere atomica, quindi non deve contenere nè sottosezioni nè paragrafi nè altro. Il titolo, il sommario e l'introduzione devono sembrare delle scatole cinesi, nel senso che lette in quest'ordine devono progressivamente svelare informazioni sul contenuto per incatenare l'attenzione del lettore e indurlo a leggere l'opera fino in fondo. L'introduzione deve essere tripartita, non graficamente ma logicamente:
+\end_layout
+
+\begin_layout Section
+
+\lang italian
+Inquadramento generale
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+La prima parte contiene una frase che spiega l'area generale dove si svolge il lavoro; una che spiega la sottoarea più specifica dove si svolge il lavoro e la terza, che dovrebbe cominciare con le seguenti parole 
+\begin_inset Quotes fls
+\end_inset
+
+lo scopo della tesi è …
+\begin_inset Quotes frs
+\end_inset
+
+, illustra l'obbiettivo del lavoro. Poi vi devono essere una o due frasi che contengano una breve spiegazione di cosa e come è stato fatto, delle attività  sperimentali, dei risultati ottenuti con una valutazione e degli sviluppi futuri. La prima parte deve essere circa una facciata e mezza o due
+\end_layout
+
+\begin_layout Section
+
+\lang italian
+Breve descrizione del lavoro
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+La seconda parte deve essere una esplosione della prima e deve quindi mostrare in maniera più esplicita l'area dove si svolge il lavoro, le fonti bibliografiche più importanti su cui si fonda il lavoro in maniera sintetica (una pagina) evidenziando i lavori in letteratura che presentano attinenza con il lavoro affrontato in modo da mostrare da dove e perché è sorta la tematica di studio. Poi si mostrano esplicitamente le realizzazioni, le direttive future di ricerca, quali sono i problemi aperti e quali quelli affrontati e si ripete lo scopo della tesi. Questa parte deve essere piena (ma non grondante come la sezione due) di citazioni bibliografiche e deve essere lunga circa 4 facciate.
+\end_layout
+
+\begin_layout Section
+
+\lang italian
+Struttura della tesi
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+La terza parte contiene la descrizione della struttura della tesi ed è organizzata nel modo seguente. 
+\begin_inset Quotes fls
+\end_inset
+
+La tesi è strutturata nel modo seguente.
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+Nella sezione due si mostra …
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+Nella sez. tre si illustra …
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+Nella sez. quattro si descrive …
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+Nelle conclusioni si riassumono gli scopi, le valutazioni di questi e le prospettive future …
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+Nell'appendice A si riporta …(Dopo ogni sezione o appendice ci vuole un punto).
+\begin_inset Quotes frs
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+I titoli delle sezioni da 2 a M-1 sono indicativi, ma bisogna cercare di mantenere un significato equipollente nel caso si vogliano cambiare. Queste sezioni possono contenere eventuali sottosezioni.
+\end_layout
+
+\begin_layout Standard
+
+\lang italian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%``Terence: "Mi fai un gelato anche a me? Lo vorrei di pistacchio" 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Bud: "Non ce l'ho il pistacchio. C'ho la vaniglia, cioccolato, fragola, limone e caffé"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Terence: "Ah bene. Allora fammi un cono di vaniglia e di pistacchio"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Bud: "No, non ce l'ho il pistacchio. C'ho la vaniglia, cioccolato, fragola, limone e caffé"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Terence: "Ah, va bene. Allora vediamo un po', fammelo al cioccolato, tutto coperto di pistacchio"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Bud: "Ehi, macché sei sordo? Ti ho detto che il pistacchio non ce l'ho!"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Terence: "Ok ok, non c'è bisogno che t'arrabbi, no? Insomma, di che ce l'hai?"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Bud: "Ce l'ho di vaniglia, cioccolato, fragola, limone e caffé!"
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Terence: "Ah, ho capito. Allora fammene uno misto: mettici la fragola, il cioccolato, la vaniglia, il limone e il caffé. Charlie, mi raccomando il pistacchio, eh"''}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

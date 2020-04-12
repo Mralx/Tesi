@@ -1,0 +1,923 @@
+#LyX file created by tex2lyx 2.3
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin /home/alex/Scrivania/desktop/Tesi/Capitoli/Template/Test (copia)/
+\textclass report
+\options openright
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-1
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 2
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Architettura del sistema
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset CommandInset label
+LatexCommand label
+name "capitolo5"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This thesis is aimed at exploiting measures related to the environment into a proactive allocation of idle agents. This tries to be a further improvement of the mechanisms proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rogers2013"
+literal "false"
+
+\end_inset
+
+, with respect to 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rogers2013"
+literal "false"
+
+\end_inset
+
+. The proposed mechanisms are analyzed in detail in this chapter, giving particular attention to how the various elements presented before, namely graphs and centrality measures, are employed.
+\end_layout
+
+\begin_layout Standard
+At first, a common structure for the coordination mechanisms is defined, and it is shown how a different implementation of the different functions allows characterizing each one. This is done starting from reserve and buddy system, as presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rogers2013"
+literal "false"
+
+\end_inset
+
+, being the building blocks of the other mechanisms proposed. Then, the focus shifts to the proactive versions developed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Cattaneo2017"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+After this, it is presented how the proposed proactive mechanisms modify some components of this common structure to include the use of topological aspects.
+\end_layout
+
+\begin_layout Section
+Base mechanisms
+\end_layout
+
+\begin_layout Standard
+Reserve and buddy system have been introduced intuitively in the previous chapters, and here a more detailed look at how they are implemented is given. Recalling that the buddy system is conceived as a mix from reserve and divide and conquer mechanisms, it is clear why they share some algorithms.
+\end_layout
+
+\begin_layout Standard
+The general structure for the coordination mechanisms analyzed can be roughly summarized of four elements: 
+\end_layout
+
+\begin_layout Itemize
+planning function; 
+\end_layout
+
+\begin_layout Itemize
+activation function; 
+\end_layout
+
+\begin_layout Itemize
+goal function; 
+\end_layout
+
+\begin_layout Itemize
+proactivity function. 
+\end_layout
+
+\begin_layout Standard
+For some aspects, the planning function works as a common interface provided by the mechanism. As the simulation requires an agent to move, the step to take is returned by this function. It calls the appropriate function coherently with the state of the agent, whether it is active or idle. It also initializes the exploration by setting the starting agent and forming the active and the idle sets.
+\end_layout
+
+\begin_layout Standard
+The remaining three functions allow characterizing a coordination mechanism. They enclose the logic about the assignment of frontiers to active agents, what triggers idle agents to be turned into active and where they are kept until that moment.
+\end_layout
+
+\begin_layout Standard
+In particular, the proactivity function is the focus of this work. In the previous chapter, the importance of graphs and centrality measures has been introduced. How these are included in the proposed coordination mechanisms is shown in the last section, giving also attention to some optimization performed to avoid an excessive impact of their computation.
+\end_layout
+
+\begin_layout Subsection
+Reserve
+\end_layout
+
+\begin_layout Standard
+Reserve mechanism divides the team of robots into two sub-teams, one composed of active agents and the other composed of idle ones. This separation is done by the planning function as soon as the exploration begins, once the first set of frontiers is computed.
+\end_layout
+
+\begin_layout Standard
+At first, the distance of each agent from each frontier is retrieved, then the agent of the pair with the lowest distance is set as the starting agent and assigned to that frontier. This assignment is iterated until every frontier is assigned to an agent or vice versa. The set of assigned agents composes the active set, while the remaining agents if any, form the idle set. After this initialization step, the planning function is invoked every time an agent either has reached its goal or a certain amount of time has passed since the last planning. In both cases, it is in charge of calling the right function among the activation function, the goal function or the proactivity one.
+\end_layout
+
+\begin_layout Standard
+Once an agent is active, which frontier is assigned to it is computed by the goal function. To do this, the planning function provides it with the updated list of frontiers. The assignment is simply done considering the closest frontier to the agent location.
+\end_layout
+
+\begin_layout Standard
+The activation function can be invoked only for agents of the idle set, being the function aimed at turning them into active. This function checks whether there are any not assigned frontiers and if so, the agent is turned into active and assigned to the closest one. If this is not the case and all the frontiers are assigned, the proactivity function is called.
+\end_layout
+
+\begin_layout Standard
+The reserve policy is that the idle set waits at the initial location and thus, the proactivity function always returns the position of the agent. In this way, agents of the idle set stay still, until the activation function assigns them to a frontier.
+\end_layout
+
+\begin_layout Subsection
+Buddy system
+\end_layout
+
+\begin_layout Standard
+Buddy system proceeds in a way similar to the reserve one. This method is characterized by the use of paired robots and each robot in the pair is the buddy of the other, from this the name of the mechanism. Pairs are created before the exploration begins, by assigning a role to each robot of the team. The roles are two, either an agent is a leader or a follower and they are assigned to split the team into two halves. In the case of odd teams, the extra agent is assigned leader role.
+\end_layout
+
+\begin_layout Standard
+Apart from this division into leaders and followers, the team is also split into an active set and an idle set. The active set is composed of leaders assigned to frontiers and their buddies. The idle set is composed of the pairs waiting at their initial locations.
+\end_layout
+
+\begin_layout Standard
+The first call to the planning function selects the starting pair. This is done similarly to the reserve, by looking for the robot closest to a frontier. If it is a leader, it is assigned to that frontier. If it is a follower, its buddy is retrieved and being it the leader, it is assigned to that frontier. As for reserve, this approach is iterated as long as there are no more leaders or frontiers to assign. All the leaders assigned to a frontier and their buddies compose the active set. The idle set is composed of the pairs whose leader is not assigned to a frontier if any.
+\end_layout
+
+\begin_layout Standard
+Further calls to the planning function distinguish whether the calling agent is a leader or a follower. In the former case, it simply invokes the goal function, while in the latter it checks whether the pair needs to be split. This happens when the two closest frontiers are enough distant one from the other. This is a branching point and the pair is split. The leader is assigned to the closest. The follower is now considered a leader itself and is assigned to the second closest frontier. If that is evaluated not to be a branching point, then the goal function for the follower is called. In fact, the goal function is implemented differently whether the considered agent is a leader or a follower.
+\end_layout
+
+\begin_layout Standard
+The goal function for leaders is the same as reserve. It assigns the agent to the closest frontier, while the goal function for the follower moves the agent towards the frontier assigned to its leader. This makes the pair go together in the direction of the assigned frontier.
+\end_layout
+
+\begin_layout Standard
+The activation function for the buddy system follows the same principle of the reserve one. If there are any not assigned frontiers, the closest idle leader to each one is computed and turned into active by assigning that frontier to it. This has the side effect of turning into active also its buddy because the goal function will now make the follower follow its leader, rather than waiting at the initial position.
+\end_layout
+
+\begin_layout Standard
+Buddy system keeps the idle set waiting at the initial position. Therefore, when called by an agent, the proactivity function simply returns the current location of the agent.
+\end_layout
+
+\begin_layout Subsection
+Benchmark proactive mechanisms
+\end_layout
+
+\begin_layout Standard
+The proactivity function in the previous cases consists only of returning the position of the agent calling it. This makes the agents stay still at their initial locations until the activation function turns them into active. As discussed in the previous chapters, this makes the average distance between the agents and the assigned frontier higher, penalizing performance. To overcome this, a new proactivity function has been proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Cattaneo2017"
+literal "false"
+
+\end_inset
+
+. Robots of the idle set are moved to a position likely to be nearer the future assigned frontier and this speeds up exploration. Experimental results show this modification to actually be an enhancement in the case of reserve. The proactive version outperforms the base version on almost every environment on which it has been tested. The proactive buddy system, on the contrary, is affected less by the proactivity.
+\end_layout
+
+\begin_layout Standard
+The previously defined functions are the same for both the algorithms. The only difference is in the proactivity function. For both proactive reserve and proactive buddy system, the proactivity function assigns to the agent a goal location computed as the barycenter of the locations of the active agents. It can be formalized as 
+\begin_inset Formula \[
+G_{t}(a)=\frac{1}{\mid A\mid}\sum_{a'\in A}P_{t}(a')
+\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+recalling the notion from the previous chapter, where 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $a'$
+\end_inset
+
+ are agents, in particular, 
+\begin_inset Formula $a$
+\end_inset
+
+ is an idle agent and 
+\begin_inset Formula $a'$
+\end_inset
+
+ iterates over 
+\begin_inset Formula $A$
+\end_inset
+
+, the set of active agents. 
+\begin_inset Formula $P_{t}\left(a'\right)$
+\end_inset
+
+ is a function providing the location of the agent 
+\begin_inset Formula $a'$
+\end_inset
+
+ at the time 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{t}\left(a\right)$
+\end_inset
+
+ is the goal location assigned to the idle agent. The subscript 
+\begin_inset Formula $t$
+\end_inset
+
+ for the goal function is possible since the location of the active agents at time 
+\begin_inset Formula $t$
+\end_inset
+
+ are used to compute the barycenter. There is no delay in the propagation of the information.
+\end_layout
+
+\begin_layout Standard
+This proactivity function is characterized only by the actual location of active agents. The environment is not explicitly included in this formula. However, it affects indirectly where the robots are moved as robots are moving into it. To take its features into account directly, an approach based on graphs and centrality measures is proposed in the following section, characterized by a different implementation of the proactivity function.
+\end_layout
+
+\begin_layout Section
+Proposed proactive mechanisms
+\end_layout
+
+\begin_layout Standard
+The proposed proactive mechanisms differ from the previously defined ones mostly for the proactivity function. There are no other conceptual differences in the other elements of the structure. Even if a small variation to the implementation of the goal function is introduced, as will be pointed out in the next section.
+\end_layout
+
+\begin_layout Standard
+The proactivity function is modified in a way to include the computation of either the closeness or the betweenness and to use their values to obtain the proactivity point. Independently from the measure needed, the proactivity function follows the same steps. At first, it is checked if the graph has been modified since the last computation. If not, the proactivity point returned is the same as the previous step, avoiding useless computations. Otherwise, a new point has to be evaluated. This is done by determining the value of the considered metric for the nodes of the graph and then retrieving the most central one, i.e., the one with the highest value of the metric. If more than one node is found, the returned point is their barycenter. However, this case has a very low frequency and the number of nodes never exceeded two, during the experiments.
+\end_layout
+
+\begin_layout Standard
+As presented in the previous chapter, the proposed proactive mechanisms exploit two different types of graphs, combined with two centrality measures. All their combinations have been tested both applied to the reserve and the buddy system, for a total of four different versions for each one.
+\end_layout
+
+\begin_layout Standard
+In the following sections, it is presented how the mechanisms have been adapted to include the generation of the graphs and some optimizations aimed at allowing an efficient computation of the centrality measures. This was needed because of the high complexity of the algorithms used, which made the average simulation cycle to greatly increase its duration, particularly in the more advanced stages of the exploration.
+\end_layout
+
+\begin_layout Subsection
+Graph building process
+\end_layout
+
+\begin_layout Standard
+In the proposed mechanisms, there are two types of graphs tested. As already stated before, they are referred to as topological graph and visibility graph. Both have been implemented and tested to check how differently their use would affect performance. Their structures are built to enforce different aspects of the environment. The topological graph is built on the notion of navigability, that is it aims at capturing the connections among spaces. The visibility graph is based on the concept of visibility, which is more related to the possibility of sensing a certain location from another one.
+\end_layout
+
+\begin_layout Standard
+Both graphs have been implemented employing adjacency lists 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Cormen2010"
+literal "false"
+
+\end_inset
+
+. Recalling that the map is modeled as an occupancy grid, each node is characterized by its coordinates in the global coordinate system. It also holds a list containing all the nodes linked to it and the distance separating them. This has been preferred over a representation through adjacency matrices because both the graphs tend to be sparse, in particular the topological one. To confirm this, the average degree of the nodes of the topological graph is two, whereas it has a high variability for the visibility one. However, even in open environments, where the number of nodes visible from a node is higher, the average degree is always lower than half of the total number of nodes.
+\end_layout
+
+\begin_layout Standard
+In the following, how these graphs are built is shown in detail, starting from the topological graph, then focusing on the visibility one.
+\end_layout
+
+\begin_layout Subsubsection
+Topological graph
+\end_layout
+
+\begin_layout Standard
+The topological graph is a graph isomorphic to the one used by the navigation system to compute the paths followed by robots 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Spirin2015"
+literal "false"
+
+\end_inset
+
+. In the following, this last one is referred to as navigation graph to avoid confusion. Whether it is a frontier for an active agent or a proactivity point for an idle one, every time the path from an agent position to its goal is needed, the navigation graph is checked. In case the time since the last update is higher than a threshold or the occupancy grid of the environment has changed, it is recomputed. This is done in the following way. The obstacle cells of the occupancy grid are progressively enlarged until the skeleton of the free space is found. It is then discretized into a set of nodes that are going to be the nodes of the navigation graph. The first kind of nodes correspond to branching points, then it looks for points filling the gaps among them. These points are added as nodes if the distance from the closest node is higher than a certain fixed value. At this point, the set of nodes for the navigation graph is complete but a further pruning is applied to remove the ones too close to an obstacle. Each point of the occupancy grid is then mapped to the nearest node and this provides a partition of the map into different polygons, each one associated with a node. Two nodes are adjacent if the polygons associated with them share one side and this allows finding the edges of the graph, completing its construction.
+\end_layout
+
+\begin_layout Standard
+Once the navigation graph is computed, the topological graph is built accordingly of the same set of nodes with the same adjacency relations. The only difference is that the edges of the navigation graph do not keep track of the distance between nodes, while the edges of the topological graph do. Indeed, the topological graph is a weighted undirected graph, where the weight function is a distance function. Given the structure of this graph, the difference between Euclidean distance and the effective length of the path between the two nodes is negligible, thus the first one has been applied for efficiency reasons.
+\end_layout
+
+\begin_layout Standard
+The update of this graph is equivalent to the computation of a new navigation graph and is done every time a path for an agent is needed. Thus, referring to the general structure of a coordination mechanism presented before, it may be done by each of the four functions because each one implies the computation of a path for the agent. This ensures the topological graph to be updated frequently.
+\end_layout
+
+\begin_layout Subsubsection
+Visibility graph
+\end_layout
+
+\begin_layout Standard
+As presented in Chapter 4, the visibility graph is composed of pose nodes and frontier nodes. Pose nodes map the positions assumed by the robots at various time instants. Frontier nodes are used to include the location of frontiers known at a certain moment into the graph.
+\end_layout
+
+\begin_layout Standard
+It is initialized at the beginning of the exploration, considering as pose nodes the set of initial positions of the robots. The frontier nodes are included as soon as the first scan provides the first set of frontiers. After this, it is never rebuilt from scratch, like happens for the topological graph, rather it is progressively updated to match the movements of the robots and the disclosure of new frontiers. This holds because its construction is carried on entirely during the calls to the goal function. In both the reserve and the buddy system, this function comprises the update of the list of frontiers to properly assign robots. This provides the possibility to remove old frontier nodes and include the new ones. During this step, also the actual locations of active robots are used to generate nodes of the graph, the pose nodes, and to add them. Once all these nodes have been included, edges are generated. They model the notion of visibility, thus an edge links two nodes if and only if a robot located in one is able to perceive the other one. This condition is way more restrictive than the navigability one, on which the topological graph is based. A simple example of this is the case of two nodes located on opposite sides of a wardrobe. It is clearly possible to define a path connecting them, but the sensors of a robot placed on one side can not provide measurements about what is on the other side. Moreover, edges built in this way are straight lines and as for the topological graph, the distance function providing the weight to them is the Euclidean distance.
+\end_layout
+
+\begin_layout Subsection
+Centrality measures
+\end_layout
+
+\begin_layout Standard
+The main problem with closeness and betweenness is related to their computational complexity. They require the knowledge of the shortest paths connecting each pair of nodes and their length. This is particularly true for betweenness, while closeness only needs the last one. As the size of the graph grows, it may be difficult to compute the proactivity point in a reasonable amount of time. For this reason, two major optimizations have been performed. The first one is to compute the matrix of the distances between each pair of nodes in an efficient way and store it, allowing to avoid the repeated computations of the length of the shortest paths. The second one relates to how betweenness is computed.
+\end_layout
+
+\begin_layout Subsubsection
+Distance matrix
+\end_layout
+
+\begin_layout Standard
+The distance matrix is a square matrix containing the distances between each pair of nodes of a graph. Both the topological and the visibility graphs are weighted undirected graphs, thus it is useless to have a square matrix, being it symmetric by construction. Moreover, the weights considered are always non-negative, for this reason, the distance of a node from itself is always zero. This allows reducing the size of the matrix from 
+\begin_inset Formula $N\times N$
+\end_inset
+
+ to an 
+\begin_inset Formula $\left(N-1\right)\times\left(N-1\right)$
+\end_inset
+
+ triangular matrix, where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of nodes.
+\end_layout
+
+\begin_layout Standard
+This data structure is essential in speeding up the computation of closeness. Recalling that the closeness of a node is defined as the inverse of the average distance of it from all the other nodes, it can be computed as 
+\begin_inset Formula \[
+C\left(x\right)=\frac{1}{avg\left[row\left(x\right)\cup col\left(x\right)\right]}
+\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $row\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $col\left(x\right)$
+\end_inset
+
+ provide respectively the elements of the row and the column of the distance matrix associated to node 
+\begin_inset Formula $x$
+\end_inset
+
+. While 
+\begin_inset Formula $avg$
+\end_inset
+
+ is simply the function computing the average. The union is to ensure considering each element, being the distance matrix triangular. Thus, in a single sweep of the whole matrix, the value of the closeness of each node can be computed.
+\end_layout
+
+\begin_layout Standard
+The main issue about the distance matrix is in its construction. It is an instance of the All Pairs Shortest Path problem, that is the problem of finding the shortest paths linking each pair of nodes. An algorithm able to solve this is the Floyd-Warshall algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Cormen2010"
+literal "false"
+
+\end_inset
+
+. It is based on the concept of 
+\emph on
+intermediate nodes
+\emph default
+, which is the set of nodes composing a path without the starting and the arrival nodes. Consider a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ which nodes are 
+\begin_inset Formula $V=\left\{ 1,2,\ldots,n\right\} $
+\end_inset
+
+ and a subset 
+\begin_inset Formula $\left\{ 1,2,\ldots,k\right\} $
+\end_inset
+
+ of 
+\begin_inset Formula $V$
+\end_inset
+
+ for a generic 
+\begin_inset Formula $k$
+\end_inset
+
+. Let also 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ be two nodes of 
+\begin_inset Formula $G$
+\end_inset
+
+ and consider all the paths connecting them, composed only of vertices in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k\right\} $
+\end_inset
+
+. Let 
+\begin_inset Formula $p$
+\end_inset
+
+ be a shortest path connecting 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+. If 
+\begin_inset Formula $k$
+\end_inset
+
+ is an intermediate node of 
+\begin_inset Formula $p$
+\end_inset
+
+, then the length of the path from 
+\begin_inset Formula $i$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+, plus the one from 
+\begin_inset Formula $k$
+\end_inset
+
+ to 
+\begin_inset Formula $j$
+\end_inset
+
+ is lower than the one from 
+\begin_inset Formula $i$
+\end_inset
+
+ to 
+\begin_inset Formula $j$
+\end_inset
+
+ having nodes in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k-1\right\} $
+\end_inset
+
+ as intermediate nodes. On the contrary, if 
+\begin_inset Formula $k$
+\end_inset
+
+ is not an intermediate node, then this last path is shorter. By progressively increasing the value of 
+\begin_inset Formula $k$
+\end_inset
+
+ to consider the whole set of nodes as possible intermediate nodes, it is possible to find all the shortest paths for each pair of nodes of the graph.
+\end_layout
+
+\begin_layout Standard
+The complexity of the algorithm is 
+\begin_inset Formula $\Theta\left(N^{3}\right)$
+\end_inset
+
+. This is manageable in the case of the topological graph because 
+\begin_inset Formula $N$
+\end_inset
+
+ is limited by the graph building algorithm. On the other hand, the number of nodes in the visibility graph is much higher because no pruning is applied. The only device consists of forcing a minimum distance within pose nodes. However, as the exploration goes on, 
+\begin_inset Formula $N$
+\end_inset
+
+ might be sufficiently high to make the application of the Floyd-Warshall algorithm heavy. To overcome this issue, two factors allowed to come up with an efficient solution.
+\end_layout
+
+\begin_layout Standard
+First of all the visibility graph is updated at every step and is never built from scratch, after the initialization. The second main aspect is that the Floyd-Warshall algorithm is an example of dynamic programming, thus the solution provided for the graph at time 
+\begin_inset Formula $t$
+\end_inset
+
+ can be used as a starting point to compute the solution for the graph at time 
+\begin_inset Formula $t'>t$
+\end_inset
+
+. In fact, paths computed with a reduced set of intermediate nodes, suppose it to be 
+\begin_inset Formula $\left\{ 1,2,\ldots,k-1\right\} $
+\end_inset
+
+, are the shortest paths possible if the graph had node in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k-1\right\} $
+\end_inset
+
+. Then, the extension of the intermediate nodes to 
+\begin_inset Formula $\left\{ 1,2,\ldots,k\right\} $
+\end_inset
+
+ provides the optimal solution for the graph with nodes in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k\right\} $
+\end_inset
+
+. This idea can be applied by looking at the graph at time 
+\begin_inset Formula $t$
+\end_inset
+
+ like the one with intermediate nodes in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k-1\right\} $
+\end_inset
+
+, while the one at time 
+\begin_inset Formula $t'>t$
+\end_inset
+
+ as the one with intermediate nodes in 
+\begin_inset Formula $\left\{ 1,2,\ldots,k\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In this way, the distance matrix of the visibility graph is computed at the beginning of the exploration and consequently updated as new nodes are added to the graph. The complexity of each update is linear in the number of nodes, including the new ones.
+\end_layout
+
+\begin_layout Standard
+Apart from computing all the distances between each pair of nodes, it is also possible to reconstruct the shortest paths linking them. Which modifications need to be done and how this is exploited are discussed in the following section.
+\end_layout
+
+\begin_layout Subsubsection
+Betweenness
+\end_layout
+
+\begin_layout Standard
+Efficient computation of betweenness requires the preemptive computation of the shortest paths between each pair of agents. Assume to have these stored in a matrix, that, similarly to the distance matrix, is an 
+\begin_inset Formula $\left(N-1\right)\times\left(N-1\right)$
+\end_inset
+
+ triangular matrix. Even if this is available, finding the betweenness 
+\begin_inset Formula $B\left(v\right)$
+\end_inset
+
+ of a node 
+\begin_inset Formula $v$
+\end_inset
+
+ requires to go through each pair of nodes 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+, such that 
+\begin_inset Formula $s\neq v\neq t$
+\end_inset
+
+, and retrieve the list of shortest paths linking them. This list needs to be iterated to count the number of shortest paths going through 
+\begin_inset Formula $v$
+\end_inset
+
+ and their total number for that pair of nodes. At this point, the ratio of these two quantities can be computed and the result has to be summed with the value for each other selection of 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+. Similarly to the application of the Floyd-Warshall algorithm, this algorithm may be a problem for the case of a visibility graph, where the number of nodes 
+\begin_inset Formula $N$
+\end_inset
+
+ might increase enough to make the computation unfeasible in a reasonable amount of time.
+\end_layout
+
+\begin_layout Standard
+The main aspect of improvement is in the computation of the number of shortest paths from 
+\begin_inset Formula $s$
+\end_inset
+
+ to 
+\begin_inset Formula $t$
+\end_inset
+
+ going through 
+\begin_inset Formula $v$
+\end_inset
+
+, which in the previous chapter was referred to as 
+\begin_inset Formula $\sigma_{st}\left(v\right)$
+\end_inset
+
+. This is made possible by the 
+\emph on
+Bellman criterion
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Brandes2001"
+literal "false"
+
+\end_inset
+
+, which states that a node 
+\begin_inset Formula $v$
+\end_inset
+
+ of a graph lies on a shortest path between two nodes 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+, if and only if 
+\begin_inset Formula $d\left(s,t\right)=d\left(s,v\right)+d(v,t)$
+\end_inset
+
+. Even if apparently obvious, this criterion allows to compute 
+\begin_inset Formula $\sigma_{st}\left(v\right)$
+\end_inset
+
+ as 
+\begin_inset Formula \[
+\begin{cases}
+0 & if\ d\left(s,t\right)<d\left(s,v\right)+d\left(v,t\right)\\
+\sigma_{sv}\cdot\sigma_{vt} & otherwise
+\end{cases}
+\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\sigma_{sv}$
+\end_inset
+
+ is the value of the count of the shortest paths from node 
+\begin_inset Formula $s$
+\end_inset
+
+ to node 
+\begin_inset Formula $v$
+\end_inset
+
+, and 
+\begin_inset Formula $\sigma_{vt}$
+\end_inset
+
+ is the analogous from 
+\begin_inset Formula $v$
+\end_inset
+
+ to 
+\begin_inset Formula $t$
+\end_inset
+
+. The idea is that if 
+\begin_inset Formula $v$
+\end_inset
+
+ is along a shortest path from 
+\begin_inset Formula $s$
+\end_inset
+
+ to 
+\begin_inset Formula $t$
+\end_inset
+
+, then 
+\begin_inset Formula $\sigma_{st}\left(v\right)$
+\end_inset
+
+ can be computed as the number of shortest paths from node 
+\begin_inset Formula $s$
+\end_inset
+
+ to node 
+\begin_inset Formula $v$
+\end_inset
+
+ multiplied by the number of the ones from 
+\begin_inset Formula $v$
+\end_inset
+
+ to 
+\begin_inset Formula $t$
+\end_inset
+
+, to include all the possible combinations.
+\end_layout
+
+\begin_layout Standard
+On this, the betweenness can simply be computed in the same way as above. This also allows avoiding the storage of the whole list of shortest paths for each pair of nodes because it is only needed their count and the distance matrix. The Floyd-Warshall algorithm can be suitably modified to fill the matrix of counts by updating it as new shortest paths are found. This can be done while checking if the length of the path going through the considered intermediate node is lower than the previously known path. If the new path is lower, then the counter is reset to one. If the length is equal, then the counter is increased by one. If the new path is longer, then the counter remains equal because the new path is not a shortest path.
+\end_layout
+
+\begin_layout Standard
+Once both these matrices are completed, computation of the betweenness for the whole set of nodes requires for each node to iterate over all the possible pairs of other nodes. Thus, the computation has cubic complexity in the number of nodes but it is independent of the length of the paths considered. On the contrary, this would affect the computation in the case the entire paths had to be scanned to check whether node 
+\begin_inset Formula $v$
+\end_inset
+
+ was present or not.
+\end_layout
+
+\begin_layout Subsubsection
+Reduced node-set
+\end_layout
+
+\begin_layout Standard
+The optimizations provided before to speed up the computation of the measures, in particular for betweenness, work well in practice. This holds both for the topological graph and for the visibility graph, where the number of nodes is way higher, being even two to three times it. In some cases, this ratio can also go up to four times, producing an obliged impact on the computation. After all, the complexity holds a cubic relation with the number of nodes.
+\end_layout
+
+\begin_layout Standard
+Moreover, another aspect taken into consideration is related exclusively to the visibility graph. The value of both the centrality measures for frontier nodes is almost uninformative. In fact, the value of betweenness is forced to be zero because no shortest paths between a pair of nodes go through a frontier. On the other hand, the value of closeness is always small as compared to the other value of closeness. This can be explained easily considering that frontier nodes are marginal nodes of the graph, because of their definition. Furthermore, being the sensing range way higher than the speed of the robot, the distance between pose nodes is lower than the distance between them and frontier nodes. Thus, the impact of frontier nodes on the value of closeness is negligible.
+\end_layout
+
+\begin_layout Standard
+To deal with both these theoretical and empirical considerations, it has been decided to restrict the set of nodes for which centrality measures are computed. The reduced node-set 
+\begin_inset Formula $R$
+\end_inset
+
+ is then composed of pose nodes 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $n$
+\end_inset
+
+ either is adjacent to a frontier node 
+\begin_inset Formula $f$
+\end_inset
+
+ or is adjacent to a pose node 
+\begin_inset Formula $n'$
+\end_inset
+
+ adjacent to 
+\begin_inset Formula $f$
+\end_inset
+
+. To have a clear definition of how this set is composed, it is worth defining a function 
+\begin_inset Formula $adj(n)$
+\end_inset
+
+ for a node 
+\begin_inset Formula $n$
+\end_inset
+
+ of a graph returning the set of nodes adjacent to 
+\begin_inset Formula $n$
+\end_inset
+
+ and indicating as 
+\begin_inset Formula $F$
+\end_inset
+
+ the set of frontier nodes. On this, an auxiliary set 
+\begin_inset Formula $A$
+\end_inset
+
+ can be defined as the set of nodes adjacent to a frontier node, namely 
+\begin_inset Formula \[
+A=\bigcup_{f\in F}adj\left(f\right)
+\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, the definition of 
+\begin_inset Formula $R$
+\end_inset
+
+ can be rewritten as 
+\begin_inset Formula \[
+R=\left(A\:\cup\:\bigcup_{a\in A}adj\left(a\right)\right)\setminus F
+\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Formula $R$
+\end_inset
+
+ composed in this way allows a trade-off between considering the whole set of nodes and just the ones adjacent to a frontier node.
+\end_layout
+
+\begin_layout Standard
+Thanks to all the tricks exposed so far, it has been possible to reduce the average simulation cycle time of the proposed mechanisms to values comparable to the ones of the mechanisms exploiting the barycenter. 
+\end_layout
+
+\end_body
+\end_document
